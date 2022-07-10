@@ -1,0 +1,140 @@
+@import '../../.mainStyle.scss';
+.myProfile{
+    padding:30px 20px;
+    background-color: #eee;
+    &.dark{
+        background-color: #444;
+        .profileTitle{
+            color: #fff;
+        }
+    }
+.profileTitle{
+    text-align: center;
+    font-size: 100px;
+    font-weight: 700;
+
+}
+
+.informationContainer{
+
+    display: flex;
+    height: 300px;
+    margin-top: 20px;
+    .informationWrapper {
+        width: 50%;
+        height: 100%;
+    }
+    .information{
+        background-color: #fff;
+        .userInformation{
+            padding: 10px 0;
+            text-align: center;
+            .feild{
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                font-size: 30px;
+                margin: 10px 0;
+                border-bottom: 4px solid #222;
+                width: 100%;
+                .icons{
+                    margin-right: 5px;
+                }
+
+            }
+            .value{
+                color: #FFD600;
+                margin-left: 10px;
+            }
+            .userCountry{
+                font-size:30px;
+                margin: 10px 0;
+            }
+            .imageWrapper{
+                img{
+                    width: 80px;
+                    height: 50px;
+                }
+            }
+        }
+        &.dark{
+            background-color: #373737;
+            .InformationHeader{
+                border-bottom: 4px solid #fff;
+            }
+            .feild{
+                border-bottom: 4px solid #fff;
+            }
+            
+        }
+        width: 90%;
+        height: fit-content;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        @include shadowMainStyle ;
+
+        margin: auto;
+        .InformationHeader{
+            color: $gold;
+            text-align: center;
+            background-color: $qatar;
+            font-size: 40px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-bottom: 4px solid #161616;
+            
+
+        }
+
+    }
+    .informationWrapper{
+        .information{
+            
+
+        }
+    }
+    .expectInformationWrapper{
+        background-color: #aaa;
+    }
+
+
+
+
+}
+
+/* Profile Expects Section */
+
+.userExpectContainer{
+   
+    background-color: #fff;
+    @include shadowMainStyle;   
+    width: 80%;
+    margin: 40px auto 0;
+    height: fit-content;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    .profileTitle{
+        background-color: $qatar;
+        color: #FFD600;
+    }
+    &.dark{
+        background-color: #373737;
+    }
+    .expects{
+        padding: 20px;
+    }
+
+
+}
+
+
+}
+#email{
+    font-size: 20px;
+    margin: auto 0 auto 5px;
+    
+}
+#verifiy{
+    color: #0f0;
+    font-weight: 600;
+}

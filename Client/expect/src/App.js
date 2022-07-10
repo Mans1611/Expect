@@ -15,6 +15,8 @@ import MathcesAdm from './adminPage/pages/Mathces/MathcesAdm';
 import Statistics from './adminPage/pages/statistics/Statistics';
 import Adminaccount from './adminPage/pages/account/Adminaccount';
 import { createContext,useState } from 'react';
+import Footer from './component/footer/Footer';
+import MyProfile from './pages/myProfile/MyProfile';
 
 export const ThemeContext = createContext(true);
 
@@ -27,11 +29,13 @@ function App(props) {
     <Router>
       <ThemeContext.Provider value = {{isDark,setDark}}>
         <Routes>
-          <Route exact path='/main' element={<Navbar/>}> 
+          <Route path='/expect' element={<Navbar/>}> 
             <Route path='matches' element={<Matches/>}/>
             <Route path='home' element={<Home/>} />
-            <Route path="myexpects" element={<MyExpects/>}></Route>
+            <Route path="myexpects" element={<MyExpects/>}/>
+            <Route path="myprofile" element={<MyProfile/>}/>
           </Route>
+          
       </Routes>
      </ThemeContext.Provider>
 

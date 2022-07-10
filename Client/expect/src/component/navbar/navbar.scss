@@ -1,6 +1,7 @@
 
 
 @import './global'  ;
+@import '../../.mainStyle.scss';
 @mixin flexAlign() { // like function in js
     display: flex;
     align-items: center;
@@ -9,15 +10,14 @@
     @include flexAlign();
     height: 60px;
     overflow-y: hidden;
-    background-color: #fff;
-    border-bottom: 1px solid #222;
+    background-color: #eee;
+    border-bottom: 5px solid #222;
     transition: 150ms;
     width: 100%;
     font-family: 'Ubuntu Mono', monospace;
-    box-shadow: 0px 19px 17px -9px rgba(0,0,0,1);
-    -webkit-box-shadow: 0px 19px 17px -9px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 19px 17px -9px rgba(0,0,0,1);
-
+    box-shadow: 1px 20px 35px 1px rgba(0,0,0,0.57);
+    -webkit-box-shadow: 1px 20px 35px 1px rgba(0,0,0,0.57);
+    -moz-box-shadow: 1px 20px 35px 1px rgba(0,0,0,0.57);
 
 .navbarLink{
     text-decoration: none;
@@ -61,11 +61,11 @@
                     @include flexAlign();
                     overflow: hidden;
                     .username{
-                        font-size: 20px;
+                        font-size: 36px;
                         font-weight: 600;
                         max-width: 90px;
-                        margin-left: 5px;
-                        color: rgb(197, 0, 43);
+                        margin-right: 30px;
+                        color: $gold;
                     }
                     .navbarProfileImg{
                         width: 40px;
@@ -79,6 +79,7 @@
                     position: relative;
                 }
                 &:hover  {
+                   
                     .navbarDropdown{
                         color: #222;
                         display: flex;

@@ -37,7 +37,7 @@ const Navbar = (props) => {
     return ( 
         <>
         <>
-        <div  className={`navbar ${isDark? 'dark': ""}`}>
+        <div  className={`navbar ${isDark? 'dark': null}`}>
             <div className="navbarContainer">
                 <div className="navbarLeft">
                     <Link to="/" className={`navbarLink ${isDark? 'dark': ""}`}><h1>Expect</h1></Link>
@@ -53,11 +53,11 @@ const Navbar = (props) => {
                     }
                     <div className="navbarMenu">
                        <div className="imgContainer">
+                        <span className="username">Mans1611</span>
                         <img className='navbarProfileImg' src="https://cdn.dribbble.com/users/1040983/screenshots/5630845/media/e95768b82810699dfd54512ff570954a.png?compress=1&resize=400x300&vertical=top" />
-                        <span className="username">Manfas</span>
                        </div>
                        <div className='navbarDropdown'>
-                            <Link to='/myprofile'  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>
+                            <Link to='myprofile'  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>
                             <div onClick={()=>{setDark(!isDark)}} className={`dropdownItem ${isDark? 'dark':''}` }>
                                 <span className="dropdownItem">Dark Mode</span>
                                 <div className="circleContainer">

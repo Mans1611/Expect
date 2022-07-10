@@ -1,3 +1,11 @@
+$gold : #FFD600;
+$qatar:#93002C;
+
+@mixin shadowMainStyle {
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.39);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.39);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.39);
+}
 @mixin dark1{
     background-color: #111;
     transition: 150ms;

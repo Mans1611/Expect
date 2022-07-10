@@ -6,9 +6,8 @@
     border-radius: 10px;
     margin: 5px auto ;
     background-color: #eee;
-    box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
-    -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
-    -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+    
+
     padding: 5px;  
     
     &.dark{
@@ -62,12 +61,12 @@
             border: 2px solid rgb(193, 0, 39);
             border-radius: 5px;
             cursor: pointer;
-            width: 90px;
-            height: 35px;
-            padding: 5px 10px;
-            font-size: 20px;
+            width: 100px;
+            height: 40px;
+            padding: 20px ;
+            font-size: 30px;
+            font-weight: 600;
             text-align: center;
-            display: flex;
             align-items: center;
             &:hover{
                 color:#fff;

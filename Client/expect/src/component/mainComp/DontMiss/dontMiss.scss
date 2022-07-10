@@ -3,8 +3,9 @@
 .dontMissList{
     width: 100%;
     height: fit-content;
-    background-color: #eee;
+    background-color: #fff;
     padding-bottom: 10px ;
+    @include shadowMainNews;
     &.dark{
         @include dark2;
     }
