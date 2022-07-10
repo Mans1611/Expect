@@ -1,0 +1,94 @@
+.matchCard {
+  width: 300px;
+  height: 200px;
+  border: 2px solid #c10027;
+  border-radius: 10px;
+  margin: 5px auto;
+  background-color: #eee;
+  box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -webkit-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -moz-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  padding: 5px;
+}
+
+.matchCard.dark {
+  background-color: #222;
+  color: #eee;
+  transition: 150ms;
+  border: 2px solid #0a5770;
+}
+
+.matchCard .matchcardHeader {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 25px;
+  font-weight: 600;
+  color: inherit;
+}
+
+.matchCard .matchcardHeader .matchCardCountry {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.matchCard .matchcardHeader .countryLabel {
+  font-size: 16px;
+  font-weight: 600;
+  color: inherit;
+}
+
+.matchCard .matchcardHeader .matchCardCountryImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.matchCard .matchCardCounter {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.matchCard .matchCardCounter .timeLeftLabel {
+  font-size: 18px;
+}
+
+.matchCard .matchCardStart {
+  position: relative;
+  margin-top: 10px;
+}
+
+.matchCard .matchCardStart .matchCardbutton {
+  position: absolute;
+  right: 10px;
+  color: #c10027;
+  border: 2px solid #c10027;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 90px;
+  height: 35px;
+  padding: 5px 10px;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.matchCard .matchCardStart .matchCardbutton:hover {
+  color: #fff;
+  background-color: #c10027;
+}
+
+@media screen and (max-width: 580px) {
+  .matchCard .matchCardCountryImg {
+    width: 30px;
+    height: 30px;
+  }
+}
+/*# sourceMappingURL=matchcard.css.map */

@@ -1,0 +1,58 @@
+.container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(34, 34, 34, 0.719);
+  z-index: 999;
+}
+
+.faterCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.circle1, .circle2, .circle3 {
+  background-color: #ff0033;
+  width: 15px;
+  height: 15px;
+  border-radius: 25%;
+  border: 5px solid #222;
+  margin: 5px;
+  position: relative;
+  z-index: 999;
+}
+
+.circle1 {
+  animation: loading 1s linear  infinite;
+}
+
+.circle2 {
+  animation: loading 1s linear 100ms  infinite;
+}
+
+.circle3 {
+  animation: loading 1s linear 200ms infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/*# sourceMappingURL=loading.css.map */

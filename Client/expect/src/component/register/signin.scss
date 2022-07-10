@@ -1,0 +1,24 @@
+@import './global';
+.signin{
+  .signinHeadLine{
+      margin-top: 10px;
+      text-align: center;
+      
+  } 
+  .feild{
+      margin-bottom: 10px;
+      .submit{
+        background-color:$pink ;
+        height: 40px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 25px;
+        border: none;
+        cursor: pointer;
+        &:hover{
+            background-color: #b2002a;
+        }
+    }
+  }
+}

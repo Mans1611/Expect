@@ -1,0 +1,22 @@
+@import '../.loading.scss';
+
+.container{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(34, 34, 34, 0.719);
+    z-index: 999;
+}
+.faterCenter{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+}
+  .circle1,.circle2,.circle3{
+    @include styling;
+  }
+  @include animation

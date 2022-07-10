@@ -1,0 +1,13 @@
+@import '../../.mainStyle.scss';
+
+
+.footer{
+    height:120px;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 10px 20px;
+    &.dark{
+        @include dark1
+    }
+}

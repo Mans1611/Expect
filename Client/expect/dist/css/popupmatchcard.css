@@ -1,0 +1,203 @@
+.popMatchFullPage {
+  background-color: rgba(0, 0, 0, 0.612);
+  position: fixed;
+  z-index: 990;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popMatchContainer {
+  width: 500px;
+  height: fit-content;
+  background-color: #ddd;
+  border-radius: 10px;
+  border: 2px solid #640000;
+  position: fixed;
+  z-index: 999;
+  padding: 5px;
+  animation: popup 150ms  linear;
+}
+
+.popMatchContainer .Popicon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.popMatchContainer .popMatchWinner {
+  text-align: center;
+}
+
+.popMatchContainer .popMatchWinner .winnerTitle {
+  font-size: 20px;
+  font-weight: 600px;
+  margin-top: 10px;
+  display: block;
+}
+
+.popMatchContainer.dark {
+  background-color: #111;
+  color: #eee;
+}
+
+.popMatchContainer .matchcardHeader {
+  margin-top: 20px !important;
+}
+
+.popMatchContainer .matchcardHeader .popMatchCardCountryImg, .popMatchContainer .matchcardHeader .popMatchCardCountryImg svg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.popMatchContainer .matchcardHeader .popMatchCardCountryImg.selectedCount, .popMatchContainer .matchcardHeader .popMatchCardCountryImg svg.selectedCount {
+  border: 3px solid green;
+  transform: scale(1.1);
+  padding: 2px;
+}
+
+.popMatchContainer .matchcardHeader .result {
+  width: 55px;
+  height: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: rgba(103, 103, 103, 0.509);
+  box-shadow: 0 1px 0 #83838387;
+  border: none;
+  color: #eee;
+  padding: 5px;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  /* Firefox */
+}
+
+.popMatchContainer .matchcardHeader .result:focus {
+  border-bottom: 2px solid #c1003a;
+  border-left: 2px solid #c1003a;
+  outline: none;
+}
+
+.popMatchContainer .matchcardHeader .result::-webkit-outer-spin-button, .popMatchContainer .matchcardHeader .result::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.popMatchContainer .matchcardHeader .result[type=number] {
+  -moz-appearance: textfield;
+}
+
+.popMatchContainer .matchCardResult {
+  height: 100px;
+  background-color: #000;
+}
+
+.popMatchContainer .matchCardPlayers .countryLabel {
+  font-size: 16px;
+  color: #eee;
+}
+
+.popMatchContainer .popFormMatch .popFormLabels {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.playersContainer {
+  display: flex;
+  overflow-y: hidden;
+  position: relative;
+}
+
+.playersContainer .arrow {
+  position: absolute;
+  top: calc(128px / 2);
+  margin-top: -15px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.playersContainer .arrow.left {
+  left: 0;
+}
+
+.playersContainer .arrow.right {
+  right: 0;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.buttonsWrapper .matchCardButton {
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 600;
+  border: none;
+  margin-left: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.buttonsWrapper .matchCardButton:hover {
+  transform: scale(1.1);
+}
+
+.buttonsWrapper .matchCardButton.save {
+  background-color: #c1003a;
+  color: #eee;
+}
+
+.buttonsWrapper .matchCardButton.cancel {
+  background-color: #0054f1;
+  color: #eee;
+}
+
+@media screen and (max-width: 580px) {
+  .popMatchContainer {
+    width: 90%;
+    max-height: 80vh;
+    overflow: scroll;
+  }
+}
+
+.playersContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+.playersContainer::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #666;
+}
+
+/* Handle */
+.playersContainer::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+@keyframes popup {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  to {
+  }
+}
+/*# sourceMappingURL=popupmatchcard.css.map */

@@ -1,0 +1,27 @@
+.home{
+    height: fit-content;
+    background-color: rgb(228, 228, 228);
+    &.dark{
+        background-color: #444;
+    }
+}
+.pageContainer{
+    padding-top: 60px;
+    padding-left: 60px;
+    display: grid;
+    grid-template-columns: 55% 30%;
+    column-gap: 15px;
+
+}
+
+
+@media screen and (max-width:890px) {
+    
+        .pageContainer{
+            padding: 30px 0px; 
+            display: grid;
+            grid-template-columns: 100%;
+                
+   
+    }
+}

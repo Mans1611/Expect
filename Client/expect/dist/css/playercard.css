@@ -1,0 +1,35 @@
+.palyerCard {
+  min-width: 150px;
+  height: 120px;
+  background-color: inherit;
+  border-radius: 5px;
+  padding: 4px 0;
+  cursor: pointer;
+  margin-right: 5px;
+  box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -webkit-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -moz-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  border: 1px solid #222;
+}
+
+.palyerCard .playerCardInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.palyerCard .playerCardInfo .imgBackground {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.palyerCard .playerCardInfo .imgBackground .playerCardImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+/*# sourceMappingURL=playercard.css.map */

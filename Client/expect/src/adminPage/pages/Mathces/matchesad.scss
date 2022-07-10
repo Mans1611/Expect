@@ -1,0 +1,28 @@
+.matchesadmin{
+    padding: 20px;
+    .matchesContainer{
+        background-color: rgba(51, 51, 51, 0.83) ;
+        height: fit-content;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        padding: 5px ;
+        min-height: 200px;
+    }
+
+
+    .addMatch{
+        width: 150px;
+        height: 40px;
+        padding: 5px 10px;
+        background-color: #FF005C;
+        border-radius: 15px;      
+        box-shadow: 2px 4px rgb(59, 59, 59);
+        &:hover{
+            background-color: #af0040;   
+        }
+        span{
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+}

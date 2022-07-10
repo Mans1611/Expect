@@ -1,0 +1,53 @@
+$pink :#F1003A;
+@mixin  center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headLineDiv{
+    margin-top: 10px;
+    text-align: center;
+    .headLine{
+        font-size: 30px;
+        color:$pink ;
+    }
+}
+.form,.formSignup{
+    padding: 10px;
+    .feild{
+        display: flex;
+        flex-direction: column;
+        
+        label{
+            font-size: 25px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        .inputFeild{
+            height: 40px;
+            border-radius: 10px;
+            background-color: #F0F0F0;
+            border: none;
+            padding: 5px  10px;
+            font-size: 20px;
+            box-shadow: 2px 2px 10px rgba(74, 74, 74, 0.699);
+        }
+        .inputFeild:focus{
+            outline: none;
+            border: 2px solid $pink;
+            transform: scale(1.05);
+            &::placeholder{
+                visibility: hidden;
+            }
+        }
+
+    }
+}
+.options{
+    text-align: center;
+    a{
+        font-weight: 500;
+        font-size: 1.1em;
+        color: #000;
+    }
+}

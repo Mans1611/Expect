@@ -1,0 +1,187 @@
+.dark {
+  background-color: #222;
+  color: #eee;
+  transition: 150ms;
+}
+
+.darker {
+  background-color: #111;
+  transition: 150ms;
+}
+
+.white {
+  background-color: #eee;
+  color: #222;
+  transition: 150ms;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  overflow-y: hidden;
+  background-color: #eee;
+  border-bottom: 1px solid #222;
+  transition: 150ms;
+  width: 100%;
+  font-family: 'Ubuntu Mono', monospace;
+  box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -webkit-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -moz-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+}
+
+.navbar .navbarLink {
+  text-decoration: none;
+}
+
+.navbar .navbarContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .navbarContainer .navbarLeft {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.navbar .navbarContainer .navbarRight {
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar .navbarContainer .navbarRight.selected {
+  background-color: #c10027;
+  color: #eee;
+  padding: 15px 0;
+}
+
+.navbar .navbarContainer .navbarRight .navbarRightItem {
+  padding: 15px 5px;
+  font-size: 1.3em;
+}
+
+.navbar .navbarContainer .navbarRight .navbarRightItem:hover {
+  background-color: #c10027;
+  color: #eee;
+}
+
+.navbar .navbarContainer .navbarRight .navbarMenu {
+  cursor: pointer;
+  margin-left: 20px;
+  background-color: inherit;
+}
+
+.navbar .navbarContainer .navbarRight .navbarMenu .imgContainer {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.navbar .navbarContainer .navbarRight .navbarMenu .imgContainer .username {
+  font-size: 20px;
+  font-weight: 600;
+  max-width: 90px;
+  margin-left: 5px;
+  color: #c5002b;
+}
+
+.navbar .navbarContainer .navbarRight .navbarMenu .imgContainer .navbarProfileImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navbar .navbarContainer .navbarRight .navbarMenu .navbarDropdown {
+  display: none;
+  position: relative;
+}
+
+.navbar .navbarContainer .navbarRight .navbarMenu:hover .navbarDropdown {
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 10px;
+  border-radius: 5px;
+  z-index: 999;
+  color: inherit;
+  width: fit-content;
+  height: fit-content;
+  font-size: 16px;
+  background-color: #eee;
+  text-align: center;
+  box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -webkit-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+  -moz-box-shadow: 2px 3px 87px -6px rgba(0, 0, 0, 0.43);
+}
+
+.navbarLink {
+  text-decoration: none;
+  color: #222;
+}
+
+.circleContainer {
+  width: 40px;
+  height: 20px;
+  background-color: #aaa;
+  border-radius: 20px;
+  position: relative;
+}
+
+.circleContainer .darkModeIcons {
+  width: 18px;
+  height: 18px;
+}
+
+.circleContainer .circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #222;
+  position: absolute;
+  top: 0;
+  transition: 300ms ease;
+}
+
+.dropdownItem {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdownItem:hover {
+  background-color: #c10027;
+  color: #eee;
+}
+
+.right {
+  right: 0;
+  transition: 300ms;
+}
+
+@media screen and (max-width: 390px) {
+  .bottomNavbarLink {
+    padding: 0;
+  }
+  .imgContainer {
+    display: none;
+  }
+}
+
+@media (min-width: 340px) and (max-width: 680px) {
+  .navbarContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .navbarMenu {
+    display: none;
+  }
+}
+/*# sourceMappingURL=navbar.css.map */

@@ -1,0 +1,12 @@
+.dashbboard{
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    .content{
+        flex: 16;
+        display: flex;
+        flex-direction: column;
+        
+    }
+}

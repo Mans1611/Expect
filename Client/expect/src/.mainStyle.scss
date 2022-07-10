@@ -1,0 +1,16 @@
+@mixin dark1{
+    background-color: #111;
+    transition: 150ms;
+}
+
+
+@mixin dark2{
+    background-color: #222;
+    transition: 150ms;
+}
+
+@mixin dark3{
+    background-color: #333;
+    transition: 150ms;
+    
+}

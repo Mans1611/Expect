@@ -1,0 +1,23 @@
+.dark {
+  background-color: #222;
+  color: #eee;
+  transition: 150ms;
+}
+
+.darker {
+  background-color: #111;
+  transition: 150ms;
+}
+
+.white {
+  background-color: #eee;
+  color: #222;
+  transition: 150ms;
+}
+
+.dark {
+  background-color: #eee;
+  color: #eee;
+  transition: 150ms;
+}
+/*# sourceMappingURL=App.css.map */

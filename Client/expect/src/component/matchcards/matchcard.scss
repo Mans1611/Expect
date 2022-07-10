@@ -1,0 +1,87 @@
+
+.matchCard{
+    width: 300px;
+    height: 200px;
+    border: 2px solid rgb(193, 0, 39);
+    border-radius: 10px;
+    margin: 5px auto ;
+    background-color: #eee;
+    box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+    -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+    -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+    padding: 5px;  
+    
+    &.dark{
+        background-color: #222;
+        color: #eee;
+        transition: 150ms;
+        border: 2px solid rgb(10, 87, 112);
+    }              
+    .matchcardHeader{
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 25px;
+        font-weight: 600;
+        color: inherit;
+        .matchCardCountry{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .countryLabel{
+            font-size: 16px ;
+            font-weight: 600;
+            color: inherit;
+        }
+        .matchCardCountryImg{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    }
+    .matchCardCounter{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        .timeLeftLabel{
+            font-size: 18px;
+        }
+    }
+    .matchCardStart{
+        position: relative;
+        margin-top: 10px;
+        .matchCardbutton{
+            position: absolute;
+            right: 10px;
+            color:  rgb(193, 0, 39);
+            border: 2px solid rgb(193, 0, 39);
+            border-radius: 5px;
+            cursor: pointer;
+            width: 90px;
+            height: 35px;
+            padding: 5px 10px;
+            font-size: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            &:hover{
+                color:#fff;
+                background-color:rgb(193, 0, 39);
+            }
+        }
+
+
+    }
+    @media screen and (max-width:580px) {
+        .matchCardCountryImg{
+            width: 30px;
+            height: 30px;
+        }
+        
+    }
+}

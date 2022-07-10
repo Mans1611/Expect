@@ -1,0 +1,199 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+}
+
+body {
+  background-image: url(file:///C:/Users/hp/Downloads/darkness.png);
+}
+
+.welcomeSentenceWrapper {
+  margin: 40px 0 0 100px;
+  text-align: center;
+}
+
+.welcomeSentenceWrapper .welcomeSentence {
+  color: #fff;
+  font-size: 60px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.welcomeSentenceWrapper .welcomeSentence span {
+  color: #FFD600;
+}
+
+.tipsTitleWrapper {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.tipsTitleWrapper .tipsTitle {
+  color: #F1003A;
+  font-size: 55px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.welcomePage {
+  width: 100%;
+  height: 100vh;
+  padding: 0 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.welcomePage .playerImage {
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  right: -20px;
+  top: 0;
+  z-index: 10;
+}
+
+.welcomePage .wrapperPoint {
+  margin-left: 60px;
+  position: relative;
+  margin-top: -40px;
+  z-index: 999;
+}
+
+.welcomePage .wrapperPoint .headingPoint {
+  color: #fff;
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.welcomePage .cardExplainContainer {
+  width: 350px;
+  height: 250px;
+  border-radius: 5px;
+  margin-left: 10px;
+  position: relative;
+  z-index: 999;
+  overflow: hidden;
+  background-color: rgba(85, 85, 85, 0.685);
+}
+
+.welcomePage .cardExplainContainer .imgExplainContainer {
+  height: 150px;
+}
+
+.welcomePage .cardExplainContainer .imgExplainContainer .explainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: #F1003A solid 6px;
+}
+
+.welcomePage .cardExplainContainer .explenationCont {
+  color: #ddd;
+  padding: 8px 10px 20px;
+  transition: all 300ms;
+}
+
+.welcomePage .cardExplainContainer .explainBottom {
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  background-color: #F1003A;
+  width: 100%;
+  color: #fff;
+  height: 40px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  border-top: #333 solid 2px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.welcomePage .cardExplainContainer .explainBottom .showmore {
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+.welcomePage.second {
+  background-color: rgba(51, 51, 51, 0.584);
+}
+
+.welcomePage.second .playerImage {
+  position: absolute;
+  right: 0px;
+}
+
+.topnavbar {
+  height: fit-content;
+  width: 100%;
+  background-color: #212121c7;
+  z-index: 999;
+}
+
+.buttonscontainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+
+.buttonscontainer .buttonsWrapper {
+  margin-right: 10px;
+}
+
+.WelcomeNavbarButtons {
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #F1003A;
+  border: #F1003A solid 2px;
+  margin-left: 10px;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+
+.WelcomeNavbarButtons.blueButton {
+  color: #0000f4;
+  border: #0000f4 solid 2px;
+}
+
+.WelcomeNavbarButtons.blueButton:hover {
+  color: #0000f4;
+  border: #0000f4 solid 2px;
+}
+
+.WelcomeNavbarButtons:hover {
+  background-color: #272727;
+  color: #F1003A;
+  border: #F1003A solid 2px;
+}
+
+#firstPoly, #secondPoly {
+  width: 500px;
+  height: 100%;
+  position: absolute;
+}
+
+#firstPoly {
+  right: -80px;
+}
+
+#secondPoly {
+  left: -80px;
+  transform: rotate(180deg);
+}
+
+.left {
+  position: absolute;
+  left: -40px;
+  border: #FFD600;
+}
+/*# sourceMappingURL=welcome.css.map */

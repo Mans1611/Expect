@@ -1,0 +1,147 @@
+.headLineDiv {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.headLineDiv .headLine {
+  font-size: 30px;
+  color: #F1003A;
+}
+
+.form, .formSignup {
+  padding: 10px;
+}
+
+.form .feild, .formSignup .feild {
+  display: flex;
+  flex-direction: column;
+}
+
+.form .feild label, .formSignup .feild label {
+  font-size: 25px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.form .feild .inputFeild, .formSignup .feild .inputFeild {
+  height: 40px;
+  border-radius: 10px;
+  background-color: #F0F0F0;
+  border: none;
+  padding: 5px  10px;
+  font-size: 20px;
+  box-shadow: 2px 2px 10px rgba(74, 74, 74, 0.699);
+}
+
+.form .feild .inputFeild:focus, .formSignup .feild .inputFeild:focus {
+  outline: none;
+  border: 2px solid #F1003A;
+  transform: scale(1.05);
+}
+
+.form .feild .inputFeild:focus::placeholder, .formSignup .feild .inputFeild:focus::placeholder {
+  visibility: hidden;
+}
+
+.options {
+  text-align: center;
+}
+
+.options a {
+  font-weight: 500;
+  font-size: 1.1em;
+  color: #000;
+}
+
+.signup {
+  width: 100%;
+}
+
+.signup .headLineDiv {
+  margin-bottom: 10px;
+}
+
+.signup .formSignup {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  transition: all 300ms;
+}
+
+.signup .formSignup .nextButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00b400;
+}
+
+.signup .formSignup .nextButton:hover {
+  background-color: #009400;
+}
+
+.signup .formSignup .firstForm {
+  width: 100%;
+  margin-right: 30px;
+}
+
+.signup .formSignup .firstForm .firstFormNext {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.signup .options {
+  margin-top: 5px;
+}
+
+.feild {
+  width: 270px;
+  margin-bottom: 5px;
+}
+
+label .notRequired {
+  font-size: 16px;
+  color: #f00;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+.secondForm .feild {
+  margin-bottom: 20px;
+}
+
+.secondForm .secondFormNext {
+  display: flex;
+  justify-content: space-between;
+}
+
+.secondForm .secondFormNext .prevButton {
+  background-color: #00f;
+}
+
+.secondForm .secondFormNext .prevButton:hover {
+  background-color: #00007e;
+}
+
+.secondForm option {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 15px 5px;
+  text-align: center;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=signup.css.map */
