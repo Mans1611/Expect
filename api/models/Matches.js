@@ -2,19 +2,19 @@ import mongoose from 'mongoose';
 const {Schema,model} = mongoose;
 
 const matchSchema = new Schema({
-    country1 : {
+    firstCountry : {
         type:Object,
         required : true
     },
-    country2 : {
+    secondCountry : {
         type:Object,
         required : true
     },
-    id : {
+    matchId : {
         type:String,
         required : true
     },
-    time : {
+    matchTime : {
         type : String,
         required : true
     },
@@ -24,5 +24,5 @@ const matchSchema = new Schema({
         default: false
     }
 })
-const Matches = model("Mathces",matchSchema);
+const Matches = model("Matches",matchSchema);
 export default Matches;

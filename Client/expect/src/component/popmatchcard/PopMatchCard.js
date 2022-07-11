@@ -1,18 +1,19 @@
 import './popupmatchcard.scss';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState,useContext } from 'react';
 import axios from 'axios';
 import Loading from '../loading/big.loading/Loading'
 import PlayerCard from './playercard/PlayerCard';
 import { ArrowBackOutlined,ArrowForwardOutlined } from '@mui/icons-material';
 import BalanceIcon from '@mui/icons-material/Balance';
+import { ThemeContext } from '../../App';
 const PopMatchCard = (props) => { 
     let countries = document.getElementsByClassName('popMatchCardCountryImg');
     
     const [user,setUser] = useState({})
     const [winner,setWinner] = useState('draw');
     const element = useRef();
-    
+    const {isDark} = useContext(ThemeContext); 
 
     useEffect(()=>{
         for(let i = 0; i<countries.length;i++){
@@ -32,7 +33,7 @@ const PopMatchCard = (props) => {
 
     return (
         <div  ref={element}  className="popMatchFullPage">
-            <div className={`popMatchContainer ${props.dark? 'dark':''}`}>
+            <div className={`popMatchContainer ${isDark? 'dark':''}`}>
                 <CloseIcon onClick={props.togglePop} className='Popicon'/>
                 <div className="popMatchWinner">
                         <span className="winnerTitle">Select Winner</span>    
@@ -40,8 +41,8 @@ const PopMatchCard = (props) => {
 
                 <div className="matchcardHeader">
                     <div className="matchCardCountry">
-                        <img src={props.match.country1.logo}  className="popMatchCardCountryImg" />
-                        <span className='countryLabel'>{props.match.country1.name}</span>
+                        <img src={props.match.firstCountry.logo}  className="popMatchCardCountryImg" />
+                        <span className='countryLabel'>{props.match.firstCountry.name}</span>
                         <input type="number" className='result'/>
                     </div>
 
@@ -51,22 +52,22 @@ const PopMatchCard = (props) => {
                     </div>
 
                     <div className="matchCardCountry">
-                        <img  src={props.match.country2.logo} alt={props.match.country2.name} className="popMatchCardCountryImg" />
-                        <span className='countryLabel'>{props.match.country2.name}</span>
+                        <img  src={props.match.secondCountry.logo} alt={props.match.secondCountry.name} className="popMatchCardCountryImg" />
+                        <span className='countryLabel'>{props.match.secondCountry.name}</span>
                         <input type="number" className='result'/>
                     </div>
                 </div>
                 {/* <div className="matchCardResult"></div> */}
                 <div className="matchCardPlayers">
-                    <span className="countryLabel">Select Player from {props.match.country1.name}</span>
+                    <span className="countryLabel">Select Player from {props.match.firstCountry.name}</span>
                     <div className="playersContainer">
-                    {props.match.country1.players.map(player=>{
+                    {props.match.firstCountry.players.map(player=>{
                             return <PlayerCard player = {player}/>
                         })}
                     </div>
-                    <span className="countryLabel"> Select Player from {props.match.country2.name}</span>
+                    <span className="countryLabel"> Select Player from {props.match.secondCountry.name}</span>
                     <div className="playersContainer">
-                        {props.match.country2.players.map(player=>{
+                        {props.match.secondCountry.players.map(player=>{
                             return <PlayerCard player = {player}/>
                         })}
                     </div>

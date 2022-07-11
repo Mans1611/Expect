@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import {  useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import fetchData from '../../fetchData';
 import Loading from '../loading/big.loading/Loading';
 //import fetchData from '../../fetchData';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
 import './matchcard.scss';
+import { ThemeContext } from '../../App';
 const MathchCard = (props) => {
     const [hours,setHours] = useState(0);
     const [min,setMin] = useState(0);
@@ -15,7 +16,7 @@ const MathchCard = (props) => {
     const togglePop = ()=>{
         setPop(!pop);
     }
-    
+    const {isDark} = useContext(ThemeContext); 
     
     
     // const counter = useCallback(()=>{   
@@ -32,19 +33,19 @@ const MathchCard = (props) => {
     //     },[sec])
     // console.log(counter);
     return ( 
-        <div className={`matchCard ${props.dark?'dark':''}`}>
+        <div className={`matchCard ${isDark?'dark':''}`}>
             
             
         
             <div className="matchcardHeader">
               <div className="matchCardCountry"> {/* country1.*/ }
-                <img src={props.match.country1.logo} alt="" className="matchCardCountryImg" />
-                <span className='countryLabel'>{props.match.country1.countryName}</span>
+                <img src={props.match.firstCountry.logo} alt="" className="matchCardCountryImg" />
+                <span className='countryLabel'>{props.match.firstCountry.countryName}</span>
               </div>
                 VS
                 <div className="matchCardCountry">
-                    <img src={props.match.country2.logo} alt="" className="matchCardCountryImg" />
-                    <span className='countryLabel'>{props.match.country2.countryName}</span>
+                    <img src={props.match.secondCountry.logo} alt="" className="matchCardCountryImg" />
+                    <span className='countryLabel'>{props.match.secondCountry.countryName}</span>
                 </div>
             </div>
             { display &&
@@ -58,7 +59,7 @@ const MathchCard = (props) => {
                 </div>
                 
                 {
-                    pop && <PopMatchCard pop={pop} togglePop={togglePop} dark = {props.dark} match={props.match}/>
+                    pop && <PopMatchCard pop={pop} togglePop={togglePop} dark = {isDark} match={props.match}/>
                 }
            </div>
      );

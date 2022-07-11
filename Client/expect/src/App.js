@@ -21,7 +21,7 @@ import MyProfile from './pages/myProfile/MyProfile';
 export const ThemeContext = createContext(true);
 
 
-function App(props) {
+function App() {
   
   const [isDark,setDark] = useState(false);
   

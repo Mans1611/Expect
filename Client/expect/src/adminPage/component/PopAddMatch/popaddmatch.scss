@@ -1,3 +1,5 @@
+@import '../../../.mainStyle.scss';
+
 .popaddMatch{
     position: absolute;
     top:0;
@@ -10,12 +12,161 @@
     justify-content: center;
     align-items: center;
     .popAddMatchContainer{
-        width: 50%;
-        height:400px;
+        width: 60%;
+        height:fit-content;
         background-color: #333;
         border-radius:5px;
+        position: relative;
+        padding: 10px;
+
+        .closeIcon{
+            position:absolute;
+            top: 5px;
+            right: 5px;
+            cursor:pointer;
+        }
+        .selectedContries{
+            display: flex;
+            justify-content:space-evenly;
+            align-items: center;
+            margin-bottom: 20px;
+            .vs{
+                color: #fff;
+                font-size: 55px;
+                font-weight: 600;
+            }
+            .circle{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: #272727;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .icons{
+                    color: #bbb;
+                    font-size: 60px;
+                    font-weight: 600;
+                }
+            }
+
+        }
+        .countriesSelection{
+            background-color: #222;
+            border-radius: 10px;
+            height: fit-content;
+            padding: 10px;
+
+            form{
+
+                .innergrid{
+                    display: grid;
+                    grid-template-columns: repeat(5,20%);
+                    column-gap: 1%;
+                }
+                
+            }
+
+            .country{
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                background-color: #575757;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 5px;
+                input{
+                    width: 25px;
+                    height: 25px;
+                    background-color: aqua;
+                    margin-bottom: 10px;
+                    
+
+                }
+               
+            }
+            
+        }
+        label,.countrylable{
+            font-size: 30px;
+            font-weight: 600;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
         
     }
 
+
+}
+.countryHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.countryFlage{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+
+}
+.fieldContainer{
+  text-align: center;
+  margin: 10px 0;
+  h2{
+    color: $gold;
+    font-size: 36px;
+  }  
+  .timeSelection{
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-evenly;
+    .timing{
+        display: flex;
+        flex-direction: column;
+    }
+}
+input{
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 21px;
+    text-align: center;
+    background-color: #171717;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 5px;
+
+}
+
+}
+.buttonWrapper{
+    display: flex;
+    justify-content: end;
+    button{
+        width: fit-content;
+        height: fit-content;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 26px;
+        padding: 15px 10px;
+        background-color: $pinck ;
+        cursor: pointer;
+    }
+}
+.post{
+    justify-content: center;
+    margin-top: 10px;
+    #postButton{
+        background-color:#c9a700;
+        &:hover{
+            background-color: #967d00;
+            transform: scale(1.1);
+        }
+    }
 
 }

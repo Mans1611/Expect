@@ -1,20 +1,18 @@
-
+@import '../../.mainStyle.scss';
 .matchCard{
     width: 300px;
-    height: 200px;
+    height: fit-content;
     border: 2px solid rgb(193, 0, 39);
     border-radius: 10px;
     margin: 5px auto ;
     background-color: #eee;
-    
-
     padding: 5px;  
     
     &.dark{
-        background-color: #222;
+        background-color: #111;
         color: #eee;
         transition: 150ms;
-        border: 2px solid rgb(10, 87, 112);
+        
     }              
     .matchcardHeader{
         display: flex;
@@ -34,6 +32,7 @@
             font-size: 16px ;
             font-weight: 600;
             color: inherit;
+            margin-top: 5px;
         }
         .matchCardCountryImg{
             width: 40px;
@@ -48,15 +47,17 @@
         display: flex;
         flex-direction: column;
         .timeLeftLabel{
-            font-size: 18px;
+            font-size: 24px;
+            color: $gold;
+            font-weight: 600;
         }
     }
     .matchCardStart{
-        position: relative;
+        display: flex;
+        justify-content: end;
         margin-top: 10px;
         .matchCardbutton{
-            position: absolute;
-            right: 10px;
+           
             color:  rgb(193, 0, 39);
             border: 2px solid rgb(193, 0, 39);
             border-radius: 5px;
