@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import MathchCard from '../../matchcards/MatchCard';
 import './dontMiss.scss';
 import axios from 'axios'
-import Loading from '../../loading/big.loading/Loading';
 import SmallLaoding from '../../loading/small.loading/smallLoading';
-import { useContext } from 'react';
-import { ThemeContext } from '../../../App';
+import { globalUser } from '../../../Context/HomeContext';
+
 const DontMissList = () => {
-    const {isDark} = useContext(ThemeContext);
+    const {isDark} = globalUser();
     const [data,setData] = useState(null);
     const [isLoading,setLoading] = useState(true);
     useEffect(()=>{

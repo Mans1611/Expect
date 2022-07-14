@@ -6,6 +6,7 @@ import Loading from '../loading/big.loading/Loading';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
 import './matchcard.scss';
 import { ThemeContext } from '../../App';
+import { globalUser } from '../../Context/HomeContext';
 const MathchCard = (props) => {
     const [hours,setHours] = useState(0);
     const [min,setMin] = useState(0);
@@ -16,7 +17,7 @@ const MathchCard = (props) => {
     const togglePop = ()=>{
         setPop(!pop);
     }
-    const {isDark} = useContext(ThemeContext); 
+    const {isDark} = globalUser(); 
     
     
     // const counter = useCallback(()=>{   

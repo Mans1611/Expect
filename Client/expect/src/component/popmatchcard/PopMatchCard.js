@@ -7,13 +7,14 @@ import PlayerCard from './playercard/PlayerCard';
 import { ArrowBackOutlined,ArrowForwardOutlined } from '@mui/icons-material';
 import BalanceIcon from '@mui/icons-material/Balance';
 import { ThemeContext } from '../../App';
+import { globalUser } from '../../Context/HomeContext';
 const PopMatchCard = (props) => { 
     let countries = document.getElementsByClassName('popMatchCardCountryImg');
     
     const [user,setUser] = useState({})
     const [winner,setWinner] = useState('draw');
     const element = useRef();
-    const {isDark} = useContext(ThemeContext); 
+    const {isDark} = globalUser();
 
     useEffect(()=>{
         for(let i = 0; i<countries.length;i++){

@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../App';
 import '../../pages/myProfile/myProfile.scss';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import { globalUser } from '../../Context/HomeContext';
 const PersonalComp = () => {
-    const {isDark} = useContext(ThemeContext);
+    const {isDark} = globalUser();
     return ( 
         <div className="informationWrapper">
             <div className={`information ${isDark? 'dark':null}`}>

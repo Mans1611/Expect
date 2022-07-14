@@ -4,9 +4,10 @@ import MainNews from '../../component/mainComp/mainNews/MainNews';
 import './home.scss';
 import { useContext,useState } from 'react';
 import { ThemeContext } from '../../App';
+import { globalUser, userContext } from '../../Context/HomeContext';
 
 const Home = () => {
-    const {isDark}  = useContext(ThemeContext);
+    const {isDark} = globalUser();
     return ( 
             <div className={`home ${isDark?'dark':null}`}>
                 <div className="pageContainer">

@@ -7,9 +7,10 @@ import './mainnews.scss';
 import SmallNews from './SmallNews.js'
 import {useContext} from 'react';
 import { ThemeContext } from '../../../App';
+import { globalUser } from '../../../Context/HomeContext';
 const MainNews = ()=> {
-    const {isDark} = useContext(ThemeContext);
 
+    const {isDark} = globalUser();
     const [news,setNews] = useState(null);
     const [isLoading,setLoading] = useState(true);
     const [mainNews,setMainNews] = useState(null);

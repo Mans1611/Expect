@@ -6,13 +6,14 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import BottomNavbar from './bottomnavbar/BottomNavbar';
 import { ThemeContext } from '../../App';
+import { globalUser } from '../../Context/HomeContext';
 
 const Navbar = (props) => {
     const [width , setWidth] = useState(window.innerWidth);
     const [scale, setScale] = useState(((width<680)? true : false));
     let items = document.getElementsByClassName('navbarLink');
     const navbarItems = ["Home" , "Matches","MyExpects", "Standing"];
-    const {isDark,setDark} = useContext(ThemeContext);
+    const {isDark,setDark} = globalUser();
     
     useEffect(()=>{
         for(let i = 0 ; i<items.length;i++){
@@ -27,13 +28,17 @@ const Navbar = (props) => {
         setScale(((width<680)? true : false))
     } 
     ,[])
-    
 
     window.addEventListener('resize',()=>{
         setWidth(window.innerWidth);
         setScale(((width<680)? true : false))
-    })  
-    
+    }) 
+
+    const store = globalUser();
+    const handleLogOut = ()=>{
+        store.setAuth(false);
+        store.setUserGlob(false);
+    }
     return ( 
         <>
         <>
@@ -49,11 +54,11 @@ const Navbar = (props) => {
                     })
 
                     }
-                        </>
+                    </>
                     }
                     <div className="navbarMenu">
                        <div className="imgContainer">
-                        <span className="username">Mans1611</span>
+                        <span className="username">{store.userGlob}</span>
                         <img className='navbarProfileImg' src="https://cdn.dribbble.com/users/1040983/screenshots/5630845/media/e95768b82810699dfd54512ff570954a.png?compress=1&resize=400x300&vertical=top" />
                        </div>
                        <div className='navbarDropdown'>
@@ -66,7 +71,7 @@ const Navbar = (props) => {
                                     <div className={`circle ${isDark?' right':''}`}></div>
                                 </div>
                             </div>
-                            <Link to='/'  className={`navbarLink ${isDark? 'dark': ""}`}> <div className="dropdownItem"> <span className="dropdownItem">Log out</span></div></Link>
+                            <Link to='/register/signup' onClick={handleLogOut}  className={`navbarLink ${isDark? 'dark': ""}`}> <div className="dropdownItem"> <span className="dropdownItem">Log out</span></div></Link>
                        </div>
                     </div>
                 </div>

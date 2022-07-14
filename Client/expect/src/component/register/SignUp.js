@@ -1,15 +1,18 @@
 
 import './signup.scss';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useEffect, useRef,useState } from 'react';
+import { useContext, useEffect, useRef,useState } from 'react';
 import { ArrowBackIos } from '@mui/icons-material';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import SmallLaoding from '../loading/small.loading/smallLoading';
 import Cookie from 'universal-cookie';
 import {moveToFirst,moveToSecond} from './utilites/Moving.js';
+import { globalUser, userContext } from '../../Context/HomeContext';
 
 const SignUp = () => {
+    
+
     const [countriesOption, setCountries] = useState([]);
     const [userName,setUserName] = useState(null);
     const [phone,setPhone] = useState(null);
@@ -45,11 +48,11 @@ const SignUp = () => {
 
         })
     }
-
+    
     const navigate = useNavigate();
+   const store = globalUser();
 
     const submit = async (e)=>{
-
         e.preventDefault();
             if(userName == '' || userName==null){
                 document.getElementById(`userNamemsg`).innerText = " *Username is required";
@@ -107,7 +110,9 @@ const SignUp = () => {
                 const response = await axios.post('/register/signup',user);
                 if(response.status === 201){
                     setLoadingPost(false);
-                    navigate('/expect/home')
+                    store.setUserGlob(userName);
+                    store.setAuth(true);
+                    navigate('/expect/home');
                     window.localStorage.setItem('token',response.headers.token);
                 }
                 setLoadingPost(false)

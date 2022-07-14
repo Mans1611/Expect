@@ -10,10 +10,11 @@ import { Link, Outlet } from 'react-router-dom';
 import '../bottomnavbar.scss';
 import {useContext} from 'react';
 import { ThemeContext } from '../../../App';
+import { globalUser } from '../../../Context/HomeContext';
 
 
 const BottomNavbar = () => {
-    const {isDark,setDark} = useContext(ThemeContext);
+    const {isDark,setDark} = globalUser();
 
     return ( 
         <div className={`bottomNavbar ${isDark? 'dark':'white'}`}>

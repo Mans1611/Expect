@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import './mainnews.scss';
 import { ThemeContext } from '../../../App';
+import { globalUser } from '../../../Context/HomeContext';
 
 const SmallNews = (props) => {
 
-    const {isDark} = useContext(ThemeContext);
+    const {isDark} = globalUser();
     return(
         <div onClick={props.HandleMainNews}  id='restNews' className='restNewsContainer'>
             { props.news.map((item,index)=>{
