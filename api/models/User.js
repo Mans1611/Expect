@@ -1,17 +1,19 @@
 import mongoose from 'mongoose';
 const {Schema,model} = mongoose;
+
 const UserSchema = new Schema ({
-    username:{type:String,},
-    email:{type:String},
-    phonenumber:{type:String},
-    pw1:{type:String},
-    country: {type:String},
-    point :{type:Number},
+    userName:{
+        type:String,required:true,unique:true
+    },
+    email:{type:String,required:true},
+    phoneNumber:{type:String,unique:true},
+    password:{type:String,required:true},
+    userCountry: {type:String,required:true},
+    userPoints :{type:Number,default:0},
     isAdmin:{type:Boolean,default:false},
     isVerified : {type:Boolean,default:false},
-    Expects : {type:Array},
-    profilePic:{type:String,default:""},
-},{timestamps:true})
+    expects : {type:Array,default:[]}
+})
 
-const User = model("User" , UserSchema );
+const User = model('User' , UserSchema );
 export default User;

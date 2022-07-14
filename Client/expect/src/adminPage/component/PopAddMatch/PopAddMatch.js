@@ -137,7 +137,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
                             <label htmlFor={country.countryName}>
                               <img value={country.countryName} className='countryFlage' src={country.logo} alt="" />
                               {country.countryName}
-                              </label>
+                            </label>
                         </div>
                         ))
                       }

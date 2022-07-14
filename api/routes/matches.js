@@ -21,9 +21,7 @@ matches.get('/getmatches',async(req,res)=>{
 
 matches.post('/addgame', async(req,res)=>{
     let {country1,country2,time,id} = req.body;
-    // country1 = await Country.findOne({country:country1});
-    // country2 = await Country.findOne({country:country2});
-    console.log(req.body);
+    
     const match = await new Matches (req.body);
     match.save(()=>{
         console.log("match is added");

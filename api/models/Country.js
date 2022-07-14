@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const {Schema,model} = mongoose;
+
 const countrySchema = new Schema({
     countryName:{
         type:String,
@@ -11,7 +12,7 @@ const countrySchema = new Schema({
     },
     players : {
         type:Array,
-        required:false
+        required:true
     },
     eliminated : {
         type:Boolean,

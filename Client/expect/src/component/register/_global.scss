@@ -1,4 +1,5 @@
 $pink :#F1003A;
+@import '../../.mainStyle.scss';
 @mixin  center {
     display: flex;
     justify-content: center;
@@ -8,8 +9,10 @@ $pink :#F1003A;
     margin-top: 10px;
     text-align: center;
     .headLine{
-        font-size: 30px;
+        font-size: 40px;
         color:$pink ;
+        font-weight: 600;
+        border-bottom: 2px solid #000;
     }
 }
 .form,.formSignup{
@@ -17,7 +20,7 @@ $pink :#F1003A;
     .feild{
         display: flex;
         flex-direction: column;
-        
+        margin-bottom: 10px;
         label{
             font-size: 25px;
             font-weight: 600;
@@ -25,7 +28,7 @@ $pink :#F1003A;
         }
         .inputFeild{
             height: 40px;
-            border-radius: 10px;
+            border-radius: 5px;
             background-color: #F0F0F0;
             border: none;
             padding: 5px  10px;
@@ -34,8 +37,8 @@ $pink :#F1003A;
         }
         .inputFeild:focus{
             outline: none;
-            border: 2px solid $pink;
-            transform: scale(1.05);
+            border: 2px solid $gold ;
+            width: 100%;
             &::placeholder{
                 visibility: hidden;
             }
@@ -50,4 +53,8 @@ $pink :#F1003A;
         font-size: 1.1em;
         color: #000;
     }
+}
+.warning{
+    color: red;
+    margin-top: 5px;
 }

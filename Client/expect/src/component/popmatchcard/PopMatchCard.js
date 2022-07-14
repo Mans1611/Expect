@@ -22,7 +22,6 @@ const PopMatchCard = (props) => {
                     if(current[0])
                         current[0].className = current[0].className.replace(' selectedCount','');
                     this.className += ' selectedCount';
-                    console.log(this);
                 })
             }
         element.current.addEventListener('click',(e)=>{
@@ -36,7 +35,7 @@ const PopMatchCard = (props) => {
             <div className={`popMatchContainer ${isDark? 'dark':''}`}>
                 <CloseIcon onClick={props.togglePop} className='Popicon'/>
                 <div className="popMatchWinner">
-                        <span className="winnerTitle">Select Winner</span>    
+                    <span className="winnerTitle">Select Winner</span>    
                 </div>
 
                 <div className="matchcardHeader">
@@ -47,7 +46,7 @@ const PopMatchCard = (props) => {
                     </div>
 
                     <div className="matchCardCountry">
-                    <div className="popMatchCardCountryImg"><BalanceIcon /></div>
+                        <div className="popMatchCardCountryImg"><BalanceIcon /></div>
                         <span className='countryLabel'>Draw</span>
                     </div>
 
@@ -61,19 +60,18 @@ const PopMatchCard = (props) => {
                 <div className="matchCardPlayers">
                     <span className="countryLabel">Select Player from {props.match.firstCountry.name}</span>
                     <div className="playersContainer">
-                    {props.match.firstCountry.players.map(player=>{
-                            return <PlayerCard player = {player}/>
+                    {props.match.firstCountry.players.map((player,index)=>{
+                            return <PlayerCard key={index} player = {player}/>
                         })}
                     </div>
                     <span className="countryLabel"> Select Player from {props.match.secondCountry.name}</span>
                     <div className="playersContainer">
-                        {props.match.secondCountry.players.map(player=>{
-                            return <PlayerCard player = {player}/>
+                        {props.match.secondCountry.players.map((player,index)=>{
+                            return <PlayerCard key={index} player = {player}/>
                         })}
                     </div>
                 </div>
                 <div className="buttonsWrapper">
-                    <button className='matchCardButton cancel' >Cancel</button>
                     <button className='matchCardButton save' >Save</button>
                 </div>
             </div>

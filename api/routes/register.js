@@ -1,12 +1,13 @@
 
 import jwt from 'jsonwebtoken';
 import  express,{Router} from 'express'
-import crypto from ('crypto')
-import  User  from ('../models/User.js');
-import verify  from ('../middleware/verify.js');
+import crypto from 'crypto'
+import  User  from '../models/User.js';
+import verify  from '../middleware/verify.js';
 import mailVerification from '../maller/mailVerification.js'; 
-import Token  from ('../models/Token.js');
+import Token  from '../models/Token.js';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 dotenv.config();
 
 const router = express.Router();
@@ -16,85 +17,43 @@ router.get('/users',async(req,res)=>{
     .catch(err=>res.status(404).json('error' + err)); 
 })
 
-router.post('/signup', async(req,res)=>{ 
+
+
+
+
+router.post('/signup',async(req,res)=>{
     try{
-        let existUser = false;
-        const {username,email,phonenumber,pw1,country} = req.body;
-        let point = 0 ;
-        const newNumber = '+974' + phonenumber;
+
+    
+    const {userName,password,phoneNumber,email,userCountry} = req.body;
+    if(!userName || !password || !phoneNumber || !email || !userCountry)
+        return res.status(400).send("check your request");
+    
+   const existUser = await User.findOne({phoneNumber});
+    if(existUser)
+        return res.status(400).json({msg:"error in creating this user try again"});
+    const genSalt = await bcrypt.genSalt(parseInt(process.env.SALT));
+    const hashed = await bcrypt.hash(password,genSalt);
+
+    const user = await new User({
+        userName,password:hashed,phoneNumber,email,userCountry
+    });
+    const token = jwt.sign({userName,email},process.env.JWT);
+    await user.save(()=>{
         
-        //const salt = await  bcrypt.genSalt(8);
-        //const hashed = await bcrypt.hash(pw1,salt);
-        //const token = jwt.sign({username,email},process.env.PK,{expiresIn:'5d'});
-        res.header('Access-Control-Allow-Origin', '*');
-        const newUser = await new User({
-            username,
-            email,
-            phonenumber:newNumber,
-            pw1,
-            point,
-            country,
-        });
-        const emailToken = crypto.randomBytes(32).toString('hex'); 
-        const {id} = newUser;
-        await new Token({ _id : id}).save();
-        const link = `http://localhost:5000/verify/${id}/${emailToken}`;
-        //console.log(email,link);
-        await mailVerification(email,link);
+        console.log("done creating user");
+        res.status(201).header("token",token).json({msg:"USer is created succussfully"});
 
-        await newUser.save(()=>{
-            console.log("done");
-            res.header('x-auth-token' , "mans").json("user is added succssuflly")
-        })
-        
-     }
-     catch(err){
-         console.log("second cathch");
-         res.status(401).send(err);
-        }
-        })
+    })
+    }
+    catch(err){
+        console.log(err);
+    }
+
+})
 
 
 
-app.post('/signup', async(req,res)=>{ 
-    try{
-        let existUser = false;
-        const {username,email,phonenumber,pw1,country} = req.body;
-        console.log("-".repeat(20));
-        let point = 0 ;
-        const newNumber = '+974' + phonenumber;
-        console.log(newNumber);
-
-        const encryptedPassword = encryptPassword(pw1,"mans");
-        console.log(encryptedPassword);
-        const newUser = await new User({
-            username,
-            email,
-            phonenumber:newNumber,
-            pw1:encryptedPassword,
-            point,
-            country,
-        });
-        const emailToken = crypto.randomBytes(32).toString('hex'); 
-        //console.log("token:" +emailToken);
-        const {id} = newUser;
-
-        console.log("id : " + id);
-        //await new Token({ _id : id}).save();
-        const link = `http://localhost:8000/verify/${id}/${emailToken}`;
-        console.log(link);
-        await mailVerification(email,link);
-
-        await newUser.save(()=>{
-            res.header('x-auth-token' , "mans").json("user is added succssuflly")
-        })  
-        }
-        catch(err){
-            console.log(err);
-        }
-
-})   
-            
 
 router.get('/find/all',verify,async(req,res)=>{
     const {last}= req.query;
@@ -109,9 +68,11 @@ router.get('/find/all',verify,async(req,res)=>{
 })
 
 
+
 router.post('/login',async(req,res)=>{
     const {phonenumber,pw1} = req.body;
     const newPhone = "+974" + phonenumber;
+    console.log(phonenumber);
     try{
         const checkUser = await User.findOne({phonenumber:newPhone});
         if(!checkUser)
@@ -200,10 +161,10 @@ router.get('/find/random',async (req,res)=>{
 })
 
 router.delete('/:id',async(req,res)=>{
+    try{
     const user = await User.findById(req.params.id)
     if(!user)
         return res.status(404).send("this user is not found")
-    try{
         await User.findByIdAndDelete(req.params.id)
         res.json('user is being deleted')
     }catch(err){

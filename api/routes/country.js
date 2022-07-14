@@ -5,7 +5,7 @@ import Country from '../models/Country.js'
 const country = express.Router();
 country.get('/countries',async(req,res)=>{
     const countries = await Country.find();
-    res.send(countries);
+    res.status(200).send(countries);
 })
 
 
@@ -36,6 +36,7 @@ country.post('/addcountry',async(req,res)=>{
         logo,
         players
     })
+    
     await newCountry.save(()=>{
         console.log("the country is added");
     })

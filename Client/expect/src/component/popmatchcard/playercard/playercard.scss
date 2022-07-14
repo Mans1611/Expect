@@ -1,6 +1,8 @@
+@import '../../../.mainStyle.scss';
+
 .palyerCard{
     min-width: 150px;
-    height: 120px;
+    height: 150px;
     background-color: inherit;
     border-radius: 5px;
     padding: 4px 0;
@@ -9,22 +11,29 @@
     box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
-    border: 1px solid #222;
-    .playerCardInfo{ display: flex;
+    border: 1px solid $qatar;
+    .playerCardInfo{
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color:$gold ;
         .imgBackground{
-            width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background-color: #fff;
+               
             .playerCardImg{
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                object-fit: cover;
+                width: 60px;
+                height: 60px;
+                object-fit: contain;
+                border-radius: 30%;
             }
+        }
+        .playerDetails{
+            background-color: $qatar;
+            font-size: 30px;
+            text-align: center;
+            color: #fff;
+            width: 100%;
+
         }
         
 }

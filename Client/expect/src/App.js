@@ -1,6 +1,6 @@
 import './App.scss';
 import Navbar from './component/navbar/Navbar';
-import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes,Route, useNavigate } from 'react-router-dom';
 import Matches from './pages/matches/Matches';
 import {connect} from 'react-redux';
 import Home from './pages/home/Home';
@@ -21,10 +21,9 @@ import MyProfile from './pages/myProfile/MyProfile';
 export const ThemeContext = createContext(true);
 
 
-function App() {
+const  App = ()=> {
   
   const [isDark,setDark] = useState(false);
-  
   return (
     <Router>
       <ThemeContext.Provider value = {{isDark,setDark}}>
@@ -39,8 +38,15 @@ function App() {
       </Routes>
      </ThemeContext.Provider>
 
+      <Routes>
+        <Route path='/welcome' element={<Welcome/>}></Route>
+        <Route path="/register" element = {<Register/>}>
+          <Route path='signin' element = {<SignIn/>}/>
+          <Route path='signup' element = {<SignUp/>}/> 
+        </Route>
+      </Routes>
 
-     <Routes>
+      <Routes>
         <Route path='/adminpage' element = {<HomeAdminPage/>}>
             <Route path="account" element = {<Adminaccount/>}/>
             <Route path='dashboard' element={<DashBoard/>}/>
@@ -48,14 +54,7 @@ function App() {
             <Route path='statistics' element={<Statistics/>}/>
         </Route>
       </Routes>
-      <Routes>
-        <Route path='/welcome' element={<Welcome/>}></Route>
-        <Route path="/register" element = {<Register/>}>
-          <Route path='signin' element = {<SignIn/>}/>
-          <Route path='signup' element = {<SignUp/>}/> 
-        </Route>
-        
-      </Routes>
+
       
     </Router>
   );
@@ -76,4 +75,4 @@ function mapStateToProps (state){
     }
   }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;

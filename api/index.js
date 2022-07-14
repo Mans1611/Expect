@@ -7,6 +7,7 @@ import  countryRoute from './routes/country.js';
 import news from './routes/news.js'
 import cors from 'cors' ;
 dotenv.config();
+import register from './routes/register.js';
 
 
 const app = express();
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use('/matches',matchesRoute);
 app.use('/country',countryRoute);
 app.use('/news',news);
-
+app.use('/register',register);
 
 app.use(cors());
 
