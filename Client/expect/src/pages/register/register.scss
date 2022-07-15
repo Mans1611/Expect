@@ -58,7 +58,7 @@
 }
 
 
-@media screen and (max-width:560px) {
+@media screen and (max-width:760px) {
     .register{
         width: 100%;
         display: flex;
@@ -85,5 +85,14 @@
     
     }
     
+    
+}
+#backendMsg,#backendmsglogin{
+    color: #fff;
+    font-size: 24px;
+    background-color: #ba5454;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
     
 }

@@ -23,7 +23,6 @@ export const ThemeContext = createContext(true);
 
 const  App = ()=> {
   
-  const [isDark,setDark] = useState(false);
   return (
     <Router>
       <Provider children={(

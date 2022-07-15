@@ -9,9 +9,7 @@ export const Provider = ({children})=>{
     const [userGlob,setUserGlob] = useState(null);
     const [auth,setAuth] = useState(false)
   
-    const changeAuth = (value)=>{
-        setAuth(value);
-    }
+    
 
     return(
         <userContext.Provider value={{isDark,setDark,userGlob,setUserGlob,auth,setAuth}}>

@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-
+import mailMessage from "./mailMessage.js";
+  
 const mailVerification = async(to,msg)=>{
     const transporter = nodemailer.createTransport({
         host: process.env.HOST,
@@ -14,13 +15,7 @@ const mailVerification = async(to,msg)=>{
         from:process.env.USER,
         to:to,
         subject : 'Email Verification',
-        html:`
-        <div style="background-color:#ddd;border-raduis:10px">
-            <h2>
-                <a target="_blank" href = ${msg}>click here to verify</a>
-            </h2>
-        </div>
-        `,
+        html: `${mailMessage(msg)}`,
     })
     
 }

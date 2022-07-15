@@ -6,10 +6,10 @@ import './match.scss';
 import fetchData from '../../fetchData';
 import NotFound from '../../component/NotFound/NotFound';
 import { ThemeContext } from '../../App';
+import { globalUser } from '../../Context/HomeContext';
 
 const Matches = () => {
-    const {isDark} = useContext(ThemeContext);
-    
+    const {isDark} = globalUser();
     const [data,setData] = useState(null);
     const [isLoading,setLoading] = useState(true);
     const [notFound,setNoutFound] = useState(false);
@@ -51,11 +51,6 @@ const Matches = () => {
         </>
      );
 }
-const  mapStateToProps = (state) =>{
-    return {
-        dark:state.dark,
-        matches : state.matches
-    }
-}
 
-export default connect(mapStateToProps)(Matches);
+
+export default Matches;

@@ -82,10 +82,9 @@ button{
     font-size: 20px;
     cursor: pointer;
 }
-@media screen and (max-width:560px) {
+@media screen and (max-width:760px) {
     
-    .signup{
-        
+    .signup{ 
         width: 290px;
         .formSignup{
             display: flex;

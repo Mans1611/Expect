@@ -22,16 +22,11 @@ const SignUp = () => {
     const [country,setCountry] = useState(null);    
     const [loading,setLoading] = useState(true); 
     const [loadingPost,setLoadingPost] = useState(false); 
-
     useEffect(()=>{
-
-    
     return async()=>{
         try{
             const response = await axios.get('/country/countries');
             setCountries(response.data);
-            setCountry(countriesOption[0])
-            
             setLoading(false);
         }catch(err){
             console.log(err);
@@ -40,8 +35,8 @@ const SignUp = () => {
 
     const fields = document.getElementsByClassName('inputFeild');
     for(let i = 0 ; i<fields.length;i++){
-        if(fields[i].tagName === "SELECT")
-            continue;
+        // if(fields[i].tagName === "SELECT")
+        //     continue;
         fields[i].addEventListener('focus',(e)=>{
             e.target.nextSibling.innerHTML='';
             e.target.style.border ="" 
@@ -54,6 +49,7 @@ const SignUp = () => {
 
     const submit = async (e)=>{
         e.preventDefault();
+        // long validation id conditions
             if(userName == '' || userName==null){
                 document.getElementById(`userNamemsg`).innerText = " *Username is required";
                 document.getElementById(`userNamemsg`).previousElementSibling.style.border ="2px solid red" 
@@ -91,7 +87,7 @@ const SignUp = () => {
                 return 0 ; 
 
             }
-            if( pass&& pass !== '' &&pass.length < 7 ){
+            if(pass&& pass !== '' &&pass.length < 7 ){
                 document.getElementById(`passmsg`).innerText = " *Password length must be 8";
                 document.getElementById(`passmsg`).previousElementSibling.style.border ="2px solid red" 
                 moveToFirst();
@@ -102,12 +98,30 @@ const SignUp = () => {
                 document.getElementById(`countrymsg`).previousElementSibling.style.border ="2px solid red" 
                 return 0 ; 
             }
+
+            // long validation regular expression from stackoverflow
+            const mailreg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i; 
+            if(!mail.match(mailreg)){
+                document.getElementById(`mailmsg`).innerText = " *mail is not valid";
+                document.getElementById(`mailmsg`).previousElementSibling.style.border ="2px solid red" 
+                moveToFirst();
+                return 0;
+            }
         
             try{
-                setLoadingPost(true)
+                setLoadingPost(true);
+                setUserName(userName.replace(/ /g,''));
+                setMail(mail.replace(/ /g,''));
+
+                if(phone!==null){
+                    setPhone(phone.replace(/ /g,''));
+                    if(phone!=='')
+                        setPhone('+974'+phone);
+                }
                 const user = {userName,email:mail,password:pass,userCountry:country,phoneNumber:phone}  ;
                 console.log(user);
                 const response = await axios.post('/register/signup',user);
+                console.log(response);
                 if(response.status === 201){
                     setLoadingPost(false);
                     store.setUserGlob(userName);
@@ -115,7 +129,11 @@ const SignUp = () => {
                     navigate('/expect/home');
                     window.localStorage.setItem('token',response.headers.token);
                 }
-                setLoadingPost(false)
+
+                else if(response.status === 203){
+                    setLoadingPost(false);
+                    document.getElementById('backendMsg').innerText = response.data.msg;
+                }
             }catch(err){
                 console.log(err);
             }
@@ -162,15 +180,15 @@ const SignUp = () => {
                     <div className="secondForm">
                         <div className="feild">
                             <label htmlFor="">PhoneNumber <span className="notRequired">(Not Required) </span></label>
-                            <input onChange={(e)=>{setPhone(e.target.value)}}   placeholder='Enter your PhoneNumber ' className='inputFeild' type="phonenumber"/>
+                            <input onChange={(e)=>{setPhone(e.target.value)}} maxLength={8}   placeholder='Enter your PhoneNumber ' className='inputFeild' type="phonenumber"/>
                             <span  className='warning' id="phonemsg"></span>
                         </div>
                         <div className="feild">
                             <label htmlFor="country">Country </label>
                             {
                                 loading? <SmallLaoding/>:
-                                <select id='country' onChange={(e)=>{setCountry(e.target.value)}} className='selectCountry inputFeild'>
-                                    <option className='defaultSelection' disabled selected value="">Select Your fan country</option>
+                                <select id='country'  onChange={(e)=>{setCountry(e.target.value)}} className='selectCountry inputFeild'>
+                                    <option className='defaultSelection' defaultChecked  value=''>Select Your fan country</option>
                                     {countriesOption.map((country,id)=>{
                                         return <option value={country.countryName.toLowerCase()} key={id}>{country.countryName}</option> 
                                     })}
@@ -186,10 +204,8 @@ const SignUp = () => {
                             <button type='submit'  onClick={submit} className="nextButton">
                                 {loadingPost? "Loading" : "Submit"}
                             </button>
-                            {/* {showMsg && <div className='msg'>
-                                    {msg}
-                                </div>} */}
                         </div>
+                        <div id='backendMsg'></div>
                     </div>
                 </form>
         </div>

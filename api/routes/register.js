@@ -23,27 +23,35 @@ router.get('/users',async(req,res)=>{
 
 router.post('/signup',async(req,res)=>{
     try{
-
-    
     const {userName,password,phoneNumber,email,userCountry} = req.body;
-    if(!userName || !password || !phoneNumber || !email || !userCountry)
-        return res.status(400).send("check your request");
-    
-   const existUser = await User.findOne({phoneNumber});
+
+    if(phoneNumber){
+        const existUser = await User.findOne({phoneNumber});
+        console.log(existUser);
+        if(existUser)
+            return res.status(203).json({msg:"this phone number is being added before"});  
+    }
+    let existUser = await User.findOne({userName})
     if(existUser)
-        return res.status(400).json({msg:"error in creating this user try again"});
+        return res.status(203).json({msg:"This userName is already exist"});
+    
+        existUser = await User.findOne({email})
+    if(existUser)
+        return res.status(203).json({msg:"This email is already exist"});
+    
+    
     const genSalt = await bcrypt.genSalt(parseInt(process.env.SALT));
     const hashed = await bcrypt.hash(password,genSalt);
 
     const user = await new User({
         userName,password:hashed,phoneNumber,email,userCountry
     });
+    const msg = `hello expecter ${userName}`;
+    await mailVerification(email,msg);
     const token = jwt.sign({userName,email},process.env.JWT);
     await user.save(()=>{
-        
         console.log("done creating user");
-        res.status(201).header("token",token).json({msg:"USer is created succussfully"});
-
+        res.status(201).header("token",token).json({msg:"User is created succussfully"});
     })
     }
     catch(err){
@@ -70,17 +78,18 @@ router.get('/find/all',verify,async(req,res)=>{
 
 
 router.post('/login',async(req,res)=>{
-    const {phonenumber,pw1} = req.body;
-    const newPhone = "+974" + phonenumber;
-    console.log(phonenumber);
+    const {userName,password} = req.body;
+
     try{
-        const checkUser = await User.findOne({phonenumber:newPhone});
-        if(!checkUser)
-            return res.status(404).send("this user is not found in database");
-        const checkPass = await bcrypt.compare(pw1,checkUser.pw1);
-        if(checkUser&&checkPass)
-            return res.status(200).send("login successfully");
-        res.status(400).send("check the phone number or your password"); 
+        const userDB = await User.findOne({userName});
+
+        if(!userDB)
+            return res.status(203).json({msg:"this user is not found in database"});
+        const checkPass = await bcrypt.compare(password,userDB.password);
+        console.log(checkPass);
+        if(checkPass)
+            return res.status(200).json({msg:"login successfully"});
+        res.status(203).json({msg:"The Passowrd is incorrect"}); 
     }catch(err){
         res.status(402).json({msg:err}); 
     }

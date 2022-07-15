@@ -11,7 +11,7 @@ const Register = () => {
     useEffect(()=>{
         paths = window.location.href.split('/');
         setPath(paths.find(element => element ==='signin' || element ==='signin' ));
-        console.log(window.location.href);
+       
     },[window.location.href]);
     
     

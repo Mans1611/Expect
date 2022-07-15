@@ -4,7 +4,6 @@ import { globalUser } from "../Context/HomeContext"
 
 const RequiredAuth = ({childern})=>{
     const store = globalUser();
-    console.log(store.auth);
     if(!store.auth){
        return <Navigate to='/register/signup'/>
     }
