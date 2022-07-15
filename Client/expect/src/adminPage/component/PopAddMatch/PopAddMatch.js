@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import CountryPop from '../countryPop/CountryPop';
 import AddIcon from '@mui/icons-material/Add';
+import { matchesStore } from '../../Context/matchesContext';
 const PopAddMatch = ({showPop,setShowPop}) => {
   const hidePop = (e)=>{
       if(e.target.className === 'popaddMatch'){
@@ -17,8 +18,8 @@ const PopAddMatch = ({showPop,setShowPop}) => {
   const [firstCountry,setFirstCountry] = useState(null)
   const [secondCountry,setSecondCountry] = useState(null);
   const [showCountry,setShowCountry] = useState(false);
-  const [showMsg,setShowMsg] = useState(false); 
-  // const [matchid,setMatchId] = useState(null);
+  const store = matchesStore();
+
   useEffect(()=>{
     return async ()=>{
       try{
@@ -38,6 +39,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
 
     const checkedCountry =  document.querySelector('input[name="country"]:checked').value;
 
+    // for setting country in upper icon 
     if(!firstCountry){
       for(let country of countries){
         if(checkedCountry === country.countryName){
@@ -66,13 +68,14 @@ const PopAddMatch = ({showPop,setShowPop}) => {
     if(time !=='' && date !=='' && firstCountry  && secondCountry && matchId !==''){
       const matchTime = `${date} ${time}`;
       try{
-        const response = await axios.post('/matches/addgame',{
+        await axios.post('/matches/addgame',{
           matchTime,
           firstCountry,
           secondCountry,
           matchId
         })
-
+        const response = await axios.get('/matches/getmatches')
+        store.setMatches(response.data);
         setShowPop(false);
       }catch(err){
         console.log(err);

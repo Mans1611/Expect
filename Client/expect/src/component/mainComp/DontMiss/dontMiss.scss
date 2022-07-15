@@ -1,16 +1,16 @@
 @import '../.main.scss';
 @import '../../../.mainStyle.scss';
 .dontMissList{
-    width: 100%;
+    width: 90%;
     height: fit-content;
     background-color: #fff;
     padding-bottom: 10px ;
+    margin: auto;
     @include shadowMainNews;
     &.dark{
         @include dark2;
     }
     border-radius: $borderRaduis;
-    margin-left: 30px;
     .titleWrapper{
         border-top-right-radius: inherit;
         border-top-left-radius: inherit;

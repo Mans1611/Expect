@@ -2,9 +2,8 @@ import Footer from '../../component/footer/Footer';
 import DontMissList from '../../component/mainComp/DontMiss/DontMissList';
 import MainNews from '../../component/mainComp/mainNews/MainNews';
 import './home.scss';
-import { useContext,useState } from 'react';
-import { ThemeContext } from '../../App';
 import { globalUser, userContext } from '../../Context/HomeContext';
+import HomeStanding from '../../component/HomeStanding/HomeStanding';
 
 const Home = () => {
     const {isDark} = globalUser();
@@ -13,6 +12,8 @@ const Home = () => {
                 <div className="pageContainer">
                     <MainNews/>
                     <DontMissList/>
+                    <div></div>
+                    <HomeStanding/>
                 </div>
                 <Footer/>
             </div>

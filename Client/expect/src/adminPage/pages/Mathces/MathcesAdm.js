@@ -1,32 +1,28 @@
 import './matchesad.scss';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import { useEffect, useState } from 'react';
-import fetchData from '../../../fetchData';
-import Loading from '../../../component/loading/big.loading/Loading';
-import MathchCard from '../../../component/matchcards/MatchCard';
 import PopAddMatch from '../../component/PopAddMatch/PopAddMatch';
 import MatchCardAdm from '../../component/MatchCardAdm/MatchCardAdm';
 import axios from 'axios';
 import SmallLaoding from '../../../component/loading/small.loading/smallLoading';
+import { matchesStore } from '../../Context/matchesContext';
 
 const MathcesAdm = () => {
-    const [matches,setMatches] = useState([]);
+    //const [matches,setMatches] = useState([]);
     const [showPop,setShowPop] = useState(false) ;
     const [isLoading,setLoading] = useState(true);
+    const store = matchesStore();
     useEffect(()=>{
         return async()=>{
             try{
                 const response = await axios.get('/matches/getmatches')
-                setMatches(response.data);
+                store.setMatches(response.data);
                 setLoading(false);
             }
             catch(err){
                 console.log(err);
             }
-        }
-
-        
-    
+        } 
     },[])
 
     const popAddMatch = ()=>{
@@ -40,7 +36,7 @@ const MathcesAdm = () => {
                 {
                     isLoading? <SmallLaoding/>:
                     (
-                        matches.map((match,index)=> <MatchCardAdm match={match} key={index}/>)
+                        store.matches.map((match,index)=> <MatchCardAdm match={match} key={index}/>)
                     )
                 
                 }
