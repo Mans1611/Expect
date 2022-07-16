@@ -7,6 +7,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import BottomNavbar from './bottomnavbar/BottomNavbar';
 import { ThemeContext } from '../../App';
 import { globalUser } from '../../Context/HomeContext';
+import Cookies from 'universal-cookie';
 
 const Navbar = (props) => {
     const [width , setWidth] = useState(window.innerWidth);
@@ -14,7 +15,7 @@ const Navbar = (props) => {
     let items = document.getElementsByClassName('navbarLink');
     const navbarItems = ["Home" , "Matches","MyExpects", "Standing"];
     const {isDark,setDark} = globalUser();
-    
+    const cookie = new Cookies();
     useEffect(()=>{
         for(let i = 0 ; i<items.length;i++){
             items[i].addEventListener('click',function(){
@@ -35,9 +36,11 @@ const Navbar = (props) => {
     }) 
 
     const store = globalUser();
+    
     const handleLogOut = ()=>{
         store.setAuth(false);
         store.setUserGlob(false);
+        cookie.remove('token');
     }
     return ( 
         <>
@@ -63,7 +66,11 @@ const Navbar = (props) => {
                        </div>
                        <div className='navbarDropdown'>
                             <Link to='myprofile'  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>
-                            <div onClick={()=>{setDark(!isDark)}} className={`dropdownItem ${isDark? 'dark':''}` }>
+                            <div onClick={
+                                ()=>{
+                                setDark(!isDark);
+                            }
+                                } className={`dropdownItem ${isDark? 'dark':''}` }>
                                 <span className="dropdownItem">Dark Mode</span>
                                 <div className="circleContainer">
                                     <LightModeIcon color="warning" className='darkModeIcons'/>

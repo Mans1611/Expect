@@ -9,10 +9,9 @@ import SmallLaoding from '../loading/small.loading/smallLoading';
 import Cookie from 'universal-cookie';
 import {moveToFirst,moveToSecond} from './utilites/Moving.js';
 import { globalUser, userContext } from '../../Context/HomeContext';
-
+import {tokenVerification} from './utilites/tokenVerification.js';
+const cookie = new Cookie();
 const SignUp = () => {
-    
-
     const [countriesOption, setCountries] = useState([]);
     const [userName,setUserName] = useState(null);
     const [phone,setPhone] = useState(null);
@@ -21,9 +20,13 @@ const SignUp = () => {
     const [rePass,setRepass] = useState(null);
     const [country,setCountry] = useState(null);    
     const [loading,setLoading] = useState(true); 
-    const [loadingPost,setLoadingPost] = useState(false); 
+    const [loadingPost,setLoadingPost] = useState(false);
+    const [errMsg,setErrorMSg] = useState(false);
+    
+    
+ 
     useEffect(()=>{
-    return async()=>{
+        return async()=>{
         try{
             const response = await axios.get('/country/countries');
             setCountries(response.data);
@@ -31,6 +34,7 @@ const SignUp = () => {
         }catch(err){
             console.log(err);
         }
+        
     }},[])
 
     const fields = document.getElementsByClassName('inputFeild');
@@ -45,7 +49,7 @@ const SignUp = () => {
     }
     
     const navigate = useNavigate();
-   const store = globalUser();
+    const store = globalUser();
 
     const submit = async (e)=>{
         e.preventDefault();
@@ -118,21 +122,26 @@ const SignUp = () => {
                     if(phone!=='')
                         setPhone('+974'+phone);
                 }
+                
                 const user = {userName,email:mail,password:pass,userCountry:country,phoneNumber:phone}  ;
-                console.log(user);
                 const response = await axios.post('/register/signup',user);
-                console.log(response);
                 if(response.status === 201){
                     setLoadingPost(false);
                     store.setUserGlob(userName);
                     store.setAuth(true);
                     navigate('/expect/home');
-                    window.localStorage.setItem('token',response.headers.token);
+                    cookie.set('token',response.headers.token,{
+                        maxAge : 60*2
+                    })
+                
                 }
 
                 else if(response.status === 203){
                     setLoadingPost(false);
-                    document.getElementById('backendMsg').innerText = response.data.msg;
+                    setErrorMSg(true);
+                    setTimeout(()=>{
+                        document.getElementById('backendMsg').innerText = response.data.msg;
+                    },0)
                 }
             }catch(err){
                 console.log(err);
@@ -205,7 +214,7 @@ const SignUp = () => {
                                 {loadingPost? "Loading" : "Submit"}
                             </button>
                         </div>
-                        <div id='backendMsg'></div>
+                        {errMsg && <div id='backendMsg'></div>}
                     </div>
                 </form>
         </div>

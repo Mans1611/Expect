@@ -4,17 +4,83 @@
     width: 90%;
     height: 300px;
     border-radius: 20px;
-    background-color: #222;
-    color: #fff;
-    margin: auto;
-    
+    background-color: #fff;
+    transition: 200ms;
     .headline{
-        text-align: center;
-        font-size: 50px;
-        color: $gold;
-        font-weight: 600;
-        background-color: #111;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
+        padding: 5px 0 ;
+        text-align: center;
+        background-color: #222;
+        a{
+            font-size: 50px;
+            color: $gold;
+            font-weight: 600;
+            text-decoration: none; 
+        }
+
     }
+    &.dark{
+        .headline{
+            background-color: #111;
+            border-bottom:4px solid #fff ;
+        }
+        background-color: #222;
+        color: #fff;
+        .tableHead{
+            color: $gold ;
+            background-color: #111;
+            border-bottom: 2px solid #eee;
+        }       
+            
+        
+        .player{
+            background-color: #444;
+            border-bottom: 1px solid #eee;
+        }
+        .playerLink{
+            color: #fff;
+        }
+
+    }
+    margin: auto;
+    @include shadowMainStyle;
+        
+    
+    .player{
+        padding:5px 10px;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ddd;
+        border-bottom: 1px solid #999;
+        &:hover{
+            transform: scaleX(1.05);
+        }
+        
+        
+        a{
+            color: #222;
+            font-size: 22px;
+            text-decoration: none;
+            &:hover{
+                color: $pinck;
+                text-decoration: underline;
+            }
+        }
+        
+
+    }
+
+}
+.tableHead{
+    color: #171717;
+    font-size: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #555;
+    padding: 5px 10px;
+    font-weight: 700;
 }

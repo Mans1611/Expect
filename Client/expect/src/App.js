@@ -16,13 +16,22 @@ import Adminaccount from './adminPage/pages/account/Adminaccount';
 import { createContext,useState } from 'react';
 import Footer from './component/footer/Footer';
 import MyProfile from './pages/myProfile/MyProfile';
-import { Provider } from './Context/HomeContext';
+import { globalUser, Provider } from './Context/HomeContext';
 import RequiredAuth from './Auth/RequiredAuth';
 import { MatchesProvider } from './adminPage/Context/matchesContext';
+import Cookies from "universal-cookie";
+import { useEffect } from 'react';
+
 export const ThemeContext = createContext(true);
 
 
 const  App = ()=> {
+  
+  const cookie = new Cookies();
+ 
+
+  
+      
   
   return (
     <Router>

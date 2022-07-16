@@ -11,11 +11,7 @@ import bcrypt from 'bcrypt';
 dotenv.config();
 
 const router = express.Router();
-router.get('/users',async(req,res)=>{
-    User.find() 
-    .then(user=>res.json(user))
-    .catch(err=>res.status(404).json('error' + err)); 
-})
+
 
 
 
@@ -62,21 +58,6 @@ router.post('/signup',async(req,res)=>{
 
 
 
-
-router.get('/find/all',verify,async(req,res)=>{
-    const {last}= req.query;
-    const {id} = req.user;
-    const user = await User.findById(id);
-    if(!user.isAdmin)
-        return res.status(401).send("you are not authnticated");
-    
-    const users = last? await User.find().sort({_id:-1}).limit(2):await User.find();
-    res.status(200).send(users);
-
-})
-
-
-
 router.post('/login',async(req,res)=>{
     const {userName,password} = req.body;
 
@@ -87,13 +68,25 @@ router.post('/login',async(req,res)=>{
             return res.status(203).json({msg:"this user is not found in database"});
         const checkPass = await bcrypt.compare(password,userDB.password);
         console.log(checkPass);
-        if(checkPass)
-            return res.status(200).json({msg:"login successfully"});
+        if(checkPass){
+            const token = jwt.sign({userName},process.env.JWT);  
+            return res.status(200).json({msg:"login successfully",token});
+        }
         res.status(203).json({msg:"The Passowrd is incorrect"}); 
     }catch(err){
         res.status(402).json({msg:err}); 
     }
 })
+
+router.get('/verifySession/:token',async(req,res)=>{
+    if(!req.params.token)
+        return  res.status(203).json({msg:"token is not defined"});
+    console.log(req.params.token);
+    const verifyToken = await jwt.decode(req.params.token,process.env.JWT);
+    res.status(200).json({payload:verifyToken});
+})
+
+
 router.put('/:id',verify,async (req,res) =>{
     const {id,phonenumber} = req.user;
     //console.log(id,req.params.id);
@@ -110,6 +103,7 @@ router.put('/:id',verify,async (req,res) =>{
     res.status(200).json({msg:"done"})
 
 });
+
 router.get('/verify/:id/:token',async (req,res)=>{
     const {id, token} = req.params;
     try{
@@ -127,6 +121,7 @@ router.get('/verify/:id/:token',async (req,res)=>{
         res.status(402).send(err);
     }
 })
+
 router.get('/states',async (req,res)=>{
      const today = new Date();
      const lastYear = today.setFullYear(today.setFullYear() - 1);
@@ -151,6 +146,7 @@ router.get('/states',async (req,res)=>{
         res.status(500).json(err);
     }
 })
+
 router.get('/find/random',async (req,res)=>{
     const {random} = req.query;
     let data;
