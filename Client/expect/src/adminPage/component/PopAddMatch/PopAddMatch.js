@@ -44,6 +44,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
       for(let country of countries){
         if(checkedCountry === country.countryName){
           setFirstCountry(country);
+          console.log(firstCountry);
           break;
         }
       }
