@@ -6,12 +6,12 @@ import { ArrowBackIos } from '@mui/icons-material';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import SmallLaoding from '../loading/small.loading/smallLoading';
-import Cookie from 'universal-cookie';
+import Cookies from 'universal-cookie';
 import {moveToFirst,moveToSecond} from './utilites/Moving.js';
 import { globalUser, userContext } from '../../Context/HomeContext';
 import {tokenVerification} from './utilites/tokenVerification.js';
-const cookie = new Cookie();
 const SignUp = () => {
+    const cookie = new Cookies();
     const [countriesOption, setCountries] = useState([]);
     const [userName,setUserName] = useState(null);
     const [phone,setPhone] = useState(null);
@@ -23,10 +23,26 @@ const SignUp = () => {
     const [loadingPost,setLoadingPost] = useState(false);
     const [errMsg,setErrorMSg] = useState(false);
     
-    
+
+    const navigate = useNavigate();
+    const store = globalUser();
  
     useEffect(()=>{
+
+        
         return async()=>{
+            
+            const token = cookie.get("token");
+            console.log(token);
+            if(token){
+                navigate('/expect/home')
+                store.setAuth(true);
+                const {data} = await axios.get(`/register/verifySession/${token}`);
+                store.setUserGlob(data.payload.userName);
+                cookie.set("token",token,{
+                    maxAge : 60*60*8
+                })
+            }
         try{
             const response = await axios.get('/country/countries');
             setCountries(response.data);
@@ -48,8 +64,7 @@ const SignUp = () => {
         })
     }
     
-    const navigate = useNavigate();
-    const store = globalUser();
+    
 
     const submit = async (e)=>{
         e.preventDefault();
@@ -131,7 +146,7 @@ const SignUp = () => {
                     store.setAuth(true);
                     navigate('/expect/home');
                     cookie.set('token',response.headers.token,{
-                        maxAge : 60*2
+                        maxAge : 60*60*8
                     })
                 
                 }

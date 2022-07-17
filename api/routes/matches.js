@@ -3,6 +3,7 @@ import Country from '../models/Country.js';
 import Matches from '../models/Matches.js';
 
 const matches = express.Router();
+
 matches.get('/getmatches',async(req,res)=>{
     try{
         const matches = await Matches.find();
@@ -13,9 +14,16 @@ matches.get('/getmatches',async(req,res)=>{
 
 })
 
-// router.get('/match/:id',(req,res)=>{
-    
-// })
+matches.get('/match/:id', async (req,res)=>{
+    try{
+        const match = await Matches.findOne({matchId:req.params.id});
+        res.status(200).json({data:match});
+    }
+    catch(err){
+        console.log(err);
+
+    }
+ })
 
 
 
@@ -30,6 +38,7 @@ matches.post('/addgame', async(req,res)=>{
     */
     const {players:players_1} = firstCountry;
     const {players:players_2} = secondCountry;
+    const result = 0;
 
     const newPlayers_1 = [],newPlayers_2 = [];
     const length = (players_1.length>players_2.length)? players_1.length : players_2.length;
@@ -51,7 +60,8 @@ matches.post('/addgame', async(req,res)=>{
     }
     firstCountry.players = newPlayers_1;
     secondCountry.players = newPlayers_2;
-
+    firstCountry.result = 0;
+    secondCountry.result = 0;
 
     const match = await new Matches ({
         firstCountry,
@@ -60,7 +70,7 @@ matches.post('/addgame', async(req,res)=>{
     }
     );
 
-    console.log(match);
+    console.log(match.firstCountry);
     match.save(()=>{
         console.log("match is added");
     })
@@ -68,13 +78,35 @@ matches.post('/addgame', async(req,res)=>{
     
 })
 
-matches.put('/editgame/:id',(req,res)=>{
+matches.put('/editmatch/:matchID',async (req,res)=>{
    
-   
+    const updatedMatch = await Matches.findOneAndUpdate({matchId:req.params.matchID},
+        {
+            $set : {
+                'firstCountry.result':req.body.result1, // this to access the inner 
+                'secondCountry.result' : req.body.result2
+            },
+        },{returnDocument:true}).clone();
+
+        console.log(updatedMatch);
+    
+        
+    res.status(200).json({msg:"Done Updating",updatedMatch})
 })
 
-matches.delete("/deletelastgames",(req,res)=>{
+matches.delete('/deletematch/:matchID',async (req,res)=>{
+    console.log("passes");
+   try{
+        const match = await Matches.findOne({matchId:req.params.matchID});
+        if(!match)
+            return res.status(203).json({msg:`This Match_id ${req.params.matchID} is not exist to delete`})     
+        await Matches.deleteOne({matchId : req.params.matchID});
+        res.status(200).json({msg:"this match is deleted successfuly"});
    
+    }
+   catch(err){
+    console.log(err);
+   }
 })
 
 

@@ -58,25 +58,26 @@
             height: fit-content;
             padding: 10px;
 
+
             form{
 
                 .innergrid{
                     display: grid;
                     grid-template-columns: repeat(5,20%);
-                    column-gap: 1%;
                 }
                 
             }
 
             .country{
                 display: flex;
-                width: 100%;
+                width: 95%; /* 95% od the inner grid container*/
                 flex-direction: column;
                 align-items: center;
                 background-color: #575757;
                 padding: 5px 10px;
                 cursor: pointer;
                 border-radius: 5px;
+                margin: auto;
                 input{
                     width: 25px;
                     height: 25px;
@@ -150,15 +151,28 @@ input{
     display: flex;
     justify-content: end;
     button{
-        width: fit-content;
+        min-width: 60px;
         height: fit-content;
         border-radius: 5px;
         color: #fff;
         font-weight: 500;
         font-size: 26px;
         padding: 15px 10px;
-        background-color: $pinck ;
+        background-color: #ec0323 ;
         cursor: pointer;
+    }
+    &.ok{
+        margin-top: 10px;
+        button{
+        font-weight: 600;
+        font-size: 26px;
+        background-color: #ec0323;
+        border-radius: 10px;
+        &:hover{
+            transform: scale(1.1);
+            background-color: #ec032390;
+        }
+        }
     }
 }
 .post{

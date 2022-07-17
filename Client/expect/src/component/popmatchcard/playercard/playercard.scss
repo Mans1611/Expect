@@ -2,33 +2,31 @@
 
 .palyerCard{
     min-width: 150px;
-    height: 150px;
     background-color: inherit;
     border-radius: 5px;
     padding: 4px 0;
+    margin: 0 4px 5px 0 ;
     cursor: pointer;
     margin-right: 5px;
     box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
-    border: 1px solid $qatar;
+    border: 3px solid $betiured;
     .playerCardInfo{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color:$gold ;
         .imgBackground{
                
             .playerCardImg{
                 width: 60px;
                 height: 60px;
                 object-fit: contain;
-                border-radius: 30%;
+                border-radius: 50%;
             }
         }
         .playerDetails{
-            background-color: $qatar;
             font-size: 30px;
             text-align: center;
             color: #fff;

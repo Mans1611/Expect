@@ -8,6 +8,7 @@ import CountryPop from '../countryPop/CountryPop';
 import AddIcon from '@mui/icons-material/Add';
 import { matchesStore } from '../../Context/matchesContext';
 const PopAddMatch = ({showPop,setShowPop}) => {
+  
   const hidePop = (e)=>{
       if(e.target.className === 'popaddMatch'){
         setShowPop(false);
@@ -147,7 +148,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
                       }
                       </div>
                       
-                      <div className="buttonWrapper">
+                      <div className="buttonWrapper ok">
                           <button onClick={handleSelect} >OK</button>
                       </div>
 

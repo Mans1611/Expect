@@ -6,6 +6,7 @@
     border-radius: 20px;
     background-color: #fff;
     transition: 200ms;
+    margin: 20px ;
     .headline{
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
@@ -19,18 +20,23 @@
             text-decoration: none; 
         }
 
+
     }
     &.dark{
         .headline{
             background-color: #111;
             border-bottom:4px solid #fff ;
         }
+        a{
+            color: $betiured;
+        }
         background-color: #222;
         color: #fff;
         .tableHead{
-            color: $gold ;
+            color: $betiured ;
             background-color: #111;
             border-bottom: 2px solid #eee;
+            font-weight: 500;
         }       
             
         

@@ -21,6 +21,8 @@ import RequiredAuth from './Auth/RequiredAuth';
 import { MatchesProvider } from './adminPage/Context/matchesContext';
 import Cookies from "universal-cookie";
 import { useEffect } from 'react';
+import NotFound from './pages/NotFound/NotFound';
+import PopMatchCard from './component/popmatchcard/PopMatchCard';
 
 export const ThemeContext = createContext(true);
 
@@ -44,7 +46,9 @@ const  App = ()=> {
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<MyExpects/>}/>
             <Route path="myprofile" element={<MyProfile/>}/>
+            <Route path = "matches/:id" element = {<PopMatchCard/>}/>
           </Route>
+          
       
         <Route path='/welcome' element={<Welcome/>}></Route>
         <Route path="/register" element = {<Register/>}>
@@ -57,12 +61,13 @@ const  App = ()=> {
       </Provider>
       <MatchesProvider childern={
         <Routes>
-          <Route path='adminpage' element = {<HomeAdminPage/>}>         
+          <Route path='/adminpage' element = {<HomeAdminPage/>}>         
                 <Route path="account" element = {<Adminaccount/>}/>
                 <Route path='dashboard' element={<DashBoard/>}/>
                 <Route path='matches' element={<MathcesAdm/>}/>
                 <Route path='statistics' element={<Statistics/>}/>
             </Route>
+          <Route path='*' element={<NotFound/>} />
         </Routes>
       }>
       </MatchesProvider>

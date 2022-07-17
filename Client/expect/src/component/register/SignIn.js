@@ -12,7 +12,13 @@ const SignIn = () => {
     const navigate = useNavigate();
     const store = globalUser();
     const cookie = new Cookies();
-    
+
+    const inputs = document.getElementsByClassName('inputFeild')
+    for(let input of inputs){
+        input.addEventListener('focus',()=>{
+            setErrorMSg(false)
+        })
+    }
     useEffect(()=>{
         return async()=>{
             const token = cookie.get("token")
@@ -22,12 +28,13 @@ const SignIn = () => {
                 const {data} = await axios.get(`/register/verifySession/${token}`);
                 store.setUserGlob(data.payload.userName);
                 cookie.set("token",token,{
-                    maxAge : 30
+                    maxAge : 60*60*8
                 })
             }
 
         }
-    })
+    },[])
+
     const handleLogin = async(e)=>{
         e.preventDefault();
 

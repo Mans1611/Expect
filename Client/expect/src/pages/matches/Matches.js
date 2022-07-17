@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+
 import MathchCard from '../../component/matchcards/MatchCard';
 import { useState, useEffect, useContext } from 'react';
 import Loading from '../../component/loading/big.loading/Loading';
@@ -10,7 +10,7 @@ import { globalUser } from '../../Context/HomeContext';
 
 const Matches = () => {
     const {isDark} = globalUser();
-    const [data,setData] = useState(null);
+    const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [notFound,setNoutFound] = useState(false);
    useEffect( ()=>{

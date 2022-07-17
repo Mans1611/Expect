@@ -10,14 +10,13 @@ import { matchesStore } from '../../Context/matchesContext';
 const MathcesAdm = () => {
     //const [matches,setMatches] = useState([]);
     const [showPop,setShowPop] = useState(false) ;
-    const [isLoading,setLoading] = useState(true);
     const store = matchesStore();
     useEffect(()=>{
         return async()=>{
             try{
                 const response = await axios.get('/matches/getmatches')
                 store.setMatches(response.data);
-                setLoading(false);
+                store.setLoading(false);
             }
             catch(err){
                 console.log(err);
@@ -34,7 +33,7 @@ const MathcesAdm = () => {
             {showPop && <PopAddMatch showPop={showPop} setShowPop={setShowPop}/>}
             <div className='matchesContainer'>
                 {
-                    isLoading? <SmallLaoding/>:
+                    store.isLoading? <SmallLaoding/>:
                     (
                         store.matches.map((match,index)=> <MatchCardAdm match={match} key={index}/>)
                     )

@@ -1,39 +1,43 @@
 @import '../../.mainStyle.scss';
 .matchCard{
-    width: 250px;
+    width: 90%;
     height: fit-content;
-    border: 2px solid rgb(193, 0, 39);
     border-radius: 10px;
     margin: 5px auto ;
     background-color: #eee;
-    padding: 5px;  
+    padding-bottom: 10px;
+    @include shadowMainStyle;
     
     &.dark{
-        background-color: #171717;
+        background-color: #272727;
         color: #eee;
         transition: 150ms;
+        .matchcardHeader{
+            background: linear-gradient(90deg, rgba(255,123,0,0.8634804263502276) 0%, rgba(255,183,0,0.8186624991793592) 50%);
+            background: linear-gradient(90deg, rgb(81, 51, 51) 0%, rgb(157, 1, 22) 50%);
+        
+        }
         
     }              
     .matchcardHeader{
         display: flex;
-        margin-top: 10px;
         align-items: center;
         justify-content: space-around;
+        background: linear-gradient(90deg, rgba(255,123,0,0.8634804263502276) 0%, rgba(255,183,0,0.8186624991793592) 50%);
+            
         font-size: 30px;
         font-weight: 600;
-        color: inherit;
+        color: #fff;
+         border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        padding: 5px;
         .matchCardCountry{
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        .countryLabel{
-            font-size:24px ;
-            font-weight: 600;
-            color: inherit;
-            margin-top: 5px;
-        }
+        
         .matchCardCountryImg{
             width: 40px;
             height: 40px;
@@ -43,6 +47,7 @@
         }
     }
     .matchCardCounter{
+        margin-top: 10px;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -50,22 +55,24 @@
             font-size: 24px;
             color: $gold;
             font-weight: 600;
+
         }
     }
     .matchCardStart{
         display: flex;
         justify-content: end;
         margin-top: 10px;
+        padding: 0 5px;
         .matchCardbutton{
            
             color:  rgb(193, 0, 39);
             border: 2px solid rgb(193, 0, 39);
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             width: 100px;
             height: 40px;
             padding: 20px ;
-            font-size: 30px;
+            font-size: 34px;
             font-weight: 600;
             text-align: center;
             align-items: center;

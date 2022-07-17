@@ -5,8 +5,9 @@ export const matchesContext = createContext(null);
 
 export const MatchesProvider = ({childern})=>{
     const [matches,setMatches]= useState([]);
+    const [isLoading,setLoading]= useState(true);
     return ( 
-    <matchesContext.Provider value = {{matches,setMatches}}>
+    <matchesContext.Provider value = {{matches,setMatches,isLoading,setLoading}}>
         {childern}
     </matchesContext.Provider>
     )

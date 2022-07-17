@@ -1,7 +1,8 @@
+@import '../../../.mainStyle.scss';
 
 .sidenavbar{
     background-color: #222222;
-    height: 100%;
+
     width: 60px;
     flex: 1;
     padding: 10px 1px;
@@ -19,7 +20,7 @@
         cursor: pointer;
         padding: 0 5px;
         &:hover{
-            background-color: #FF005C;
+            background-color: $betiured;
             color: #fff;
         }
         &.account{
@@ -47,7 +48,7 @@
     }
 }
 .selectedsidebar{
-    background-color: #FF005C;
+    background-color: $betiured;
     animation: pop 100ms;
 }
 @keyframes pop {

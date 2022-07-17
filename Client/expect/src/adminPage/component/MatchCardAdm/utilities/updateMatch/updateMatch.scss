@@ -1,0 +1,130 @@
+@import '../../../../../.mainStyle.scss';
+
+.UpdateMatchContainer{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #272727ae;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .updatePop{
+        background-color: #212121;
+        border-radius: 10px;
+        width: 50%;
+        height: 90vh;
+        overflow-y: scroll;
+        position: relative;
+        &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            border-radius: 5px;
+            background-color: #888;
+          }
+           
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            background: #272727; 
+            border-radius: 5px;
+            margin-top: 5px;
+          }
+        .closeIcon{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 30px;
+        }
+        .matchcardHeader{
+            padding: 10px;
+            height: fit-content;
+            .countryLabel{
+                font-size:36px ;
+                font-weight: 600;
+                color: inherit;
+                margin: 5px 0 ;
+
+            }
+            .matchCardCountryImg{
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+        }
+        .formContainer{
+            width: 100%;
+            
+            .changeResult{
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
+                input[type='number']{
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 5px;
+                    font-size: 40px;
+                    font-weight: 600;
+                    text-align: center;
+                    background-color: #555;
+                    color: #fff;
+                    &:focus{
+                        border: none;
+                        outline: none;
+                    }
+                    
+                    &::-webkit-outer-spin-button,// this to remove the arrows
+                    &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                    }
+                    -moz-appearance: textfield;
+            
+                }
+            }
+            .matchCardPlayers{
+                margin-top: 20px;
+                text-align: center;
+                .countryLabel{
+                    font-size: 30px;
+                    color: $gold;
+                }
+                .palyerCard{
+                    margin: 5px ;
+                
+
+                }
+            }
+            .radioContaineter{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                
+                input[type="radio"]{
+                    width: 25px;
+                    height: 25px;
+                    accent-color: $betiured;
+                }
+            }
+        }
+
+    }
+    .buttonWrapper{
+        justify-content: center;
+        margin: 10px 0;
+        button{
+            width: 200px;
+            font-size: 30px;
+            font-weight: 600;
+            &:hover{
+                background-color: #960014 ;
+            }
+        }
+    }
+}
