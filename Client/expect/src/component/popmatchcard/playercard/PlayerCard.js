@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+import { userContext } from '../../../Context/HomeContext';
 import './playercard.scss'
 const PlayerCard = ({player}) => {
+    const {isDark} = useContext(userContext)
     return ( 
-        <div className="palyerCard">
+        <div className={`palyerCard ${isDark? 'dark':''}`}>
             <div className="playerCardInfo">
                 <div className="imgBackground"><img className='playerCardImg' src={player.playerImg} alt="" /></div>
                 <div className="playerDetails">

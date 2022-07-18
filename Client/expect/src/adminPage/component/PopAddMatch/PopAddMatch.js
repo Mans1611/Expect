@@ -64,11 +64,14 @@ const PopAddMatch = ({showPop,setShowPop}) => {
   }
 
   const handlePost = async()=>{
-    const time = document.querySelector('input[name="time"]').value;
-    const date = document.querySelector('input[name="date"]').value;
+    let time = document.querySelector('input[name="time"]').value;
+    let date = document.querySelector('input[name="date"]').value;
     const matchId = document.querySelector('input[name="matchId"]').value;
     if(time !=='' && date !=='' && firstCountry  && secondCountry && matchId !==''){
-      const matchTime = `${date} ${time}`;
+      date = date.split('-');
+      const matchTime = `${date[1]},${date[2]},${date[0]},${time}`;
+      console.log(matchTime);
+      
       try{
         await axios.post('/matches/addgame',{
           matchTime,

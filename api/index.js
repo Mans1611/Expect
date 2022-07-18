@@ -9,6 +9,7 @@ import cors from 'cors' ;
 dotenv.config();
 import register from './routes/register.js';
 import users from './routes/users.js';
+import expects from './routes/expects.js';
 
 
 const app = express();
@@ -25,6 +26,8 @@ app.use('/country',countryRoute);
 app.use('/news',news);
 app.use('/register',register);
 app.use('/users',users);
+app.use('/expects',expects);
+
 app.use(cors());
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file

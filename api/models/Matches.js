@@ -18,11 +18,12 @@ const matchSchema = new Schema({
         type : String,
         required : true
     },
-    fullTime:{
+    fullTime:{ 
         type: Boolean, 
         required:false,
         default: false
     }
+    
 })
 const Matches = model("Matches",matchSchema);
 export default Matches;

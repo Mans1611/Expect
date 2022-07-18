@@ -8,6 +8,7 @@ import mailVerification from '../maller/mailVerification.js';
 import Token  from '../models/Token.js';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
+import Expects from '../models/Expects.js';
 dotenv.config();
 
 const router = express.Router();
@@ -45,6 +46,11 @@ router.post('/signup',async(req,res)=>{
     const msg = `hello expecter ${userName}`;
     await mailVerification(email,msg);
     const token = jwt.sign({userName,email},process.env.JWT);
+    const expects = new Expects({userName})
+    await expects.save(()=>{
+        console.log("done creating user");
+    })
+    
     await user.save(()=>{
         console.log("done creating user");
         res.status(201).header("token",token).json({msg:"User is created succussfully"});

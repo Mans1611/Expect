@@ -28,49 +28,43 @@ export const ThemeContext = createContext(true);
 
 
 const  App = ()=> {
-  
-  const cookie = new Cookies();
- 
-
-  
-      
+const cookie = new Cookies(); 
   
   return (
     <Router>
       <Provider children={(
-      <Routes>
+      <MatchesProvider childern={(
        
-        <>
-          <Route path='/expect' element={<Navbar/>}> 
+        <Routes>
+          <Route path='/expect' element={<><Navbar/><Footer/></>}> 
             <Route path='matches' element={<Matches/>}/>
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<MyExpects/>}/>
             <Route path="myprofile" element={<MyProfile/>}/>
             <Route path = "matches/:id" element = {<PopMatchCard/>}/>
+
           </Route>
           
-      
+      {/* Regestirng pages */}
         <Route path='/welcome' element={<Welcome/>}></Route>
         <Route path="/register" element = {<Register/>}>
           <Route path='signin' element = {<SignIn/>}/>
           <Route path='signup' element = {<SignUp/>}/> 
         </Route>
-      </> 
-      </Routes>
+      {/* Admin pages */}
+          <Route path='/adminpage' element = {<HomeAdminPage/>}>         
+              <Route path="account" element = {<Adminaccount/>}/>
+              <Route path='dashboard' element={<DashBoard/>}/>
+              <Route path='matches' element={<MathcesAdm/>}/>
+              <Route path='statistics' element={<Statistics/>}/>
+            </Route>
+          <Route path='*' element = {<NotFound/>}/>
+      </Routes> 
+      )}>
+
+      </MatchesProvider>
       )}>
       </Provider>
-      <MatchesProvider childern={
-        <Routes>
-          <Route path='/adminpage' element = {<HomeAdminPage/>}>         
-                <Route path="account" element = {<Adminaccount/>}/>
-                <Route path='dashboard' element={<DashBoard/>}/>
-                <Route path='matches' element={<MathcesAdm/>}/>
-                <Route path='statistics' element={<Statistics/>}/>
-            </Route>
-          <Route path='*' element={<NotFound/>} />
-        </Routes>
-      }>
-      </MatchesProvider>
     </Router>
   );
 }

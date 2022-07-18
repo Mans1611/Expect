@@ -2,7 +2,6 @@
 
 .palyerCard{
     min-width: 150px;
-    background-color: inherit;
     border-radius: 5px;
     padding: 4px 0;
     margin: 0 4px 5px 0 ;
@@ -11,7 +10,13 @@
     box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
-    border: 3px solid $betiured;
+    background: linear-gradient(90deg, #513333 50%, #9d0116 50%);
+    border: 4px solid #272727;
+    &.dark{
+        background:linear-gradient(90deg, #272727 50%, rgba(255, 128, 0, 0.819) 50%) ;
+        border: 3px solid #d7d7d7;
+    }
+
     .playerCardInfo{
         display: flex;
         flex-direction: column;
@@ -22,11 +27,12 @@
             .playerCardImg{
                 width: 60px;
                 height: 60px;
-                object-fit: contain;
+                object-fit: cover;
                 border-radius: 50%;
             }
         }
         .playerDetails{
+            padding-top: 5px;
             font-size: 30px;
             text-align: center;
             color: #fff;

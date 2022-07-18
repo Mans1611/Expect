@@ -8,23 +8,12 @@
     padding-bottom: 10px;
     @include shadowMainStyle;
     
-    &.dark{
-        background-color: #272727;
-        color: #eee;
-        transition: 150ms;
-        .matchcardHeader{
-            background: linear-gradient(90deg, rgba(255,123,0,0.8634804263502276) 0%, rgba(255,183,0,0.8186624991793592) 50%);
-            background: linear-gradient(90deg, rgb(81, 51, 51) 0%, rgb(157, 1, 22) 50%);
-        
-        }
-        
-    }              
+              
     .matchcardHeader{
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background: linear-gradient(90deg, rgba(255,123,0,0.8634804263502276) 0%, rgba(255,183,0,0.8186624991793592) 50%);
-            
+        background: linear-gradient(90deg, rgb(81, 51, 51) 0%, rgb(157, 1, 22) 50%);
         font-size: 30px;
         font-weight: 600;
         color: #fff;
@@ -36,14 +25,17 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            
         }
         
         .matchCardCountryImg{
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            border: 2px solid #222;
             object-fit: cover;
             cursor: pointer;
+            
         }
     }
     .matchCardCounter{
@@ -55,9 +47,25 @@
             font-size: 24px;
             color: $gold;
             font-weight: 600;
-
+        }
+        .timeLeft{
+            font-size: 20px;
+            font-weight: 500;
+            color: #222;
         }
     }
+    &.dark{
+        background-color: #272727;
+        color: #eee;
+        transition: 150ms;
+        .matchcardHeader{
+            background: linear-gradient(90deg, rgba(255,123,0,0.8634804263502276) 0%, rgba(255,183,0,0.8186624991793592) 50%);
+        }
+        .timeLeft{
+            color: #fff;
+        }
+        
+    }    
     .matchCardStart{
         display: flex;
         justify-content: end;
@@ -83,6 +91,12 @@
         }
 
 
+    }
+    .icon{
+        svg{
+            width: 50px;
+            height: 50px;
+        }
     }
     @media screen and (max-width:580px) {
         .matchCardCountryImg{

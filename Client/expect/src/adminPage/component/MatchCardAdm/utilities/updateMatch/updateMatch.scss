@@ -125,6 +125,10 @@
             &:hover{
                 background-color: #960014 ;
             }
+            &.fulltime{
+                background-color: #036622;
+                margin-left: 5px ;
+            }
         }
     }
 }

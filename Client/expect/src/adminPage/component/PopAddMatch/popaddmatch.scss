@@ -13,7 +13,8 @@
     align-items: center;
     .popAddMatchContainer{
         width: 60%;
-        height:fit-content;
+        height:90vh;
+        overflow-y: scroll ;
         background-color: #333;
         border-radius:5px;
         position: relative;
@@ -64,6 +65,7 @@
                 .innergrid{
                     display: grid;
                     grid-template-columns: repeat(5,20%);
+                    row-gap: 10px;
                 }
                 
             }

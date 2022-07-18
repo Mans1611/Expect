@@ -17,7 +17,6 @@ const Home = () => {
                     <div></div>
                     <HomeStanding/>
                 </div>
-                <Footer/>
             </div>
         
      );

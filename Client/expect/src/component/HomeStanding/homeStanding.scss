@@ -7,6 +7,8 @@
     background-color: #fff;
     transition: 200ms;
     margin: 20px ;
+    grid-column: 2;
+    grid-row: 3;
     .headline{
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
@@ -41,7 +43,7 @@
             
         
         .player{
-            background-color: #444;
+            background-color: #333;
             border-bottom: 1px solid #eee;
         }
         .playerLink{
@@ -59,7 +61,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #ddd;
+        background-color: #ccc;
         border-bottom: 1px solid #999;
         &:hover{
             transform: scaleX(1.05);

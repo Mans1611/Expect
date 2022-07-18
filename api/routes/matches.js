@@ -24,7 +24,17 @@ matches.get('/match/:id', async (req,res)=>{
 
     }
  })
+matches.get('/match/',async(req,res)=>{
+    try{
+        const dontMissMatches = await Matches.find({fullTime : req.query.fullTime}).limit(2);
+        console.log("wow");
+        res.status(200).send(dontMissMatches);
+    }catch(err){
+        console.log(err);
 
+    }
+
+})
 
 
 matches.post('/addgame', async(req,res)=>{
@@ -80,19 +90,26 @@ matches.post('/addgame', async(req,res)=>{
 
 matches.put('/editmatch/:matchID',async (req,res)=>{
    
+    
+    const fullTime = req.body.fullTime ? req.body.fullTime : false;
+    
+    console.log("why is "+fullTime);
+
     const updatedMatch = await Matches.findOneAndUpdate({matchId:req.params.matchID},
         {
             $set : {
-                'firstCountry.result':req.body.result1, // this to access the inner 
-                'secondCountry.result' : req.body.result2
+                'firstCountry.result':req.body.result1, // this to access the inner property
+                'secondCountry.result' : req.body.result2,
+                fullTime
             },
-        },{returnDocument:true}).clone();
-
-        console.log(updatedMatch);
+            
+        })
+        
     
         
     res.status(200).json({msg:"Done Updating",updatedMatch})
 })
+
 
 matches.delete('/deletematch/:matchID',async (req,res)=>{
     console.log("passes");

@@ -6,6 +6,7 @@ import { useEffect,useRef } from 'react';
 import axios from 'axios';
 import { matchesStore } from '../../../../Context/matchesContext';
 import PlayerCardRadio from '../../../../../component/PlayerCardRadio/PlayerCardRadio';
+import { useState } from 'react';
 const UpdateMatch = ({match,setUpdate})=> {
   const store = matchesStore();
   // this code down below is to cahnge the background color when you select a player
@@ -29,18 +30,19 @@ const UpdateMatch = ({match,setUpdate})=> {
     }
   
 }
-  const country_1_result = useRef(0);
-  const country_2_result = useRef(0);
+  const [country_1_result,setResult1] = useState(match.firstCountry.result);
+  const [country_2_result,setResult2] = useState(match.secondCountry.result);
 
 
   const handleUpdate = async(e)=>{
     e.preventDefault();
-    console.log(country_1_result.current.value);
-    console.log(country_2_result.current.value);
+    console.log(country_1_result);
     try{
+      console.log("updated handle mans");
       const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
-        result1 : country_1_result.current.value,
-        result2 : country_2_result.current.value
+        result1 : country_1_result,
+        result2 : country_2_result,
+        fullTime : false
       })
       setUpdate(false);
       const {updatedMatch,msg} = response.data;
@@ -48,6 +50,20 @@ const UpdateMatch = ({match,setUpdate})=> {
 
     }catch(err){
       console.log("check your internet");
+    }
+  }
+
+  const fullTime = async(e)=>{
+    e.preventDefault();
+    try{
+      console.log("fullTime handle mans");
+      const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
+        fullTime: true
+      })
+      setUpdate(false)
+      console.log(response.data);
+    }catch(err){
+      console.log("error in full time");
     }
   }
 
@@ -71,10 +87,11 @@ const UpdateMatch = ({match,setUpdate})=> {
 
             </div>
             <div className="formContainer">
-              <form onSubmit={handleUpdate}>
+              <form>
                 <div className="changeResult">
-                    <input ref={country_1_result} type="number" name="result" id="country_1_result" />
-                    <input ref={country_2_result} type="number" name="result" id="country_2_result" />
+                    <input maxLength='1' onChange={(e)=>setResult1(e.target.value)} type="number" name="result" id="country_1_result" />
+                    <input maxLength='1' onChange={(e)=>setResult2(e.target.value)} type="number" name="result" id="country_2_result" />
+                
                 </div>
                 <div className="matchCardPlayers">
                     <span className="countryLabel">Select Player from {match.firstCountry.countryName}</span>
@@ -91,7 +108,8 @@ const UpdateMatch = ({match,setUpdate})=> {
                     </div>
                 </div>
                 <div className="buttonWrapper">
-                  <button  type="submit">Update </button>
+                  <button  onClick={handleUpdate}>Update </button>
+                  <button  onClick={fullTime} className='fulltime'>Full Time</button>
                 </div>
               </form>
             </div>

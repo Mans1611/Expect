@@ -1,0 +1,24 @@
+.matchResultComp{
+
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    .circle{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 3px solid #0f0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        .time{
+            font-size: 20px;
+            font-weight: 500;
+
+        }
+    }
+
+}
