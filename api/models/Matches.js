@@ -18,6 +18,11 @@ const matchSchema = new Schema({
         type : String,
         required : true
     },
+    started:{ 
+        type: Boolean, 
+        required:false,
+        default: false
+    },
     fullTime:{ 
         type: Boolean, 
         required:false,

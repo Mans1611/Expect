@@ -9,6 +9,7 @@ import { ThemeContext } from '../../App';
 import { globalUser } from '../../Context/HomeContext';
 import TimeCounter from '../../TimeCounter';
 import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchResultComp';
+import { Link } from 'react-router-dom';
 
 
 
@@ -16,18 +17,18 @@ import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchR
 export const MatchCardContext = createContext(null);
 const MathchCard = ({match}) => {
 
-    console.log("render match comp");
     const [pop,setPop] = useState(false);
     
     const togglePop = ()=>{
         setPop(!pop);
     }
-   const {isDark} = globalUser(); 
-   const [timeUp, setTimeUp] = useState(false);  
-    
+    const {isDark} = globalUser(); 
+    const [timeUp, setTimeUp] = useState(false); 
+
+
    
     return ( 
-    <MatchCardContext.Provider value={match}>
+    <MatchCardContext.Provider value={{match}}>
 
        
         <div className={`matchCard ${isDark?'dark':''}`}>
@@ -48,9 +49,9 @@ const MathchCard = ({match}) => {
             }
 
             {/* if the time is up the timer will display and you cant press the Expect button  */}
-            {!timeUp &&
+            {!timeUp && 
                 <div className="matchCardStart">
-                    <button onClick={togglePop} className='matchCardbutton'>Expext</button>
+                    { <button onClick={togglePop} className='matchCardbutton'>Expext</button>}
                 </div>
             } 
                 {!timeUp && pop && <PopMatchCard pop={pop} togglePop={togglePop} dark = {isDark} match={match}/>}
@@ -60,10 +61,5 @@ const MathchCard = ({match}) => {
         </MatchCardContext.Provider>
      );
 }
-// const mapStateToProps = (state)=>{
-//     return {
-//         dark:state.dark,
-//     }
-// }
 
 export default MathchCard;

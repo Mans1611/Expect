@@ -14,7 +14,6 @@ const DontMissList = () => {
             try{
                 const {data} = await axios.get('/matches/match/?fullTime=false'); // so the match will not be en
                 setData(data)
-                console.log(data);
                 setLoading(false);
                 return data[0];
             }catch(err){

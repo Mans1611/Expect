@@ -7,19 +7,27 @@ import fetchData from '../../fetchData';
 import NotFound from '../../component/NotFound/NotFound';
 import { ThemeContext } from '../../App';
 import { globalUser } from '../../Context/HomeContext';
+import filteringExpects from './utilites/filteringExpects';
+import axios from 'axios';
 
 const Matches = () => {
-    const {isDark} = globalUser();
+    const {isDark,userGlob} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [notFound,setNoutFound] = useState(false);
+    const [expected,setExpected] = useState([]);
+
    useEffect( ()=>{
     return async () => {
         try{
-            const matches = await fetchData('/matches/getmatches');
-            setLoading(false);
-            setData(matches);
+            const response = await axios.get('/matches/getmatches');
+            const expectedResponse = await axios.get(`/expects/${userGlob}`);
             
+            const {arr1:FilteredMatches,expected:expectedFilter} = filteringExpects(response.data,expectedResponse.data);
+            
+            setData(FilteredMatches);
+            setExpected(expectedFilter);
+            setLoading(false);
         }catch(err){
             setNoutFound(true);
             setLoading(false);  
@@ -39,6 +47,10 @@ const Matches = () => {
                                 data.map((value,key)=>{
                                     return (<MathchCard dark={isDark} key={key} match ={value}/>)   
                                 })
+                            }
+                            {
+                                expected.map((value,index)=>  <MathchCard dark={isDark} key={index} match ={value}/>)
+
                             }
                         </div>
 

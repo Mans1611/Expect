@@ -10,73 +10,93 @@ import { ThemeContext } from '../../App';
 import { globalUser } from '../../Context/HomeContext';
 import PlayerCardRadio from '../PlayerCardRadio/PlayerCardRadio';
 import { useParams } from 'react-router-dom';
+import { useReducer } from 'react';
+import { MatchCardContext } from '../matchcards/MatchCard';
 const PopMatchCard = (props) => {
-    const {id} = useParams();
 
-    let countries = document.getElementsByClassName('popMatchCardCountryImg');
-    const [user,setUser] = useState({});
-
-    const [winner,setWinner] = useState('draw');
-    const [result_1,setReault_1] = useState(0)
-    const [result_2,setReault_2] = useState(0);
-    const [player_1,setPlayer_1] = useState(props.match.firstCountry.players[0])
-    const [player_2,setplayer_2] = useState(props.match.secondCountry.players[0]);
-
-
-    const element = useRef(null);
+    const {setExpected} = useContext(MatchCardContext);
     const {isDark} = globalUser();
-    const [match,setMatch] = useState(null);
-    // useEffect(()=>{
-        
-    //     element.current.addEventListener('click',(e)=>{
-    //         if(e.target.className === 'popMatchFullPage')
-    //             props.togglePop(!props.pop);
-    //     }) 
-        
-    // },[])
+    const [showMsg,setShow] = useState(false); // to show the error msg for non valid result
+
+    
+    const hidePop = (e)=>{
+        if(e.target.className === 'popMatchFullPage')
+        props.togglePop(false);
+    }
+
+    const reducerFN = (state, action)=>{
+        switch(action.type){
+            case 'warnMsg' : 
+                return { msg : 'Your Expected Result Do Not Match With The Winner',className : "warnMsg",showMsg:true};
+            
+            case 'success':
+                return {msg : action.payload ,showMsg:true,className : 'succsess' };
+            default : 
+                throw new Error('error in resucer')    
+        }
+
+    }
+    const [Msg,dispatch] = useReducer(reducerFN,{msg : '',className:'',showMsg : false} )
 
     const handlePost = async (e)=>{
         e.preventDefault();
         const winnerValue = document.querySelector('input[name="countryWinner"]:checked').id;
-        setWinner(winnerValue);
         const result1_value = document.querySelector('input[id="result_1"]').value;
-        setReault_1(result1_value);
         const result2_value = document.querySelector('input[id="result_2"]').value;
-        setReault_2(result2_value);
         const firstPlayer_value = document.querySelector('input[name="firstCountry"]:checked').id;
-        setPlayer_1(firstPlayer_value);
-
-        const player1 = props.match.firstCountry.players.filter((player)=> {
-            if(player.playerName === firstPlayer_value)
-                return player
+        
+        let mutatePlayer1,mutatePlayer2 ;
+         props.match.firstCountry.players.find((player,index)=> {
             
+            if(player.playerName === firstPlayer_value){
+                mutatePlayer1 = {...player,index:index};
+            }
         }) 
         const secondPlayer_value = document.querySelector('input[name="secondCountry"]:checked').id;
-        const player2 = props.match.secondCountry.players.filter((player)=> {
-            if(player.playerName === secondPlayer_value)
-                return player;
-        }) 
         
-        setPlayer_1(secondPlayer_value);
+        props.match.secondCountry.players.find((player,index)=> {
+            if(player.playerName === secondPlayer_value){
+                mutatePlayer2 = {index:index,...player};
+            }
+        })
+
+        console.log(mutatePlayer1);
+        console.log(mutatePlayer2);
+
+        if((result1_value === result2_value && winnerValue !== 'draw') || (result1_value !== result2_value && winnerValue === 'draw') ){
+            dispatch({type:"warnMsg"})
+            return 0 ;
+        }
+       
+        
         try{
             const response = await axios.post('/expects/addexpect/mans1611',{
                 winnerValue,
                 result1_value,
                 result2_value,
-                player1,
-                player2,
+                mutatePlayer1,
+                mutatePlayer2,
                 matchId : props.match.matchId
             });
-            console.log(response);
-        }catch(err){
+            if(response.status === 201){
+                console.log(response.data.msg);
+                dispatch({type:"success",payload:response.data.msg});
+    
+                setTimeout(()=>{
+                    props.togglePop(false)
+            },2000);
+                setExpected(true);
+            }
 
+        }catch(err){
+            console.log(err);
         }
 
     }
 
 
     return (
-        <div  ref={element}  className="popMatchFullPage">
+        <div  onClick={hidePop}  className="popMatchFullPage">
             <div className={`popMatchContainer ${isDark? 'dark':''}`}>
                 <form>
                 <div className="headerPopUp">
@@ -133,6 +153,7 @@ const PopMatchCard = (props) => {
                                 })}
                             </div>
                         </div>
+                        {Msg.showMsg && <div className={Msg.className}>{Msg.msg} </div>}
                         <div className="buttonsWrapper">
                             <button onClick={handlePost} className='matchCardButton save' >Save</button>
                         </div>
@@ -144,7 +165,7 @@ const PopMatchCard = (props) => {
 
                 
                 
-                {/* <div className="matchCardResult"></div> */}
+                
             </div>
 
         </div>

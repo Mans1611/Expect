@@ -14,14 +14,14 @@ const MatchResultComp =({result_1,result_2})=> {
     //         setMin(temp);
     //     },1000*5)
     // },[min])
-    const {fullTime} = useContext(MatchCardContext); 
+    const {match} = useContext(MatchCardContext); 
 
   return (
     <div className='matchResultComp'>
         <h1 className="result">{result_1}</h1>
         {/* so if the match is full time it endes */}
         {
-            fullTime ? <div className="circle">FT</div> :  <Minute/> 
+            match.fullTime ? <div className="circle">FT</div> :  <Minute/> 
 
 
         }
