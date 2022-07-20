@@ -4,6 +4,7 @@ const TimeCounter = ({matchTime,setTimeUp})=>{
     
     const time = new Date(matchTime).getTime();
     let left = 999999;
+
     const [hours,setHours] = useState(0);
     const [min,setMin] = useState(0);
     const [sec,setSec] = useState(0);
@@ -20,7 +21,6 @@ const TimeCounter = ({matchTime,setTimeUp})=>{
         let Hours = Math.floor(left/(1000*60*60));
         let Min = Math.floor((left%(1000*60*60))/(1000*60));
         let Sec = Math.floor((left%(1000*60))/(1000));
-
         setHours(Hours);setMin(Min);setSec(Sec);
         },1000)
 
@@ -32,9 +32,9 @@ const TimeCounter = ({matchTime,setTimeUp})=>{
 
     return (
             <div className="matchCardCounter">
-            <span className="timeLeftLabel">Time Left:</span>
-            <span className="timeLeft">{(hours<10)? `0${hours}`: hours} : {(min<10)? `0${min}`: min} : {(sec<10)? `0${sec}`: sec}</span>
-        </div>
+                <span className="timeLeftLabel">Time Left:</span>
+                <span className="timeLeft">{(hours<10)? `0${hours}`: hours} : {(min<10)? `0${min}`: min} : {(sec<10)? `0${sec}`: sec}</span>
+            </div>
         
     )
 

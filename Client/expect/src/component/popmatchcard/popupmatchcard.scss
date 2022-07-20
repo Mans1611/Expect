@@ -233,15 +233,16 @@ form{
         border-radius: 5px;
         font-size: 20px;
         margin: 5px auto ;
-        border: 2px solid #262626;
         animation: popup 200ms;
     }
     .warnMsg{
         background-color: #df3b51;
+        border-left: #9d0116 5px solid;
 
     }
     .succsess{
         background-color: rgb(0, 151, 0);
+        border-left: rgb(0, 123, 0) solid 10px;
     }
     .buttonsWrapper{
         display: flex;

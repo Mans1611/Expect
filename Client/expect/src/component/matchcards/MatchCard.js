@@ -18,14 +18,14 @@ export const MatchCardContext = createContext(null);
 const MathchCard = ({match}) => {
 
     const [pop,setPop] = useState(false);
-    
+    const [timeUp, setTimeUp] = useState(false); 
     const togglePop = ()=>{
         setPop(!pop);
     }
     const {isDark} = globalUser(); 
-    const [timeUp, setTimeUp] = useState(false); 
+    
 
-
+  
    
     return ( 
     <MatchCardContext.Provider value={{match}}>

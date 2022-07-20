@@ -1,15 +1,22 @@
 
 export default function(arr1,arr2){
     const expected = [];
-    for(let i = 0 ; i < arr1.length ; i++){
-        for(let j = 0 ; j < arr2.length ; j++){
-            if(arr1[i].matchId === arr2[j].matchId){
-                expected.push(arr1[i]);
-                arr1.splice(i,1);
+
+    for(let i = 0 ; i < arr2.length ; i++){
+        const match = arr1.find((val,index)=> {
+            if (val.matchId === arr2[i].matchId && val.fullTime=== false){
+                arr1.splice(index,1);
+                return val;
             }
         }
+        );
+        if(match)
+            expected.push(match);   
+        }
+        console.log("done");
+        return {arr1,expected} ; 
+
     }
 
-    return {arr1,expected} ; 
 
-}
+

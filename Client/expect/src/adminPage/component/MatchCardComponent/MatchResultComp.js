@@ -15,15 +15,14 @@ const MatchResultComp =({result_1,result_2})=> {
     //     },1000*5)
     // },[min])
     const {match} = useContext(MatchCardContext); 
-
+    console.log(match.matchTime);
   return (
     <div className='matchResultComp'>
         <h1 className="result">{result_1}</h1>
+
         {/* so if the match is full time it endes */}
         {
             match.fullTime ? <div className="circle">FT</div> :  <Minute/> 
-
-
         }
 
         <h1 className="result">{result_2}</h1>

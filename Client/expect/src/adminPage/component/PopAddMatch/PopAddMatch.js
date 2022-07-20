@@ -12,7 +12,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
   const hidePop = (e)=>{
       if(e.target.className === 'popaddMatch'){
         setShowPop(false);
-      }
+      } 
   }
   const [isLoading,setLoading] = useState(true);
   const [countries,setCountries] = useState(null);

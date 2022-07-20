@@ -14,8 +14,7 @@ import { useReducer } from 'react';
 import { MatchCardContext } from '../matchcards/MatchCard';
 const PopMatchCard = (props) => {
 
-    const {setExpected} = useContext(MatchCardContext);
-    const {isDark} = globalUser();
+    const {isDark,userGlob} = globalUser();
     const [showMsg,setShow] = useState(false); // to show the error msg for non valid result
 
     
@@ -70,7 +69,8 @@ const PopMatchCard = (props) => {
        
         
         try{
-            const response = await axios.post('/expects/addexpect/mans1611',{
+            console.log(userGlob);
+            const response = await axios.post(`/expects/addexpect/${userGlob}`,{
                 winnerValue,
                 result1_value,
                 result2_value,
@@ -85,7 +85,6 @@ const PopMatchCard = (props) => {
                 setTimeout(()=>{
                     props.togglePop(false)
             },2000);
-                setExpected(true);
             }
 
         }catch(err){
