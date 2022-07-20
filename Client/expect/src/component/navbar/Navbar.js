@@ -16,9 +16,8 @@ const Navbar = (props) => {
     const navbarItems = ["Home" , "Matches","MyExpects", "Standing"];
     const {isDark,setDark} = globalUser();
     const cookie = new Cookies();
-    useEffect(()=>{
-       
 
+    useEffect(()=>{
         for(let i = 0 ; i<items.length;i++){
             items[i].addEventListener('click',function(){
                 let previousSelected = document.getElementsByClassName('selected');
@@ -44,6 +43,7 @@ const Navbar = (props) => {
         store.setUserGlob(false);
         cookie.remove('token');
     }
+
     return ( 
         <>
         <>
@@ -72,7 +72,6 @@ const Navbar = (props) => {
                             <div onClick={
                                 ()=>{
                                 setDark(!isDark);
-                                console.log(isDark);
                                 localStorage.setItem('isDark',isDark);
                             }
                                 } className={`dropdownItem ${isDark? 'dark':''}` }>

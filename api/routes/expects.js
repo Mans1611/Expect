@@ -7,8 +7,11 @@ const expects = express.Router();
 
 expects.get('/:username',async(req,res)=>{
     try{
+        
         const user = await Expects.findOne({userName : req.params.username});
-        res.status(200).send(user.expects);
+        console.log(user);
+        if(user.expects)
+            res.status(200).send(user.expects);
 
     }catch(err){
         console.log(err);

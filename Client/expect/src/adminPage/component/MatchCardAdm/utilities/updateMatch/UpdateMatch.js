@@ -36,9 +36,7 @@ const UpdateMatch = ({match,setUpdate})=> {
 
   const handleUpdate = async(e)=>{
     e.preventDefault();
-    console.log(country_1_result);
     try{
-      console.log("updated handle mans");
       const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
         result1 : country_1_result,
         result2 : country_2_result,
@@ -46,8 +44,7 @@ const UpdateMatch = ({match,setUpdate})=> {
       })
       setUpdate(false);
       const {updatedMatch,msg} = response.data;
-      console.log(msg); 
-
+      
     }catch(err){
       console.log("check your internet");
     }
@@ -56,13 +53,11 @@ const UpdateMatch = ({match,setUpdate})=> {
   const fullTime = async(e)=>{
     e.preventDefault();
     try{
-      console.log("fullTime handle mans");
       const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
         fullTime: true
       })
       setUpdate(false)
-      console.log(response.data);
-    }catch(err){
+      }catch(err){
       console.log("error in full time");
     }
   }

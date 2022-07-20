@@ -1,39 +1,55 @@
 import './signin.scss';
 import PersonIcon from '@mui/icons-material/Person';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
+import Loading from '../loading/big.loading/Loading';
+import FetchingToken from '../../utilis/FetchingToken';
+
 const SignIn = () => {
+    const location = useLocation();
+    const redirect = location.state?.path || '/expect/home';
     const [userName,setUserName] = useState(null);
     const [password,setPassword] = useState(null);
     const [errMsg,setErrorMSg] = useState(false);
     const navigate = useNavigate();
     const store = globalUser();
     const cookie = new Cookies();
-
+    const [loading,setLoading] = useState(true);
     const inputs = document.getElementsByClassName('inputFeild')
     for(let input of inputs){
         input.addEventListener('focus',()=>{
             setErrorMSg(false)
         })
     }
+
     useEffect(()=>{
+        
         return async()=>{
-            const token = cookie.get("token")
-            if(token){
-                navigate('/expect/home')
-                store.setAuth(true);
-                const {data} = await axios.get(`/register/verifySession/${token}`);
-                store.setUserGlob(data.payload.userName);
-                cookie.set("token",token,{
-                    maxAge : 60*60*8
-                })
-            }
+            try{ 
+                const token = cookie.get("token");
+                if(token){
+                    navigate('/expect/home')
+                    store.setAuth(true);
+                    const {data} = await axios.get(`/register/verifySession/${token}`);
+                    
+                    store.setUserGlob(data.payload.userName);
+                    cookie.set("token",token,{
+                        maxAge : 60*60*8
+                    })
+                }
+                }catch(err){
+                    console.log(err);
+                }
 
         }
+
+        
     },[])
+
+
 
     const handleLogin = async(e)=>{
         e.preventDefault();
@@ -75,20 +91,20 @@ const SignIn = () => {
                 <h2 className='headLine'>Sign In</h2>
             </div>
             
-                <form className='form'>
-                    <div className="feild">
-                        <label htmlFor="username">Username</label>
-                        <input id='username' onChange={(e)=>{setUserName(e.target.value)}} placeholder='Enter your Username ' className='inputFeild' type="email"/>
-                    </div>
-                    <div className="feild">
-                        <label htmlFor="password">Password</label>
-                        <input id="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='Enter your password ' className='inputFeild' type="password" />
-                    </div>
-                    {errMsg && <div id="backendmsglogin"></div>}
-                    <div className="feild">
-                        <input className='submit' onClick={handleLogin} type="submit" />
-                    </div>
-                </form>
+            <form className='form'>
+                <div className="feild">
+                    <label htmlFor="username">Username</label>
+                    <input id='username' onChange={(e)=>{setUserName(e.target.value)}} placeholder='Enter your Username ' className='inputFeild' type="email"/>
+                </div>
+                <div className="feild">
+                    <label htmlFor="password">Password</label>
+                    <input id="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='Enter your password ' className='inputFeild' type="password" />
+                </div>
+                {errMsg && <div id="backendmsglogin"></div>}
+                <div className="feild">
+                    <input className='submit' onClick={handleLogin} type="submit" />
+                </div>
+            </form>
                 <div className="options">
                     <span className="option">Don't have an account? <Link  to='/register/signup'>Create Account</Link> </span>
                 </div>

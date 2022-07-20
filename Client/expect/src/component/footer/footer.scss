@@ -4,9 +4,10 @@
 .footer{
     height:120px;
     text-align: center;
-    margin-top: 20px;
     background-color: #93002C;
     padding: 10px 20px;
+    position: relative;
+    bottom: 0;
     &.dark{
         @include dark1
     }

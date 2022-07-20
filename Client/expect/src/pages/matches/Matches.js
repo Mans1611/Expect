@@ -10,30 +10,38 @@ import { globalUser } from '../../Context/HomeContext';
 import filteringExpects from './utilites/filteringExpects';
 import axios from 'axios';
 import Expected from './Component/Expected/Expected';
-
+import Cookies from 'universal-cookie';
+import { useNavigate } from 'react-router-dom';
 const Matches = () => {
-    const {isDark,userGlob} = globalUser();
+    const {isDark} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [notFound,setNoutFound] = useState(false);
     const [expected,setExpected] = useState([]);
     const [timeUp, setTimeUp] = useState(false); 
-    
+    const cookie = new Cookies();
+    const navigate = useNavigate();
+    const {userGlob} = globalUser();
+
    useEffect( ()=>{
+    
     return async () => {
         try{
+            const token = cookie.get("token");
+            if(!token)
+                navigate('/register/signin');
+            else{
+                const response = await axios.get('/matches/getmatches');
+                console.log("passed after request");
+                console.log(userGlob);       
+                const expectedResponse = await axios.get(`/expects/${userGlob}`); 
+                const FilteredMatches = filteringExpects(response.data,expectedResponse.data);
+                setData(FilteredMatches);
+                console.log(FilteredMatches);
+                setLoading(false);
 
-            const response = await axios.get('/matches/getmatches');
-            const expectedResponse = await axios.get(`/expects/${userGlob}`);
-            const {arr1:FilteredMatches,expected:expectedFilter} = filteringExpects(response.data,expectedResponse.data);
-            
-            console.log(FilteredMatches);
-            console.log(expectedFilter);
 
-            setData(FilteredMatches);
-            setExpected(expectedFilter);
-
-            setLoading(false);
+            }
         }catch(err){
             setNoutFound(true);
             setLoading(false);  
@@ -50,12 +58,13 @@ const Matches = () => {
                     <div className="matchWrapper">
                         <h1 className="matchTitle">UpComming Matches</h1>
                         <div className="matchCardContainer">
-                            {
+                            {/*
                                 expected.map((value,index)=> <Expected timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={index} match ={value}/> )                                     
-                            }
+                            */}
                             {
                                 data.map((value,key)=>{
-                                    return (<MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>)   
+                                    if(!value.expected) return <MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>;
+                                    else { return <Expected key={key} match ={value}/> }
                                 })
                             }
                         </div>

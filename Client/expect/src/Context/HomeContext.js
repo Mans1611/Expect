@@ -5,6 +5,7 @@ import {useContext,createContext } from "react";
 export const userContext = createContext(null);
 
 export const Provider = ({children})=>{
+    
     const [isDark,setDark] = useState(false);
     const [userGlob,setUserGlob] = useState(null);
     const [auth,setAuth] = useState(false);

@@ -20,7 +20,6 @@ import { globalUser, Provider } from './Context/HomeContext';
 import RequiredAuth from './Auth/RequiredAuth';
 import { MatchesProvider } from './adminPage/Context/matchesContext';
 import Cookies from "universal-cookie";
-import { useEffect } from 'react';
 import NotFound from './pages/NotFound/NotFound';
 import PopMatchCard from './component/popmatchcard/PopMatchCard';
 
@@ -29,19 +28,18 @@ export const ThemeContext = createContext(true);
 
 const  App = ()=> {
 const cookie = new Cookies(); 
-  
+  console.log("application is rendered");
   return (
     <Router>
       <Provider children={(
       <MatchesProvider childern={(
-       
         <Routes>
-          <Route path='/expect' element={<><Navbar/><Footer/></>}> 
-            <Route path='matches' element={<Matches/>}/>
+          <Route path='/expect' element={<RequiredAuth childern={<><Navbar/><Footer/></>}/>}> 
+            <Route path='matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
-            <Route path="myexpects" element={<MyExpects/>}/>
-            <Route path="myprofile" element={<MyProfile/>}/>
-            <Route path = "matches/:id" element = {<PopMatchCard/>}/>
+            <Route path="myexpects" element={<RequiredAuth childern={<MyExpects/>}></RequiredAuth> }/>
+            <Route path="myprofile" element={<RequiredAuth childern={<MyProfile/>}></RequiredAuth> }/>
+            <Route path = "matches/:id" element = {<RequiredAuth childern={<PopMatchCard/>}></RequiredAuth> }/>
 
           </Route>
           

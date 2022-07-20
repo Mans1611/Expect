@@ -8,7 +8,6 @@ const Expected = ({match})=> {
     
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false); 
-
   return (
     <div className='expectedContainer'>
         <div className={`matchCard ${isDark?'dark':''}`}>

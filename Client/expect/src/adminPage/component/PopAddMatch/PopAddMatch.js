@@ -45,7 +45,6 @@ const PopAddMatch = ({showPop,setShowPop}) => {
       for(let country of countries){
         if(checkedCountry === country.countryName){
           setFirstCountry(country);
-          console.log(firstCountry);
           break;
         }
       }
@@ -70,7 +69,6 @@ const PopAddMatch = ({showPop,setShowPop}) => {
     if(time !=='' && date !=='' && firstCountry  && secondCountry && matchId !==''){
       date = date.split('-');
       const matchTime = `${date[1]},${date[2]},${date[0]},${time}`;
-      console.log(matchTime);
       
       try{
         await axios.post('/matches/addgame',{

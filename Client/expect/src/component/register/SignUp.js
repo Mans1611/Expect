@@ -29,11 +29,10 @@ const SignUp = () => {
  
     useEffect(()=>{
 
-        
+        console.log("sign up is render");
         return async()=>{
             
             const token = cookie.get("token");
-            console.log(token);
             if(token){
                 navigate('/expect/home')
                 store.setAuth(true);
@@ -146,10 +145,10 @@ const SignUp = () => {
                     store.setAuth(true);
                     navigate('/expect/home');
                     cookie.set('token',response.headers.token,{
-                        maxAge : 60*60*8
+                        maxAge : 60*60*8 // the token is valid for 8 hours 
                     })
-                
                 }
+
 
                 else if(response.status === 203){
                     setLoadingPost(false);

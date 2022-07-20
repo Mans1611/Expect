@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 
 
 export const MatchCardContext = createContext(null);
+
 const MathchCard = ({match}) => {
 
     const [pop,setPop] = useState(false);
@@ -56,7 +57,10 @@ const MathchCard = ({match}) => {
             } 
                 {!timeUp && pop && <PopMatchCard pop={pop} togglePop={togglePop} dark = {isDark} match={match}/>}
             
-            {timeUp && <MatchResultComp result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> }
+            {timeUp && <MatchResultComp time = {match.matchTime} 
+                        FT={match.fullTime} 
+                        result_1={match.firstCountry.result} 
+                        result_2={match.secondCountry.result}/> }
            </div>
         </MatchCardContext.Provider>
      );
