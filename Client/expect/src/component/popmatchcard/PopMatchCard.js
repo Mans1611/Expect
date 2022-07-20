@@ -1,116 +1,130 @@
-import './popupmatchcard.scss';
+import '../popupmatchcard.scss';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useRef, useState,useContext } from 'react';
+import { useEffect, useRef, useState,useContext,useReducer } from 'react';
 import axios from 'axios';
-import Loading from '../loading/big.loading/Loading';
 
-import PlayerCard from './playercard/PlayerCard';
 import BalanceIcon from '@mui/icons-material/Balance';
-import { ThemeContext } from '../../App';
 import { globalUser } from '../../Context/HomeContext';
 import PlayerCardRadio from '../PlayerCardRadio/PlayerCardRadio';
-import { useParams } from 'react-router-dom';
-import { useReducer } from 'react';
-import { MatchCardContext } from '../matchcards/MatchCard';
-const PopMatchCard = (props) => {
+import CreatingExpect from '../../utilis/CreatingExpectObject';
+
+const PopMatchCard = ({match,togglePop,type,userExpect}) => {
 
     const {isDark,userGlob} = globalUser();
     const [showMsg,setShow] = useState(false); // to show the error msg for non valid result
+    
+    
 
+    
+    useEffect(()=>{
+        return async()=>{
+            if(userExpect){
+                //console.log( document.getElementById('result_1'));
+                document.getElementById('result_1').value = userExpect.result1_value;
+                document.getElementById('result_2').value = userExpect.result2_value;
+                document.getElementById(userExpect.winnerValue).checked = true;   
+                document.getElementById(userExpect.mutatePlayer1.playerName).checked = true;  
+                document.getElementById(userExpect.mutatePlayer2.playerName).checked = true; 
+                 
+            }
+        }
+    },[])
     
     const hidePop = (e)=>{
         if(e.target.className === 'popMatchFullPage')
-        props.togglePop(false);
+        togglePop(false);
     }
-
+    
+    
     const reducerFN = (state, action)=>{
         switch(action.type){
             case 'warnMsg' : 
-                return { msg : 'Your Expected Result Do Not Match With The Winner',className : "warnMsg",showMsg:true};
+            return { msg : 'Your Expected Result Do Not Match With The Winner',className : "warnMsg",showMsg:true};
             
             case 'success':
                 return {msg : action.payload ,showMsg:true,className : 'succsess' };
+            case "success Update":
+                return {msg : action.payload, showMsg : true, className : "succsess"};
             default : 
-                throw new Error('error in resucer')    
+            throw new Error('error in resucer')    
+            }
+            
         }
-
-    }
     const [Msg,dispatch] = useReducer(reducerFN,{msg : '',className:'',showMsg : false} )
 
-    const handlePost = async (e)=>{
-        e.preventDefault();
-        const winnerValue = document.querySelector('input[name="countryWinner"]:checked').id;
-        const result1_value = document.querySelector('input[id="result_1"]').value;
-        const result2_value = document.querySelector('input[id="result_2"]').value;
-        const firstPlayer_value = document.querySelector('input[name="firstCountry"]:checked').id;
-        
-        let mutatePlayer1,mutatePlayer2 ;
-         props.match.firstCountry.players.find((player,index)=> {
-            
-            if(player.playerName === firstPlayer_value){
-                mutatePlayer1 = {...player,index:index};
-            }
-        }) 
-        const secondPlayer_value = document.querySelector('input[name="secondCountry"]:checked').id;
-        
-        props.match.secondCountry.players.find((player,index)=> {
-            if(player.playerName === secondPlayer_value){
-                mutatePlayer2 = {index:index,...player};
-            }
-        })
-
-        console.log(mutatePlayer1);
-        console.log(mutatePlayer2);
-
-        if((result1_value === result2_value && winnerValue !== 'draw') || (result1_value !== result2_value && winnerValue === 'draw') ){
-            dispatch({type:"warnMsg"})
-            return 0 ;
-        }
-       
-        
-        try{
-            console.log(userGlob);
-            const response = await axios.post(`/expects/addexpect/${userGlob}`,{
-                winnerValue,
-                result1_value,
-                result2_value,
-                mutatePlayer1,
-                mutatePlayer2,
-                matchId : props.match.matchId
-            });
-            if(response.status === 201){
-                console.log(response.data.msg);
-                dispatch({type:"success",payload:response.data.msg});
     
+        
+        const handleUpdate = async (e)=>{
+            e.preventDefault();
+           let updateObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players);
+           try{
+               const updatedResponse = await axios.put(`/expects/editexpect/${userGlob}`,{
+                matchId : match.matchId,
+                ...updateObject
+               });
+                dispatch({type:"success Update",payload: updatedResponse.data.msg});
                 setTimeout(()=>{
-                    props.togglePop(false)
-            },2000);
-            }
-
-        }catch(err){
+                    togglePop(false)
+                },1500);
+           }catch(err){
             console.log(err);
+
+           }
         }
 
+        const handlePost = async (e)=>{
+            e.preventDefault();
+
+            const winnerValue = document.querySelector('input[name="countryWinner"]:checked').id;
+            const result1_value = document.querySelector('input[id="result_1"]').value;
+            const result2_value = document.querySelector('input[id="result_2"]').value;
+            
+            if((result1_value === result2_value && winnerValue !== 'draw') || (result1_value !== result2_value && winnerValue === 'draw') ){
+                dispatch({type:"warnMsg"})
+                return 0 ;
+            }
+            try{
+                const expectObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players);
+                
+                const response = await axios.post(`/expects/addexpect/${userGlob}`,{
+                    matchId : match.matchId,
+                    ...expectObject
+                });
+    
+                if(response.status === 201){
+                    dispatch({type:"success",payload:response.data.msg});
+        
+                    setTimeout(()=>{
+                        togglePop(false)
+                },2000);
+                }
+    
+            }catch(err){
+                console.log(err);
+            }
+        
+    
     }
+    
 
 
     return (
         <div  onClick={hidePop}  className="popMatchFullPage">
             <div className={`popMatchContainer ${isDark? 'dark':''}`}>
+                <CloseIcon onClick={togglePop} className='Popicon'/>
                 <form>
                 <div className="headerPopUp">
-                    <CloseIcon onClick={props.togglePop} className='Popicon'/>
                     <div className="popMatchWinner">
                         <span className="winnerTitle">Select Winner</span>    
                     </div>
 
                     <div className="matchcardHeader">
 
-                        <label htmlFor={props.match.firstCountry.countryName}>
+                        <label htmlFor={match.firstCountry.countryName}>
                             <div className="matchCardCountry">
-                                <img src={props.match.firstCountry.logo} alt={props.match.firstCountry.countryName}   className="popMatchCardCountryImg" />
-                                <span className='countryLabel'>{props.match.firstCountry.countryName}</span>
-                                <input  type="radio" name="countryWinner" id={props.match.firstCountry.countryName} />
+                                <img src={match.firstCountry.logo} alt={match.firstCountry.countryName}   className="popMatchCardCountryImg" />
+                                <span className='countryLabel'>{match.firstCountry.countryName}</span>
+                                <input type="radio" name="countryWinner" id={match.firstCountry.countryName} />
                             </div>
                         </label>
                         
@@ -121,11 +135,11 @@ const PopMatchCard = (props) => {
                                 <input defaultChecked type="radio" name="countryWinner" id="draw" />
                             </div>
                         </label>
-                        <label htmlFor={props.match.secondCountry.countryName}>
+                        <label htmlFor={match.secondCountry.countryName}>
                             <div className="matchCardCountry">
-                                <img  src={props.match.secondCountry.logo} alt={props.match.secondCountry.countryName} className="popMatchCardCountryImg" />
-                                <span className='countryLabel'>{props.match.secondCountry.countryName}</span>
-                                <input type="radio" name="countryWinner" id={props.match.secondCountry.countryName} />
+                                <img  src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="popMatchCardCountryImg" />
+                                <span className='countryLabel'>{match.secondCountry.countryName}</span>
+                                <input type="radio" name="countryWinner" id={match.secondCountry.countryName} />
                             </div>
                         </label>
                     </div>
@@ -134,27 +148,33 @@ const PopMatchCard = (props) => {
                 <div className="formContainerPopup">
                         <h2 className="expectResult">Expect Result</h2>
                         <div className="inputcontainer">
-                            <input defaultValue={0} maxLength={1} type="number" name="matchResult" id="result_1" className="result" />
-                            <input defaultValue={0} maxLength={1} type="number" name="matchResult" id="result_2" className="result" />
+                            <input  defaultValue={0} maxLength={1} type="number" name="matchResult" id="result_1" className="result" />
+                            <input   defaultValue={0} maxLength={1} type="number" name="matchResult" id="result_2" className="result" />
                             
                         </div>
                         <div className="matchCardPlayers">
-                            <h2 className="countryLabel">Select Player from {props.match.firstCountry.countryName}</h2>
+                            <h2 className="countryLabel">Select Player from {match.firstCountry.countryName}</h2>
                             <div className="playersContainer">
-                            {props.match.firstCountry.players.map((player,index)=>
+                            {match.firstCountry.players.map((player,index)=>
                                 <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
                                 )}
                             </div>
-                            <h2 className="countryLabel"> Select Player from {props.match.secondCountry.countryName}</h2>
+                            <h2 className="countryLabel"> Select Player from {match.secondCountry.countryName}</h2>
                             <div className="playersContainer">
-                                {props.match.secondCountry.players.map((player,index)=>{
+                                {match.secondCountry.players.map((player,index)=>{
                                     return <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
                                 })}
                             </div>
                         </div>
                         {Msg.showMsg && <div className={Msg.className}>{Msg.msg} </div>}
                         <div className="buttonsWrapper">
-                            <button onClick={handlePost} className='matchCardButton save' >Save</button>
+                            { type === "POST" ? 
+                             <button onClick={handlePost} className='matchCardButton save' >Save</button>
+                             :
+                             <button onClick={handleUpdate} className='matchCardButton save' >Update</button>
+
+                                
+                            }
                         </div>
 
 

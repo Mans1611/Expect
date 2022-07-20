@@ -6,12 +6,26 @@ import { globalUser } from '../../../Context/HomeContext';
 import TimeCounter from '../../../TimeCounter';
 import MatchResultComp from '../../../adminPage/component/MatchCardComponent/MatchResultComp';
 import Minute from '../../../adminPage/component/MatchCardComponent/Minute';
+import UpdatePopUp from '../../../component/UpdatePopUp/UpdatePopUp';
+import PopMatchCard from '../../../component/popmatchcard/PopMatchCard';
+
 const Expect = ({match,userExpect})=> {
-    
-    console.log(userExpect.winnerValue);
     
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false);
+    const [updatePop,setUpdatePop] = useState(false);
+
+
+    const showEditExpect = (e)=>{
+        e.preventDefault();
+        setUpdatePop(true);
+
+    }
+
+    const togglePop = (e)=>{
+        setUpdatePop(false);
+    }
+
 
   return (
 
@@ -19,7 +33,7 @@ const Expect = ({match,userExpect})=> {
             <div className={`matchCard ${isDark?'dark':''}`}>
             
             
-            <div className="matchcardHeader">
+            <div className="matchcardHeader expectCard">
                 <div className="matchCardCountry"> {/* country1.*/ }
                     <img src={match.firstCountry.logo}  alt={match.firstCountry.countryName} className="matchCardCountryImg" />
                     <span className='countryLabel'>{match.firstCountry.countryName}</span>
@@ -51,12 +65,18 @@ const Expect = ({match,userExpect})=> {
             
             {
                 <div className="matchCardStart">
-                    <button  className='matchCardbutton'>See MyExpect</button>
+                    {timeUp ?
+                        <button  className='matchCardbutton'>See MyExpect</button> 
+                        : 
+                        <button onClick={showEditExpect}  className='matchCardbutton'>Edit Expect</button>
+                    }
                 </div>
         } 
                 
             {/*timeUp && <MatchResultComp result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> */}
         </div>
+
+        {updatePop && <PopMatchCard userExpect={userExpect} match={match} togglePop = {togglePop} /> }
         </div>
   )
 }

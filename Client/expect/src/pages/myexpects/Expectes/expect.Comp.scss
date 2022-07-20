@@ -5,8 +5,10 @@
     .matchcardHeader{
         padding: 10px;
         justify-content: space-between;
-        background: linear-gradient(90deg, rgb(1, 159, 53) 0%, rgba(0, 189, 91, 0.711) 50%);  
         background-color: rgba(255, 255, 255, 0);   
+        &.expectCard{
+            background: linear-gradient(90deg, rgb(1, 159, 53) 0%, rgba(0, 189, 91, 0.711) 50%);  
+        }
         .result{
             font-size: 33px;
             font-weight: 600;
