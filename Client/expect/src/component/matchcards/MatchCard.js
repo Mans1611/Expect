@@ -19,6 +19,7 @@ export const MatchCardContext = createContext(null);
 const MathchCard = ({match}) => {
 
     const [pop,setPop] = useState(false);
+
     const [timeUp, setTimeUp] = useState(false); 
     const togglePop = ()=>{
         setPop(!pop);
@@ -55,7 +56,7 @@ const MathchCard = ({match}) => {
                     { <button onClick={togglePop} className='matchCardbutton'>Expext</button>}
                 </div>
             } 
-                {!timeUp && pop && <PopMatchCard type="POST" pop={pop} togglePop={togglePop} dark = {isDark} match={match}/>}
+                {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
             
             {timeUp && <MatchResultComp time = {match.matchTime} 
                         FT={match.fullTime} 

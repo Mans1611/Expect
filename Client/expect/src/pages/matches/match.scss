@@ -27,11 +27,43 @@
             
         }
     }
-    @media screen and (max-width: 576px) {
-        
-        .matchCardContainer{
-            
-            flex-direction: column;
+}
+@media screen and (max-width: 960px) {
+    .match{
+       
+        .matchWrapper{
+            padding: 10px;
+            .matchTitle{
+                text-align: center;
+                font-size: 52px;
+                color: inherit;
+            }
+            .matchCardContainer{
+                grid-template-columns: repeat(3,33%);   
+            }
         }
     }
+    
+}
+@media screen and (max-width: 760px) {
+    .match{
+       
+        .matchWrapper{
+            padding: 10px;
+            .matchTitle{
+                text-align: center;
+                font-size: 60px;
+                padding: 10px ;
+            }
+            .matchCardContainer{
+                grid-template-columns: repeat(2,50%);   
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width: 576px) {
+    
+    
 }

@@ -8,18 +8,15 @@ import { globalUser } from '../../Context/HomeContext';
 import PlayerCardRadio from '../PlayerCardRadio/PlayerCardRadio';
 import CreatingExpect from '../../utilis/CreatingExpectObject';
 
-const PopMatchCard = ({match,togglePop,type,userExpect}) => {
+const PopMatchCard = ({match,pop,setPop,type,userExpect}) => {
 
     const {isDark,userGlob} = globalUser();
-    const [showMsg,setShow] = useState(false); // to show the error msg for non valid result
-    
-    
-
-    
+   
     useEffect(()=>{
         return async()=>{
             if(userExpect){
                 //console.log( document.getElementById('result_1'));
+               
                 document.getElementById('result_1').value = userExpect.result1_value;
                 document.getElementById('result_2').value = userExpect.result2_value;
                 document.getElementById(userExpect.winnerValue).checked = true;   
@@ -31,46 +28,46 @@ const PopMatchCard = ({match,togglePop,type,userExpect}) => {
     },[])
     
     const hidePop = (e)=>{
-        if(e.target.className === 'popMatchFullPage')
-        togglePop(false);
+        if(e.target.className === 'popMatchFullPage'){
+            setPop(false);
+
+        }
     }
     
     
     const reducerFN = (state, action)=>{
         switch(action.type){
             case 'warnMsg' : 
-            return { msg : 'Your Expected Result Do Not Match With The Winner',className : "warnMsg",showMsg:true};
+                return { msg : 'Your Expected Result Do Not Match With The Winner',className : "warnMsg",showMsg:true};
             
             case 'success':
                 return {msg : action.payload ,showMsg:true,className : 'succsess' };
             case "success Update":
                 return {msg : action.payload, showMsg : true, className : "succsess"};
             default : 
-            throw new Error('error in resucer')    
+            throw new Error('error in reducer')    
             }
             
         }
     const [Msg,dispatch] = useReducer(reducerFN,{msg : '',className:'',showMsg : false} )
-
     
-        
-        const handleUpdate = async (e)=>{
-            e.preventDefault();
-           let updateObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players);
-           try{
-               const updatedResponse = await axios.put(`/expects/editexpect/${userGlob}`,{
-                matchId : match.matchId,
-                ...updateObject
-               });
-                dispatch({type:"success Update",payload: updatedResponse.data.msg});
-                setTimeout(()=>{
-                    togglePop(false)
-                },1500);
-           }catch(err){
-            console.log(err);
+    const handleUpdate = async (e)=>{
+        e.preventDefault();
+        let updateObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players);
+        try{
+            const updatedResponse = await axios.put(`/expects/editexpect/${userGlob}`,{
+            matchId : match.matchId,
+            ...updateObject
+            });
+            dispatch({type:"success Update",payload: updatedResponse.data.msg});
+            setTimeout(()=>{
+                setPop(false)
+            },1500);
+        }catch(err){
+        console.log(err);
 
-           }
         }
+    }
 
         const handlePost = async (e)=>{
             e.preventDefault();
@@ -95,8 +92,9 @@ const PopMatchCard = ({match,togglePop,type,userExpect}) => {
                     dispatch({type:"success",payload:response.data.msg});
         
                     setTimeout(()=>{
-                        togglePop(false)
+                        setPop(false)
                 },2000);
+
                 }
     
             }catch(err){
@@ -111,7 +109,7 @@ const PopMatchCard = ({match,togglePop,type,userExpect}) => {
     return (
         <div  onClick={hidePop}  className="popMatchFullPage">
             <div className={`popMatchContainer ${isDark? 'dark':''}`}>
-                <CloseIcon onClick={togglePop} className='Popicon'/>
+                <CloseIcon onClick={()=> setPop(false)} className='Popicon'/>
                 <form>
                 <div className="headerPopUp">
                     <div className="popMatchWinner">

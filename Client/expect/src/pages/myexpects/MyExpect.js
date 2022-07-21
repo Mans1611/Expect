@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { globalUser } from "../../Context/HomeContext";
-import Expected from "../matches/Component/Expected/Expected";
 import filteringExpects from "../matches/utilites/filteringExpects";
 import Expect from '../../component/Expectes/Expect';
 import './myexpect.scss'
@@ -13,11 +12,8 @@ const MyExpects = () => {
     const [width,setWidth] = useState(window.innerWidth);
     
     window.addEventListener('resize',()=>{
-
-         if(window < 580)
-             setWidth(window.innerWidth) 
+             setWidth(window.innerWidth)
     })
-   
 
     useEffect(()=>{
 
@@ -45,6 +41,10 @@ const MyExpects = () => {
         <div className={`myexpects ${isDark? 'dark': ''}`}>
             <div className="headlineWrapper">
                 <h1 className="headline">Your Full Expects</h1>
+            </div>  
+            <div className="userTotalPoints">
+                <div className="text">Total Points</div>
+                <div className="totalPoints">48 PT</div>
             </div>
 
            

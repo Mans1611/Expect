@@ -27,7 +27,6 @@ matches.get('/match/:id', async (req,res)=>{
 matches.get('/match/',async(req,res)=>{
     try{
         const dontMissMatches = await Matches.find({fullTime : req.query.fullTime}).limit(2);
-        console.log("wow");
         res.status(200).send(dontMissMatches);
     }catch(err){
         console.log(err);

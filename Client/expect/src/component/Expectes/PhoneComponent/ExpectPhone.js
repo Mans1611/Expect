@@ -1,22 +1,17 @@
-import { ArrowDownward } from '@mui/icons-material';
 import React, {useState} from 'react'
 import Minute from '../../../adminPage/component/MatchCardComponent/Minute';
 import { globalUser } from '../../../Context/HomeContext';
 import './phoneExpect.scss';
 import TimeCounter from '../../../TimeCounter';
-import UpdatePopUp from '../../UpdatePopUp/UpdatePopUp';
+import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import '../../popupmatchcard.scss';
 const ExpectPhone = ({match,userExpect})=> {
 
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false);
-    const [updatePop,setUpdatePop] = useState(false);
+    const [pop,setPop] = useState(false);
     
-    const showEditExpect = (e)=>{
-        e.preventDefault();
-        setUpdatePop(true);
-
-    }
+   
 
     const togglePop = (e)=>{
         setUpdatePop(false);
@@ -48,9 +43,9 @@ const ExpectPhone = ({match,userExpect})=> {
             </div>
         </div>
         <div className="ExpectPhoneWrap">
-            <button onClick={()=>setUpdatePop(true)}> Edit Expect </button>
+            <button onClick={()=>setPop(true)}> Edit Expect </button>
         </div>
-        {!showEditExpect && <UpdatePopUp match={match} togglePop={togglePop} />}
+        {pop && <PopMatchCard userExpect={userExpect} match={match}  setPop = {setPop} />}
     </div>
   )
 }

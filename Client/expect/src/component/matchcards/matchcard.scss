@@ -29,8 +29,8 @@
         }
         
         .matchCardCountryImg{
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             border: 2px solid #222;
             object-fit: cover;
@@ -96,11 +96,20 @@
             height: 50px;
         }
     }
-    @media screen and (max-width:580px) {
-        .matchCardCountryImg{
-            width: 30px;
-            height: 30px;
-        }
-        
-    }
+    
 }
+@media screen and (max-width:790px) {
+    .matchCardCountryImg{
+        width: 30px;
+        height: 30px;
+    }
+    
+}
+
+@media screen and (max-width:580px) {
+    .matchCardCountryImg{
+        width: 30px;
+        height: 30px;
+    }
+    
+} 

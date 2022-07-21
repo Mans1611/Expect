@@ -13,18 +13,7 @@ const Expect = ({match,userExpect})=> {
     
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false);
-    const [updatePop,setUpdatePop] = useState(false);
-
-
-    const showEditExpect = (e)=>{
-        e.preventDefault();
-        setUpdatePop(true);
-    }
-
-    const togglePop = (e)=>{
-        setUpdatePop(false);
-    }
-
+    const [pop,setPop] = useState(false);
 
   return (
 
@@ -51,8 +40,8 @@ const Expect = ({match,userExpect})=> {
 
             <div className="yourExpect">
                 <h3>YourExpections</h3>
-                <div className="winnerExpections"> Winner : {userExpect.winnerValue}  </div>
-                <div className="resultExpections">Result :  {userExpect.result1_value} :  {userExpect.result2_value} </div>
+                <div className="winnerExpections"> Winner : <span className="userExpect"> {userExpect.winnerValue}</span>  </div>
+                <div className="resultExpections">Result : <span className="userExpect"> {userExpect.result1_value}  :  {userExpect.result2_value} </span> </div>
 
             </div>
             
@@ -65,7 +54,7 @@ const Expect = ({match,userExpect})=> {
                     {timeUp ?
                         <button  className='matchCardbutton'>See MyExpect</button> 
                         : 
-                        <button onClick={showEditExpect}  className='matchCardbutton'>Edit Expect</button>
+                        <button onClick={()=> {setPop(true)}}  className='matchCardbutton'>Edit Expect</button>
                     }
                 </div>
         } 
@@ -73,7 +62,7 @@ const Expect = ({match,userExpect})=> {
             {/*timeUp && <MatchResultComp result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> */}
         </div>
 
-        {updatePop && <PopMatchCard userExpect={userExpect} match={match} togglePop = {togglePop} /> }
+        {pop && <PopMatchCard userExpect={userExpect} match={match} setPop={setPop} /> }
         
         </div>
   )
