@@ -32,7 +32,6 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            border: 2px solid #222;
             object-fit: cover;
             cursor: pointer;
             
@@ -70,18 +69,17 @@
         margin-top: 10px;
         padding: 0 5px;
         .matchCardbutton{
-           
             color:  rgb(193, 0, 39);
             border: 2px solid rgb(193, 0, 39);
             border-radius: 10px;
             cursor: pointer;
-            width: 100px;
-            height: 40px;
-            padding: 20px ;
-            font-size: 34px;
+            width: fit-content;
+            padding: 5px 10px ;
+            font-size: 30px;
             font-weight: 600;
             text-align: center;
             align-items: center;
+            background: inherit;
             &:hover{
                 color:#fff;
                 background-color:rgb(193, 0, 39);

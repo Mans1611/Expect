@@ -26,18 +26,36 @@
         }
     }
     .yourExpect{
+       .ExpectionsContent{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg{
+            font-weight: 700;
+            font-size: 30px;
+            color: #eee;
+        }
+       }
         h3{
             color: $gold;
             border-bottom: 2px solid #ddd;
             margin-bottom: 5px;
         }
         .userExpect{
-            color: rgb(0, 179, 0);
+            color: #000
         }
         border-top: 2px solid $gold;
         padding: 5px;
+        color: #373737;
         text-align: center;
         font-size: 30px;
+        
+        &.dark{
+            color: #ddd;
+            .userExpect{
+                color: #fff;
+            }
+        }
     }
        
         .matchCardStart{

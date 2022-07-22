@@ -14,7 +14,7 @@
 }
 .popMatchContainer{
     outline: none;
-    width: 50%;
+    width: 60%;
     height: 90vh;
     overflow-y: scroll;
     &::-webkit-scrollbar {
@@ -78,11 +78,7 @@
                 border-radius: 5px;
             }
             object-fit: cover;
-            cursor: pointer;
-           
-            
-
-            
+            cursor: pointer; 
         }
     }
 }
@@ -180,9 +176,7 @@ form{
                 border-radius: 5px;
             }
         }
-      .headerPopUp{
-        background: linear-gradient(90deg, rgba(255, 123, 0, 0.86348) 0%, rgba(255, 183, 0, 0.818662) 50%);
-    }
+      
     .expectResult{
         color: #fff;
     }
@@ -192,10 +186,10 @@ form{
             background-color: #fff;
             color: rgb(255, 204, 0);
             &.save{
-                background-color: rgb(193, 0, 58);
+                background:linear-gradient(90deg, #513333 0%, #9d0116 50%);
                 color: #eee;
                 &:hover{
-                    background-color: #fff;
+                    background:linear-gradient(90deg, #ffffff 0%, #ffffff 50%);
                     color: rgb(193, 0, 58) ; 
                 }
                 

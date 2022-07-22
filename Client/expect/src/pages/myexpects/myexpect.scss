@@ -2,6 +2,7 @@
 
 .myexpects{
     height: fit-content;
+    background: linear-gradient(90deg, rgba(240,235,227,1) 52%, rgba(228,220,207,1) 100%);
     .headlineWrapper{
         padding: 20px 0 ;
         .headline{
@@ -13,19 +14,21 @@
     }
     .userTotalPoints{
         margin: 10px auto;
-        background-color: #171717;
+        background-color: #a7a7a7;
         width: 180px;
-        height: 90px;
+        height: fit-content;
         border-radius: 10px ;
         text-align: center;
+        border: 5px solid #171717;
         .text{
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
-            background-color: #474747;
-            color: #fff ;
-            font-size: 28px;
+            background-color: #eee;
+            color: #171717 ;
+            font-size: 32px;
             height: 40%;
-            padding: 5px; 
+            padding: 10px;
+            border-bottom: 5px solid #171717;
         }
         .totalPoints{
             padding: 5px;
@@ -34,9 +37,24 @@
             font-size: 44px;
             font-weight: 600;
         }
-
     }
-    .expectsContainer{
+
+
+    &.dark{
+        background: linear-gradient(180deg, #373737 52%, #171717 100%);
+        .userTotalPoints{
+            background-color: #171717;
+            .text{
+                color: #fff ;
+                background-color: #373737;
+            }
+            .totalPoints{
+                color: $gold;
+            }
+    
+        }
+    }
+        .expectsContainer{
         padding: 10px;
         background: linear-gradient(180deg, #a1a1a1 0%, #ffffff 100%);
         height: 100%;

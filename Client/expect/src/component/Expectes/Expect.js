@@ -8,7 +8,7 @@ import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchR
 import Minute from '../../adminPage/component/MatchCardComponent/Minute';
 import UpdatePopUp from '../UpdatePopUp/UpdatePopUp';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
-
+import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 const Expect = ({match,userExpect})=> {
     
     const {isDark} = globalUser();
@@ -38,10 +38,10 @@ const Expect = ({match,userExpect})=> {
                
             </div>
 
-            <div className="yourExpect">
+            <div className={`yourExpect ${isDark?'dark':''}`}>
                 <h3>YourExpections</h3>
-                <div className="winnerExpections"> Winner : <span className="userExpect"> {userExpect.winnerValue}</span>  </div>
-                <div className="resultExpections">Result : <span className="userExpect"> {userExpect.result1_value}  :  {userExpect.result2_value} </span> </div>
+                <div className="ExpectionsContent"> Winner : <span className="userExpect"> {userExpect.winnerValue}</span>  </div>
+                <div className="ExpectionsContent"><ScoreboardIcon/> Result : <span className="userExpect"> {userExpect.result1_value}  :  {userExpect.result2_value} </span> </div>
 
             </div>
             

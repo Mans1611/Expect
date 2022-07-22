@@ -25,7 +25,7 @@ const UpdateMatch = ({match,setUpdate})=> {
   // },playerNavigator)
   
   const hidePop = (e)=>{
-    if(e.target.className === 'UpdateMatchContainer' || e.target.tagName == 'path'){
+    if(e.target.className === 'UpdateMatchContainer' || e.target.tagName == 'svg'){
       setUpdate(false);
     }
   
@@ -91,13 +91,13 @@ const UpdateMatch = ({match,setUpdate})=> {
                 <div className="matchCardPlayers">
                     <span className="countryLabel">Select Player from {match.firstCountry.countryName}</span>
                     <div className="playersContainer">
-                      {match.firstCountry.players.map((player)=> <PlayerCardRadio countryOrder= 'firstCountry' player={player} />)}
+                      {match.firstCountry.players.map((player)=> <PlayerCardRadio auth={true} countryOrder= 'firstCountry' player={player} />)}
                     </div>
                     <span className="countryLabel"> Select Player from {match.secondCountry.countryName}</span>
                     <div className="playersContainer">
                         {match.secondCountry.players.map((player)=>{
                             return (
-                              <PlayerCardRadio countryOrder= 'secondCountry' player={player} />
+                              <PlayerCardRadio auth={true} countryOrder= 'secondCountry' player={player} />
                             )
                         })}
                     </div>

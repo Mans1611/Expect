@@ -2,7 +2,7 @@
 
 .palyerCard{
     min-width: 150px;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 4px 0;
     margin: 0 4px 5px 0 ;
     cursor: pointer;
@@ -13,7 +13,6 @@
     background: linear-gradient(90deg, #513333 50%, #9d0116 50%);
     border: 4px solid #272727;
     &.dark{
-        background:linear-gradient(90deg, #272727 50%, rgba(255, 128, 0, 0.819) 50%) ;
         border: 3px solid #d7d7d7;
     }
 
@@ -37,10 +36,51 @@
             text-align: center;
             color: #fff;
             width: 100%;
+            .PlayerStateSelction{
+                width: 100%;
+                outline: none;
+                margin: 5px auto;
+                height: 30px;
+                background-color: #171717;
+                color: #fff;
+                border-radius: 0;
+                font-size: 22px;
+                text-align: center;
+                option{
+                    border-radius: 0;
+                    font-size: 20px;
+                    &:hover{
+                        background-color: #9d0116;
+                        color: #fff;
+                    } 
+                    &.goodPoints{
+                        color: rgba(0, 163, 0, 0.897);
+                    }
+                    &.badPoints{
+                        color: #db001d;
+                    }
+                     
+                }    
+            }
+            
         }
         
 }
+.adminButton{
+    margin: 5px auto;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #9d0116;
+    border:2px solid #fff;
+    width: 90%;
+    font-size: 20px;
+    &:hover{
+        background-color: #fff;
+        color: #9d0116;
+    }
 }
+}
+
 @media screen and (max-width:760px) {
     .palyerCard{
         min-width: 130px;

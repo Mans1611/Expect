@@ -61,7 +61,14 @@ const MathchCard = ({match}) => {
             {timeUp && <MatchResultComp time = {match.matchTime} 
                         FT={match.fullTime} 
                         result_1={match.firstCountry.result} 
-                        result_2={match.secondCountry.result}/> }
+                        result_2={match.secondCountry.result}/> 
+            }
+           {
+            match.fullTime && 
+                <div className="matchCardStart">
+                    <button onClick={togglePop} className='matchCardbutton'>Match State</button>
+                </div>
+           }
            </div>
         </MatchCardContext.Provider>
      );
