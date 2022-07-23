@@ -14,9 +14,9 @@ const PopMatchCard = ({match,pop,setPop,type,userExpect}) => {
    
     useEffect(()=>{
         return async()=>{
+            
             if(userExpect){
-                //console.log( document.getElementById('result_1'));
-               
+                console.log(userExpect);
                 document.getElementById('result_1').value = userExpect.result1_value;
                 document.getElementById('result_2').value = userExpect.result2_value;
                 document.getElementById(userExpect.winnerValue).checked = true;   
@@ -85,6 +85,7 @@ const PopMatchCard = ({match,pop,setPop,type,userExpect}) => {
                 
                 const response = await axios.post(`/expects/addexpect/${userGlob}`,{
                     matchId : match.matchId,
+                    userPoints : 0,
                     ...expectObject
                 });
     

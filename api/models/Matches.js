@@ -27,6 +27,11 @@ const matchSchema = new Schema({
         type: Boolean, 
         required:false,
         default: false
+    },
+    states : {
+        type : Array,
+        default : [],
+        required : false
     }
     
 })

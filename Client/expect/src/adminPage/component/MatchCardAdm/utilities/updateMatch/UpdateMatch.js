@@ -36,26 +36,45 @@ const UpdateMatch = ({match,setUpdate})=> {
 
   const handleUpdate = async(e)=>{
     e.preventDefault();
+    const selcted_player_1 = document.querySelector('input[name="firstCountry"]:checked').id;
+    const selcted_player_2 = document.querySelector('input[name="secondCountry"]:checked').id;
+    const state_1Player = document.getElementById('firstCountryState').value;
+    const state_2Player = document.getElementById('secondCountryState').value;
+    
+    const updatedPlayer_1 = {
+      playerName: selcted_player_1,
+      state : state_1Player
+    }
+    const updatedPlayer_2 = {
+      playerName: selcted_player_2,
+      state : state_2Player
+    }
+
+    
+
     try{
       const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
         result1 : country_1_result,
         result2 : country_2_result,
+        updatedPlayer_1,
+        updatedPlayer_2,
         fullTime : false
       })
       setUpdate(false);
       const {updatedMatch,msg} = response.data;
       
-    }catch(err){
+    }
+    catch(err){
       console.log("check your internet");
     }
+
+
   }
 
   const fullTime = async(e)=>{
     e.preventDefault();
     try{
-      const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
-        fullTime: true
-      })
+      const response = await axios.put(`/matches/fullTime/${match.matchId}`)
       setUpdate(false)
       }catch(err){
       console.log("error in full time");

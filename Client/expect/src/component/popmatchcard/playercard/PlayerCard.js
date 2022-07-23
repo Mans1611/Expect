@@ -1,8 +1,12 @@
 import { useState,useContext } from 'react';
 import { userContext } from '../../../Context/HomeContext';
 import './playercard.scss';
-const PlayerCard = ({showPlayerState,player,auth}) => {
+import { matchesStore } from '../../../adminPage/Context/matchesContext';
+
+const PlayerCard = ({showPlayerState,player,countryOrder,auth}) => {
+
     const {isDark} = useContext(userContext);
+    const [state,setState] = useState(null);
     return ( 
         <div className={`palyerCard ${isDark? 'dark':''}`}>
             <div className="playerCardInfo">
@@ -12,30 +16,26 @@ const PlayerCard = ({showPlayerState,player,auth}) => {
                     <h6 className='details'>PlayerPosition : {player.position}</h6>
                     <h6 className='details'>Totoal Points : {player.playerPoints}</h6>
                     {auth && <h6 className="details">Total Votes : {player.votes}  </h6>}
-                    {auth && showPlayerState && <SelectionComp/> }
-                    {auth && <button  className='adminButton'>Update Player</button>}
-                
+                    {auth && showPlayerState && <SelectionComp countryOrder={countryOrder}  setState={setState}  name={countryOrder}/> }
                 </div>
-           
-            
             </div>
         </div>
      );
 }
  
-const SelectionComp = ()=>{
+const SelectionComp = ({countryOrder})=>{
     return (
-        <select className = 'PlayerStateSelction'>
-            <option disabled>None</option>
-            <option className='goodPoints'>Long Goal (6PTS)</option>
-            <option className='goodPoints'>Goal Foul (6PTS)</option>
-            <option className='goodPoints'>Goal (5PTS)</option>
-            <option className='goodPoints'>ASSIST (3PTS)</option>
-            <option className='goodPoints'>Penalty Goal (3PTS)</option>
+        <select className = 'PlayerStateSelction' id = {`${countryOrder}State`}>
+            <option value={null} disabled>None</option>
+            <option  className='goodPoints'>Score Long Goal (6PTS)</option>
+            <option  className='goodPoints'> Score Goal From Foul (6PTS)</option>
+            <option className='goodPoints'>Score Goal (5PTS)</option>
+            <option className='goodPoints'>Make ASSIST (3PTS)</option>
+            <option className='goodPoints'>Score Penalty (3PTS)</option>
             <option className='goodPoints'>Make Penalty(2PTS)</option>
             <option className='badPoints'>Conced Penalty (-2PTS)</option>
-            <option className='badPoints'>Own Goal (-3PTS)</option>
-            <option className='badPoints'>Red Card (-4PTS)</option>
+            <option className='badPoints'>Score Own Goal (-3PTS)</option>
+            <option className='badPoints'>Take Red Card (-4PTS)</option>
         </select>
     )
 }

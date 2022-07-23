@@ -21,13 +21,10 @@ const MyExpects = () => {
             try{
                 const {data:Expected} = await axios.get(`/expects/${userGlob}`);
                 const {data:matches} = await axios.get('/matches/getmatches');
-
                 const commonMatches = filteringExpects(matches,Expected);
-                
-                console.log(commonMatches);
-                
                 const expetedFullMatches = commonMatches.filter((val)=>val.expected);
                 
+                console.log(expetedFullMatches);
                 setExpected(expetedFullMatches);
                 setUserExpections(Expected);
 

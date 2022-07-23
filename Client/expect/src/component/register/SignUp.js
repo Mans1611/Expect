@@ -87,7 +87,6 @@ const SignUp = () => {
                 document.getElementById(`passmsg`).previousElementSibling.style.border ="2px solid red" 
                 moveToFirst();
                 return 0 ; 
-
             }
             if(userName == '' || userName==null){
                 document.getElementById(`repassmsg`).innerText = " *Renter Your password";
@@ -102,8 +101,7 @@ const SignUp = () => {
                 document.getElementById(`passmsg`).previousElementSibling.style.border ="2px solid red" 
                 document.getElementById(`repassmsg`).previousElementSibling.style.border ="2px solid red" 
                 moveToFirst();
-                return 0 ; 
-
+                return 0 ;
             }
             if(pass&& pass !== '' &&pass.length < 7 ){
                 document.getElementById(`passmsg`).innerText = " *Password length must be 8";
@@ -136,7 +134,6 @@ const SignUp = () => {
                     if(phone!=='')
                         setPhone('+974'+phone);
                 }
-                
                 const user = {userName,email:mail,password:pass,userCountry:country,phoneNumber:phone}  ;
                 const response = await axios.post('/register/signup',user);
                 if(response.status === 201){

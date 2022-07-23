@@ -6,9 +6,9 @@ export default function PlayerCardRadio({player,countryOrder,auth}) {
 
   return (
     <div  className="radioContaineter">
-        <input onClick={()=>setShowState(true) } value={player}  type="radio" name={countryOrder} id= {player.playerName} />
+        <input onClick={()=>setShowState(true)} value={player}  type="radio" name={countryOrder} id= {player.playerName} />
         <label  htmlFor={player.playerName}>
-            <PlayerCard showPlayerState={showPlayerState}  player = {player} auth={auth} />
+            <PlayerCard countryOrder={countryOrder} showPlayerState={showPlayerState}  player = {player} auth={auth} />
         </label>
     </div>
   )

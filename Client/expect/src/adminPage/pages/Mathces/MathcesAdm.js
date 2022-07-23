@@ -37,7 +37,6 @@ const MathcesAdm = () => {
                     (
                         store.matches.map((match,index)=> <MatchCardAdm match={match} key={index}/>)
                     )
-                
                 }
             </div>
             <div className="buttonContainer">
