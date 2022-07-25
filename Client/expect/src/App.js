@@ -28,8 +28,8 @@ export const ThemeContext = createContext(true);
 
 
 const  App = ()=> {
-const cookie = new Cookies(); 
-  console.log("application is rendered");
+  
+
   return (
     <Router>
       <Provider children={(

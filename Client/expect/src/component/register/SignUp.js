@@ -29,7 +29,7 @@ const SignUp = () => {
  
     useEffect(()=>{
 
-        console.log("sign up is render");
+       
         return async()=>{
             
             const token = cookie.get("token");

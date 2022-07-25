@@ -8,9 +8,8 @@ import HomeStanding from '../../component/HomeStanding/HomeStanding';
 const Home = () => {
     
     const {isDark,userGlob} = globalUser();
-    console.log(userGlob);
-    return ( 
-            <div className={`home ${isDark?'dark':null}`}>
+   return ( 
+            <div className={`home ${isDark?'dark':''}`}>
                 <div className="pageContainer">
                     <MainNews/>
                     <DontMissList/>

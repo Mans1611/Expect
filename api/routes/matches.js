@@ -4,6 +4,11 @@ import Matches from '../models/Matches.js';
 import addingPointsPlayer from './utilis/addingPointsPlayers.js';
 import TransferingPointsToCountry from './utilis/TransferingPointsToCountry.js';
 
+
+
+
+
+
 const matches = express.Router();
 
 matches.get('/getmatches',async(req,res)=>{
@@ -79,7 +84,6 @@ matches.post('/addgame', async(req,res)=>{
     }
     );
 
-    console.log(match.firstCountry);
     match.save(()=>{
         console.log("match is added");
     })
@@ -90,8 +94,6 @@ matches.post('/addgame', async(req,res)=>{
 matches.put('/editmatch/:matchID',async (req,res)=>{
     const fullTime = req.body.fullTime ? req.body.fullTime : false;
     let match = await Matches.findOne({matchId:req.params.matchID});
-    console.log(req.body);
-
     const {updatedPlayer_1,updatedPlayer_2} = req.body;
     match.firstCountry.result = req.body.result1 ? req.body.result1 : match.firstCountry.result ;
     match.secondCountry.result = req.body.result2 ? req.body.result2 : match.secondCountry.result ;
@@ -105,7 +107,7 @@ matches.put('/editmatch/:matchID',async (req,res)=>{
         match.states.push(updatedPlayer_2);
     }
     await Matches.updateOne({matchId:req.params.matchID},match) 
-    return res.status(200).send("done");  
+    return res.status(200).send("done");
 })
 
 matches.put('/fullTime/:matchId',async(req,res)=>{
@@ -117,9 +119,8 @@ matches.put('/fullTime/:matchId',async(req,res)=>{
                                         match.firstCountry.countryName,
                                         match.secondCountry.countryName,
                                         match)
-
-
     }
+    
     catch(err){
 
     }
@@ -128,7 +129,7 @@ matches.put('/fullTime/:matchId',async(req,res)=>{
 
 
 matches.delete('/deletematch/:matchID',async (req,res)=>{
-    console.log("passes");
+    
    try{
         const match = await Matches.findOne({matchId:req.params.matchID});
         if(!match)

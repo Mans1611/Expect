@@ -7,8 +7,16 @@ import axios from 'axios';
 import { matchesStore } from '../../../../Context/matchesContext';
 import PlayerCardRadio from '../../../../../component/PlayerCardRadio/PlayerCardRadio';
 import { useState } from 'react';
+
+import io from 'socket.io-client';
+
+
+
+const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
+
 const UpdateMatch = ({match,setUpdate})=> {
   const store = matchesStore();
+  
   // this code down below is to cahnge the background color when you select a player
 
   // const playerNavigator = document.querySelector(`input:checked`)
@@ -50,22 +58,31 @@ const UpdateMatch = ({match,setUpdate})=> {
       state : state_2Player
     }
 
-    
-
     try{
-      const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
+
+      socket.emit('updatingMatches',{
         result1 : country_1_result,
         result2 : country_2_result,
         updatedPlayer_1,
         updatedPlayer_2,
+        matchId: match.matchId,
         fullTime : false
       })
+      
+
+      //   const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
+      //   result1 : country_1_result,
+      //   result2 : country_2_result,
+      //   updatedPlayer_1,
+      //   updatedPlayer_2,
+      //   fullTime : false
+      // })
       setUpdate(false);
-      const {updatedMatch,msg} = response.data;
+      // const {updatedMatch,msg} = response.data;
       
     }
     catch(err){
-      console.log("check your internet");
+      console.log(err);
     }
 
 

@@ -6,14 +6,27 @@ import  matchesRoute from './routes/matches.js';
 import  countryRoute from './routes/country.js';
 import news from './routes/news.js'
 import cors from 'cors' ;
+import http from 'http' ;
 dotenv.config();
 import register from './routes/register.js';
 import users from './routes/users.js';
 import expects from './routes/expects.js';
-
+import { Server } from 'socket.io';
+import { updateMatch } from './socket.ioFunctions/updateMatch.js';
+import { getMatches } from './socket.ioFunctions/getMatches.js';
+import Matches from './models/Matches.js';
 
 const app = express();
+
+const server = http.createServer(app);
 const port = process.env.PORT|| 8000;
+
+
+const io = new Server(server,{
+    cors:{
+        origin : "http://localhost:5000"
+    }
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,7 +49,27 @@ mongoose.connect('mongodb://127.0.0.1:27017/expect',{useNewUrlParser:true}); // 
 mongoose.connection.once('open',()=>{
     console.log("You are connected to the cloud database");
 })
-app.listen(port,()=>{
+
+io.on('connection',(socket)=>{
+    try{
+        socket.on('updatingMatches',async (data)=>{ 
+            await updateMatch(data);
+            const matches = await Matches.find();
+            socket.broadcast.emit("sendingMessage",matches);
+            
+        })
+        
+    }
+
+    catch(err){
+        console.log(err);
+    }
+
+    
+
+})
+
+server.listen(port,()=>{
     console.log("http://localhost:" + port);
 })
 
