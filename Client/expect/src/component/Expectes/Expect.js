@@ -32,7 +32,7 @@ const Expect = ({match,userExpect})=> {
                 { timeUp ?  match.fullTime ? <div className="clashHolder">FT</div> : <div className="clashHolder"><Minute matchTime={match.matchTime}/></div>  : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/>}
                     
                 
-                {timeUp &&<span className="result">{match.firstCountry.result}</span>}
+                {timeUp &&<span className="result">{match.secondCountry.result}</span>}
                 <div className="matchCardCountry">
                     <img src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="matchCardCountryImg" />
                     <span className='countryLabel'>{match.secondCountry.countryName}</span>

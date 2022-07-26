@@ -72,8 +72,6 @@ const UpdatePopUp = ({match,togglePop}) => {
                             <button  className='matchCardButton save' >Save</button>
                         </div>
 
-
-
                 </div>
                 </form>
 

@@ -3,14 +3,17 @@
 // without searching for it.
 
 export default function AddingPointsToUSers(matches,userExpections){
-    let totalPoints = 0
+    let totalPoints = 0;
+
     for(let i = 0; i < userExpections.length;i++){
-            
+           
             matches.find((match)=>{
                 // so if the matchId matches it will transfer the points of selected from the two countries to the user. 
+                
                 if(match.matchId === userExpections[i].matchId){
-                    userExpections[i].userPoints += match.firstCountry.players[userExpections[0].mutatePlayer1.index].playerPoints;
-                    userExpections[i].userPoints += match.secondCountry.players[userExpections[0].mutatePlayer1.index].playerPoints;
+                    userExpections[i].userPoints += match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints;
+                    userExpections[i].userPoints += match.secondCountry.players[userExpections[i].mutatePlayer2.index].playerPoints;
+                    console.log(userExpections[i].userPoints);
                     totalPoints += userExpections[i].userPoints;
                 }
             })

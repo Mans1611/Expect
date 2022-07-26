@@ -31,8 +31,6 @@ const io = new Server(server,{
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-
 // middleware
 app.use('/matches',matchesRoute);
 app.use('/country',countryRoute);
@@ -52,10 +50,10 @@ mongoose.connection.once('open',()=>{
 
 io.on('connection',(socket)=>{
     try{
-        socket.on('updatingMatches',async (data)=>{ 
+        socket.on('updatingMatch',async (data)=>{ 
             await updateMatch(data);
             const matches = await Matches.find();
-            socket.broadcast.emit("sendingMessage",matches);
+            socket.broadcast.emit("updatingMatches",matches);
             
         })
         

@@ -1,7 +1,7 @@
 
 
 
-const CreatingExpect = (players_1_arr,players_2_arr) =>{
+const CreatingExpect = (players_1_arr,players_2_arr,userPoints = 0) =>{
 
         const winnerValue = document.querySelector('input[name="countryWinner"]:checked').id;
         const result1_value = document.querySelector('input[id="result_1"]').value;
@@ -28,6 +28,7 @@ const CreatingExpect = (players_1_arr,players_2_arr) =>{
                 result2_value,
                 mutatePlayer1,
                 mutatePlayer2,
+                userPoints
             };
 
             return expectObject;

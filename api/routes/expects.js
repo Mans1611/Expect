@@ -12,8 +12,7 @@ expects.get('/:username',async(req,res)=>{
     try{
         const user = await Expects.findOne({userName : req.params.username});
         const matches = await Matches.find();
-        const {userExpections,totalPoints} = AddingPointsToUsers(matches,user.expects);
-        
+        const {userExpections,totalPoints} = AddingPointsToUsers(matches,user.expects);        
         await User.findOneAndUpdate({userName:req.params.username},{userPoints:totalPoints});
         res.status(200).json({matches,userExpections,totalPoints});
 

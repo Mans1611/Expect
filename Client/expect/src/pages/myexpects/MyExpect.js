@@ -5,7 +5,10 @@ import filteringExpects from "../matches/utilites/filteringExpects";
 import Expect from '../../component/Expectes/Expect';
 import './myexpect.scss'
 import ExpectPhone from "../../component/Expectes/PhoneComponent/ExpectPhone";
+import Expected from "../matches/Component/Expected/Expected";
+import io from 'socket.io-client';
 
+const socket = io.connect('http://localhost:8000');
 
 const MyExpects = () => {
     
@@ -14,7 +17,6 @@ const MyExpects = () => {
     const [userExpections,setUserExpections] = useState([]); // this for the details about each expections like weinner and result 
     const [width,setWidth] = useState(window.innerWidth);
     const [totalPoints,setTotalPoints] = useState(0);
-
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
     })
@@ -23,17 +25,36 @@ const MyExpects = () => {
         return async()=>{
             try{
                 const response = await axios.get(`/expects/${userGlob}`);
-                const matchesWithFlage = filteringExpects(response.data.matches,response.data.userExpections);
-                const UserExpections =  matchesWithFlage.filter(val=>val.expected);
-                 setUserExpections(response.data.userExpections);
-                 setExpected(UserExpections);
-                 setTotalPoints(response.data.totalPoints);
+                const matchesWithFlage = filteringExpects(response.data.matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
+                const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                setUserExpections(response.data.userExpections);
+                setExpected(filterdExpectedMatches); // matches 
+                setTotalPoints(response.data.totalPoints);
 
             }catch(err){
                 console.log(err);
             }
         }
     },[])
+
+    useEffect(()=>{
+        return async()=>{
+            try{
+                socket.on("updatingMatches",async(matches)=>{
+                    const response = await axios.get(`/expects/${userGlob}`);
+                    const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
+                    const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                    setUserExpections(response.data.userExpections);
+                    setExpected(filterdExpectedMatches); // matches 
+                    setTotalPoints(response.data.totalPoints);
+
+                })
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+    },[socket])
 
     return ( 
         <div className={`myexpects ${isDark? 'dark':''}`}>
@@ -50,8 +71,10 @@ const MyExpects = () => {
                     (width > 580) ?
                             (
                                 <div className="expectsContainer"> 
-                                    {expected.map((val,index)=>{
-                                        return <Expect key = {index} userExpect = {userExpections[index]} match={val}/> // since the have the same length and each one meet the same in the other array
+                                    {
+                                        expected.map((val,index)=>{
+                                            return <Expect match= {val} userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)}  />
+                                    
                                     })}
                                 </div> )
 

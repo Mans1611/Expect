@@ -8,21 +8,20 @@ import { globalUser } from '../../Context/HomeContext';
 import PlayerCardRadio from '../PlayerCardRadio/PlayerCardRadio';
 import CreatingExpect from '../../utilis/CreatingExpectObject';
 
-const PopMatchCard = ({match,pop,setPop,type,userExpect}) => {
+const PopMatchCard = ({match,setPop,type,userExpect}) => {
 
     const {isDark,userGlob} = globalUser();
    
     useEffect(()=>{
         return async()=>{
-            
             if(userExpect){
                 document.getElementById('result_1').value = userExpect.result1_value;
                 document.getElementById('result_2').value = userExpect.result2_value;
                 document.getElementById(userExpect.winnerValue).checked = true;   
                 document.getElementById(userExpect.mutatePlayer1.playerName).checked = true;  
                 document.getElementById(userExpect.mutatePlayer2.playerName).checked = true; 
-                 
             }
+            console.log(userExpect.userPoints);
         }
     },[])
     
@@ -52,7 +51,8 @@ const PopMatchCard = ({match,pop,setPop,type,userExpect}) => {
     
     const handleUpdate = async (e)=>{
         e.preventDefault();
-        let updateObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players);
+        console.log(userExpect);
+        let updateObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players,userExpect.userPoints);
         try{
             const updatedResponse = await axios.put(`/expects/editexpect/${userGlob}`,{
             matchId : match.matchId,
@@ -70,7 +70,7 @@ const PopMatchCard = ({match,pop,setPop,type,userExpect}) => {
 
         const handlePost = async (e)=>{
             e.preventDefault();
-
+            console.log("passed in post request");
             const winnerValue = document.querySelector('input[name="countryWinner"]:checked').id;
             const result1_value = document.querySelector('input[id="result_1"]').value;
             const result2_value = document.querySelector('input[id="result_2"]').value;
@@ -84,7 +84,6 @@ const PopMatchCard = ({match,pop,setPop,type,userExpect}) => {
                 
                 const response = await axios.post(`/expects/addexpect/${userGlob}`,{
                     matchId : match.matchId,
-                    userPoints : 0,
                     ...expectObject
                 });
     

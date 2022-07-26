@@ -2,7 +2,7 @@ import Matches from "../models/Matches.js";
 import addingPointsPlayer from "../routes/utilis/addingPointsPlayers.js";
 
 const updateMatch = async(data)=>{
-
+    
     const fullTime = data.fullTime ? data.fullTime : false;
     let match = await Matches.findOne({matchId:data.matchId});
     
@@ -19,6 +19,5 @@ const updateMatch = async(data)=>{
         match.states.push(updatedPlayer_2);
     }
     await Matches.updateOne({matchId:data.matchId},match) 
-    console.log("done");
 }
 export {updateMatch};

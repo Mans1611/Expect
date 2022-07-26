@@ -63,7 +63,7 @@ const MathchCard = ({match}) => {
                         result_1={match.firstCountry.result} 
                         result_2={match.secondCountry.result}/> 
             }
-           {
+           {timeUp &&
             match.fullTime && 
                 <div className="matchCardStart">
                     <button onClick={togglePop} className='matchCardbutton'>Match State</button>

@@ -60,7 +60,7 @@ const UpdateMatch = ({match,setUpdate})=> {
 
     try{
 
-      socket.emit('updatingMatches',{
+      socket.emit('updatingMatch',{
         result1 : country_1_result,
         result2 : country_2_result,
         updatedPlayer_1,
@@ -91,8 +91,9 @@ const UpdateMatch = ({match,setUpdate})=> {
   const fullTime = async(e)=>{
     e.preventDefault();
     try{
-      const response = await axios.put(`/matches/fullTime/${match.matchId}`)
-      setUpdate(false)
+        socket.emit("updatingMatch",{fullTime :true,matchId:match.matchId});
+        setUpdate(false);
+        
       }catch(err){
       console.log("error in full time");
     }

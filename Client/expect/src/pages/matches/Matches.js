@@ -33,13 +33,9 @@ useEffect(()=>{
                 navigate('/register/signin');
             else{ 
                     const response = await axios.get(`/expects/${userGlob}`);
-                    const Response = await axios.get(`/expects/${userGlob}`); 
-                    const MatchesWithFlag = filteringExpects(response.data.matches,Response.data.userExpections);
-                    
+                    const MatchesWithFlag = filteringExpects(response.data.matches,response.data.userExpections);
                     setData(MatchesWithFlag);
                     setLoading(false);
-               
-
             }
         }catch(err){
             setNoutFound(true);
@@ -48,17 +44,14 @@ useEffect(()=>{
     } 
 },[]);
 
-useEffect(()=>{
-    socket.on("sendingMessage",async(matches)=>{
-       setData(matches)
-    })
-},[socket])
+    useEffect(()=>{
+        socket.on("updatingMatches",async(matches)=>{
+            const Response = await axios.get(`/expects/${userGlob}`);
+            const MatchesWithFlag = filteringExpects(matches,Response.data.userExpections);
+            setData(MatchesWithFlag);
+        })
+    },[socket])
 
-   
-    
-
-
-   
     return ( 
             <>
            {isLoading? <Loading/>: (

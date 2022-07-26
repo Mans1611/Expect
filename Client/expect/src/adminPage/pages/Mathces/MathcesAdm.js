@@ -6,11 +6,15 @@ import MatchCardAdm from '../../component/MatchCardAdm/MatchCardAdm';
 import axios from 'axios';
 import SmallLaoding from '../../../component/loading/small.loading/smallLoading';
 import { matchesStore } from '../../Context/matchesContext';
+import io from 'socket.io-client';
+
+const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
 const MathcesAdm = () => {
-    //const [matches,setMatches] = useState([]);
+    
     const [showPop,setShowPop] = useState(false) ;
     const store = matchesStore();
+
     useEffect(()=>{
         return async()=>{
             try{
@@ -24,10 +28,13 @@ const MathcesAdm = () => {
         } 
     },[])
 
-    const popAddMatch = ()=>{
-        setShowPop(!showPop);
-    }
+    useEffect(()=>{
+            socket.on("updatingMatches",(matches)=>{
+                store.setMatches(matches);
+            })
+    },[socket])
 
+    
     return ( 
         <div className="matchesadmin">
             {showPop && <PopAddMatch showPop={showPop} setShowPop={setShowPop}/>}
@@ -40,7 +47,7 @@ const MathcesAdm = () => {
                 }
             </div>
             <div className="buttonContainer">
-                <button onClick={popAddMatch}  className="addMatch">
+                <button onClick={()=>setShowPop(!showPop)}  className="addMatch">
                     <span>Add Match</span>
                     <NoteAddIcon/>
                 </button>
