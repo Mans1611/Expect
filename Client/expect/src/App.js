@@ -19,16 +19,15 @@ import MyProfile from './pages/myProfile/MyProfile';
 import { globalUser, Provider } from './Context/HomeContext';
 import RequiredAuth from './Auth/RequiredAuth';
 import { MatchesProvider } from './adminPage/Context/matchesContext';
-import Cookies from "universal-cookie";
+
 import NotFound from './pages/NotFound/NotFound';
 import PopMatchCard from './component/popmatchcard/PopMatchCard';
 import Standing from './pages/Standing/Standing';
-
+import { useParams } from 'react-router-dom';
 export const ThemeContext = createContext(true);
 
 
 const  App = ()=> {
-  
 
   return (
     <Router>
@@ -40,9 +39,8 @@ const  App = ()=> {
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<RequiredAuth childern={<MyExpects/>}></RequiredAuth> }/>
             <Route path="standing" element={<RequiredAuth childern={<Standing/>}></RequiredAuth> }/>
-            <Route path="myprofile" element={<RequiredAuth childern={<MyProfile/>}></RequiredAuth> }/>
-            <Route path = "matches/:id" element = {<RequiredAuth childern={<PopMatchCard/>}></RequiredAuth> }/>
-
+            
+            <Route path="myprofile/:userName" element={<MyProfile/>}/>
           </Route>
           
       {/* Regestirng pages */}

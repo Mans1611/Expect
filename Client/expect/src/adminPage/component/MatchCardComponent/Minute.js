@@ -19,7 +19,7 @@ const Minute = ({matchTime,min,setMin})=> {
     },[refresh])
 
     return (
-    <div className="circle">
+    <div className="circle circleAdm">
         <span className="time">{min}</span>
     </div>
   )

@@ -13,7 +13,7 @@ const matches = express.Router();
 
 matches.get('/getmatches',async(req,res)=>{
     try{
-        const matches = await Matches.find();
+        const matches = await Matches.find().sort({matchTime : 1});
         res.status(200).send(matches);
     }catch(err){
         console.log(err);

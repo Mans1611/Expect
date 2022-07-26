@@ -68,7 +68,7 @@ const Navbar = (props) => {
                         <img className='navbarProfileImg' src="https://cdn.dribbble.com/users/1040983/screenshots/5630845/media/e95768b82810699dfd54512ff570954a.png?compress=1&resize=400x300&vertical=top" />
                        </div>
                        <div className='navbarDropdown'>
-                            <Link to='myprofile'  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>
+                            <Link to={`myprofile/${store.userGlob}`}  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>
                             <div onClick={
                                 ()=>{
                                 setDark(!isDark);
