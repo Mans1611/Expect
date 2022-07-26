@@ -4,9 +4,9 @@ import { MatchCardContext } from '../../../component/matchcards/MatchCard';
 
 
 
-const Minute = ({matchTime})=> {
+const Minute = ({matchTime,min,setMin})=> {
     const MATCH_Time_IN_SECONDS = new Date(matchTime).getTime();
-    const [min,setMin] = useState(1);
+    
     const [refresh,setRefresh] = useState(0)
     setInterval(()=>{
         setRefresh(refresh+1);

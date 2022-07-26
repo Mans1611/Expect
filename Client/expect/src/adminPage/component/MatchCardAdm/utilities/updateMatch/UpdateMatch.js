@@ -3,18 +3,17 @@ import './updateMatch.scss'
 import CloseIcon from '@mui/icons-material/Close';
 import PlayerCard from '../../../../../component/popmatchcard/playercard/PlayerCard';
 import { useEffect,useRef } from 'react';
-import axios from 'axios';
 import { matchesStore } from '../../../../Context/matchesContext';
 import PlayerCardRadio from '../../../../../component/PlayerCardRadio/PlayerCardRadio';
 import { useState } from 'react';
-
+import { PlayerStateToObject } from '../../../../../utilis/PlayerStateToObject';
 import io from 'socket.io-client';
 
 
 
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
-const UpdateMatch = ({match,setUpdate})=> {
+const UpdateMatch = ({match,setUpdate,min})=> {
   const store = matchesStore();
   
   // this code down below is to cahnge the background color when you select a player
@@ -49,14 +48,15 @@ const UpdateMatch = ({match,setUpdate})=> {
     const state_1Player = document.getElementById('firstCountryState').value;
     const state_2Player = document.getElementById('secondCountryState').value;
     
-    const updatedPlayer_1 = {
-      playerName: selcted_player_1,
-      state : state_1Player
-    }
-    const updatedPlayer_2 = {
-      playerName: selcted_player_2,
-      state : state_2Player
-    }
+
+    // here i senf the minute with the player to be able to show it in the state to the users
+    const updatedPlayer_1 = PlayerStateToObject(selcted_player_1,state_1Player,"first",min)
+    
+    // i set a prop which is country just to aside each country in the state component
+    // for example first country will be to the righ and the second will be to the left
+    
+    const updatedPlayer_2 =  PlayerStateToObject(selcted_player_2,state_2Player,"second",min)
+    
 
     try{
 

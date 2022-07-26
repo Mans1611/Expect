@@ -4,7 +4,7 @@ export default  function addingPointsPlayer(player,countryName,match){
         case "Score Long Goal (6PTS)":
             points = 6;
             break;
-        case "Score Goal From Foul (6PTS)":
+        case "Score Goal From Free Kick (6PTS)":
             points = 6;
             break;
         case "Score Goal (5PTS)":

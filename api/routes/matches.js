@@ -114,7 +114,6 @@ matches.put('/fullTime/:matchId',async(req,res)=>{
     try{
         let match = await Matches.findOne({matchId:req.params.matchId});
         match.fullTime = true;
-       
         await TransferingPointsToCountry(
                                         match.firstCountry.countryName,
                                         match.secondCountry.countryName,

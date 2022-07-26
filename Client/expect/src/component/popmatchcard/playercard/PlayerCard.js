@@ -28,7 +28,7 @@ const SelectionComp = ({countryOrder})=>{
         <select className = 'PlayerStateSelction' id = {`${countryOrder}State`}>
             <option value={null} disabled>None</option>
             <option  className='goodPoints'>Score Long Goal (6PTS)</option>
-            <option  className='goodPoints'> Score Goal From Foul (6PTS)</option>
+            <option  className='goodPoints'> Score Goal From Free Kick (6PTS)</option>
             <option className='goodPoints'>Score Goal (5PTS)</option>
             <option className='goodPoints'>Make ASSIST (3PTS)</option>
             <option className='goodPoints'>Score Penalty (3PTS)</option>

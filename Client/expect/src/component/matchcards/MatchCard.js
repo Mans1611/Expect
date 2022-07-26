@@ -1,19 +1,10 @@
 import {  createContext, useState } from 'react';
-import { connect } from 'react-redux';
-import fetchData from '../../fetchData';
-import Loading from '../loading/big.loading/Loading';
-//import fetchData from '../../fetchData';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
 import './matchcard.scss';
-import { ThemeContext } from '../../App';
 import { globalUser } from '../../Context/HomeContext';
 import TimeCounter from '../../TimeCounter';
 import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchResultComp';
-import { Link } from 'react-router-dom';
-
-
-
-
+import MatchState from '../MatchState/MatchState';
 export const MatchCardContext = createContext(null);
 
 const MathchCard = ({match}) => {
@@ -21,9 +12,7 @@ const MathchCard = ({match}) => {
     const [pop,setPop] = useState(false);
 
     const [timeUp, setTimeUp] = useState(false); 
-    const togglePop = ()=>{
-        setPop(!pop);
-    }
+    
     const {isDark} = globalUser(); 
     
 
@@ -53,7 +42,7 @@ const MathchCard = ({match}) => {
             {/* if the time is up the timer will display and you cant press the Expect button  */}
             {!timeUp && 
                 <div className="matchCardStart">
-                    { <button onClick={togglePop} className='matchCardbutton'>Expext</button>}
+                    { <button onClick={()=>setPop(!pop)} className='matchCardbutton'>Expext</button>}
                 </div>
             } 
                 {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
@@ -64,12 +53,13 @@ const MathchCard = ({match}) => {
                         result_2={match.secondCountry.result}/> 
             }
            {timeUp &&
-            match.fullTime && 
                 <div className="matchCardStart">
-                    <button onClick={togglePop} className='matchCardbutton'>Match State</button>
+                    <button onClick={()=> setPop(true)} className='matchCardbutton'>Match State</button>
                 </div>
            }
            </div>
+           { pop && timeUp && <MatchState setPop = {setPop} match={match}/>}
+
         </MatchCardContext.Provider>
      );
 }

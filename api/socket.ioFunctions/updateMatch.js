@@ -1,10 +1,14 @@
 import Matches from "../models/Matches.js";
 import addingPointsPlayer from "../routes/utilis/addingPointsPlayers.js";
+import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCountry.js";
 
 const updateMatch = async(data)=>{
-    
+
     const fullTime = data.fullTime ? data.fullTime : false;
     let match = await Matches.findOne({matchId:data.matchId});
+    // so if the match is over it will transfer the points to the the players in their countries
+    if(fullTime)
+        await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
     
     const {updatedPlayer_1,updatedPlayer_2} = data;
     match.firstCountry.result = data.result1 ? data.result1 : match.firstCountry.result ;

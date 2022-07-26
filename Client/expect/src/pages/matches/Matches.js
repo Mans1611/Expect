@@ -17,9 +17,8 @@ const socket = io.connect('http://localhost:8000'); // we connect it to the bake
 const Matches = () => {
     const {isDark} = globalUser();
     const [data,setData] = useState([]);
-    const [isLoading,setLoading] = useState(false);
+    const [isLoading,setLoading] = useState(true);
     const [notFound,setNoutFound] = useState(false);
-    const [expected,setExpected] = useState([]);
     const [timeUp, setTimeUp] = useState(false); 
     const cookie = new Cookies();
     const navigate = useNavigate();
