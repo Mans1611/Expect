@@ -15,6 +15,7 @@ import { Server } from 'socket.io';
 import { updateMatch } from './socket.ioFunctions/updateMatch.js';
 import { getMatches } from './socket.ioFunctions/getMatches.js';
 import Matches from './models/Matches.js';
+import admin from './routes/admin.js';
 
 const app = express();
 
@@ -38,7 +39,7 @@ app.use('/news',news);
 app.use('/register',register);
 app.use('/users',users);
 app.use('/expects',expects);
-
+app.use('/admin',admin);
 app.use(cors());
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file

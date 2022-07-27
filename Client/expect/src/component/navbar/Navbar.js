@@ -1,15 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import './navbar.scss';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import BottomNavbar from './bottomnavbar/BottomNavbar';
-import { ThemeContext } from '../../App';
 import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
 
 const Navbar = (props) => {
+
     const [width , setWidth] = useState(window.innerWidth);
     const [scale, setScale] = useState(((width<680)? true : false));
     let items = document.getElementsByClassName('navbarLink');
@@ -17,6 +16,17 @@ const Navbar = (props) => {
     const {isDark,setDark} = globalUser();
     const cookie = new Cookies();
 
+    let location = useLocation().pathname.split("/")[2]; 
+    let item = document.getElementById(location)
+    if(item)
+        item.classList.add("selected");
+    
+    useEffect(()=>{
+        item = document.getElementById(location)
+        if(item)
+            item.classList.add("selected");
+    },[isDark])
+    
     useEffect(()=>{
         for(let i = 0 ; i<items.length;i++){
             items[i].addEventListener('click',function(){
@@ -55,17 +65,17 @@ const Navbar = (props) => {
                 <div className="navbarRight">
                     {!scale && <>
                     {   navbarItems.map((item,index)=>{ // to reduce the code lines 
-                        return <Link key={index} to = {`${item.toLowerCase()}`} className={`navbarLink ${isDark? 'dark': ""}`}><span className="navbarRightItem" key={index}>{item}</span></Link>    
+                        return <Link key={index} id = {`${item.toLowerCase()}`} to = {`${item.toLowerCase()}`} className={`navbarLink`}><span className="navbarRightItem" key={index}>{item}</span></Link>    
                     })
-
                     }
                     </>
                     }
                     
                     <div className="navbarMenu">
                        <div className="imgContainer">
-                        <span className="username">{store.userGlob}</span>
-                        <img className='navbarProfileImg' src="https://cdn.dribbble.com/users/1040983/screenshots/5630845/media/e95768b82810699dfd54512ff570954a.png?compress=1&resize=400x300&vertical=top" />
+                       
+                            <span className="username">{store.userGlob}</span>
+                       
                        </div>
                        <div className='navbarDropdown'>
                             <Link to={`myprofile/${store.userGlob}`}  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>

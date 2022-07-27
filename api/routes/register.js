@@ -1,7 +1,6 @@
 
 import jwt from 'jsonwebtoken';
 import  express,{Router} from 'express'
-import crypto from 'crypto'
 import  User  from '../models/User.js';
 import verify  from '../middleware/verify.js';
 import mailVerification from '../maller/mailVerification.js'; 

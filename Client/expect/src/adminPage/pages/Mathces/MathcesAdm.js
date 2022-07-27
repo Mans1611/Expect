@@ -7,6 +7,8 @@ import axios from 'axios';
 import SmallLaoding from '../../../component/loading/small.loading/smallLoading';
 import { matchesStore } from '../../Context/matchesContext';
 import io from 'socket.io-client';
+import { AdminContext } from '../../Context/ProtectedAdmin';
+import { useNavigate } from 'react-router-dom';
 
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
@@ -14,7 +16,13 @@ const MathcesAdm = () => {
     
     const [showPop,setShowPop] = useState(false) ;
     const store = matchesStore();
-
+    const {isAuth, setAuth} = AdminContext();
+    const navigate = useNavigate();
+    if(!isAuth){
+        return navigate('/adminpage/login');
+    } 
+    
+    console.log(isAuth);
     useEffect(()=>{
         return async()=>{
             try{

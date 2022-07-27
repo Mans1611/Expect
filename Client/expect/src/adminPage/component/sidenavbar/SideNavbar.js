@@ -6,17 +6,18 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {Link} from 'react-router-dom'
 import { useEffect } from 'react';
+import Cookies from 'universal-cookie';
+
+
+const cookie = new Cookies();
 
 const SideNavbar = () => {
         useEffect(()=>{
-            let [ ,def] = window.location.href.split("/adminpage/"); // to know from url of the page and to pick the second item of the array    
-            if(def){
+            
+            let items = document.querySelectorAll('.sidenavbaritems');
 
-                document.getElementById(def).className += ' selectedsidebar'  
-            }
-            let items = document.querySelectorAll('.sidenavbaritems')
             // there is a bug in statistics it selected class dose not removed 
-            for(let i = 0 ; i < items.length-1 ; i++){ // this to remove sign out as it transfer out to the admin page
+            for(let i = 0 ; i < items.length ; i++){ // this to remove sign out as it transfer out to the admin page
                 items[i].addEventListener("click",function(){
                     try{
                         let previos = document.getElementsByClassName("selectedsidebar");
@@ -32,8 +33,6 @@ const SideNavbar = () => {
                 })
 
         }},[])
-        
-
     
     return ( 
         <div className="sidenavbar">
@@ -63,7 +62,7 @@ const SideNavbar = () => {
                     </div>
                 </Link>
             </div>
-            <Link to='account' className='sidenavBarLink'>
+            <Link onClick={()=>{cookie.remove("token")}} to='/adminpage/login' className='sidenavBarLink'>
                 <div className="signout sidenavbaritems">
                     <ExitToAppIcon className='icons'/>
                     <span className="labels">Sign Out</span>

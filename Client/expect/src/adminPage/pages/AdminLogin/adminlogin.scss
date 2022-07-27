@@ -1,0 +1,104 @@
+.AdminLoginPage{
+    width : 100vw;
+    min-height: 100vh;
+    padding: 10px;
+    background-color: #474747;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .loginContainer{
+        width: 30%;
+        height: fit-content;
+        text-align: center;
+        background-color: #373737;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        .AdminLoginTitle{
+            border-bottom: 5px solid #fff;
+            padding: 5px;
+            font-size: 70px;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 20px;
+            background-color: #111;
+        
+        }
+        .imgAdmin{
+            width: 90px;
+            border-radius: 50%;
+            height: 90px;
+        }
+    }
+    .inputWrapper{
+        display: flex;
+        flex-direction: column;
+        label{
+            font-size: 32px;
+            color: #fff;
+        }
+        
+        .input{
+            display: flex;
+            align-items: center;
+            margin: 10px auto;
+            width: 90%;
+            .icons{
+                background-color: #111;
+                height: 50px;
+                width: 40px;
+                color: #fff;
+                padding: 5px;
+            }
+
+            input{
+                width: 90%;
+                height: 50px;
+                padding: 5px;
+                outline: none;
+                border: none;
+                color: #fff;
+                font-size: 25px;
+                text-align: center;
+                background-color: rgba(17, 17, 17, 0.44);
+                &:focus{
+                    border-bottom: rgb(255, 94, 126) solid 2px;
+                    
+                }
+            }
+        }
+    }
+    button[type="submit"]{
+        background-color: #2f9;
+        width: 90%;
+        margin: 0px auto 10px;
+        padding: 5px;
+        font-size: 40px;
+        font-weight: 500;
+        margin-top: 5px;
+        color: #111;
+        &:hover{
+            background-color: #0f1;
+        }
+    }
+    a{
+        color: #eee;
+        font-size: 22px;
+        margin-bottom: 10px;
+        &:hover{
+            color: rgb(255, 164, 164);
+            font-size: 25px;
+        }
+
+    }
+    .msg{
+        background-color: rgb(248, 70, 106);
+        border-left: #f01 solid 10px;
+        font-size: 20px;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px auto;
+        width: 80%;
+    }
+}

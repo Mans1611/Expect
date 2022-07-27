@@ -19,11 +19,12 @@ import MyProfile from './pages/myProfile/MyProfile';
 import { globalUser, Provider } from './Context/HomeContext';
 import RequiredAuth from './Auth/RequiredAuth';
 import { MatchesProvider } from './adminPage/Context/matchesContext';
-
 import NotFound from './pages/NotFound/NotFound';
-import PopMatchCard from './component/popmatchcard/PopMatchCard';
 import Standing from './pages/Standing/Standing';
-import { useParams } from 'react-router-dom';
+import AdminLogin from './adminPage/pages/AdminLogin/AdminLogin';
+import AdminSignUp from './adminPage/pages/AdminLogin/AdminSignUp';
+import { ProtectedAdminProvider } from './adminPage/Context/ProtectedAdmin';
+import Wrapper from './adminPage/pages/Wrapper';
 export const ThemeContext = createContext(true);
 
 
@@ -33,13 +34,15 @@ const  App = ()=> {
     <Router>
       <Provider children={(
       <MatchesProvider childern={(
+        <ProtectedAdminProvider childern={
+
+        
         <Routes>
           <Route path='/expect' element={<RequiredAuth childern={<><Navbar/><Footer/></>}/>}> 
             <Route path='matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<RequiredAuth childern={<MyExpects/>}></RequiredAuth> }/>
             <Route path="standing" element={<RequiredAuth childern={<Standing/>}></RequiredAuth> }/>
-            
             <Route path="myprofile/:userName" element={<MyProfile/>}/>
           </Route>
           
@@ -49,17 +52,22 @@ const  App = ()=> {
           <Route path='signin' element = {<SignIn/>}/>
           <Route path='signup' element = {<SignUp/>}/> 
         </Route>
-      {/* Admin pages */}
-          <Route path='/adminpage' element = {<HomeAdminPage/>}>         
-              <Route path="account" element = {<Adminaccount/>}/>
-              <Route path='dashboard' element={<DashBoard/>}/>
-              <Route path='matches' element={<MathcesAdm/>}/>
-              <Route path='statistics' element={<Statistics/>}/>
-            </Route>
-          <Route path='*' element = {<NotFound/>}/>
-      </Routes> 
-      )}>
 
+      {/* Admin pages */}
+
+
+        <Route path='/adminpage/login' element={<AdminLogin/>}/>
+        <Route path='/adminpage/signup' element={<AdminSignUp/>}/>
+        <Route exact path='/adminpage' element = {<HomeAdminPage/>}>       
+            <Route path="account" element = {<Adminaccount/>}/>
+            <Route path='dashboard' element={<DashBoard/>}/>
+            <Route path='matches' element={<MathcesAdm/>}/>
+            <Route path='statistics' element={<Statistics/>}/>
+        </Route>
+        <Route path='*' element = {<NotFound/>}/>
+      </Routes> 
+  }></ProtectedAdminProvider>
+      )}>
       </MatchesProvider>
       )}>
       </Provider>

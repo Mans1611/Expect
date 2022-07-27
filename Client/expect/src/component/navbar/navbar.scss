@@ -15,7 +15,19 @@
     transition: 150ms;
     width: 100%;
     font-family: 'Ubuntu Mono', monospace;
-    
+    &.dark{
+        background-color: #222;
+        border-bottom: #eee solid 5px;
+        .selected{
+            background-color: rgb(193, 0, 39);
+            color: #eee;
+            padding: 15px 0;
+        }
+        .navbarLink{
+            color: #fff;
+            transition: 200ms;
+        }
+    }
 
 .navbarLink{
     text-decoration: none;
@@ -30,7 +42,7 @@
        
         .navbarLeft{
             cursor: pointer;
-            margin-left:  20px; ;
+            margin-left:  20px; 
         }
         .navbarRight{
             
@@ -39,12 +51,10 @@
             .navbarRightItem{
                 font-size: 30px;
                 font-weight: 600;
-                margin-right: 10px ;
+               
             }
             .navbarRightItem{
-                padding:15px 5px;
-                
-                
+                padding:15px 10px;
                 &:hover{
                     background-color: rgb(193, 0, 39);
                     color: #eee;
@@ -53,7 +63,6 @@
             .navbarMenu{
                 cursor: pointer;
                 margin-left: 20px;
-                background-color: inherit;
                 .imgContainer{
                     padding: 5px 0; 
                     @include flexAlign();
