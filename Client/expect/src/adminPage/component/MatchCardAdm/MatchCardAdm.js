@@ -10,7 +10,7 @@ import axios from 'axios';
 import TimeCounter from '../../../TimeCounter';
 import Minute from '../MatchCardComponent/Minute';
 
-const MatchCardAdm = ({match}) => {
+const MatchCardAdm = ({match,key}) => {
     const date  = match.matchTime.slice(0,10).replaceAll(',' , "-"); // to just to take the the date from the database
     const time  = match.matchTime.slice(11); // to show the time
     
@@ -19,10 +19,10 @@ const MatchCardAdm = ({match}) => {
     const [showUpdate,setUpdate] = useState(false);
     const [min,setMin] = useState(1);
     const store = matchesStore();
+
     const handleDelte = async(matchId) =>{
         try{
             const response = await axios.delete(`/matches/deletematch/${matchId}`);
-            console.log(response.data.msg);
             const {data} = await axios.get('/matches/getmatches')
             store.setMatches(data);
         }catch(err){
@@ -30,7 +30,7 @@ const MatchCardAdm = ({match}) => {
         }
     }
     return ( 
-        <div className="matchCard dark">
+        <div className="matchCard dark admin">
             <div className="matchcardHeader">
                 <div className="matchCardCountry"> {/* country1.*/ }
                     <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
@@ -38,7 +38,7 @@ const MatchCardAdm = ({match}) => {
                     <span className='countryLabel'>{match.firstCountry.result}</span>
                 </div>
                 VS 
-                <div className="matchCardCountry">
+                <div className="matchCardCountry">      
                     <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
                     <span className='countryLabel'>{match.secondCountry.countryName}</span>
                     <span className='countryLabel'>{match.secondCountry.result}</span>
@@ -65,7 +65,7 @@ const MatchCardAdm = ({match}) => {
                 </div>
                 
             </div>
-            {showUpdate && <UpdateMatch min={min} setUpdate={setUpdate} match = {match}/>}
+            {showUpdate && <UpdateMatch key = {key} min={min} setUpdate={setUpdate} match = {match}/>}
         </div>
      );
 }

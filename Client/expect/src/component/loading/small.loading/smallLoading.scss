@@ -1,13 +1,21 @@
 @import '../.loading.scss';
-.SmallLaoding{
+.smallLoadingContainer{
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    .square{
-     @include styling   
+    
+    .SmallLaoding{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        .square{
+         @include styling   
+        }
+        @include animation
+    
     }
-    @include animation
-
 }

@@ -7,12 +7,6 @@
     background-color: #d7d7d7;
     color: #222;
     transition: 300ms;
-    &.dark{
-        background-color: #333;
-        color: #eee;
-        transition: 300ms;
-        
-    }
     .matchWrapper{
         padding: 10px;
         .matchTitle{
@@ -20,13 +14,59 @@
             font-size: 52px;
             color: inherit;
         }
-        .matchCardContainer{
+    }
+    .matchCard-container{
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background-color: #ffd50056;
+        transition: 300ms;
+        .matchCardGrid{
+            margin: 20px 0;
+            padding: 10px;
             display: grid;
             grid-template-columns: repeat(4,25%);
             height: calc(fit-content + 50px);
-            
         }
+        
+        .matchcardButton-wrapper{
+            button{
+                width: 100%;
+                font-size: 36px;
+                font-weight: 600;
+                margin: 0  auto;
+                background-color: #FFD600;
+                color: #fff;
+                padding: 10px;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                border-top-left-radius: inherit;
+                border-top-right-radius: inherit;
+
+            }
     }
+    }
+
+    /* for dark mode */
+    &.dark{
+        background-color: #333;
+        color: #eee;
+        transition: 300ms;
+
+        .matchCard-container{
+            background-color:#222;
+           
+        .matchcardButton-wrapper{
+            button{
+                background-color: #FFD600 ;
+                color: #272727;   
+            }
+            }
+        }
+        
+    
+    
+        
+    
 }
 @media screen and (max-width: 960px) {
     .match{
@@ -66,4 +106,6 @@
 @media screen and (max-width: 576px) {
     
     
+}
+
 }

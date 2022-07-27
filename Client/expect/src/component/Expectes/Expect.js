@@ -14,7 +14,7 @@ const Expect = ({match,userExpect})=> {
     const [timeUp, setTimeUp] = useState(false);
     const [pop,setPop] = useState(false);
     const matchPoints = AddingPoints(match,userExpect);
-    
+    const [min,setMin] = useState(1);
 
 
   return (
@@ -29,7 +29,7 @@ const Expect = ({match,userExpect})=> {
                 </div>
                { timeUp && <span className="result">{match.firstCountry.result}</span>}
                 
-                { timeUp ?  match.fullTime ? <div className="clashHolder">FT</div> : <div className="clashHolder"><Minute matchTime={match.matchTime}/></div>  : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/>}
+                { timeUp ?  match.fullTime ? <div className="clashHolder">FT</div> : <div className="clashHolder"><Minute min = {min} setMin={setMin} matchTime={match.matchTime}/></div>  : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/>}
                     
                 
                 {timeUp &&<span className="result">{match.secondCountry.result}</span>}

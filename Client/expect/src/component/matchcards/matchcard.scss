@@ -8,7 +8,18 @@
     padding-bottom: 10px;
     @include shadowMainStyle;
     
-   
+    &.admin{
+        .circleAdm{
+            margin: 5px auto;
+            border:2px solid #090;
+            border-radius:50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
     
     
               
@@ -16,7 +27,7 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background: linear-gradient(90deg, rgb(81, 51, 51) 0%, rgb(157, 1, 22) 50%);
+        background: linear-gradient(90deg, rgba(255, 247, 0,0.5) 0%, rgba(255, 210, 0,0.5) 50%);
         font-size: 30px;
         font-weight: 600;
         color: #fff;
@@ -32,8 +43,8 @@
         }
         
         .matchCardCountryImg{
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
             cursor: pointer;
@@ -72,20 +83,21 @@
         margin-top: 10px;
         padding: 0 5px;
         .matchCardbutton{
-            color:  rgb(193, 0, 39);
+            background-color:rgb(193, 0, 39);
             border: 2px solid rgb(193, 0, 39);
+            color:#fff;
             border-radius: 10px;
             cursor: pointer;
             width: fit-content;
             padding: 5px 10px ;
             font-size: 30px;
-            font-weight: 600;
+            font-weight: 500;
             text-align: center;
             align-items: center;
-            background: inherit;
             &:hover{
-                color:#fff;
-                background-color:rgb(193, 0, 39);
+                color:  rgb(193, 0, 39);
+                border: 2px solid rgb(193, 0, 39);
+                background-color: #fff;
             }
         }
 

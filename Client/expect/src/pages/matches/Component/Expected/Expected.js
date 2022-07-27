@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { globalUser } from '../../../../Context/HomeContext';
 import './expected.scss';
 import TimeCounter from '../../../../TimeCounter';
-
+import MatchResultComp from '../../../../adminPage/component/MatchCardComponent/MatchResultComp';
 const Expected = ({match})=> {
     
     const {isDark} = globalUser();
@@ -29,13 +29,13 @@ const Expected = ({match})=> {
         }
 
         {/* if the time is up the timer will display and you cant press the Expect button  */}
+        {timeUp && <MatchResultComp FT = {match.fullTime} time = {match.matchTime} result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> }
         {
             <div className="matchCardStart">
                 { <button  className='matchCardbutton'>See MyExpect</button>}
             </div>
     } 
             
-        {/*timeUp && <MatchResultComp result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> */}
        </div>
     </div>
   )

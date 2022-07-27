@@ -31,6 +31,21 @@ matches.get('/match/:id', async (req,res)=>{
 
     }
  })
+
+ // in this route we can get the information by just the date of this day 
+ matches.get('/', async (req,res)=>{
+    try{
+        const regEX = new RegExp(`${req.query.date}`,'ig'); // use regular expression to just find all matches with this date no matter the time
+        const match = await Matches.find({matchTime: regEX });
+        res.status(200).send(match);
+    }
+    catch(err){
+        console.log(err);
+
+    }
+ })
+
+// for full time query 
 matches.get('/match/',async(req,res)=>{
     try{
         const dontMissMatches = await Matches.find({fullTime : req.query.fullTime}).limit(2);
