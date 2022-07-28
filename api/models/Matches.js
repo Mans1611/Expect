@@ -18,6 +18,10 @@ const matchSchema = new Schema({
         type : String,
         required : true
     },
+    votes : {
+        type : Number,
+        default : 0
+    },
     started:{ 
         type: Boolean, 
         required:false,

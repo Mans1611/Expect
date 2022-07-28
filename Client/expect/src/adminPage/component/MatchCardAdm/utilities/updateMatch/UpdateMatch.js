@@ -115,6 +115,7 @@ const UpdateMatch = ({match,setUpdate,min})=> {
     <div className='UpdateMatchContainer' onClick={hidePop}>
         <div className="updatePop">
           <CloseIcon onClick = {hidePop} className='closeIcon' />
+          
           <div className="matchcardHeader">
                 <div className="matchCardCountry"> {/* country1.*/ }
                     <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
@@ -131,6 +132,9 @@ const UpdateMatch = ({match,setUpdate,min})=> {
 
             </div>
             <div className="formContainer">
+              <div className="VotesContainer">
+                <h3>Totoal Votes : {match.votes}</h3>
+              </div>
               <form>
                   <div className="changeResult">
                     <input onChange={(e)=>setDate(e.target.value)} type="date"  id="dateEdit" />

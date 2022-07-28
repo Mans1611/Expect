@@ -32,6 +32,8 @@ export default  function addingPointsPlayer(player,countryName,match){
         default:
             break;
     }
+    // this to abb for both countries by else statment 
+    // it will iterate over each player(NOT USERS) and add his points
 
     if(match.firstCountry.countryName === countryName){
         match.firstCountry.players.forEach((val)=>{

@@ -54,6 +54,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            
             .state{
                 position: relative;
                 font-size: 17px;
@@ -71,6 +72,14 @@
                     text-align: start ;
                     padding-left: 10px;
                 }
+            }
+            .expected{
+                background-color: #459e00;
+                border-radius: 5px;
+                padding: 5px;
+                margin: 0 5px ;
+                color: #fff;
+                
             }
             
             .circle{

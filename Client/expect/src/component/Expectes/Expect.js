@@ -9,6 +9,7 @@ import PopMatchCard from '../popmatchcard/PopMatchCard';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import AddingPoints from '../../utilis/AddingPoints';
 import axios from 'axios';
+import MatchState from '../MatchState/MatchState';
 const Expect = ({match,userExpect,setUserExpections})=> {
     
     if(!userExpect)
@@ -21,6 +22,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
         const matchPoints = AddingPoints(match,userExpect);
         const [min,setMin] = useState(1);
         const [showDelete,setShowDelete] = useState(false);
+        const [showState,setShowState] = useState(false);
 
         
         const handldeDeleteExpect = async(e) =>{
@@ -68,7 +70,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
             {
                 <div className="matchCardStart">
                     {timeUp ?
-                        <button  className='matchCardbutton'>See MyExpect</button> 
+                        <button onClick={()=> setShowState(true)}  className='matchCardbutton'>Expect State </button> 
                         : 
                         <>
                         { showDelete ? 
@@ -90,12 +92,12 @@ const Expect = ({match,userExpect,setUserExpections})=> {
             
             {/*timeUp && <MatchResultComp result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> */}
             <div className="matchPoints">
-                Match Points : {matchPoints} PT
+                Match Points : {userExpect.userPoints} PT
             </div>
         </div>
 
-        {pop && <PopMatchCard userExpect={userExpect} match={match} setPop={setPop} /> }
-        
+        {pop && <PopMatchCard  userExpect={userExpect} match={match} setPop={setPop} /> }
+        {showState && <MatchState userExpect={userExpect} match = {match} setPop = {setShowState}/>}
         </div>
   )
 }

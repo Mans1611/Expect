@@ -51,7 +51,24 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
     
     const handleUpdate = async (e)=>{
         e.preventDefault();
-        console.log(userExpect);
+        const winnerValue = document.querySelector('input[name="countryWinner"]:checked').id;
+        const result1_value = document.querySelector('input[id="result_1"]').value;
+        const result2_value = document.querySelector('input[id="result_2"]').value;
+        
+        if((result1_value === result2_value && winnerValue !== 'draw') || (result1_value !== result2_value && winnerValue === 'draw') ){
+            dispatch({type:"warnMsg"})
+            return 0 ;
+        }
+        if(
+            (result1_value > result2_value && winnerValue !== match.firstCountry.countryName) ||   
+            (result1_value < result2_value && winnerValue !== match.secondCountry.countryName)
+          )
+            // if statment implementation
+            {
+                dispatch({type : "warnMsg",payload : "Check The Result And the Winner State"});
+                return 0;
+            }
+
         let updateObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players,userExpect.userPoints);
         try{
             const updatedResponse = await axios.put(`/expects/editexpect/${userGlob}`,{
@@ -79,6 +96,16 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                 dispatch({type:"warnMsg"})
                 return 0 ;
             }
+            if(
+                (result1_value > result2_value && winnerValue !== match.firstCountry.countryName) ||   
+                (result1_value < result2_value && winnerValue !== match.secondCountry.countryName)
+              )
+                // if statment implementation
+                {
+                    dispatch({type : "warnMsg",payload : "Check The Result And the Winner State"});
+                    return 0;
+                }
+
             try{
                 const expectObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players);
                 

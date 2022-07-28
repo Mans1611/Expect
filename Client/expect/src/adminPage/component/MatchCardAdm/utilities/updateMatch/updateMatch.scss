@@ -61,7 +61,11 @@
         }
         .formContainer{
             width: 100%;
-            
+            .VotesContainer{
+                font-size: 26px;
+                padding: 5px;
+                text-align: center;
+            }
             .changeResult{
                 margin-top: 20px;
                 display: flex;

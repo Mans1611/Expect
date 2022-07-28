@@ -4,7 +4,7 @@ import './matchState.scss'
 import State from './State';
 import CloseIcon from '@mui/icons-material/Close';
 
-const MatchState = ({match,setPop}) => {
+const MatchState = ({match,setPop,userExpect}) => {
     const {isDark} = globalUser();
 
     const hidePop = (e)=>{
@@ -35,7 +35,7 @@ const MatchState = ({match,setPop}) => {
                     <h1 className="matchStateTitle">Match Satate</h1>
                     <div className="matchState">
                         {
-                            match.states.map( (state,index) => <State key={index} state = {state} /> )
+                            match.states.map( (state,index) => <State userExpect={userExpect} key={index} state = {state} /> )
                         }
                         
                     </div>

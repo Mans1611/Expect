@@ -2,13 +2,122 @@
 
 
 .footer{
-    height:120px;
+    height:200px;
     text-align: center;
-    background-color: #93002C;
-    padding: 10px 20px;
-    position: relative;
-    bottom: 0;
-    &.dark{
-        @include dark1
+    background-color: #272727;
+    color:#f5f5f5;
+
+    .Expect{
+        padding: 10px 20px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        h1{
+            font-size: 84px; 
+        }
+        .cupIcon{
+            height: 100px;
+            width: 90px;
+        }
     }
+    
+    .contentContainer{
+        position: relative;
+        z-index: 9;
+        display: flex;
+        background-color: #111;
+        width: 100%;
+        padding: 10px 0 ;
+        display: flex;
+        justify-content: space-around;
+        .contactUs{
+            display: flex;
+            flex-direction: column;
+
+        }
+        .iconsContainer{
+            
+            a{
+                &:hover{
+                    background-color: transparent;
+                    animation: none;
+                }
+            }
+            .imgicons{
+                width: 40px;
+                height: 40px;
+                border-radius: 5px;
+                &:hover{
+                    transform: scale(1.1);
+                    animation: none;
+                }
+            }
+
+        }
+        a{
+            text-decoration: none;
+            font-size: 20px;
+            color: #fff;
+            margin: 5px ;
+            padding: 5px;
+            border-bottom: #111 3px solid;
+            &:hover{
+                animation : linedown 400ms alternate forwards  ;
+
+            }
+        }
+        .feedBackContainer{
+            width: 40%;
+            margin-left: -60px;
+            textarea{
+                background-color: #272727;
+                border: 2px solid #ddd ;
+                border-radius: 5px;
+                max-width: 80%;
+                max-height: 120px;
+                padding: 10px;
+                color: #fff;
+                font-size: 20px;
+            }
+            button{
+                margin: auto;
+                width: 120px;
+                background-color: #e04;
+                font-size: 26px;
+                padding: 10px 5px;
+                font-weight: 600;
+                &:hover{
+                    background-color: rgb(129, 0, 36);
+                }
+            }
+        }
+
+    }
+    .bottomFooter{
+        color: #f5f5f5;
+        border-top: 2px solid #eee;
+        background-color: #111;
+        height: 30px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        justify-content: center;
+        span{
+            font-size: 30px;
+            margin: 4px 0 ;
+        }
+    }
+    
 }
+@keyframes linedown {
+        from{
+
+        }   
+        to{
+            border-bottom : 3px solid #e04 ;
+            background-color: #222;
+        }         
+} 

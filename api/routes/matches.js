@@ -73,12 +73,16 @@ matches.post('/addgame', async(req,res)=>{
     const newPlayers_1 = [],newPlayers_2 = [];
     const length = (players_1.length>players_2.length)? players_1.length : players_2.length;
     
+    // so the match Id is unique for every match . 
+    const existMatch = await Matches.findOne({matchId:req.body.matchId})
+    if(existMatch)
+        res.status(203).send("This Match Is Already Exist")
+        
     // the two arrays may vary in length, hence i implement id condition in each loop 
     for(let i = 0; i<length; i++){
         if(players_1[i]){
             const {playerName,position,playerImg} = players_1[i]
             const newObj = {playerName,position,playerImg,votes,playerPoints: 0};
-
             newPlayers_1.push(newObj);
         }
         if(players_2[i]){
@@ -87,22 +91,27 @@ matches.post('/addgame', async(req,res)=>{
             newPlayers_2.push(newObj)
         }
     }
-    firstCountry.players = newPlayers_1;
-    secondCountry.players = newPlayers_2;
-    firstCountry.result = 0;
-    secondCountry.result = 0;
+    try{
+        firstCountry.players = newPlayers_1;
+        secondCountry.players = newPlayers_2;
+        firstCountry.result = 0;
+        secondCountry.result = 0;
 
-    const match = await new Matches ({
-        firstCountry,
-        secondCountry,
-        ...req.body
+        const match = await new Matches ({
+            firstCountry,
+            secondCountry,
+            ...req.body
+        }
+        );
+    
+         match.save(()=>{
+            console.log("match is added");
+        })
+        res.status(201).json({msg:"Match is added"});
+
+    }catch(err){
+        console.log(err);
     }
-    );
-
-    match.save(()=>{
-        console.log("match is added");
-    })
-    res.status(201).json({msg:"Match is added"});
     
 })
 
