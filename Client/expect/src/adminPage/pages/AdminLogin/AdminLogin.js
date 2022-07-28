@@ -13,7 +13,8 @@ const AdminLogin = ()=> {
     const [msg,setMsg] = useState('');
     const [showMsg,setShowMsg] = useState(false);
     const navigate = useNavigate();
-    const {isAuth, setAuth} = AdminContext();
+
+    const {isAuth, setAdminAuth} = AdminContext();
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
@@ -27,8 +28,8 @@ const AdminLogin = ()=> {
                 setShowMsg(true);
                 return setMsg(response.data);
             }
-            navigate('/adminpage/');
-            setAuth(true);
+            setAdminAuth(true);
+            navigate('/adminpage/dashboard');
 
 
         }catch(err){

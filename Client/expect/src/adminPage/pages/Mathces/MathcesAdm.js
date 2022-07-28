@@ -16,15 +16,15 @@ const MathcesAdm = () => {
     
     const [showPop,setShowPop] = useState(false) ;
     const store = matchesStore();
-    const {isAuth, setAuth} = AdminContext();
+
+    const {isAuth, setAdminAuth} = AdminContext();
+
     const navigate = useNavigate();
-    if(!isAuth){
-        return navigate('/adminpage/login');
-    } 
     
-    console.log(isAuth);
+
     useEffect(()=>{
         return async()=>{
+            
             try{
                 const response = await axios.get('/matches/getmatches')
                 store.setMatches(response.data);

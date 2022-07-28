@@ -9,12 +9,12 @@ const Content = () => {
     return (
         
             <div className="maxcontent">
-                {/* <Routes>
+                <Routes>
                     <Route path = "account" element = {<Adminaccount/>} />
                     <Route path="dashboard" element={<DashBoard/>}/>
                     <Route path='matches' element={<MathcesAdm/>}/>
                     <Route path='statistics' element={<Statistics/>}/>
-                </Routes> */}
+                </Routes>
             </div>
      );
 }

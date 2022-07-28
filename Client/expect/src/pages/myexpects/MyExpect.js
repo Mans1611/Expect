@@ -17,6 +17,7 @@ const MyExpects = () => {
     const [userExpections,setUserExpections] = useState([]); // this for the details about each expections like weinner and result 
     const [width,setWidth] = useState(window.innerWidth);
     const [totalPoints,setTotalPoints] = useState(0);
+    const [Loading,setLoading] = useState(true);
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
     })
@@ -24,12 +25,15 @@ const MyExpects = () => {
     useEffect(()=>{
         return async()=>{
             try{
+
                 const response = await axios.get(`/expects/${userGlob}`);
                 const matchesWithFlage = filteringExpects(response.data.matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
                 const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                console.log("rendered");
                 setUserExpections(response.data.userExpections);
                 setExpected(filterdExpectedMatches); // matches 
                 setTotalPoints(response.data.totalPoints);
+                setLoading(false);
 
             }catch(err){
                 console.log(err);
@@ -69,11 +73,11 @@ const MyExpects = () => {
            
                 {
                     (width > 580) ?
-                            (
+                            (   // if condition 
                                 <div className="expectsContainer"> 
                                     {
                                         expected.map((val,index)=>{
-                                            return <Expect match= {val} userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)}  />
+                                            return <Expect match= {val} setUserExpections = {setUserExpections} userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)}  />
                                     
                                     })}
                                 </div> )

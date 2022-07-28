@@ -59,9 +59,18 @@ expects.put('/editexpect/:userName',async(req,res)=>{
         console.log(err);
 
     }
+})
 
-
-
+expects.delete('/deleteExpect/:userName/:matchId', async(req,res)=>{
+    try{
+        let user = await Expects.findOne({userName : req.params.userName});
+        user.expects = user.expects.filter(expect => expect.matchId !== req.params.matchId);
+        
+        await Expects.updateOne({userName : req.params.userName},user);
+        res.status(200).send(user.expects);
+    }catch(err){
+        console.log(err);
+    }
 
 })
 

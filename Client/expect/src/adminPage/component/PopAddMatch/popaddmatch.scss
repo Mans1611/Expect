@@ -1,7 +1,7 @@
 @import '../../../.mainStyle.scss';
 
 .popaddMatch{
-    position: absolute;
+    position: fixed;
     top:0;
     bottom: 0;
     right: 0;
@@ -13,7 +13,8 @@
     align-items: center;
     .popAddMatchContainer{
         width: 60%;
-        height:90vh;
+        min-height: fit-content;
+        max-height:90vh;
         overflow-y: scroll ;
         background-color: #333;
         border-radius:5px;

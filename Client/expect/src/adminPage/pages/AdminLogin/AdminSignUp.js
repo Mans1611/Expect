@@ -24,8 +24,8 @@ const AdminSignUp = ()=> {
     const [showMsg, setShowMsg] = useState(false);
     const navigate = useNavigate();
 
-    const {isAuth,setAuth} = AdminContext();
-    
+    const {isAuth,setAdminAuth} = AdminContext();
+
     console.log(isAuth);
 
     const handleSubmit = async(e)=>{
@@ -40,7 +40,7 @@ const AdminSignUp = ()=> {
                 cookie.set("token",response.headers.token,{
                     maxAge :  HOURS * 1 // for just one hour
                 });
-                setAuth(true);
+                setAdminAuth(true);
                 navigate('/adminpage/');
 
             }

@@ -61,17 +61,27 @@
         .matchCardStart{
             .matchCardbutton{
                 font-size: 24px;
-                width: 150px;
+                width: fit-content;
                 background: linear-gradient(90deg, rgb(1, 159, 53) 0%, rgb(24, 209, 0) 50%);
                 color: #fff;
                 font-weight: 600;
                 border: #fff;
                 border-radius: 5px;
+                padding: 5px;
+                margin: 0 5px;
                 &:hover{
-                    background: linear-gradient(90deg, rgb(1, 121, 41) 0%, rgb(15, 132, 0) 50%);
-                
+                    border: none;
+                    color: #fff;
                 }
-            
+            }
+            .deleteExpect{
+                margin-right: 5px;
+                background-color: #c00;
+                padding: 5px;
+                &:hover{
+                    background-color: #a00;
+                }
+
             }
         }
         .matchPoints{

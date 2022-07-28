@@ -1,7 +1,7 @@
 @import '../../../../../.mainStyle.scss';
 
 .UpdateMatchContainer{
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
@@ -11,10 +11,11 @@
     justify-content: center;
     align-items: center;
     .updatePop{
-        background-color: #212121;
+        background-color: #272727;
         border-radius: 10px;
         width: 50%;
-        height: 90vh;
+        min-height: fit-content;
+        max-height: 90vh;
         overflow-y: scroll;
         position: relative;
         &::-webkit-scrollbar {
@@ -87,7 +88,21 @@
                     -moz-appearance: textfield;
             
                 }
+                input{
+                    width: 140px;
+                    height: 40px;
+                    border-radius: 5px;
+                    border: none;
+                    font-size: 21px;
+                    text-align: center;
+                    background-color: #171717;
+                    color: #fff;
+                    font-weight: 500;
+                    margin-top: 5px;
+                
+                }
             }
+
             .matchCardPlayers{
                 margin-top: 20px;
                 text-align: center;
@@ -111,6 +126,20 @@
                     height: 25px;
                     accent-color: $betiured;
                 }
+            }
+        }
+        .showPlayersbutton-wrapper{
+            button{
+                background-color: rgb(215, 18, 61);
+                color: #ddd;
+                margin: 10px auto;
+                font-size: 30px;
+                padding: 5px;
+                width: 200px;
+            &:hover{
+                background-color: rgb(145, 0, 31);
+                color: #fff;
+            }
             }
         }
 

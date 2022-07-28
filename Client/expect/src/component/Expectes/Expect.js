@@ -1,22 +1,38 @@
 
 import './expect.Comp.scss';
 
-import React ,{useContext, useState} from 'react'
+import React ,{useContext, useEffect, useState} from 'react'
 import { globalUser } from '../../Context/HomeContext';
 import TimeCounter from '../../TimeCounter';
 import Minute from '../../adminPage/component/MatchCardComponent/Minute';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import AddingPoints from '../../utilis/AddingPoints';
-const Expect = ({match,userExpect})=> {
+import axios from 'axios';
+const Expect = ({match,userExpect,setUserExpections})=> {
     
-    const {isDark} = globalUser();
-    const [timeUp, setTimeUp] = useState(false);
-    const [pop,setPop] = useState(false);
-    const matchPoints = AddingPoints(match,userExpect);
-    const [min,setMin] = useState(1);
+    if(!userExpect)
+        return;
+    else{
 
+        const {isDark,userGlob} = globalUser();
+        const [timeUp, setTimeUp] = useState(false);
+        const [pop,setPop] = useState(false);
+        const matchPoints = AddingPoints(match,userExpect);
+        const [min,setMin] = useState(1);
+        const [showDelete,setShowDelete] = useState(false);
 
+        
+        const handldeDeleteExpect = async(e) =>{
+            e.preventDefault();
+            try{
+                
+                const response = await axios.delete(`/expects/deleteExpect/${userGlob}/${match.matchId}`)
+                setUserExpections(response.data);
+            }catch(err){
+                console.log(err);
+            }
+    }
   return (
 
         <div className='expectComp'>
@@ -54,11 +70,24 @@ const Expect = ({match,userExpect})=> {
                     {timeUp ?
                         <button  className='matchCardbutton'>See MyExpect</button> 
                         : 
-                        <button onClick={()=> {setPop(true)}}  className='matchCardbutton'>Edit Expect</button>
+                        <>
+                        { showDelete ? 
+                        <>
+                            <button onClick={()=>setShowDelete(false)} className='matchCardbutton'>Cancel </button>
+                            <button onClick={handldeDeleteExpect} className='deleteExpect'>Confirm Delete</button>
+                         </>
+                         :
+                            <>
+                            <button onClick={()=>setShowDelete(true)} className=" deleteExpect">Delete Expect</button>
+                            <button onClick={()=> {setPop(true)}}  className='matchCardbutton'>Edit Expect</button>
+                            </>
+                        }
+                        </>
                     }
                 </div>
             } 
                 
+            
             {/*timeUp && <MatchResultComp result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> */}
             <div className="matchPoints">
                 Match Points : {matchPoints} PT
@@ -69,6 +98,7 @@ const Expect = ({match,userExpect})=> {
         
         </div>
   )
+}
 }
 
 export default Expect

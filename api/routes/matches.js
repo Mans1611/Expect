@@ -109,6 +109,9 @@ matches.post('/addgame', async(req,res)=>{
 matches.put('/editmatch/:matchID',async (req,res)=>{
     const fullTime = req.body.fullTime ? req.body.fullTime : false;
     let match = await Matches.findOne({matchId:req.params.matchID});
+    
+    console.log(req.body);
+    
     const {updatedPlayer_1,updatedPlayer_2} = req.body;
     match.firstCountry.result = req.body.result1 ? req.body.result1 : match.firstCountry.result ;
     match.secondCountry.result = req.body.result2 ? req.body.result2 : match.secondCountry.result ;
