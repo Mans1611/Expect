@@ -24,6 +24,7 @@ const MatchCardAdm = ({match,key}) => {
         try{
             const response = await axios.delete(`/matches/deletematch/${matchId}`);
             const {data} = await axios.get('/matches/getmatches')
+            setShowDelte(false)
             store.setMatches(data);
         }catch(err){
             console.log(err);

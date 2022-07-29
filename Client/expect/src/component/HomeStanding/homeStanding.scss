@@ -64,7 +64,8 @@
         background-color: #ccc;
         border-bottom: 1px solid #999;
         &:hover{
-            transform: scaleX(1.05);
+            transform: scaleX(1.01);
+            background-color: rgb(181, 0, 48) ;
         }
         
         
@@ -73,7 +74,7 @@
             font-size: 22px;
             text-decoration: none;
             &:hover{
-                color: $pinck;
+                color: #fff;
                 text-decoration: underline;
             }
         }

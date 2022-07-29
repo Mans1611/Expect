@@ -1,0 +1,12 @@
+.states{
+    min-height: 400px;
+    .statesTitle{
+        font-size: 56px;
+        padding: 10px 0 ;
+        text-align: center;
+        font-weight: 700;
+    }
+    &.dark{
+        background-color: #373737;
+    }
+}

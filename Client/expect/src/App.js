@@ -20,7 +20,7 @@ import { globalUser, Provider } from './Context/HomeContext';
 import RequiredAuth from './Auth/RequiredAuth';
 import { MatchesProvider } from './adminPage/Context/matchesContext';
 import NotFound from './pages/NotFound/NotFound';
-import Standing from './pages/Standing/Standing';
+import States from './pages/States/States';
 import AdminLogin from './adminPage/pages/AdminLogin/AdminLogin';
 import AdminSignUp from './adminPage/pages/AdminLogin/AdminSignUp';
 import { ProtectedAdminProvider } from './adminPage/Context/ProtectedAdmin';
@@ -42,7 +42,7 @@ const  App = ()=> {
             <Route path='matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<RequiredAuth childern={<MyExpects/>}></RequiredAuth> }/>
-            <Route path="standing" element={<RequiredAuth childern={<Standing/>}></RequiredAuth> }/>
+            <Route path="standing" element={<RequiredAuth childern={<States/>}></RequiredAuth> }/>
             <Route path="myprofile/:userName" element={<MyProfile/>}/>
           </Route>
           
