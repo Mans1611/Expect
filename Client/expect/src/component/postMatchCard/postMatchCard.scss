@@ -2,16 +2,21 @@
 
 .postMatchCard{
     background-color: $qatar;
-    width: 350px;
+    width: 90%;
     border-radius: 20px;
     @include shadowMainStyle;
     padding-bottom: 10px;
+    margin: 5px auto;
     .matchHeader{
         border-bottom: 4px solid #fff;
         padding: 10px ;
         display: flex;
         justify-content:space-evenly;
         align-items: center;
+        background-color: $gold;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+
         .country{
             display: flex;
             flex-direction: column;

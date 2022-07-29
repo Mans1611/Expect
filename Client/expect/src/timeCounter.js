@@ -17,14 +17,11 @@ const TimeCounter = ({matchTime,setTimeUp})=>{
         setInterval(()=>{
         current = new Date().getTime();
         left = time-current;
-        
         let Hours = Math.floor(left/(1000*60*60));
         let Min = Math.floor((left%(1000*60*60))/(1000*60));
         let Sec = Math.floor((left%(1000*60))/(1000));
         setHours(Hours);setMin(Min);setSec(Sec);
         },1000)
-
-        
 
     },[sec])
 

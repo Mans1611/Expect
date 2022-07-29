@@ -25,6 +25,7 @@ import AdminLogin from './adminPage/pages/AdminLogin/AdminLogin';
 import AdminSignUp from './adminPage/pages/AdminLogin/AdminSignUp';
 import { ProtectedAdminProvider } from './adminPage/Context/ProtectedAdmin';
 import Wrapper from './adminPage/pages/Wrapper';
+import AddNews from './adminPage/pages/AddNews/AddNews';
 export const ThemeContext = createContext(true);
 
 
@@ -63,6 +64,7 @@ const  App = ()=> {
             <Route path='dashboard' element={<DashBoard/>}/>
             <Route path='matches' element={<MathcesAdm/>}/>
             <Route path='statistics' element={<Statistics/>}/>
+            <Route path='news' element={<AddNews/>}/>
         </Route>
         <Route path='*' element = {<NotFound/>}/>
       </Routes> 

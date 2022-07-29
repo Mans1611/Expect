@@ -6,8 +6,9 @@ const news = express.Router();
 
 news.get('/getnews',async(req,res)=>{
     try{
-        const news = await News.find().limit(3);
-        res.status(200).send(news)
+        const allNews = await News.find();
+
+        res.status(200).send(allNews.reverse().slice(0,3))
     }catch(err){
         console.log(err);
     }

@@ -7,7 +7,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {Link} from 'react-router-dom'
 import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
-
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 const cookie = new Cookies();
 
@@ -61,6 +61,14 @@ const SideNavbar = () => {
                         <span className="labels">Statistics</span>
                     </div>
                 </Link>
+                <Link to='news' className='sidenavBarLink'>
+                    <div id='news' className="sidenavbaritems">
+                        <NewspaperIcon className='icons'/>
+                        <span className="labels">News</span>
+                    </div>
+                </Link>
+            
+            
             </div>
             <Link onClick={()=>{cookie.remove("token")}} to='/adminpage/login' className='sidenavBarLink'>
                 <div className="signout sidenavbaritems">

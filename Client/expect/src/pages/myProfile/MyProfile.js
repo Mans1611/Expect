@@ -22,7 +22,7 @@ const MyProfile = () => {
                     <PersonalComp userName = {userName}/>
                     <ExpectsInfo/>
                     </div>
-                    <ProfileExpects/>
+                    <ProfileExpects userName = {userName}/>
                 </div>
      )
 }

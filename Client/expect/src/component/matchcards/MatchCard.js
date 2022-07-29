@@ -47,10 +47,11 @@ const MathchCard = ({match}) => {
             } 
                 {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
             
-            {timeUp && <MatchResultComp time = {match.matchTime} 
+            {timeUp && <MatchResultComp matchId = {match.matchId} time = {match.matchTime} 
                         FT={match.fullTime} 
                         result_1={match.firstCountry.result} 
-                        result_2={match.secondCountry.result}/> 
+                        result_2={match.secondCountry.result}
+                        /> 
             }
            {timeUp &&
                 <div className="matchCardStart">

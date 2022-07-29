@@ -116,35 +116,48 @@ matches.post('/addgame', async(req,res)=>{
 })
 
 matches.put('/editmatch/:matchID',async (req,res)=>{
-    const fullTime = req.body.fullTime ? req.body.fullTime : false;
-    let match = await Matches.findOne({matchId:req.params.matchID});
-    
-    console.log(req.body);
-    
-    const {updatedPlayer_1,updatedPlayer_2} = req.body;
-    match.firstCountry.result = req.body.result1 ? req.body.result1 : match.firstCountry.result ;
-    match.secondCountry.result = req.body.result2 ? req.body.result2 : match.secondCountry.result ;
-    match.fullTime = fullTime;
-    if(updatedPlayer_1){
-        match = await addingPointsPlayer(updatedPlayer_1,match.firstCountry.countryName,match);
-        match.states.push(updatedPlayer_1);
+    try{
+
+        let match = await Matches.findOne({matchId:req.params.matchID});
+        
+        const {updatedPlayer_1,updatedPlayer_2} = req.body;
+        if(!match){
+            return res.status(203).send("this Match is not found");
+            console.log(match);
+        }
+        match.firstCountry.result = req.body.result1 ? req.body.result1 : match.firstCountry.result ;
+        match.secondCountry.result = req.body.result2 ? req.body.result2 : match.secondCountry.result ;
+        
+        const fullTime = req.body.fullTime ? req.body.fullTime : false;
+        match.fullTime = fullTime;
+
+        // skip t it it is empty or undefined
+        if(updatedPlayer_1){
+            match = await addingPointsPlayer(updatedPlayer_1,match.firstCountry.countryName,match);
+            match.states.push(updatedPlayer_1);
+        }
+        if(updatedPlayer_2){
+            match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
+            match.states.push(updatedPlayer_2);
+        }
+
+        match.started = req.body.started ? req.body.started : match.started;
+        
+        await Matches.updateOne({matchId:req.params.matchID},match) 
+        return res.status(200).send("done");
     }
-    if(updatedPlayer_2){
-        match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
-        match.states.push(updatedPlayer_2);
+    catch(err){
+        console.log(err);
     }
-    await Matches.updateOne({matchId:req.params.matchID},match) 
-    return res.status(200).send("done");
 })
 
 matches.put('/fullTime/:matchId',async(req,res)=>{
     try{
         let match = await Matches.findOne({matchId:req.params.matchId});
         match.fullTime = true;
-        await TransferingPointsToCountry(
-                                        match.firstCountry.countryName,
-                                        match.secondCountry.countryName,
-                                        match)
+        console.log("passed");
+        // to permentlay save the final points to the players in the country midel 
+        
     }
     
     catch(err){

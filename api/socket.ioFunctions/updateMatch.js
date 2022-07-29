@@ -9,8 +9,12 @@ const updateMatch = async(data)=>{
     let match = await Matches.findOne({matchId:data.matchId});
     
     // so if the match is over it will transfer the points to the the players in their countries
-    if(fullTime)
+    if(fullTime){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
+        const icon = 'https://www.pngrepo.com/png/277622/512/whistle.png'    
+        match.states.push({playerName : "",state : "Full Time", min : "FT" , icon,country:'both'});    
+        
+    }
     
     // so this code for uodating the time if the admin wants to
     match.matchTime = data.updateMatchTime ? data.updateMatchTime: match.matchTime;

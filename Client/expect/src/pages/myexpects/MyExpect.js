@@ -29,7 +29,6 @@ const MyExpects = () => {
                 const response = await axios.get(`/expects/${userGlob}`);
                 const matchesWithFlage = filteringExpects(response.data.matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
                 const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
-                console.log("rendered");
                 setUserExpections(response.data.userExpections);
                 setExpected(filterdExpectedMatches); // matches 
                 setTotalPoints(response.data.totalPoints);
@@ -49,7 +48,7 @@ const MyExpects = () => {
                     const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
                     const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
                     setUserExpections(response.data.userExpections);
-                    setExpected(filterdExpectedMatches); // matches 
+                    setExpected(filterdExpectedMatches); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
                     setTotalPoints(response.data.totalPoints);
 
                 })
@@ -73,14 +72,18 @@ const MyExpects = () => {
            
                 {
                     (width > 580) ?
-                            (   // if condition 
-                                <div className="expectsContainer"> 
-                                    {
-                                        expected.map((val,index)=>{
-                                            return <Expect match= {val} setUserExpections = {setUserExpections} userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)}  />
-                                    
-                                    })}
-                                </div> )
+                        (   // if condition 
+                            <div className="expectsContainer"> 
+                                {
+                                    expected.map((val,index)=>{
+                                        return <Expect 
+                                                match= {val} 
+                                                setUserExpections = {setUserExpections} 
+                                                userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
+                                                />
+                                
+                                })}
+                            </div> )
 
                             
                                 : // else condition

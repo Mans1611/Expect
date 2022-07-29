@@ -46,7 +46,7 @@ const MatchCardAdm = ({match,key}) => {
                 </div>
 
             </div>
-            {timeUp && !match.fullTime && <Minute min={min} setMin = {setMin} matchTime = {match.matchTime}/>}
+            {timeUp && !match.fullTime && <Minute matchId = {match.matchId} min={min} setMin = {setMin} matchTime = {match.matchTime}/>}
             
             {
                 !timeUp &&

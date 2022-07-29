@@ -38,7 +38,16 @@ const  State = ({state,userExpect})=> {
                 </div>
             )
         }
-   
+        else if(state.country === "both"){
+
+            return (
+                <div className="stateContainer">
+                    <div className='middleState'>{state.playerName} {state.state}
+                        <img src={state.icon} className="icon" />
+                    </div>
+                </div>
+            )
+        }
 
     }
 

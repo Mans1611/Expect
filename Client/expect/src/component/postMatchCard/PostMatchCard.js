@@ -1,28 +1,28 @@
 import './postMatchCard.scss';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import PublicIcon from '@mui/icons-material/Public';
-const PostMatchCard = () => {
+const PostMatchCard = ({match,userExpect}) => {
     return ( 
         <div className="postMatchCard">
             <div className="matchHeader">
                 <div className="country">
-                    <img className='countryImage' src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/640px-Flag_of_France.svg.png" alt="" />
-                    <label  className='countryLable'>France</label>
+                    <img className='countryImage' src={match.firstCountry.logo} alt="" />
+                    <label  className='countryLable'>{match.firstCountry.countryName}</label>
                 </div>
                 <div className="result">
                     <p>Final Result</p>
-                    <span>3 - 1</span>
+                    <span>{match.firstCountry.result} - {match.secondCountry.result}</span>
                 </div>
                 <div className="country">
-                    <img className='countryImage' src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/800px-Flag_of_Germany.svg.png" alt="" />
-                    <label  className='countryLable'>Germany</label>
+                    <img className='countryImage' src={match.secondCountry.logo} alt="" />
+                    <label  className='countryLable'>{match.secondCountry.countryName}</label>
                 </div>
             </div>
            <div className="userExpect">
                 <h3 className="yourExpect">YourExpect</h3>
-                <p>Winner:France</p>
-                <p>Result:4-1</p>
-                <p>Your Match Points:7 Pts</p>
+                <p>Winner: {userExpect.winnerValue}</p>
+                <p>Result:{userExpect.result1_value}  - {userExpect.result2_value}</p>
+                <p>Your Match Points : {userExpect.userPoints} Pts</p>
            </div> 
            <div className="showFullWrapper">
                 <button className="showFull">Show Full Expect</button>

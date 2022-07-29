@@ -17,6 +17,7 @@ statistics.get('/topplayers',async(req,res)=>{
     try{
         const players = await FindAllPlayers();
 
+        // so it will sort theme desc . 
         const sorted = players.sort((nextValue,currentValue)=> currentValue.totalPoints - nextValue.totalPoints);
         const top5 = sorted.slice(0,5); // just to take the top 5 of the top players.
         res.status(200).send(top5)
@@ -25,6 +26,17 @@ statistics.get('/topplayers',async(req,res)=>{
     catch(err){
         console.log(err);
     }
+})
+
+statistics.get('/topvoted',async (req,res)=>{
+    //const players = await FindAllPlayers();
+
+    // so it will sort theme desc . 
+    
+    const sorted = Senegal.players.sort((nextValue,currentValue)=> currentValue.totalVotes - nextValue.totalVotes);
+    const top5 = sorted.slice(0,5); // just to take the top 5 of the top players.
+    console.log(top5[0].totalVotes);
+    res.status(200).send(top5)
 })
 
 
