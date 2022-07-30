@@ -3,6 +3,7 @@ import { globalUser } from '../../Context/HomeContext'
 import './matchState.scss'
 import State from './State';
 import CloseIcon from '@mui/icons-material/Close';
+import { MatchStateCentral } from '../../Context/MatchCardContext';
 
 const MatchState = ({match,setPop,userExpect}) => {
     const {isDark} = globalUser();
@@ -12,6 +13,7 @@ const MatchState = ({match,setPop,userExpect}) => {
             setPop(false);
         }
     }
+   
     
   return (
     <div onClick={hidePop} className='popMatchFullPage'>

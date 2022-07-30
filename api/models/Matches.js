@@ -32,6 +32,15 @@ const matchSchema = new Schema({
         required:false,
         default: false
     },
+    matchStatue : {
+        type : String,
+        default : "UpComing" 
+    },
+    
+    stoppingTime : {
+        type : Number,
+        default : 0
+    },
     states : {
         type : Array,
         default : [],

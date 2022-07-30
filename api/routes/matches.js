@@ -127,7 +127,10 @@ matches.put('/editmatch/:matchID',async (req,res)=>{
         }
         match.firstCountry.result = req.body.result1 ? req.body.result1 : match.firstCountry.result ;
         match.secondCountry.result = req.body.result2 ? req.body.result2 : match.secondCountry.result ;
-        
+        match.nextStatue = req.body.nextStatue ? req.body.nextStatue : match.nextStatue;
+        match.matchStatue = req.body.matchStatue ? req.body.matchStatue : match.matchStatue;
+        match.stoppingTime = req.body.stoppingTime ? req.body.stoppingTime : match.stoppingTime;
+
         const fullTime = req.body.fullTime ? req.body.fullTime : false;
         match.fullTime = fullTime;
 

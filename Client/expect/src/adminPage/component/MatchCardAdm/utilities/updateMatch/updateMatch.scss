@@ -86,11 +86,19 @@
                     
                     &::-webkit-outer-spin-button,// this to remove the arrows
                     &::-webkit-inner-spin-button {
-                    -webkit-appearance: none;
-                    margin: 0;
+                        -webkit-appearance: none;
+                        margin: 0;
                     }
                     -moz-appearance: textfield;
-            
+                    
+                }
+                &.stoppingTime{
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 25px;
+                    input{
+                        margin-left: 5px;
+                    }
                 }
                 input{
                     width: 140px;

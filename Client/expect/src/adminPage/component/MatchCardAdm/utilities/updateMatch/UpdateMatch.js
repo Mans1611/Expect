@@ -6,15 +6,19 @@ import PlayerCardRadio from '../../../../../component/PlayerCardRadio/PlayerCard
 
 import { PlayerStateToObject } from '../../../../../utilis/PlayerStateToObject';
 import io from 'socket.io-client';
+import { MatchStateCentral } from '../../../../../Context/MatchCardContext';
+import axios from 'axios';
 
 
 
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
 const UpdateMatch = ({match,setUpdate,min})=> {
-  const store = matchesStore();
+  
+
   const [date,setDate] = useState(null);
   const [updatePlayerState,setUpdatePlayerState] = useState(null);
+  const [stoppingTime,setStoppingTime] = useState(match.stoppingTime);
 
   // this code down below is to cahnge the background color when you select a player
 
@@ -30,22 +34,35 @@ const UpdateMatch = ({match,setUpdate,min})=> {
   //     }
   //   }
   // },playerNavigator)
-  
+  const {state,dispatch} = MatchStateCentral();
+
   const hidePop = (e)=>{
     if(e.target.className === 'UpdateMatchContainer' || e.target.tagName == 'svg'){
-      setUpdate(false);
+        dispatch({type : "hideUpdate"});
     }
   
 }
   const [country_1_result,setResult1] = useState(match.firstCountry.result);
   const [country_2_result,setResult2] = useState(match.secondCountry.result);
+  
+  
 
+  const handleMatchState = async(e)=>{
+    e.preventDefault();
 
+    if(state.currentState === 'GoingOn' && state.nextState === "Pause"){
+      dispatch({type : "PAUSE-MATCH"});
+      await axios.put(`/matches/editmatch/${match.matchId}`,{matchStatue : "Pasued"});
+    }
+    if(state.currentState === 'Pasued' && state.nextState === "Resume"){
+      dispatch({type : "RESUME-MATCH",payload : stoppingTime});
+      await axios.put(`/matches/editmatch/${match.matchId}`,{matchStatue : "GoingOn" , stoppingTime:stoppingTime});
+    
+    }
+  }
 
   const handleUpdate = async(e)=>{
     e.preventDefault();
-    
-    
     let editDate = document.getElementById('dateEdit').value;
     let editTime = document.getElementById('timeEdit').value;
     let updateMatchTime = null;
@@ -80,8 +97,6 @@ const UpdateMatch = ({match,setUpdate,min})=> {
         fullTime : false,
         updateMatchTime
       })
-      
-
       //   const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
       //   result1 : country_1_result,
       //   result2 : country_2_result,
@@ -103,11 +118,12 @@ const UpdateMatch = ({match,setUpdate,min})=> {
   const fullTime = async(e)=>{
     e.preventDefault();
     try{
-        socket.emit("updatingMatch",{fullTime :true,matchId:match.matchId});
-        setUpdate(false);
+      console.log("passed here");
+        socket.emit("updatingMatch",{matchStatue : "FT" , matchId:match.matchId});
+        dispatch({type : "hideUpdate" })
         
       }catch(err){
-      console.log("error in full time");
+      console.log(err);
     }
   }
 
@@ -169,10 +185,19 @@ const UpdateMatch = ({match,setUpdate,min})=> {
                     </div>
                 </div>
                       }
+                      {
+                        state.showStopingTime &&
 
+                        <div className="changeResult stoppingTime">
+                          Stopping Time : 
+                          <input maxLength='1' defaultValue={match.stoppingTime} onChange={(e)=>setStoppingTime(e.target.value)} type="number" name="result" id="stoppingPoints" />
+                        </div>  
+                      }
                 <div className="buttonWrapper">
                   <button  onClick={handleUpdate}>Update</button>
-                  <button  onClick={fullTime} className='fulltime'>Full Time</button>
+                  {(state.currentState == 'UpComing') ? '' : <button  onClick={handleMatchState} className='fulltime'>{ state.nextState }</button> }
+                  {(state.currentState == 'UpComing') ? '' : <button onClick={fullTime}   className='fulltime'>Full Time</button> }
+                
                 </div>
               </form>
             </div>

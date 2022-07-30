@@ -5,9 +5,11 @@ import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCoun
 const updateMatch = async(data)=>{
 
     const fullTime = data.fullTime ? data.fullTime : false;
-    
-    let match = await Matches.findOne({matchId:data.matchId});
-    
+
+    try{
+
+        let match = await Matches.findOne({matchId:data.matchId});
+        
     // so if the match is over it will transfer the points to the the players in their countries
     if(fullTime){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
@@ -18,8 +20,9 @@ const updateMatch = async(data)=>{
     
     // so this code for uodating the time if the admin wants to
     match.matchTime = data.updateMatchTime ? data.updateMatchTime: match.matchTime;
+    match.matchStatue = data.matchStatue;
     
-    console.log(match.matchTime);
+    
     const {updatedPlayer_1,updatedPlayer_2} = data;
     match.firstCountry.result = data.result1 ? data.result1 : match.firstCountry.result ;
     match.secondCountry.result = data.result2 ? data.result2 : match.secondCountry.result ;
@@ -33,6 +36,11 @@ const updateMatch = async(data)=>{
         match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
         match.states.push(updatedPlayer_2);
     }
-    await Matches.updateOne({matchId:data.matchId},match) 
+    match.fullTime = data.matchStatue === "FT" ? true :false; 
+    const response = await Matches.updateOne({matchId:data.matchId},match) ;
+    console.log(response);
+}catch(err){
+    console.log(err);
+}
 }
 export {updateMatch};
