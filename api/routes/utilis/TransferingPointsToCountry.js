@@ -8,12 +8,14 @@ export default async function TransferingPointsToCountry(firstCountryName,second
         // this loop will transfer the points to the players in Country Models after the game is done
         firstCountry.players.forEach((val,index)=>{
             val.totalPoints += match.firstCountry.players[index].playerPoints;
+            val.totalVotes += match.firstCountry.players[index].votes;
         })
 
         secondCountry.players.forEach((val,index)=>{
             val.totalPoints += match.secondCountry.players[index].playerPoints;
+            val.totalVotes += match.secondCountry.players[index].votes;
+
         })
-        console.log(firstCountry.players[0]);
 
         await Country.findOneAndUpdate({countryName:firstCountryName},firstCountry);
         await Country.findOneAndUpdate({countryName:secondCountryName},secondCountry);

@@ -10,7 +10,7 @@ const ExpectPhone = ({match,userExpect})=> {
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false);
     const [pop,setPop] = useState(false);
-    
+    const [min,setMin] = useState(0)
    
 
     const togglePop = (e)=>{
@@ -30,7 +30,7 @@ const ExpectPhone = ({match,userExpect})=> {
             </div>
             <div className="middle">
 
-                {timeUp ? match.fullTime ? "FT" : <Minute matchTime={match.matchTime}/> : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/> }
+                {timeUp ? match.fullTime ? "FT" : <Minute min = {min}  setMin = {setMin} matchTime={match.matchTime}/> : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/> }
 
             </div>
             <div className="countryWrapper">

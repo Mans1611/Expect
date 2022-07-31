@@ -106,7 +106,7 @@ useEffect(()=>{
                                         data.map((value,key)=>{
                                             if(!value.expected) return <MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>;   
                                             else { return <Expected  key={key} match ={value}/>};
-                                            
+       
                                         })
                                         }
                                 </div>

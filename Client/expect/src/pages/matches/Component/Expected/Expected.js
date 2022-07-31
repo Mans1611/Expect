@@ -4,12 +4,15 @@ import { globalUser } from '../../../../Context/HomeContext';
 import './expected.scss';
 import TimeCounter from '../../../../TimeCounter';
 import MatchResultComp from '../../../../adminPage/component/MatchCardComponent/MatchResultComp';
+import { MatchCardProvider } from '../../../../Context/MatchCardContext';
 const Expected = ({match})=> {
     
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false); 
   return (
-    <div className='expectedContainer'>
+    <MatchCardProvider match = {match} childeren = {(
+
+      <div className='expectedContainer'>
         <div className={`matchCard ${isDark?'dark':''}`}>
         
         <div className="matchcardHeader">
@@ -38,6 +41,7 @@ const Expected = ({match})=> {
             
        </div>
     </div>
+  )}></MatchCardProvider>
   )
 }
 

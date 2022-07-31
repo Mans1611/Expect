@@ -9,17 +9,24 @@ const MatchContext  = createContext(null);
 export const MatchCardProvider =  ({childeren,match})=>{
     let nextState = null;
     let showStopingTime = false;
+    let currentState = match.matchStatue
+    
     if(match.matchStatue === "GoingOn")
         nextState = "Pause";
-    else if ( match.matchStatue === "Pasued"){
+    
+    else if ( match.matchStatue === "HT" || match.matchStatue === "ET" ){
+        currentState = "Paused"
         nextState = "Resume";
         showStopingTime = true;
     }
+
     else if ( match.matchStatue === "UpComing")
         nextState = "GoingOn";
 
+    console.log("Inatilizations");
+    console.log(currentState + " " + nextState);
     const initialState = {
-        currentState : match.matchStatue,
+        currentState,
         nextState,
         showUpdate : false,
         showStopingTime ,
@@ -31,7 +38,7 @@ export const MatchCardProvider =  ({childeren,match})=>{
             case "Started":
                 return {currentState: "GoingOn",nextState : "Pause" , ...state}; 
             case 'PAUSE-MATCH':
-                return {currentState : "Pasued",nextState : "Resume",showUpdate : true,showStopingTime:true};   
+                return {currentState : "Paused",nextState : "Resume",showUpdate : true,showStopingTime:true};   
             case 'RESUME-MATCH' :
                 return {currentState : "GoingOn",nextState : "Pause", showUpdate : false, stoppingTime : action.payload};
             case 'FT' : 

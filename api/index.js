@@ -55,10 +55,10 @@ mongoose.connection.once('open',()=>{
 io.on('connection',(socket)=>{
     try{
         socket.on('updatingMatch',async (data)=>{ 
+           
             await updateMatch(data);
             const matches = await Matches.find();
-            socket.broadcast.emit("updatingMatches",matches);
-            
+            socket.broadcast.emit("updatingMatches",matches);  
         })
         
     }

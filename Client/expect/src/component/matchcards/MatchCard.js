@@ -13,9 +13,6 @@ const MathchCard = ({match}) => {
     const [pop,setPop] = useState(false);
     const [timeUp, setTimeUp] = useState(false); 
     const {isDark} = globalUser(); 
-    
-
-  
    
     return ( 
     <MatchCardProvider match={match} childeren={
@@ -49,7 +46,7 @@ const MathchCard = ({match}) => {
                 } 
                     {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
                 
-                {timeUp && <MatchResultComp matchId = {match.matchId} time = {match.matchTime} 
+                {timeUp && <MatchResultComp  time = {match.matchTime} 
                             FT={match.fullTime} 
                             result_1={match.firstCountry.result} 
                             result_2={match.secondCountry.result}

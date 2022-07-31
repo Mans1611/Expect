@@ -3,26 +3,30 @@ import addingPointsPlayer from "../routes/utilis/addingPointsPlayers.js";
 import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCountry.js";
 
 const updateMatch = async(data)=>{
+    console.log(data);
 
     const fullTime = data.fullTime ? data.fullTime : false;
-
     try{
 
-        let match = await Matches.findOne({matchId:data.matchId});
-        
-    // so if the match is over it will transfer the points to the the players in their countries
-    if(fullTime){
+    let match = await Matches.findOne({matchId:data.matchId});
+
+    if(fullTime && data.matchStatue === "FT"){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
         const icon = 'https://www.pngrepo.com/png/277622/512/whistle.png'    
-        match.states.push({playerName : "",state : "Full Time", min : "FT" , icon,country:'both'});    
+        match.states.push({playerName : "",state : `Full Time ${match.firstCountry.result} - ${match.secondCountry.result} `, min : "FT" , icon,country:'both'});     
         
     }
     
     // so this code for uodating the time if the admin wants to
-    match.matchTime = data.updateMatchTime ? data.updateMatchTime: match.matchTime;
-    match.matchStatue = data.matchStatue;
     
+    match.matchStatue = data.matchStatue ? data.matchStatue : match.matchStatue;
+    match.stoppingTime = data.stoppingTime ? data.stoppingTime : match.stoppingTime;
     
+    if(data.matchTime){
+        match.matchTime = data.matchTime;
+        match.matchStatue = "UpComing" // so if we edit the the time we make sure to update the statue
+        match.stoppingTime = 0
+    }
     const {updatedPlayer_1,updatedPlayer_2} = data;
     match.firstCountry.result = data.result1 ? data.result1 : match.firstCountry.result ;
     match.secondCountry.result = data.result2 ? data.result2 : match.secondCountry.result ;
@@ -36,10 +40,11 @@ const updateMatch = async(data)=>{
         match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
         match.states.push(updatedPlayer_2);
     }
-    match.fullTime = data.matchStatue === "FT" ? true :false; 
-    const response = await Matches.updateOne({matchId:data.matchId},match) ;
-    console.log(response);
-}catch(err){
+     await Matches.updateOne({matchId:data.matchId},match) ;
+    
+    
+}
+catch(err){
     console.log(err);
 }
 }

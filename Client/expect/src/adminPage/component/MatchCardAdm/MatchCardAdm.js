@@ -17,9 +17,7 @@ const MatchCardAdm = () => {
     const time  = MatchCenteral.match.matchTime.slice(11); // to show the time
     const [showDelete,setShowDelte] = useState(false);
     const [timeUp,setTimeUp] = useState(false); 
-    
     const [min,setMin] = useState(null);
-    
     const handleDelte = async(matchId) =>{
         try{
             const response = await axios.delete(`/matches/deletematch/${matchId}`);
@@ -76,5 +74,4 @@ const MatchCardAdm = () => {
             
      );
 }
- 
 export default MatchCardAdm;

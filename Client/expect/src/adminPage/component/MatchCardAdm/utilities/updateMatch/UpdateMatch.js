@@ -3,22 +3,26 @@ import './updateMatch.scss'
 import CloseIcon from '@mui/icons-material/Close';
 import { matchesStore } from '../../../../Context/matchesContext';
 import PlayerCardRadio from '../../../../../component/PlayerCardRadio/PlayerCardRadio';
-
+import SportsIcon from '@mui/icons-material/Sports';
 import { PlayerStateToObject } from '../../../../../utilis/PlayerStateToObject';
 import io from 'socket.io-client';
 import { MatchStateCentral } from '../../../../../Context/MatchCardContext';
-import axios from 'axios';
 
 
 
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
-const UpdateMatch = ({match,setUpdate,min})=> {
+const UpdateMatch = ({match,min})=> {
   
 
-  const [date,setDate] = useState(null);
-  const [updatePlayerState,setUpdatePlayerState] = useState(null);
-  const [stoppingTime,setStoppingTime] = useState(match.stoppingTime);
+  // states of the component  
+  const [updatePlayerState,setUpdatePlayerState] = useState(false);
+  const [StoppingTime,setStoppingTime] = useState(match.stoppingTime);
+  const [country_1_result,setResult1] = useState(match.firstCountry.result);
+  const [country_2_result,setResult2] = useState(match.secondCountry.result);
+  const [showFullTime , setShowFT] = useState(false);
+  const [pauseState,setPauseState] = useState('');
+  const [showPauseState,setShowPauseState] = useState(false);
 
   // this code down below is to cahnge the background color when you select a player
 
@@ -34,6 +38,7 @@ const UpdateMatch = ({match,setUpdate,min})=> {
   //     }
   //   }
   // },playerNavigator)
+
   const {state,dispatch} = MatchStateCentral();
 
   const hidePop = (e)=>{
@@ -42,26 +47,42 @@ const UpdateMatch = ({match,setUpdate,min})=> {
     }
   
 }
-  const [country_1_result,setResult1] = useState(match.firstCountry.result);
-  const [country_2_result,setResult2] = useState(match.secondCountry.result);
-  
-  
 
-  const handleMatchState = async(e)=>{
-    e.preventDefault();
+const handleUpdateState = (e)=>{
+  e.preventDefault();
+  let stoppingTime = null , matchStatue = null;
 
-    if(state.currentState === 'GoingOn' && state.nextState === "Pause"){
-      dispatch({type : "PAUSE-MATCH"});
-      await axios.put(`/matches/editmatch/${match.matchId}`,{matchStatue : "Pasued"});
-    }
-    if(state.currentState === 'Pasued' && state.nextState === "Resume"){
-      dispatch({type : "RESUME-MATCH",payload : stoppingTime});
-      await axios.put(`/matches/editmatch/${match.matchId}`,{matchStatue : "GoingOn" , stoppingTime:stoppingTime});
+  if(state.currentState === 'GoingOn' && state.nextState === "Pause"){
+    // here i will check if it shown or not and if it is i will dispatch 
     
-    }
-  }
+    if(showPauseState){
+      dispatch({type : "PAUSE-MATCH"});
+     matchStatue = pauseState;
+   }
+   setShowPauseState(!showPauseState);
+ }
 
-  const handleUpdate = async(e)=>{
+ if(state.currentState === 'Paused' && state.nextState === "Resume"){
+   dispatch({type : "RESUME-MATCH"});
+   matchStatue = "GoingOn";
+   stoppingTime = StoppingTime;    
+}  
+
+try{
+  console.log("hello socket");
+  socket.emit('updatingMatch',{
+    matchStatue,
+    stoppingTime,
+    matchId : match.matchId
+  })
+}catch(err){
+  console.log(err);
+}
+
+}
+
+
+const handleUpdate = async(e)=>{
     e.preventDefault();
     let editDate = document.getElementById('dateEdit').value;
     let editTime = document.getElementById('timeEdit').value;
@@ -72,7 +93,8 @@ const UpdateMatch = ({match,setUpdate,min})=> {
         editDate = editDate.split('-');
         updateMatchTime = `${editDate[1]},${editDate[2]},${editDate[0]},${editTime}`;
     }
-    let updatedPlayer_1 = null,updatedPlayer_2 = null;
+    let updatedPlayer_1 = null , updatedPlayer_2 = null;
+    
 
     if(updatePlayerState){
       const selcted_player_1 = document.querySelector('input[name="firstCountry"]:checked').id;
@@ -85,8 +107,10 @@ const UpdateMatch = ({match,setUpdate,min})=> {
       // for example first country will be to the righ and the second will be to the left
       updatedPlayer_2 =  PlayerStateToObject(selcted_player_2,state_2Player,"second",min)
     }
-    
 
+  
+  
+    
     try{
       socket.emit('updatingMatch',{
         result1 : country_1_result,
@@ -95,31 +119,22 @@ const UpdateMatch = ({match,setUpdate,min})=> {
         updatedPlayer_2 ,
         matchId: match.matchId,
         fullTime : false,
-        updateMatchTime
+        matchTime : updateMatchTime
       })
-      //   const response = await axios.put(`/matches/editmatch/${match.matchId}`,{
-      //   result1 : country_1_result,
-      //   result2 : country_2_result,
-      //   updatedPlayer_1,
-      //   updatedPlayer_2,
-      //   fullTime : false
-      // })
-      setUpdate(false);
-      // const {updatedMatch,msg} = response.data;
-      
+      dispatch({type : "hideUpdate" })
     }
     catch(err){
       console.log(err);
     }
-
-
+    
+    
+    
   }
 
   const fullTime = async(e)=>{
     e.preventDefault();
     try{
-      console.log("passed here");
-        socket.emit("updatingMatch",{matchStatue : "FT" , matchId:match.matchId});
+        socket.emit("updatingMatch",{matchStatue : "FT" , matchId:match.matchId,fullTime :true });
         dispatch({type : "hideUpdate" })
         
       }catch(err){
@@ -153,8 +168,8 @@ const UpdateMatch = ({match,setUpdate,min})=> {
               </div>
               <form>
                   <div className="changeResult">
-                    <input onChange={(e)=>setDate(e.target.value)} type="date"  id="dateEdit" />
-                    <input onChange={(e)=>setTime(e.target.value)} type="time"  id="timeEdit" />
+                    <input type="date"  id="dateEdit" />
+                    <input type="time"  id="timeEdit" />
                   </div>
 
                   <div className="changeResult">
@@ -193,11 +208,25 @@ const UpdateMatch = ({match,setUpdate,min})=> {
                           <input maxLength='1' defaultValue={match.stoppingTime} onChange={(e)=>setStoppingTime(e.target.value)} type="number" name="result" id="stoppingPoints" />
                         </div>  
                       }
+                      {
+                        showPauseState && 
+                          <div className="changeResult stoppingTime">
+                            Stopping State : 
+                            <input placeholder='HT'  onChange={(e)=>setPauseState(e.target.value)} type="text" name="pause" id="matchState" />
+                          </div>
+                      }
+
                 <div className="buttonWrapper">
                   <button  onClick={handleUpdate}>Update</button>
-                  {(state.currentState == 'UpComing') ? '' : <button  onClick={handleMatchState} className='fulltime'>{ state.nextState }</button> }
-                  {(state.currentState == 'UpComing') ? '' : <button onClick={fullTime}   className='fulltime'>Full Time</button> }
-                
+                  {(state.currentState == 'UpComing' || match.matchStatue == 'FT') ? null : <button  onClick={handleUpdateState} className='pause'>{ state.nextState }</button> }
+                </div>
+                <div className="buttonWrapper">
+                    { match.matchStatue !== "FT" && state.currentState !== 'UpComing' && 
+                    <button onClick={(e) =>{e.preventDefault(); 
+                            setShowFT(!showFullTime)}}  
+                            className='fulltime'>End Match</button>}
+
+                    { showFullTime && <button onClick={fullTime}   className='fulltime Whistle'> <SportsIcon/>  </button> }
                 </div>
               </form>
             </div>

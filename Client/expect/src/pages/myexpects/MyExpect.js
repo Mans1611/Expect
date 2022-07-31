@@ -7,6 +7,7 @@ import './myexpect.scss'
 import ExpectPhone from "../../component/Expectes/PhoneComponent/ExpectPhone";
 import Expected from "../matches/Component/Expected/Expected";
 import io from 'socket.io-client';
+import { MatchCardProvider } from "../../Context/MatchCardContext";
 
 const socket = io.connect('http://localhost:8000');
 
@@ -76,11 +77,11 @@ const MyExpects = () => {
                             <div className="expectsContainer"> 
                                 {
                                     expected.map((val,index)=>{
-                                        return <Expect 
+                                        return <MatchCardProvider match = {val} childeren = {<Expect 
                                                 match= {val} 
                                                 setUserExpections = {setUserExpections} 
                                                 userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
-                                                />
+                                                />}></MatchCardProvider>
                                 
                                 })}
                             </div> )
@@ -91,7 +92,7 @@ const MyExpects = () => {
                                 <div className="phoneContainer">
                                     {
                                     expected.map((val,index)=>{    
-                                        return <ExpectPhone key = {index} userExpect = {userExpections[index]} match={val}/>
+                                        return <MatchCardProvider match = {val} childeren = {<ExpectPhone key = {index} userExpect = {userExpections[index]} match={val}/>}></MatchCardProvider>
                                     })
                                     }
                                 </div>

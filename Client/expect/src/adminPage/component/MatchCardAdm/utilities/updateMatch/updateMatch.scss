@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     .updatePop{
-        background-color: #272727;
+        background-color: #373737;
         border-radius: 10px;
         width: 50%;
         min-height: fit-content;
@@ -166,9 +166,19 @@
             &:hover{
                 background-color: #960014 ;
             }
-            &.fulltime{
-                background-color: #036622;
+            &.pause{
                 margin-left: 5px ;
+
+            }
+            &.fulltime{
+                margin-left: 5px ;
+                background-color: #171717;
+                &.Whistle{
+                    width: fit-content;
+                    background-color: #212121;
+                    border: 2px solid #fff;
+
+                }
             }
         }
     }

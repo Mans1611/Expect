@@ -1,7 +1,5 @@
 import './UpdatePopUp.scss';
-
 import '../popupmatchcard.scss';
-
 import PlayerCardRadio from '../PlayerCardRadio/PlayerCardRadio';
 import BalanceIcon from '@mui/icons-material/Balance';
 import CloseIcon from '@mui/icons-material/Close';
