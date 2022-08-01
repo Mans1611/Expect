@@ -2,6 +2,8 @@ import './postMatchCard.scss';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import PublicIcon from '@mui/icons-material/Public';
 const PostMatchCard = ({match,userExpect}) => {
+    if(!match)
+        return null;
     return ( 
         <div className="postMatchCard">
             <div className="matchHeader">

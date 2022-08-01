@@ -7,7 +7,6 @@ const PlayerCard = ({showPlayerState,player,countryOrder,auth}) => {
 
     const {isDark} = useContext(userContext);
     const [state,setState] = useState(null);
-    console.log(player.playerPoints);
     return ( 
         <div className={`palyerCard ${isDark? 'dark':''}`}>
             <div className="playerCardInfo">
@@ -16,6 +15,8 @@ const PlayerCard = ({showPlayerState,player,countryOrder,auth}) => {
                     <h6 className='details'>{player.playerName}</h6>
                     <h6 className='details'>PlayerPosition : {player.position}</h6>
                     <h6 className='details'>Totoal Points : { isNaN(player.playerPoints)  ? player.totalPoints : player.playerPoints  }</h6>
+                    <h6 className='details'>Totoal Votes : { isNaN(player.votes)  ? player.totalVotes : player.votes  }</h6>
+                    
                     {auth && <h6 className="details">Total Votes : {player.votes}  </h6>}
                     {auth && showPlayerState && <SelectionComp countryOrder={countryOrder}  setState={setState}  name={countryOrder}/> }
                 </div>

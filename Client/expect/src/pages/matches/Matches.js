@@ -12,18 +12,10 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import SmallLaoding from '../../component/loading/small.loading/smallLoading';
-
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
-let expandButton = 'See All Matches';
-
-const setExpandButton = (value) =>{
-    expandButton = value;
-}
-
 const Matches = () => {
-
-    
 
     const {isDark} = globalUser();
     const [data,setData] = useState([]);
@@ -32,8 +24,10 @@ const Matches = () => {
     const cookie = new Cookies();
     const navigate = useNavigate();
     const {userGlob} = globalUser();
+    const [expandButton,setExpandButton] = useState('See All Matches');
 
-const date = `${new Date().getMonth() + 1},${new Date().getDate()},${new Date().getFullYear()}`
+const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
+
 useEffect(()=>{
     return async () => { 
 
@@ -73,6 +67,20 @@ useEffect(()=>{
 
     },[socket])
 
+    const getMatchesDate = async(date)=>{
+        const Date = date.split('-'); //year - month - day 
+        if(Date[0] > 2020 && Date[0] < 2024){
+            const searchDate = `${Date[1]},${Date[2]},${Date[0]}`;
+            try{
+                const Response = await axios.get(`/expects/${userGlob}`);
+                const {data:dateMatches} = await axios.get(`/matches/?date=${searchDate}`);
+                const MatchesWithFlag = filteringExpects(dateMatches,Response.data.userExpections);
+                setData(MatchesWithFlag); 
+            }catch(err){
+                console.log(err);
+            }
+        }
+    }
 
     const expandMatches = async(e)=>{
         e.preventDefault();
@@ -82,8 +90,8 @@ useEffect(()=>{
             const MatchesWithFlag = filteringExpects(Response.data.matches,Response.data.userExpections);
             setData(MatchesWithFlag);
             setExpandButton("Just Todays' Matches");  
-            
         }
+
         else if(expandButton === `Just Todays' Matches`){
             const response = await axios.get(`/expects/${userGlob}`);
             const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
@@ -96,28 +104,35 @@ useEffect(()=>{
     }
     return ( 
            
-                <div className= {`match  ${isDark?'dark':''}` } >
-                    <div className="matchWrapper">
-                        <h1 className="matchTitle">Today Matches</h1>
-                        <div className="matchCard-container">
-                                {isLoading ? <SmallLaoding/> : 
-                                <div className="matchCardGrid">
-                                        {
-                                        data.map((value,key)=>{
-                                            if(!value.expected) return <MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>;   
-                                            else { return <Expected  key={key} match ={value}/>};
-       
-                                        })
-                                        }
-                                </div>
-                                }
-                            <div className="matchcardButton-wrapper">
-                                <button onClick={expandMatches}>{expandButton}</button>
-                            </div>
-                        </div>
-                        
+            <div className= {`match  ${isDark?'dark':''}` } >
+                <div className="matchWrapper">
+                    <h1 className="matchTitle">Today Matches</h1>
+                    <div className="dateContainer">
+                        <label htmlFor="NavigateToThisDate">
+                            <h1>Pick a Date : </h1>
+                            <input onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
+                        </label>
                     </div>
+                    <div className="matchCard-container">
+                            {isLoading ? <SmallLaoding/> : 
+                            <div className="matchCardGrid">
+                                    {
+                                    data.map((value,key)=>{
+                                        if(!value.expected) return <MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>;   
+                                        else { return <Expected  key={key} match ={value}/>};
+                                    })
+                                    }
+                            </div>
+                            }
+                        <div className="matchcardButton-wrapper">
+                            <button onClick={(e)=>{expandMatches(e);setExpandButton(
+                                expandButton === "See All Matches" ? "Just Today's" : "See All Matches" 
+                            )}}>{expandButton}</button>
+                        </div>
+                    </div>
+                    
                 </div>
+            </div>
           
      );
 }

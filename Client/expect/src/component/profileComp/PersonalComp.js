@@ -16,7 +16,6 @@ const PersonalComp = ({userName}) => {
             try{
                 const response = await axios.get(`/users/profile/${userName}`);
                 setPI(response.data[0]);
-                console.log(PI);
                 setLoading(false);
             }
             catch(err){

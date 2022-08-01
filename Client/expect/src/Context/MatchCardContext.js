@@ -23,8 +23,6 @@ export const MatchCardProvider =  ({childeren,match})=>{
     else if ( match.matchStatue === "UpComing")
         nextState = "GoingOn";
 
-    console.log("Inatilizations");
-    console.log(currentState + " " + nextState);
     const initialState = {
         currentState,
         nextState,

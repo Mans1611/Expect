@@ -11,19 +11,19 @@ import Minute from '../MatchCardComponent/Minute';
 import { MatchCardProvider , MatchStateCentral} from '../../../Context/MatchCardContext';
 
 const MatchCardAdm = () => {
-
+    const store = matchesStore();
     const MatchCenteral = MatchStateCentral();
     const date  = MatchCenteral.match.matchTime.slice(0,10).replaceAll(',' , "-"); // to just to take the the date from the database
     const time  = MatchCenteral.match.matchTime.slice(11); // to show the time
     const [showDelete,setShowDelte] = useState(false);
     const [timeUp,setTimeUp] = useState(false); 
     const [min,setMin] = useState(null);
+    
     const handleDelte = async(matchId) =>{
         try{
             const response = await axios.delete(`/matches/deletematch/${matchId}`);
-            const {data} = await axios.get('/matches/getmatches')
             setShowDelte(false)
-            store.setMatches(data);
+            store.setMatches(response.data.newMatches);
         }catch(err){
             console.log(err);
         }

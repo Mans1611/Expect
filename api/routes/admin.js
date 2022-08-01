@@ -20,14 +20,12 @@ admin.post('/signup',async(req,res)=>{
     return res.status(203).send("You are not allowed to enter this page");
     
     const token = jwt.sign({userName,isAdmin : true} , process.env.JWT);
-    console.log(token);
     const userAdmin = new Admin({
         userName,
         password : hashedPass,
     }) 
 
     await userAdmin.save(()=>{
-        console.log("user Is saved");
     });
     res.status(201).setHeader("token",token).send("done user is created")
 })

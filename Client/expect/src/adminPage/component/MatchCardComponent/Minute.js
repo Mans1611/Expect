@@ -21,11 +21,9 @@ const Minute = ({matchTime,min,setMin})=> {
         const now = new Date().getTime();
         const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
         setMin(passed - (store.match.stoppingTime));
-        console.log(min);
         if(min === 1 ) {
             try{
                 store.dispatch({type : "Started"});
-                console.log(store.match.matchId);
                 socket.emit('updatingMatch',{
                     matchStatue : "GoingOn",
                     matchId : store.match.matchId

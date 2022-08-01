@@ -123,7 +123,6 @@ matches.put('/editmatch/:matchID',async (req,res)=>{
         const {updatedPlayer_1,updatedPlayer_2} = req.body;
         if(!match){
             return res.status(203).send("this Match is not found");
-            console.log(match);
         }
         match.firstCountry.result = req.body.result1 ? req.body.result1 : match.firstCountry.result ;
         match.secondCountry.result = req.body.result2 ? req.body.result2 : match.secondCountry.result ;
@@ -158,7 +157,6 @@ matches.put('/fullTime/:matchId',async(req,res)=>{
     try{
         let match = await Matches.findOne({matchId:req.params.matchId});
         match.fullTime = true;
-        console.log("passed");
         // to permentlay save the final points to the players in the country midel 
         
     }
@@ -177,7 +175,8 @@ matches.delete('/deletematch/:matchID',async (req,res)=>{
         if(!match)
             return res.status(203).json({msg:`This Match_id ${req.params.matchID} is not exist to delete`})     
         await Matches.deleteOne({matchId : req.params.matchID});
-        res.status(200).json({msg:"this match is deleted successfuly"});
+        const matches = await Matches.find();
+        res.status(200).json({msg:"this match is deleted successfuly",newMatches:matches});
    
     }
    catch(err){

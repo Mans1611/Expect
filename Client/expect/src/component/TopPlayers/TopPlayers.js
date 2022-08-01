@@ -19,7 +19,7 @@ const TopPlayers = () => {
                 setLoading(false);
 
             }catch(err){
-                console.log();
+                console.log(err);
             }
         }
     },[])

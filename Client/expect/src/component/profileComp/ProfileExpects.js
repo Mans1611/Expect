@@ -19,10 +19,13 @@ const ProfileExpects = ({userName}) => {
                 const response = await axios.get(`/expects/${userName}`);
                 const matchesWithFlage = filteringExpects(response.data.matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
                 const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
-                console.log(filterdExpectedMatches);
-                const top3 = response.data.userExpections.filter(expect =>(expect.userPoints)).sort((a,b) => b.userPoints - a.userPoints ).slice(0,3);
-                setUserExpections(top3);
-                setExpected(filterdExpectedMatches); // matches 
+                
+                if(filterdExpectedMatches){
+                    const top3 = response.data.userExpections.filter(expect =>(expect.userPoints)).sort((a,b) => b.userPoints - a.userPoints ).slice(0,3);
+                    setUserExpections(top3);
+                    setExpected(filterdExpectedMatches); // matches 
+                    console.log(top3);
+                }
                 setLoading(false);
 
             }catch(err){

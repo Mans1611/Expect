@@ -115,7 +115,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
                         <div className="timeSelection">
                           <div className="timing">
                             <label htmlFor="matchDate"> Select Date</label>
-                            <input type="date" name="date" id="matchDate"/>
+                            <input draggable type="date" name="date" id="matchDate"/>
                           </div>
                           <div className="timing">
                             <label htmlFor="matchtime"> Select Time</label>
@@ -133,6 +133,9 @@ const PopAddMatch = ({showPop,setShowPop}) => {
 
                       <form action="">
 
+                      <div className="buttonWrapper ok">
+                          <button onClick={handleSelect} >OK</button>
+                      </div>
                       <div className="innergrid">
 
                         {
@@ -149,9 +152,6 @@ const PopAddMatch = ({showPop,setShowPop}) => {
                       }
                       </div>
                       
-                      <div className="buttonWrapper ok">
-                          <button onClick={handleSelect} >OK</button>
-                      </div>
 
                       </form>
                     </div>

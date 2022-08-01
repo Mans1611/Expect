@@ -3,7 +3,6 @@ import addingPointsPlayer from "../routes/utilis/addingPointsPlayers.js";
 import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCountry.js";
 
 const updateMatch = async(data)=>{
-    console.log(data);
 
     const fullTime = data.fullTime ? data.fullTime : false;
     try{

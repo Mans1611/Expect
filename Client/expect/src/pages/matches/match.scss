@@ -45,7 +45,37 @@
             }
     }
     }
-
+    .dateContainer{
+        display: flex;
+        align-items: center;
+        justify-content:end;
+        label{
+            display: flex;
+            align-items: center;
+        }
+        svg{
+            width: 50px;
+            height: 40px;
+        }
+        input[type="date"]{
+            background-color: #222;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            background-color: #555;
+            border: none;
+            outline: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px ;
+            color: #eee;
+            font-size: 24px;
+            text-align: center;
+            
+        }
+       
+    }
     /* for dark mode */
     &.dark{
         background-color: #333;
@@ -62,6 +92,7 @@
             }
             }
         }
+        
         
     
     

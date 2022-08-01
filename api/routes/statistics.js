@@ -34,7 +34,7 @@ statistics.get('/topvoted',async (req,res)=>{
     // so it will sort theme desc . 
     const sorted = players.sort((nextValue,currentValue)=> currentValue.totalVotes - nextValue.totalVotes);
     const top5 = sorted.slice(0,5); // just to take the top 5 of the top players.
-    console.log(top5[0].totalVotes);
+
     res.status(200).send(top5)
 })
 

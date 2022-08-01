@@ -69,7 +69,6 @@ const handleUpdateState = (e)=>{
 }  
 
 try{
-  console.log("hello socket");
   socket.emit('updatingMatch',{
     matchStatue,
     stoppingTime,
