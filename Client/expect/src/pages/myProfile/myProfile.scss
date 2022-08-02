@@ -26,6 +26,16 @@
     }
     .information{
         background-color: #fff;
+        position: relative;
+        .editIcon{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: #eee;
+            font-size: 30px;
+
+        }
         .userInformation{
             padding: 10px 0;
             text-align: center;
@@ -38,7 +48,10 @@
                 border-bottom: 4px solid #222;
                 width: 100%;
                 .icons{
+                    width: 30px;
+                    height: 30px;
                     margin-right: 5px;
+                    color: #999;
                 }
 
             }

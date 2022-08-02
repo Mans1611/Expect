@@ -23,3 +23,47 @@ $betiured : #ec0323;
     transition: 150ms;
     
 }
+
+@mixin centerFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin popupContainer {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #1717175b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin scrollbar-style{
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 5px;
+        background-color: #888;
+      }
+       
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #272727; 
+        border-radius: 5px;
+        margin-top: 5px;
+      }
+}
+@mixin Top-Right-Icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 999;
+    cursor: pointer;
+    color: #eee;
+}

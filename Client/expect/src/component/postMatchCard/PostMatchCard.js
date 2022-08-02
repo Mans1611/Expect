@@ -2,6 +2,8 @@ import './postMatchCard.scss';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import PublicIcon from '@mui/icons-material/Public';
 const PostMatchCard = ({match,userExpect}) => {
+    
+    
     if(!match)
         return null;
     return ( 
@@ -22,8 +24,8 @@ const PostMatchCard = ({match,userExpect}) => {
             </div>
            <div className="userExpect">
                 <h3 className="yourExpect">YourExpect</h3>
-                <p>Winner: {userExpect.winnerValue}</p>
-                <p>Result:{userExpect.result1_value}  - {userExpect.result2_value}</p>
+                <p>Winner : {userExpect.winnerValue}</p>
+                <p>Result : {userExpect.result1_value}  - {userExpect.result2_value}</p>
                 <p>Your Match Points : {userExpect.userPoints} Pts</p>
            </div> 
            <div className="showFullWrapper">
