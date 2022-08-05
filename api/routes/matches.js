@@ -3,18 +3,18 @@ import Country from '../models/Country.js';
 import Matches from '../models/Matches.js';
 import addingPointsPlayer from './utilis/addingPointsPlayers.js';
 import TransferingPointsToCountry from './utilis/TransferingPointsToCountry.js';
-
-
-
+import SessionVerification from "../middleware/sessionVerify.js";
 
 
 
 const matches = express.Router();
 
-matches.get('/getmatches',async(req,res)=>{
+matches.get('/getmatches',SessionVerification,async(req,res)=>{
     try{
-        const matches = await Matches.find().sort({matchTime : 1});
+        
+        const matches = await Matches.find().sort({matchTime : 1}); // so we sort it asc
         res.status(200).send(matches);
+       
     }catch(err){
         console.log(err);
     }
@@ -45,9 +45,10 @@ matches.get('/match/:id', async (req,res)=>{
     }
  })
 
-// for full time query 
-matches.get('/match/',async(req,res)=>{
+// for full time matches query 
+matches.get('/match/',SessionVerification,async(req,res)=>{
     try{
+        
         const dontMissMatches = await Matches.find({fullTime : req.query.fullTime}).limit(2);
         res.status(200).send(dontMissMatches);
     }catch(err){
@@ -82,7 +83,12 @@ matches.post('/addgame', async(req,res)=>{
     for(let i = 0; i<length; i++){
         if(players_1[i]){
             const {playerName,position,playerImg} = players_1[i]
-            const newObj = {playerName,position,playerImg,votes,playerPoints: 0};
+            const newObj = {
+                playerName,
+                position,
+                playerImg,
+                votes,
+                playerPoints: 0};
             newPlayers_1.push(newObj);
         }
         if(players_2[i]){

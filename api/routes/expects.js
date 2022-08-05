@@ -4,11 +4,12 @@ import Matches from '../models/Matches.js';
 import AddingPointsToUsers from './utilis/addingPointsToUsers.js';
 import FilteringExpects from './utilis/FilteringExpects.js';
 import User from '../models/User.js';
+import SessionVerification from "../middleware/sessionVerify.js";
 
 const expects = express.Router();
 
 
-expects.get('/:username',async(req,res)=>{
+expects.get('/:username',SessionVerification,async(req,res)=>{
     try{
         const user = await Expects.findOne({userName : req.params.username});
         const matches = await Matches.find();

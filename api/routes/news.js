@@ -1,14 +1,18 @@
 import express, { Router }  from "express";
 import News from "../models/News.js";
 import mongoose from "mongoose";
+import SessionVerification from "../middleware/sessionVerify.js";
 const news = express.Router();
 
 
-news.get('/getnews',async(req,res)=>{
+news.get('/getnews',SessionVerification,async(req,res)=>{
     try{
+        console.log(req.session.user);
+        
+    
         const allNews = await News.find();
 
-        res.status(200).send(allNews.reverse().slice(0,3))
+        res.status(200).send(allNews.reverse().slice(0,3)) // to send the updated matches since the newest will be the downward
     }catch(err){
         console.log(err);
     }

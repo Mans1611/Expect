@@ -5,8 +5,6 @@ import { useContext,useEffect,useState } from 'react';
 import ProfileExpects from '../../component/profileComp/ProfileExpects'
 import { globalUser } from '../../Context/HomeContext';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import Loading from '../../component/loading/big.loading/Loading';
 
 const MyProfile = () => {
     const {userName} = useParams();

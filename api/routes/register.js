@@ -8,6 +8,7 @@ import Token  from '../models/Token.js';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import Expects from '../models/Expects.js';
+import CreateUserSession from '../middleware/createUSerSession.js';
 dotenv.config();
 
 const router = express.Router();
@@ -21,9 +22,9 @@ router.post('/signup',async(req,res)=>{
     try{
     const {userName,password,phoneNumber,email,userCountry} = req.body;
 
+    // since the phone number is optional not required so i will check the phone number first then i will find if it repetative.
     if(phoneNumber){
         const existUser = await User.findOne({phoneNumber});
-        console.log(existUser);
         if(existUser)
             return res.status(203).json({msg:"this phone number is being added before"});  
     }
@@ -45,16 +46,21 @@ router.post('/signup',async(req,res)=>{
     const msg = `hello expecter ${userName}`;
     await mailVerification(email,msg);
     const token = jwt.sign({userName,email},process.env.JWT);
-    const expects = new Expects({userName})
+    
+    const expects = new Expects({userName})// creating a new expect documentation 
     await expects.save(()=>{
-        console.log("done creating user");
+    })
+    CreateUserSession(req);
+
+    await user.save(()=>{
+        res.status(201).json({
+            msg:"User is created succussfully",
+
+        
+        });
     })
     
-    await user.save(()=>{
-        console.log("done creating user");
-        res.status(201).header("token",token).json({msg:"User is created succussfully"});
-    })
-    }
+}
     catch(err){
         console.log(err);
     }
@@ -65,16 +71,17 @@ router.post('/signup',async(req,res)=>{
 
 router.post('/login',async(req,res)=>{
     const {userName,password} = req.body;
-
+    
     try{
         const userDB = await User.findOne({userName});
 
         if(!userDB)
             return res.status(203).json({msg:"this user is not found in database"});
         const checkPass = await bcrypt.compare(password,userDB.password);
-        console.log(checkPass);
         if(checkPass){
             const token = jwt.sign({userName},process.env.JWT);  
+            // creating a session to that user
+            CreateUserSession(req)
             return res.status(200).json({msg:"login successfully",token});
         }
         res.status(203).json({msg:"The Passowrd is incorrect"}); 
@@ -83,10 +90,11 @@ router.post('/login',async(req,res)=>{
     }
 })
 
+
+
 router.get('/verifySession/:token',async(req,res)=>{
     if(!req.params.token)
         return  res.status(203).json({msg:"token is not defined"});
-    console.log(req.params.token);
     const verifyToken = await jwt.decode(req.params.token,process.env.JWT);
     res.status(200).json({payload:verifyToken});
 })
@@ -94,7 +102,6 @@ router.get('/verifySession/:token',async(req,res)=>{
 
 router.put('/:id',verify,async (req,res) =>{
     const {id,phonenumber} = req.user;
-    //console.log(id,req.params.id);
     if(id !== req.params.id)
         return res.status(401).json({msg:"token conflict"})
         if(req.body.phonenumber)

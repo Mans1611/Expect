@@ -17,8 +17,19 @@ import { getMatches } from './socket.ioFunctions/getMatches.js';
 import Matches from './models/Matches.js';
 import admin from './routes/admin.js';
 import statistics from './routes/statistics.js';
+import session from 'express-session';
+import MongoSessions from 'connect-mongodb-session'; // to connect the session in the DB
+
+const MongoDBSession = MongoSessions(session);
 
 const app = express();
+
+// creating a collections for sessions. 
+const storeSession = new MongoDBSession({
+    uri : 'mongodb://127.0.0.1:27017/expect',
+    collection : "Users_Sessions",
+})
+
 
 const server = http.createServer(app);
 const port = process.env.PORT|| 8000;
@@ -26,12 +37,23 @@ const port = process.env.PORT|| 8000;
 
 const io = new Server(server,{
     cors:{
-        origin : "http://localhost:5000"
+        origin : "http://localhost:5000",
     }
 });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(session({
+    resave : false,
+    secret : "mansour is an idiot man",
+    saveUninitialized : false,
+    cookie : {
+        maxAge : 1000 * 5 ,
+        httpOnly : false
+    },
+    store : storeSession        
+}))
 
 // middleware
 app.use('/matches',matchesRoute);

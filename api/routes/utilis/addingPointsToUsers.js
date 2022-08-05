@@ -37,7 +37,7 @@ export default function AddingPointsToUSers(matches,userExpections){
 
 
                         }
-                    console.log(matchPoints);
+                    
                     userExpections[i].userPoints = matchPoints;
                     totalPoints += matchPoints;
 

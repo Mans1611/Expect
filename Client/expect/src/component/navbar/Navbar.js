@@ -7,7 +7,7 @@ import BottomNavbar from './bottomnavbar/BottomNavbar';
 import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
 
-const Navbar = (props) => {
+const Navbar = () => {
 
     const [width , setWidth] = useState(window.innerWidth);
     const [scale, setScale] = useState(((width<680)? true : false));
@@ -15,9 +15,10 @@ const Navbar = (props) => {
     const navbarItems = ["Home" , "Matches","MyExpects", "Standing"];
     const {isDark,setDark} = globalUser();
     const cookie = new Cookies();
-
+   
     let location = useLocation().pathname.split("/")[2]; 
     let item = document.getElementById(location)
+    
     if(item)
         item.classList.add("selected");
     
@@ -81,8 +82,9 @@ const Navbar = (props) => {
                             <Link to={`myprofile/${store.userGlob}`}  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>
                             <div onClick={
                                 ()=>{
+                                localStorage.setItem('isDark',!isDark);
+                                console.log(isDark)
                                 setDark(!isDark);
-                                localStorage.setItem('isDark',isDark);
                             }
                                 } className={`dropdownItem ${isDark? 'dark':''}` }>
                                 <span className="dropdownItem">Dark Mode</span>

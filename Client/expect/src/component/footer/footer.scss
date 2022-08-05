@@ -111,7 +111,32 @@
             margin: 4px 0 ;
         }
     }
+ @media screen and (max-width:490px) {
+    .Expect{
+        h1{
+            font-size: 64px ;
+        }
+    }
+    .contentContainer{
+        display: flex;
+        flex-direction: column;
+        .feedBackContainer{
+            width: 100%;
+            margin: 10px auto;
+            textarea{
+                min-width: 40%;
+                width: 60% ;
+                max-width: 80% ;
+                height: 40px;
+                max-height: 160px;
+            }
+        }
+
+    }
+
+ }
     
+
 }
 @keyframes linedown {
         from{

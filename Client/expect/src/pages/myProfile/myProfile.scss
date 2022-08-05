@@ -110,8 +110,77 @@
         background-color: #aaa;
     }
 
+    
+    
+    
+}
+@media screen  and (max-width : 960px){
 
-
+    .profileTitle{
+        text-align: center;
+        font-size: 100px;
+        font-weight: 700;
+    
+    }
+    
+   
+    .informationContainer{
+        height: 300px;
+        margin-top: 20px;
+        .informationWrapper {
+            width: 50%;
+            height: 100%;
+            .InformationHeader{
+                font-size: 25px;
+                font-weight: 600;
+                padding: 5px 10px;
+               
+            }
+        }
+        .information{
+            background-color: #fff;
+            position: relative;
+            .editIcon{
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                cursor: pointer;
+                color: #eee;
+                font-size: 25px;
+    
+            }
+            .userInformation{
+                padding: 10px 0;
+                text-align: center;
+                .feild{
+                  
+                    font-size: 25px;
+                    .icons{
+                        width: 30px;
+                        height: 30px;
+                        margin-right: 5px;
+                        color: #999;
+                    }
+    
+                }
+                .value{
+                    color: #FFD600;
+                    margin-left: 10px;
+                }
+                .userCountry{
+                    font-size:30px;
+                    margin: 10px 0;
+                }
+                .imageWrapper{
+                    img{
+                        width: 80px;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+    }    
+    
 
 }
 

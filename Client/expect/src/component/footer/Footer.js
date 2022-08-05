@@ -9,9 +9,7 @@ const Footer = () => {
         return ( 
         <div className={`footer ${isDark?'dark':null}`}>
             <div className="Expect">
-                <img className='cupIcon' src="https://cdn-icons.flaticon.com/png/512/3099/premium/3099038.png?token=exp=1659016363~hmac=05fb2dfd71a7a59d7c4d97fd8c361314" alt="" srcset="" />
                 <h1>E X P E C T</h1>
-                <img className='cupIcon' src="https://cdn-icons.flaticon.com/png/512/3099/premium/3099038.png?token=exp=1659016363~hmac=05fb2dfd71a7a59d7c4d97fd8c361314" alt="" srcset="" />
             </div>
             
             <div className="contentContainer">
@@ -21,10 +19,10 @@ const Footer = () => {
                     <Link to = '/home'>Contact Us</Link>
                     <div className="iconsContainer">
                         <Link to='/'>
-                            <img className='imgicons' src="https://cdn-icons-png.flaticon.com/512/1383/1383262.png" alt="" srcset="" />
+                            <img className='imgicons' src="https://pbs.twimg.com/profile_images/1508518003184349187/1KQYoqPY_400x400.png" alt="" srcset="" />
                         </Link>
                         <Link to='/'>
-                            <img className='imgicons' src="https://cdn-icons.flaticon.com/png/512/2875/premium/2875394.png?token=exp=1659014607~hmac=526dc724762201fddee5852f8cd03655" alt="" srcset="" />
+                            <img className='imgicons' src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/800px-Gmail_icon_%282020%29.svg.png" alt="" srcset="" />
                         </Link>
                     </div>
 

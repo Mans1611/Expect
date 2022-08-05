@@ -4,18 +4,25 @@ import './dontMiss.scss';
 import axios from 'axios'
 import SmallLaoding from '../../loading/small.loading/smallLoading';
 import { globalUser } from '../../../Context/HomeContext';
+import { useNavigate } from 'react-router-dom';
 
 const DontMissList = () => {
+
+   
     const {isDark} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
+    const navigate = useNavigate();
+
     useEffect(()=>{
         return async()=>{
             try{
-                const {data} = await axios.get('/matches/match/?fullTime=false'); // so the match will not be en
-                setData(data)
+
+                const response = await axios.get('/matches/match/?fullTime=false'); // so the match will not be en
+               
+                setData(response.data);
+                
                 setLoading(false);
-                return data[0];
             }catch(err){
                 console.log(err);
             }

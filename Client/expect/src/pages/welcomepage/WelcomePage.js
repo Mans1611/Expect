@@ -25,11 +25,9 @@ const Welcome = () => {
 
             <div className="welcomePage">
                <ExplenationWel/>
-               <img className='playerImage' src='https://www.footyrenders.com/render/Kevin-De-Bruyne3.png' />
-                <Polygon id="firstPoly"/>
+               <Polygon id="firstPoly"/>
                </div>
             <div className="welcomePage second">
-                <img src="https://www.footyrenders.com/render/Philippe-Coutinho-Brasil-ProRendersFutboleros-Autor.-Marcos-P%C3%A9rez.png" className='playerImage left' alt="" />
                 <Polygon id='secondPoly'/>
             </div>
             

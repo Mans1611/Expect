@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import SmallLaoding from '../../component/loading/small.loading/smallLoading';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import MatchCardPhone from '../../component/matchcards/MatchCardPhone/MatchCardPhone';
+
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
 const Matches = () => {
@@ -21,6 +23,8 @@ const Matches = () => {
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false); 
+    const [mobileMatch,setMobileMatch] = useState(false);
+    const [width,setWidth] = useState(window.innerWidth);
     const cookie = new Cookies();
     const navigate = useNavigate();
     const {userGlob} = globalUser();
@@ -32,21 +36,24 @@ useEffect(()=>{
     return async () => { 
 
         try{
-            const token = cookie.get("token");
-            if(!token)
-                navigate('/register/signin');
-            else{ 
-                    const response = await axios.get(`/expects/${userGlob}`);
-                    const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
-                    const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
-                    setData(MatchesWithFlag);
-                    setLoading(false);
-            }
+            const response = await axios.get(`/expects/${userGlob}`);
+            const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
+            const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
+            setData(MatchesWithFlag);
+            setLoading(false);
+            
         }catch(err){
             setLoading(false);  
         }
     } 
 },[]);
+
+
+    window.addEventListener('resize',()=>{
+        setWidth(window.innerWidth)
+})
+
+
 
     useEffect(()=>{
         socket.on("updatingMatches",async(matches)=>{
@@ -116,11 +123,15 @@ useEffect(()=>{
                     <div className="matchCard-container">
                             {isLoading ? <SmallLaoding/> : 
                             <div className="matchCardGrid">
-                                    {
+
+                                    { width > 480 ?
                                     data.map((value,key)=>{
                                         if(!value.expected) return <MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>;   
                                         else { return <Expected  key={key} match ={value}/>};
-                                    })
+                                    }) : 
+                                        data.map((value,index)=>{
+                                            return <MatchCardPhone timeUp ={timeUp} setTimeUp = {setTimeUp} key={index} match = {value}   />
+                                        })
                                     }
                             </div>
                             }

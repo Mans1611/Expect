@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie';
 import Loading from '../loading/big.loading/Loading';
 import FetchingToken from '../../utilis/FetchingToken';
 
+
 const SignIn = () => {
     const location = useLocation();
     const redirect = location.state?.path || '/expect/home';
@@ -18,7 +19,8 @@ const SignIn = () => {
     const store = globalUser();
     const cookie = new Cookies();
     const [loading,setLoading] = useState(true);
-    const inputs = document.getElementsByClassName('inputFeild')
+    const inputs = document.getElementsByClassName('inputFeild');
+    
     for(let input of inputs){
         input.addEventListener('focus',()=>{
             setErrorMSg(false)
@@ -26,20 +28,21 @@ const SignIn = () => {
     }
 
     useEffect(()=>{
-        
+    
         return async()=>{
             try{ 
                 const token = cookie.get("token");
-                if(token){
-                    navigate('/expect/home')
-                    store.setAuth(true);
-                    const {data} = await axios.get(`/register/verifySession/${token}`);
+                
+                // if(token){
+                //     store.setAuth(true);
+                //     navigate('/expect/home')
+                //     const {data} = await axios.get(`/register/verifySession/${token}`);
                     
-                    store.setUserGlob(data.payload.userName);
-                    cookie.set("token",token,{
-                        maxAge : 60*60*8
-                    })
-                }
+                //     store.setUserGlob(data.payload.userName);
+                //     cookie.set("token",token,{
+                //         maxAge : 60*60*8*1
+                //     })
+                // }
                 }catch(err){
                     console.log(err);
                 }

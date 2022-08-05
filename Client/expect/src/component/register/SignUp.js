@@ -32,21 +32,12 @@ const SignUp = () => {
        
         return async()=>{
             
-            const token = cookie.get("token");
-            if(token){
-                navigate('/expect/home')
-                store.setAuth(true);
-                const {data} = await axios.get(`/register/verifySession/${token}`);
-                store.setUserGlob(data.payload.userName);
-                cookie.set("token",token,{
-                    maxAge : 60*60*8
-                })
-            }
-        try{
+            try{
             const response = await axios.get('/country/countries');
             setCountries(response.data);
             setLoading(false);
-        }catch(err){
+        }
+        catch(err){
             console.log(err);
         }
         
@@ -210,7 +201,8 @@ const SignUp = () => {
                                 <select id='country'  onChange={(e)=>{setCountry(e.target.value)}} className='selectCountry inputFeild'>
                                     <option className='defaultSelection' defaultChecked  value=''>Select Your fan country</option>
                                     {countriesOption.map((country,id)=>{
-                                        return <option value={country.countryName.toLowerCase()} key={id}>{country.countryName}</option> 
+                                        const countrylogo = { backgroundImage : `url(${country.logo})` }; 
+                                        return <option style= {countrylogo} value={country.countryName.toLowerCase()} key={id}>{country.countryName}</option> 
                                     })}
                                 </select>
                             }

@@ -8,6 +8,7 @@ import SmallNews from './SmallNews.js'
 import {useContext} from 'react';
 import { ThemeContext } from '../../../App';
 import { globalUser } from '../../../Context/HomeContext';
+import { useNavigate } from 'react-router-dom';
 const MainNews = ()=> {
 
     const {isDark} = globalUser();
@@ -15,17 +16,20 @@ const MainNews = ()=> {
     const [isLoading,setLoading] = useState(true);
     const [mainNews,setMainNews] = useState(null);
     
+    const navigate = useNavigate();
     
 
     useEffect(()=>{
         return async()=>{
             try{
-                const data = await fetchData('/news/getnews');
-                setNews(data);
-                setMainNews(data[0])
+                const response = await axios.get('/news/getnews')   
+                setNews(response.data);
+                setMainNews(response.data[0]) //  to pick the first news in the leatest news 
                 setLoading(false);
             }catch(err){
+                navigate('/register/signin');
                 console.log(err);
+                
             }
         }
     },[])

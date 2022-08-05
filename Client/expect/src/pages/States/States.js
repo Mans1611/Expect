@@ -7,6 +7,7 @@ import TopPlayers from '../../component/TopPlayers/TopPlayers';
 import HomeStanding from '../../component/HomeStanding/HomeStanding';
 import { globalUser } from '../../Context/HomeContext';
 import TopVotes from '../../component/TopVotes/TopVotes';
+import MatchCardPhone from '../../component/matchcards/MatchCardPhone/MatchCardPhone';
 
 const socket = io.connect('http://localhost:8000');
 
@@ -20,6 +21,7 @@ const States = ()=> {
         <div className="statesTitle">
           Statistics
         </div>
+       
         <TopPlayers/>
         <TopVotes/>
         <HomeStanding/>

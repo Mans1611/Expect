@@ -16,7 +16,7 @@ export default function(arr1, arr2){
             }
         });
     }
-    console.log(arrWithFlag[0]);
+   
     return arrWithFlag;
 }
 

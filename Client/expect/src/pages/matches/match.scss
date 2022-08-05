@@ -91,51 +91,82 @@
                 color: #272727;   
             }
             }
-        }
-        
-        
-    
-    
-        
-    
-}
-@media screen and (max-width: 960px) {
-    .match{
-       
-        .matchWrapper{
-            padding: 10px;
-            .matchTitle{
-                text-align: center;
-                font-size: 52px;
-                color: inherit;
-            }
-            .matchCardContainer{
-                grid-template-columns: repeat(3,33%);   
-            }
-        }
+        }    
     }
-    
-}
+
+    @media screen and (max-width: 960px) {
+        
+        .matchWrapper{
+            padding: 10px;
+            .matchTitle{
+                font-size: 46px;                       
+            }
+            .matchCard-container{
+                .matchCardGrid{
+                    margin: 20px 0;
+                    padding: 10px;
+                   
+                    grid-template-columns: repeat(3,33%);   
+                    height: calc(fit-content + 50px);
+                }
+            }   
+        }         
+    }
 @media screen and (max-width: 760px) {
-    .match{
+    
        
         .matchWrapper{
             padding: 10px;
             .matchTitle{
-                text-align: center;
+              
                 font-size: 60px;
                 padding: 10px ;
             }
-            .matchCardContainer{
-                grid-template-columns: repeat(2,50%);   
+            
+            .matchCard-container{
+                border-radius: 10px;
+                margin-bottom: 20px;
+                .matchCardGrid{
+                    margin: 20px 0;
+                    padding: 10px;
+                    
+                    grid-template-columns: repeat(2,50%);
+                    height: calc(fit-content + 50px);
+                }
+                
+                .matchcardButton-wrapper{
+                    button{
+                        width: 100%;
+                        font-size: 36px;
+                        font-weight: 600;
+                        margin: 0  auto;
+                        background-color: #FFD600;
+                        color: #fff;
+                        padding: 10px;
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        border-top-left-radius: inherit;
+                        border-top-right-radius: inherit;
+        
+                    }
             }
-        }
+            }
+        
+
     }
     
 }
 
-@media screen and (max-width: 576px) {
-    
+@media screen and (max-width: 480px) {
+    .dateContainer{
+        justify-content:center;    
+    }
+    .matchCard-container{
+        .matchCardGrid{
+            display: flex;
+            flex-direction: column;
+        }
+    }
     
 }
 

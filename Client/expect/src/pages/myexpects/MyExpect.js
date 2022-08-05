@@ -19,6 +19,7 @@ const MyExpects = () => {
     const [width,setWidth] = useState(window.innerWidth);
     const [totalPoints,setTotalPoints] = useState(0);
     const [Loading,setLoading] = useState(true);
+    
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
     })
