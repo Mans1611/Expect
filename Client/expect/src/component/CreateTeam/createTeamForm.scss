@@ -1,0 +1,41 @@
+.createTeamform{
+    .invitation{
+        color :#fee504; 
+        margin-bottom: 10px;
+    }
+    .code-Wrapper{
+        display: flex;
+        justify-content: space-between;
+        background-color: #222;
+        border-radius: 10px;
+        height: 40px;
+        width: fit-content;
+        margin: auto;
+        .codeCotenet{
+            font-size: 25px;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            color: #fff;
+            padding: 10px; 
+        }
+        .copyButton{
+            width: 100px !important;
+            height: 100%;
+            border: none !important;
+            font-size: 25px !important;
+            padding: 5px !important;
+            background-color: #444;
+            &:hover{
+                background-color: #fee504;
+                color: #111;
+                
+            }
+            &.copied{
+                background-color: #fee504;
+                color: #111;
+            }
+
+        }
+    }
+}

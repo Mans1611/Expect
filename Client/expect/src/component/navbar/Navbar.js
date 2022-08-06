@@ -12,7 +12,7 @@ const Navbar = () => {
     const [width , setWidth] = useState(window.innerWidth);
     const [scale, setScale] = useState(((width<680)? true : false));
     let items = document.getElementsByClassName('navbarLink');
-    const navbarItems = ["Home" , "Matches","MyExpects", "Standing"];
+    const navbarItems = ["Home", "Matches", "MyExpects", "Team" , "Standing"];
     const {isDark,setDark} = globalUser();
     const cookie = new Cookies();
    

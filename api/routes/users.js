@@ -7,8 +7,8 @@ import bcrypt from 'bcrypt';
 
 const users = express.Router();
 
-users.get('/standing',verify,async(req,res)=>{
-    const limit = req.query.limit || 3;
+users.get('/standing',async(req,res)=>{
+    const limit = req.query.limit || 5;
     
     const users = await User.find().sort({userPoints : -1}).limit(limit);
     if(users.length>0){

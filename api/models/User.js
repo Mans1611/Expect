@@ -9,7 +9,8 @@ const UserSchema = new Schema ({
     userCountry: {type:String,required:true},
     userPoints :{type:Number,default:0},
     isAdmin:{type:Boolean,default:false},
-    isVerified : {type:Boolean,default:false}
+    isVerified : {type:Boolean,default:false},
+    team : {type : Object, default : null}
 })
 
 const User = model('User' , UserSchema );

@@ -179,4 +179,21 @@
         }
         
     } 
+    @media screen and (max-width:480px) {
+        .matchCardCountryImg{
+            width: 30px;
+            height: 30px;
+        }
+        .timeLeftLabel{
+            font-size: 20px;
+            color: $gold;
+            font-weight: 600;
+        }
+        .timeLeft{
+            font-size: 18px;
+            
+        }
+        
+    } 
+
 }

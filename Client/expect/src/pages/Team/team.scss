@@ -1,0 +1,10 @@
+.teamPage{
+    min-height: fit-content;
+    height: 700px;
+    background: linear-gradient(180deg, #eee 1%, #ccc 93%);
+    &.dark{
+        background: linear-gradient(180deg, #272727 1%, #111 93%);
+     
+    }
+
+}

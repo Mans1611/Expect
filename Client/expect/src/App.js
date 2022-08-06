@@ -24,8 +24,10 @@ import States from './pages/States/States';
 import AdminLogin from './adminPage/pages/AdminLogin/AdminLogin';
 import AdminSignUp from './adminPage/pages/AdminLogin/AdminSignUp';
 import { ProtectedAdminProvider } from './adminPage/Context/ProtectedAdmin';
-import Wrapper from './adminPage/pages/Wrapper';
 import AddNews from './adminPage/pages/AddNews/AddNews';
+import Team from './pages/Team/Team';
+import MyTeam from './component/TeamComponent/MyTeam/MyTeam';
+import CreateJoinTeam from './component/TeamComponent/JoinCrateTeam/CreateJoinTeam';
 export const ThemeContext = createContext(true);
 
 
@@ -43,6 +45,11 @@ const  App = ()=> {
             <Route path='matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<RequiredAuth childern={<MyExpects/>}></RequiredAuth> }/>
+            <Route path="team" element={<RequiredAuth childern={<Team/>}></RequiredAuth> }>
+              <Route path="myTeam" element = {<MyTeam />} />
+              <Route path="teamjoin" element = {<CreateJoinTeam />} />
+            </Route>
+            
             <Route path="standing" element={<RequiredAuth childern={<States/>}></RequiredAuth> }/>
             <Route path="myprofile/:userName" element={<MyProfile/>}/>
           </Route>

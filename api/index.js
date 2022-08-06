@@ -19,6 +19,7 @@ import admin from './routes/admin.js';
 import statistics from './routes/statistics.js';
 import session from 'express-session';
 import MongoSessions from 'connect-mongodb-session'; // to connect the session in the DB
+import team from './routes/team.js';
 
 const MongoDBSession = MongoSessions(session);
 
@@ -49,7 +50,7 @@ app.use(session({
     secret : "mansour is an idiot man",
     saveUninitialized : false,
     cookie : {
-        maxAge : 1000 * 5 ,
+        maxAge : 1000 * 60 * 60 ,
         httpOnly : false
     },
     store : storeSession        
@@ -64,6 +65,7 @@ app.use('/users',users);
 app.use('/expects',expects);
 app.use('/admin',admin);
 app.use('/statistics',statistics);
+app.use('/team',team);
 
 app.use(cors());
 

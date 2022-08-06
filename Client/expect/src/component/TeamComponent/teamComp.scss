@@ -1,0 +1,216 @@
+.TeamComponent-containetr{
+    padding:  30px 20px  ;
+    background-color:transparent ;
+    .teamNavbar{
+        margin-left: 30px;
+        ul{
+            list-style: none;
+            display: flex;
+            width: fit-content;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            background-color: #eee;
+            a{
+                text-decoration: none;
+                color: #111;
+                li{
+                    font-size: 40px;
+                    font-weight: 500;
+                    padding: 10px 10px;
+                   
+                    &:hover{
+                        background-color: #fee504;
+                        border-radius: 10px;
+                        color: #111;
+                    }
+                    &.second{
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                        border-bottom-right-radius: 0;
+                        
+                    }
+                    &.first{
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                        border-bottom-left-radius: 0;
+                    }
+                }
+            }
+        }
+    }
+    .TeamComponent{
+      
+        padding:  10px ;
+        width: 600px;
+        margin: 10px auto; 
+        .selected{
+            background-color: #fee504;
+            border-radius: 10px;
+            color: #111;
+        } 
+        .teamContent{
+            padding: 30px 10px ;
+            border-radius: 20px;
+            width: 600px;
+            background: linear-gradient(-135deg, rgba(248,222,222,1) 0%, #fee504af); 
+            border: 2px solid #111;
+        } 
+        .teamJoin{
+            .options{
+                &>button{
+                    width: 70%;
+                    margin: 10px auto;
+                    padding: 5px 10px;
+                    font-size: 40px;
+                    background-color: rgba(34, 34, 34, 0.697);
+                    outline: none;
+                    &:hover{
+                        background-color: #222;
+                        
+                    }
+                }
+                form{
+
+                    input{
+                        width: 70%;
+                        height: 50px;
+                        border: solid #eee 2px;
+                        outline: none;
+                        background-color: #373737;
+                        font-size: 24px;
+                        padding: 10px;
+                        color: #eee;
+                        &:focus{
+                            border: solid #c40027 2px;   
+                        }
+                    }
+                        .cancel{
+                            background : #ffffff88;
+                            border: 2px solid #c40027 ;
+                            color: #c40027 ;
+                           
+                        }
+                        .generateCode{
+                            background-color: #ffffff88 ;
+                            color: #111;
+                            border: 2px solid rgb(0, 186, 0);
+                            color: rgb(0, 186, 0);
+                            
+                        }
+
+                    .button-Wrapper{
+                        display: flex;
+                        justify-content: center;
+                        width: 70%;
+                        margin: 10px auto;
+                        button{
+                            width: 40%;
+                            margin: 0 10px 0 0;
+                            margin: 0 2px ;
+                            font-size: 30px;
+                            padding: 5px 10px;
+                        }
+
+                    }
+                   
+                }
+            }
+        }
+    }
+
+
+    /* dark mode*/
+
+    &.dark{
+        .teamNavbar{
+            ul{
+                background-color: #222;
+                a{
+                    color: #eee;
+                }
+            }
+        }
+        .teamContent{
+            
+            background: linear-gradient(-135deg, rgb(62, 62, 62) 0%, #706d57cc);
+            
+            .teamJoin{
+                .options{
+                    &>button{
+                        width: 70%;
+                        margin: 10px auto;
+                        padding: 5px 10px;
+                        font-size: 40px;
+                        background : rgba(15, 15, 15, 0.701);
+                        border: 2px solid #fee504;
+                        outline: none;
+                        &:hover{
+                            background-color: #fee504;
+                            
+                        }
+                    }
+                    .selected{
+                        color: #fff;
+                    }
+                        form{
+                            input{  
+                                border: solid #eee 2px;
+                                background-color: #171717;
+                                font-size: 24px;
+                                color: #fee504;
+                                &:focus{
+                                    border: solid #fee504 3px;   
+                                }
+                            }
+                            button{
+                                width: 49%;
+                                text-align: center;
+                                border: none;
+                                svg{
+                                    margin-left: 5px;
+                                }
+                            }
+                            .cancel{
+                                background : #171717;
+                                border: 2px solid #c40027 ;
+                                svg{
+                                    color : #c40027;
+                                    
+                                }
+                            }
+                            .generateCode{
+                                background-color: #171717 ;
+                                border: 2px solid rgb(0, 186, 0);
+                                svg{ 
+                                    color: rgb(0, 186, 0);
+                                }
+                            }
+                            .button-Wrapper{
+                                margin: 10px auto;
+                                &>button{
+                                    margin: 0 2px ;
+                                    font-size: 30px;
+                                    padding: 5px 10px;
+                                }
+                            }
+                            }
+
+                        
+                }
+
+            }
+        }
+                
+
+    }
+
+
+}
+@keyframes appear {
+    from{
+        height: 0;
+    }
+    to{
+        height: fit-content;
+    }
+}
