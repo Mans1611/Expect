@@ -4,7 +4,7 @@ import crypto from 'crypto' ;
 import MakeCode from './utilis/RandomChar.js';
 import Teams from '../models/Teams.js';
 import User from '../models/User.js';
-
+import joinTeamValidation from '../middleware/JoinTeamValidation.js';
 const team = express.Router();
 
 
@@ -42,6 +42,41 @@ team.post('/createteam',TeamValidation,async(req,res)=>{
 })
 
 
+team.put('/jointeam',joinTeamValidation,async(req,res)=>{
+    console.log(req.body);
+    const { user, team, teamCode, userName } = req.body;
+    team.teamMembers.push({
+        userName : user.userName,
+        totalPoints : user.userPoints
+    });
+    user.team = team;
+    
+   
+    // await Teams.updateOne({teamCode}, team);
+    // await User.updateOne({userName}, user);
+
+    res.status(200).send("joined Successfully");
+})
+
+
+// i expect sending from front end username of the leaving user. 
+team.put('/leaveteam',async(req,res)=>{
+    
+    const {userName} = req.body; 
+    let user = await User.findOne({userName});
+    if(!user.team) 
+        return res.status(400).send("You are not in a team!");
+    let team = await Teams.findOne({teamName : user.team.teamName});
+
+    // so we filter out the speceific team member. 
+    team.teamMembers = team.teamMembers.filter((member)=> member.userName !==userName);
+    
+    // so we make it null since he left the team.
+    user.team = null ;
+    await User.updateOne({userName},user);
+    await Teams.updateOne({teamName : team.teamName},team);
+    res.status(200).send(team)
+})
 
 
 export default team;

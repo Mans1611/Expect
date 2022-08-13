@@ -42,7 +42,7 @@ const TeamComponent = () => {
             <div className="teamNavbar">
                 <ul>
                     <Link to='myTeam'><li id='myTeam' className='navbar-item first'> My Team</li></Link>
-                    <Link to='teamjoin'> <li id ='teamjoin' className='navbar-item second'>Create Or Join Team</li></Link>
+                    <Link to='teamjoin'> <li id ='teamjoin' className='navbar-item second'>Create-Join Team</li></Link>
                 </ul>
             </div>
             <div className="teamContent">

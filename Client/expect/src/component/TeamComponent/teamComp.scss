@@ -1,5 +1,5 @@
 .TeamComponent-containetr{
-    padding:  30px 20px  ;
+    padding:  30px 0  ;
     background-color:transparent ;
     .teamNavbar{
         margin-left: 30px;
@@ -9,7 +9,7 @@
             width: fit-content;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            background-color: #eee;
+            background-color: #b1b1b1;
             a{
                 text-decoration: none;
                 color: #111;
@@ -49,11 +49,11 @@
             color: #111;
         } 
         .teamContent{
-            padding: 30px 10px ;
+            padding:  0px ;
             border-radius: 20px;
             width: 600px;
             background: linear-gradient(-135deg, rgba(248,222,222,1) 0%, #fee504af); 
-            border: 2px solid #111;
+           
         } 
         .teamJoin{
             .options{
@@ -111,6 +111,21 @@
                             padding: 5px 10px;
                         }
 
+                    }
+                    .invalid-msg{
+                        width: fit-content;
+                        background-color: #ff466b;
+                        border-left: 10px solid #d5002b;
+                        border-radius: 5px;
+                        color: #fff;
+                        font-size: 22px;
+                        margin: 5px auto;
+                        padding: 5px 10px;
+                        &.green{
+                            background-color: #00de30e2;
+                            border-left: 10px solid #22fc00;
+                            
+                        }
                     }
                    
                 }

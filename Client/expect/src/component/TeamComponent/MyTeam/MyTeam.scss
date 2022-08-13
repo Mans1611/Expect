@@ -1,0 +1,162 @@
+@import '../../../.mainStyle.scss';
+
+
+.myteam-container{
+    background-image: url(https://static.vecteezy.com/system/resources/previews/003/098/572/original/stadium-football-background-at-night-free-vector.jpg) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius: inherit;
+    padding-bottom: 10px;
+    &::before{
+        content: "";
+        background-color: #414141c8;
+        z-index:998;
+        border-radius: inherit;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+    .myteamHeader{
+        position: relative;
+        //background-color: #171717;
+        z-index: 999;
+        color: #ffe100;
+        padding: 40px 5px 5px 0px;
+        .teamNameWrapper{
+            font-size: 35px;
+            padding-left: 75px ;
+            h5{
+                color: #fff;
+            }
+        }
+        .details{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 20px;
+            .teamDetail{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: #444444bd;
+                border: 2px solid #272727;
+                padding: 10px;
+                border-radius: 10px;
+                .deatil{
+                    color: #ffe100;
+                    text-shadow: none;
+                    font-size: 45px;
+                    font-weight: 500;
+                }
+                .deatilTitle{
+                    color: #eee;
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+    .teamTable{
+        margin:10px 0 ;
+        background-color: #1f1f1f93;
+        position: relative;
+        z-index: 999;
+        .teamTableTitle{
+            color: #fff;
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            padding : 10px;
+        }
+        
+        .table-Container{
+            border-radius: 10px;
+            width: 80%;
+            margin: auto;
+            
+            .tableRow{
+                background-color: #ffe100;
+                color: #171717;
+                font-size: 28px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 10px;
+                font-weight: 700;
+                &.user{
+                    background-color: #dadada18;
+                    color: #fff;
+                    border-bottom: 1px solid #111;
+                    font-weight: 500;
+                    padding: 1px 5px;
+                    cursor: pointer;
+                    &:hover{
+                        transform: scaleX(1.05);
+                        color: #cdb91f;
+                    }
+                }
+            }
+        }
+    }
+    .options{
+        position: relative;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        .button{
+            margin: 2px 10px ;
+            width: 200px;
+            font-size: 28px;
+            color: #fff;
+            border: 2px solid #111;
+            &.invite{
+                background-color:#348900 ;
+                &:hover{
+                    background-color:#266300;;
+                }
+            }
+            &.danger{
+                background-color:#fe2828b4 ;
+                &:hover{
+                    background-color:#ff0000b4;;
+                }
+            }
+        }
+        .invitation{
+            margin: 10px 0;
+            font-size: 25px;
+            color: #ffe100;
+        }
+    }
+    .deleteWrapper{
+        padding: 5px 10px;
+        width: 40%;
+        display: flex;
+        background-color: #171717be;
+        justify-content: space-around;
+        border-radius: 5px;
+        button{
+            width: 49%;
+            color: #fff;
+           
+            border: 2px solid #111;
+            &.green{
+                background-color:#348900 ;
+                &:hover{
+                    background-color:#266300;;
+                }
+            }
+            &.danger{
+                background-color:#fe2828b4 ;
+                &:hover{
+                    background-color:#ff0000b4;;
+                }
+            }
+        }
+    }
+}

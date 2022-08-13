@@ -1,5 +1,6 @@
 import { useState } from "react"
 import './createTeamForm.scss';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const ClipBoardCopy = ({text})=>{
     const [isCopied,setIsCopied] = useState(false);
 
@@ -29,7 +30,7 @@ const ClipBoardCopy = ({text})=>{
             </div>
             <div className="code-Wrapper">
                 <input value = {text}className="codeCotenet" readOnly / >
-                <button className= {`copyButton ${isCopied ? 'copied':null}`} onClick={handleCopy}>{isCopied ? 'Copied!' : 'Copy'}</button>
+                <button className= {`copyButton ${isCopied ? 'copied':null}`} onClick={handleCopy}>{isCopied ? 'Copied!' : 'Copy'} <ContentCopyIcon/> </button>
             </div>
         </>
     )

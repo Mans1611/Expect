@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import './createTeamForm.scss';
 import ClipBoardCopy from "./ClipBoard";
 import { TeamContext } from "../TeamComponent/TeamComponent";
+import Axios from "../../Axios/axios";
 
 const CreateTeamForm = ()=>{
     const {userGlob} = globalUser();
@@ -16,26 +17,36 @@ const CreateTeamForm = ()=>{
     const [loading,setLoading] = useState(false);
     const [showTeamCode,setShowTeamCode] = useState(false);
     const [teamCode,setTeamCode] = useState('');
+    const [showMsg,setShowMsg] = useState(false);
+    const [msg,setMsg] = useState('');
     const {setShowCreateTeam,setShowJoinTeam} = useContext(TeamContext);
+    
     const handleCreatTeam = async(e)=>{
         e.preventDefault();
-        setLoading(true)
         const teamName = document.getElementById('teamName').value;
-        
-        if(!checkValidation(teamName))
-            return document.getElementById('teamErrMsg').innerHTML = 'Check The Team Name Agian';
+        console.log(teamName);
+        if(!checkValidation(teamName)){
+            setShowMsg(true)
+            return setMsg('The Team Name is Empty');
+        }
         try{
+            setLoading(true)
             const requsetBody = {
                 userName : userGlob,
                 teamName
             }
-
-            const response = await axios.post('/team/createteam',{
+            
+            const response = await Axios.post('/team/createteam',{
                 body : JSON.stringify(requsetBody)
             })
-            
-            setTeamCode(response.data.teamCode);
-            setShowTeamCode(true);
+            if(response.status >= 400){
+                setMsg(response.data)
+                setShowMsg(true)
+            }
+            else{ 
+                setTeamCode(response.data.teamCode);
+                setShowTeamCode(true);
+            }
             setLoading(false);
 
         }
@@ -44,6 +55,7 @@ const CreateTeamForm = ()=>{
             console.log(err);
         }
     }
+    
 
    if(loading)
         return (<SmallLaoding/>)
@@ -56,7 +68,8 @@ const CreateTeamForm = ()=>{
                <ClipBoardCopy text = {teamCode}/>
                 : 
                 <form className='team-form'>
-                    <input id='teamName' placeholder='Enter Team Name' type="text" name="teamName" />
+                    <input id='teamName' maxLength={24} placeholder='Enter Team Name' type="text" name="teamName" />
+                    {  showMsg &&  <div className={`invalid-msg`}>{msg}</div> } 
                     <div className="button-Wrapper">
                         <button onClick={(e)=>{e.preventDefault();setShowCreateTeam(false);setShowJoinTeam(false)}} className='cancel'>Cancel <CancelIcon/> </button>
                         <button onClick={handleCreatTeam} className='generateCode'>Create Team <CheckCircleIcon/></button>

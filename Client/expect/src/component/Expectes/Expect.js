@@ -60,7 +60,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
             <div className={`yourExpect ${isDark?'dark':''}`}>
                 <h3>YourExpections</h3>
                 <div className="ExpectionsContent"> Winner : <span className="userExpect"> {userExpect.winnerValue}</span>  </div>
-                <div className="ExpectionsContent"><ScoreboardIcon/> Result : <span className="userExpect"> {userExpect.result1_value}  :  {userExpect.result2_value} </span> </div>
+                <div className="ExpectionsContent"><ScoreboardIcon/> Result :  <span className="userExpect"> {userExpect.result1_value}  -  {userExpect.result2_value} </span> </div>
             </div>
             
             

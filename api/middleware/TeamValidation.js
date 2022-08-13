@@ -8,14 +8,14 @@ const TeamValidation = async (req,res,next)=>{
     
     const existTeam = await Teams.findOne({teamName : req.body.teamName});
     
-    // if(existTeam)
-    //     return res.status(203).send("This team already exist")
+    if(existTeam)
+        return res.status(400).send("This team already exist")
 
 
     const user = await User.findOne({userName : req.body.userName});
     
-    // if(user.team) 
-    //     return res.status(203).send("You Already exist in a team");
+    if(user.team) 
+        return res.status(400).send("You Already in a team");
     
     req.body.user = user; 
     next();
