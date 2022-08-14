@@ -10,7 +10,8 @@ const UserSchema = new Schema ({
     userPoints :{type:Number,default:0},
     isAdmin:{type:Boolean,default:false},
     isVerified : {type:Boolean,default:false},
-    team : {type : Object, default : null}
+    team : {type : Object, default : null},
+    userStanding : {type:Number,required:true}
 })
 
 const User = model('User' , UserSchema );

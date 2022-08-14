@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { TeamContext } from '../TeamComponent'
@@ -13,9 +13,18 @@ const CreateJoinTeam = () => {
     
     
     const {
-        showcreateTeam,setShowCreateTeam,
-        showJoinTeam, setShowJoinTeam
-    } = useContext(TeamContext)
+            showcreateTeam,setShowCreateTeam,
+            showJoinTeam, setShowJoinTeam
+          } = useContext(TeamContext)
+
+          useEffect(()=>{
+            const previous = document.getElementsByClassName('selected')[0];
+                console.log(previous);
+                if(previous){
+                    previous.className = previous.className.replace(" selected","")
+                }
+        },[])
+    
 
     return (
     <div className='teamJoin'>

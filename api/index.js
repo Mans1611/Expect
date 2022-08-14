@@ -1,26 +1,25 @@
-import  express, {Router} from 'express';
+import  express from 'express';
 import  mongoose from 'mongoose';
 import dotenv from 'dotenv'
-
-import  matchesRoute from './routes/matches.js';
-import  countryRoute from './routes/country.js';
-import news from './routes/news.js'
-import cors from 'cors' ;
 import http from 'http' ;
-dotenv.config();
+import cors from 'cors' ;
+import session from 'express-session';
+import MongoSessions from 'connect-mongodb-session'; // to connect the session in the DB
+import { Server } from 'socket.io';
+import  countryRoute from './routes/country.js';
 import register from './routes/register.js';
+import news from './routes/news.js'
+import  matchesRoute from './routes/matches.js';
 import users from './routes/users.js';
 import expects from './routes/expects.js';
-import { Server } from 'socket.io';
 import { updateMatch } from './socket.ioFunctions/updateMatch.js';
-import { getMatches } from './socket.ioFunctions/getMatches.js';
 import Matches from './models/Matches.js';
 import admin from './routes/admin.js';
 import statistics from './routes/statistics.js';
-import session from 'express-session';
-import MongoSessions from 'connect-mongodb-session'; // to connect the session in the DB
 import team from './routes/team.js';
+import { SortingTeams, SortingUsers } from './routes/utilis/SortingTeams.js';
 
+dotenv.config();
 const MongoDBSession = MongoSessions(session);
 
 const app = express();
@@ -97,6 +96,11 @@ io.on('connection',(socket)=>{
 
 server.listen(port,()=>{
     console.log("http://localhost:" + port);
+    (async()=>{
+        await SortingTeams();
+        await SortingUsers()
+    })()
+
 })
 
 

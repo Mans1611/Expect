@@ -1,6 +1,21 @@
 @import '../../../.mainStyle.scss';
 
 
+.NoTeam{
+    padding:20px 10px;
+    color: #e7e7e7;
+    background-color: #171717;
+    font-size: 36px;
+    text-align: center;
+    border-radius: inherit;
+    font-weight: 600;
+    a{
+        color: rgb(0, 128, 255);
+        &:hover{
+            color: #ffe100;
+        }
+    }
+}
 .myteam-container{
     background-image: url(https://static.vecteezy.com/system/resources/previews/003/098/572/original/stadium-football-background-at-night-free-vector.jpg) ;
     background-repeat: no-repeat;

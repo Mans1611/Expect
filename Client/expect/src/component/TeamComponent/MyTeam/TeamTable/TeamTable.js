@@ -1,7 +1,7 @@
 import React from 'react'
 import UserRow from './UserRow'
 
-const TeamTable = () => {
+const TeamTable = ({teamMembers}) => {
   return (
     <div className='teamTable'>
         <div className="teamTableTitle">Team Standing</div>
@@ -11,9 +11,12 @@ const TeamTable = () => {
                 <span className="tableHead-item">UserName</span>
                 <span className="tableHead-item">Share Points</span>
             </div>
-            <UserRow standing={1} userName={"mans"} sharePoints={"18pt"}/>
-            <UserRow standing={2} userName={"mans1211"} sharePoints={"12pt"}/>
+            {
+              teamMembers.map((member,index)=>
+                <UserRow key={index} standing={index+1} userName={member.userName} sharePoints={member.totalPoints}/>
+              )
 
+            }
 
         </div>
     </div>

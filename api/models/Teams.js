@@ -17,6 +17,11 @@ const teamSchema = new Schema({
     teamCode : {
         type : String,
         required : true
+    },
+    teamStanding : {
+        type : Number,
+        required : false,
+        
     }
 
 })

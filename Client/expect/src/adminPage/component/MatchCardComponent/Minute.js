@@ -23,7 +23,13 @@ const Minute = ({matchTime,min,setMin})=> {
         const now = new Date().getTime();
         const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
         setMin(passed - (store.match.stoppingTime));
-        if(min === 1 ) {
+    },[refresh])
+
+    useEffect(()=>{
+        const now = new Date().getTime();
+        const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
+        setMin(passed - (store.match.stoppingTime));
+        if(min >= 1 ) {
             try{
                 store.dispatch({type : "Started"});
                 socket.emit('updatingMatch',{
@@ -36,10 +42,7 @@ const Minute = ({matchTime,min,setMin})=> {
             }    
             
         }  
-        
-
-
-    },[refresh])
+    },[])
 
 
 

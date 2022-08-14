@@ -4,7 +4,7 @@ import SmallLaoding from "../loading/small.loading/smallLoading";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import axios from 'axios';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import './createTeamForm.scss';
 import ClipBoardCopy from "./ClipBoard";
 import { TeamContext } from "../TeamComponent/TeamComponent";
@@ -13,18 +13,22 @@ import Axios from "../../Axios/axios";
 const CreateTeamForm = ()=>{
     const {userGlob} = globalUser();
 
-
     const [loading,setLoading] = useState(false);
     const [showTeamCode,setShowTeamCode] = useState(false);
     const [teamCode,setTeamCode] = useState('');
     const [showMsg,setShowMsg] = useState(false);
     const [msg,setMsg] = useState('');
-    const {setShowCreateTeam,setShowJoinTeam} = useContext(TeamContext);
     
+    const {
+            setShowCreateTeam,setShowJoinTeam,
+            user_team,setUserTeam
+          } = useContext(TeamContext);
+    
+    
+
     const handleCreatTeam = async(e)=>{
         e.preventDefault();
         const teamName = document.getElementById('teamName').value;
-        console.log(teamName);
         if(!checkValidation(teamName)){
             setShowMsg(true)
             return setMsg('The Team Name is Empty');
@@ -46,6 +50,8 @@ const CreateTeamForm = ()=>{
             else{ 
                 setTeamCode(response.data.teamCode);
                 setShowTeamCode(true);
+                console.log(response.data.team);
+                setUserTeam(response.data.team)
             }
             setLoading(false);
 
@@ -78,13 +84,7 @@ const CreateTeamForm = ()=>{
 
                 }   
             </div>
-        )
-
-            
-
-        
-            
-        
+        )     
     }
 }
 

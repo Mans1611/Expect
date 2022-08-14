@@ -1,19 +1,19 @@
 import './teamComp.scss';
 
-import React, {useState,createContext} from 'react'
+import React, {useState,createContext, useEffect} from 'react'
 import { Link, Routes,Route,useLocation } from 'react-router-dom';
 import MyTeam from './MyTeam/MyTeam';
 import CreateJoinTeam from './JoinCrateTeam/CreateJoinTeam';
 import { globalUser } from '../../Context/HomeContext';
-
+import Axios from '../../Axios/axios';
 export const TeamContext = createContext(null);
 
 const TeamComponent = () => {
-    const {isDark} = globalUser();
+    const {isDark, userGlob} = globalUser();
 
     const [showcreateTeam, setShowCreateTeam] = useState(false);
     const [showJoinTeam, setShowJoinTeam] = useState(false);
-
+    const [user_team,setUserTeam] = useState(null);
     let location = useLocation().pathname.split("/")[3]; 
     let item = document.getElementById(location)
 
@@ -31,10 +31,19 @@ const TeamComponent = () => {
         })
     } 
 
+    useEffect(()=>{
+        return async()=>{
+          const {data} = await Axios.get(`/team/myteam/${userGlob}`);
+          console.log(data);
+          setUserTeam(data);
+        }
+      },[])
+
   return (
     <TeamContext.Provider value={{
         showcreateTeam,setShowCreateTeam,
-        showJoinTeam, setShowJoinTeam
+        showJoinTeam, setShowJoinTeam,
+        user_team,setUserTeam
         }}>
 
         <div className={`TeamComponent-containetr ${isDark ? 'dark' : null}`}>

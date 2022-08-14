@@ -9,7 +9,7 @@ import Axios from "../../../Axios/axios";
 const JoinTeamForm = ()=>{
     const {userGlob} = globalUser();
     
-    const {setShowJoinTeam,setShowCreateTeam} = useContext(TeamContext) ;
+    const {setShowJoinTeam,setShowCreateTeam,user_team,setUserTeam} = useContext(TeamContext) ;
     const [loading,setLoading] = useState(false);
     const [showMsg,setShowMsg] = useState(false);
     const [msg,setMsg] = useState('');
@@ -28,13 +28,14 @@ const JoinTeamForm = ()=>{
                 data :  JSON.stringify(requsetBody)
             })
             if(response.status >= 400){
-                setMsg(response.data)
+                setMsg(response.data.msg)
                 setShowMsg(true)
             }
             else{ 
                console.log(response);
-               setMsg(response.data);
-               setMsgColor('green')
+               setMsg(response.data.msg);
+               setMsgColor('green');
+               setUserTeam(response.data.team)
                setShowMsg(true);
 
             }

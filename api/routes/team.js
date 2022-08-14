@@ -5,26 +5,36 @@ import MakeCode from './utilis/RandomChar.js';
 import Teams from '../models/Teams.js';
 import User from '../models/User.js';
 import joinTeamValidation from '../middleware/JoinTeamValidation.js';
+
+import {SortingTeams} from './utilis/SortingTeams.js';
+import Expects from '../models/Expects.js';
+import Filter_User_Expects_4Team from './utilis/FilterUserExpectsForTeam.js';
+
 const team = express.Router();
 
 
 
 team.post('/createteam',TeamValidation,async(req,res)=>{
     const { userName , teamName , user } = req.body;
-
     const teamCode = MakeCode(20);
    
     // creating a team 
+    const joinedTime = new Date();
+    const teamStanding = await Teams.find().count() + 1;
+    const {expects:userExpects} = await Expects.findOne({userName});
+    const userExpects4Team = Filter_User_Expects_4Team(userExpects,joinedTime)
+    
     const team = new Teams({
         teamName ,
         teamCode,
         teamMembers : [{
             userName : user.userName,
-            totalPoints : user.userPoints
-        }]
+            expects:userExpects4Team,
+            joinedTime 
+        }],
+        teamStanding,
     })
-    // pushing the user to the team
-    
+ 
     // saving a team
     await team.save(()=>{
         console.log("team is created succ");
@@ -34,8 +44,12 @@ team.post('/createteam',TeamValidation,async(req,res)=>{
     await User.updateOne({userName},user);
     
     // sending the teamCode back to the client so he can invite his friends
-    const data = JSON.stringify({teamCode,msg: "Created Successfully"});
-    console.log("The Data is " + data);
+    const data = JSON.stringify({
+            teamCode,
+            msg: "Created Successfully",
+            team
+        });
+    
     res.status(201).send(data);
 
 
@@ -43,19 +57,24 @@ team.post('/createteam',TeamValidation,async(req,res)=>{
 
 
 team.put('/jointeam',joinTeamValidation,async(req,res)=>{
-    console.log(req.body);
     const { user, team, teamCode, userName } = req.body;
+    const joinedTime = new Date();
+    const {expects : userExpects} =  await Expects.findOne({userName:user.userName});
+    //filter Expects 
+    const user_Expects_To_Team = Filter_User_Expects_4Team(userExpects,joinedTime);
+    console.log(user_Expects_To_Team);
     team.teamMembers.push({
         userName : user.userName,
-        totalPoints : user.userPoints
+        totalPoints : user.userPoints,
+        joinedTime,
+        expect : user_Expects_To_Team
     });
     user.team = team;
-    
-   
-    // await Teams.updateOne({teamCode}, team);
-    // await User.updateOne({userName}, user);
 
-    res.status(200).send("joined Successfully");
+    await Teams.updateOne({teamCode}, team);
+    await User.updateOne({userName}, user);
+
+    res.status(200).send({team,msg : "Joined Successfully"});
 })
 
 
@@ -66,17 +85,62 @@ team.put('/leaveteam',async(req,res)=>{
     let user = await User.findOne({userName});
     if(!user.team) 
         return res.status(400).send("You are not in a team!");
-    let team = await Teams.findOne({teamName : user.team.teamName});
-
-    // so we filter out the speceific team member. 
-    team.teamMembers = team.teamMembers.filter((member)=> member.userName !==userName);
     
-    // so we make it null since he left the team.
-    user.team = null ;
-    await User.updateOne({userName},user);
-    await Teams.updateOne({teamName : team.teamName},team);
-    res.status(200).send(team)
+    try{
+        let team = await Teams.findOne({teamName : user.team.teamName});
+        // if the user was the last one we will delete the team. 
+        if(team.teamMembers.length === 1) {
+            await Teams.deleteOne({teamName : team.teamName});
+            user.team = null ;
+            await User.updateOne({userName},user);
+            res.status(200).send("done");
+        }
+        else{
+            
+            // so we filter out the speceific team member. 
+            team.teamMembers = team.teamMembers.filter((member)=> member.userName !== userName);
+            // so we make it null since he left the team.
+            user.team = null ;
+            await User.updateOne({userName},user);
+            await Teams.updateOne({teamName : team.teamName},team);
+            res.status(200).send(team);
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+        })
+
+
+
+
+
+// this route is for myteam Component
+team.get('/myteam/:userName',async(req,res)=>{
+    const {userName} = req.params;
+    try{
+        const user = await User.findOne({userName});
+        if(!user)
+            return res.status(404).send("this user is not found");
+
+        if(!user.team)
+            return res.status(200).send(null);
+        const team = await Teams.findOne({teamName : user.team.teamName});
+        res.status(200).send(team);   
+    }
+    catch(err){
+        console.log(err);
+    }
 })
 
+
+
+
+
+team.get('/sort',async(req,res)=>{
+    //this function will sort the team and updarte the database.
+    await SortingTeams();
+    res.send("done")
+})
 
 export default team;

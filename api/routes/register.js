@@ -39,12 +39,12 @@ router.post('/signup',async(req,res)=>{
     
     const genSalt = await bcrypt.genSalt(parseInt(process.env.SALT));
     const hashed = await bcrypt.hash(password,genSalt);
-
-    const user = await new User({
-        userName,password:hashed,phoneNumber,email,userCountry
+    const userStanding = await User.find().count() + 1;
+    const user =  new User({
+        userName,password:hashed,phoneNumber,email,userCountry,userStanding
     });
-    const msg = `hello expecter ${userName}`;
-    await mailVerification(email,msg);
+    // const msg = `hello expecter ${userName}`;
+    // await mailVerification(email,msg);
     const token = jwt.sign({userName,email},process.env.JWT);
     
     const expects = new Expects({userName})// creating a new expect documentation 

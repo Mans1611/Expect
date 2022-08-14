@@ -29,11 +29,16 @@ expects.post('/addexpect/:userName',async(req,res)=>{
         const user = await Expects.findOne({userName:req.params.userName});
         const {mutatePlayer1,mutatePlayer2} = req.body;
         const match = await Matches.findOne({matchId : req.body.matchId});
-        match.firstCountry.players[mutatePlayer1.index].votes +=1 ; // this to increse the number of votes for the se;cted player 
+
+        // this to increse the number of votes for the se;cted player 
+        match.firstCountry.players[mutatePlayer1.index].votes +=1 ; 
         match.secondCountry.players[mutatePlayer2.index].votes +=1 ;
         match.votes += 1;
         await Matches.updateOne({matchId : req.body.matchId},match);
-        user.expects.push(req.body);
+
+        // here I add the match time to the user expectes, as I will need it in the Team Calculation if he joined a team.
+        user.expects.push({matchTime : match.matchTime,...req.body});
+
         await Expects.updateOne({userName:req.params.userName},user);
         res.status(201).json({msg:"Successfully Added To MyExpects Secotion"});
     }catch(err){
