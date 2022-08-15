@@ -2,7 +2,9 @@
 // game in mutateplyar i have attached the index of each player so we can reach it in the array
 // without searching for it.
 
-export default function AddingPointsToUSers(matches,userExpections){
+//import expects from "../../models/Expects.js";
+
+export default async function AddingPointsToUSers(matches,userExpections){
     let totalPoints = 0;
 
     for(let i = 0; i < userExpections.length;i++){
@@ -34,20 +36,13 @@ export default function AddingPointsToUSers(matches,userExpections){
                                 WinnerPoints = (WINNER === userExpections[i].winnerValue) ? 3 : 0;
                                 matchPoints += WinnerPoints;
                             }
-
-
                         }
                     
                     userExpections[i].userPoints = matchPoints;
                     totalPoints += matchPoints;
-
-                }
-               
-
+                }  
             })
         }
-
-       
     return  {userExpections,totalPoints};
     }
 

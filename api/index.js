@@ -77,8 +77,7 @@ mongoose.connection.once('open',()=>{
 
 io.on('connection',(socket)=>{
     try{
-        socket.on('updatingMatch',async (data)=>{ 
-           
+        socket.on('updatingMatch',async (data)=>{
             await updateMatch(data);
             const matches = await Matches.find();
             socket.broadcast.emit("updatingMatches",matches);  
@@ -98,7 +97,7 @@ server.listen(port,()=>{
     console.log("http://localhost:" + port);
     (async()=>{
         await SortingTeams();
-        await SortingUsers()
+        await SortingUsers();
     })()
 
 })

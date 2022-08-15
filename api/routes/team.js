@@ -5,14 +5,14 @@ import MakeCode from './utilis/RandomChar.js';
 import Teams from '../models/Teams.js';
 import User from '../models/User.js';
 import joinTeamValidation from '../middleware/JoinTeamValidation.js';
-
+import CalculateSharePoints from './utilis/CalculateSharePoints.js';
 import {SortingTeams} from './utilis/SortingTeams.js';
 import Expects from '../models/Expects.js';
 import Filter_User_Expects_4Team from './utilis/FilterUserExpectsForTeam.js';
+//import CalculateSharePoints from './utilis/CalculateSharePoints.js';
+import CalculateTotalTeamPoints from './utilis/CalculateTotalTeamPoints.js';
 
 const team = express.Router();
-
-
 
 team.post('/createteam',TeamValidation,async(req,res)=>{
     const { userName , teamName , user } = req.body;
@@ -30,7 +30,8 @@ team.post('/createteam',TeamValidation,async(req,res)=>{
         teamMembers : [{
             userName : user.userName,
             expects:userExpects4Team,
-            joinedTime 
+            joinedTime,
+            sharePoints:0
         }],
         teamStanding,
     })
@@ -65,9 +66,9 @@ team.put('/jointeam',joinTeamValidation,async(req,res)=>{
     console.log(user_Expects_To_Team);
     team.teamMembers.push({
         userName : user.userName,
-        totalPoints : user.userPoints,
         joinedTime,
-        expect : user_Expects_To_Team
+        expect : user_Expects_To_Team,
+        sharePoints:0
     });
     user.team = team;
 
@@ -122,17 +123,34 @@ team.get('/myteam/:userName',async(req,res)=>{
         const user = await User.findOne({userName});
         if(!user)
             return res.status(404).send("this user is not found");
-
         if(!user.team)
             return res.status(200).send(null);
+
         const team = await Teams.findOne({teamName : user.team.teamName});
-        res.status(200).send(team);   
+        const {expect} = team.teamMembers.find(member=>member.userName === userName) ; 
+        const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
+        
+        await SortingTeams();
+        console.log("passed");
+        res.status(200).send({team ,expect,totalTeamPoints}); 
     }
     catch(err){
         console.log(err);
     }
 })
 
+
+// team.get("/:teamName",async(req,res)=>{
+//     const {teamName} = req.params;
+//     try{
+//         const team = await Teams.findOne({teamName}); // contains team members.
+//         const {totalExpects} = await CalculateTotalTeamPoints(team);
+//         res.send(totalExpects);
+
+//     }catch(err){
+//         console.log(err);
+//     }
+// })
 
 
 

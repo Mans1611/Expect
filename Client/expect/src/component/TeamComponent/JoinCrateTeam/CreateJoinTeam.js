@@ -19,7 +19,7 @@ const CreateJoinTeam = () => {
 
           useEffect(()=>{
             const previous = document.getElementsByClassName('selected')[0];
-                console.log(previous);
+                
                 if(previous){
                     previous.className = previous.className.replace(" selected","")
                 }

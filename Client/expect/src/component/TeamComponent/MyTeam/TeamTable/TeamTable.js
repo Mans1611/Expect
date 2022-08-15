@@ -13,7 +13,7 @@ const TeamTable = ({teamMembers}) => {
             </div>
             {
               teamMembers.map((member,index)=>
-                <UserRow key={index} standing={index+1} userName={member.userName} sharePoints={member.totalPoints}/>
+                <UserRow key={index} standing={index+1} userName={member.userName} sharePoints={member.sharePoints}/>
               )
 
             }

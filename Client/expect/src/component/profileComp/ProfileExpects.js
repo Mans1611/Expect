@@ -24,7 +24,7 @@ const ProfileExpects = ({userName}) => {
                     const top3 = response.data.userExpections.filter(expect =>(expect.userPoints)).sort((a,b) => b.userPoints - a.userPoints ).slice(0,3);
                     setUserExpections(top3);
                     setExpected(filterdExpectedMatches); // matches 
-                    console.log(top3);
+                    
                 }
                 setLoading(false);
 

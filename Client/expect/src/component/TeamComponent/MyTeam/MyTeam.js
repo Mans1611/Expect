@@ -1,23 +1,26 @@
-
 import React, {useContext, useEffect, useState} from 'react'
 import ClipBoardCopy from '../../CreateTeam/ClipBoard';
 import './MyTeam.scss';
 import TeamDetail from './TeamDetail/TeamDetail';
 import TeamTable from './TeamTable/TeamTable';
-import axios from 'axios';
 import { globalUser } from '../../../Context/HomeContext';
 import { TeamContext } from '../TeamComponent';
 import { Link } from 'react-router-dom';
 import Axios from '../../../Axios/axios';
 import SmallLaoding from '../../loading/small.loading/smallLoading';
+import io from 'socket.io-client';
+
+const soket = io.connect('http://localhost:8000');
 
 const MyTeam = () => {
   const [showClipBoard,setShowClipBoard] = useState(false);
   const [showDelete,setShowDelete] = useState(false);
   const [isLoading,setLoading] = useState(false);
   const {userGlob} = globalUser();
+  const {user_team,setUserTeam ,userTeamExpects,setUserTeamExpects,totalPoints} = useContext(TeamContext);
+
   
-  const {user_team,setUserTeam} = useContext(TeamContext);
+
 
   const handleLeave = async(e)=>{
     e.preventDefault();
@@ -31,10 +34,8 @@ const MyTeam = () => {
     }catch(err){
       console.log(err);
     }
-
   }
-
-  if(user_team === '' || user_team === null)
+  if(user_team === '' || !user_team)
     return (
       <div className="NoTeam">
         You haven't joined a team yet.<br/>
@@ -53,8 +54,13 @@ const MyTeam = () => {
               </div>
               <div className="details">
                 <TeamDetail detail={user_team.teamStanding} detailTitle={"Team Standing"}/>
-                <TeamDetail detail={user_team.teamPoints} detailTitle={"Total poinst"}/>
-                <TeamDetail detail={18} detailTitle={"Your Share"}/>
+                <TeamDetail detail={totalPoints} detailTitle={"Total points"}/>
+                {
+                  user_team.teamMembers.map(member =>{
+                    if(member.userName === userGlob)
+                        return <TeamDetail detail={member.sharePoints} detailTitle={"Your Share"}/>
+                  })
+                }
               </div>
           </div>
           <TeamTable teamMembers = {user_team.teamMembers}/>

@@ -32,7 +32,6 @@ const JoinTeamForm = ()=>{
                 setShowMsg(true)
             }
             else{ 
-               console.log(response);
                setMsg(response.data.msg);
                setMsgColor('green');
                setUserTeam(response.data.team)

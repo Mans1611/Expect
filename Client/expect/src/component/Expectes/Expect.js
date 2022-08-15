@@ -28,7 +28,6 @@ const Expect = ({match,userExpect,setUserExpections})=> {
         const handldeDeleteExpect = async(e) =>{
             e.preventDefault();
             try{
-                
                 const response = await axios.delete(`/expects/deleteExpect/${userGlob}/${match.matchId}`)
                 setUserExpections(response.data);
             }catch(err){

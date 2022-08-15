@@ -10,10 +10,13 @@ export const TeamContext = createContext(null);
 
 const TeamComponent = () => {
     const {isDark, userGlob} = globalUser();
-
+   
     const [showcreateTeam, setShowCreateTeam] = useState(false);
     const [showJoinTeam, setShowJoinTeam] = useState(false);
     const [user_team,setUserTeam] = useState(null);
+    const [userTeamExpects,setUserTeamExpects] = useState([]);
+    const [totalPoints,setTotalTeamPoints]  = useState(0);
+
     let location = useLocation().pathname.split("/")[3]; 
     let item = document.getElementById(location)
 
@@ -35,7 +38,9 @@ const TeamComponent = () => {
         return async()=>{
           const {data} = await Axios.get(`/team/myteam/${userGlob}`);
           console.log(data);
-          setUserTeam(data);
+          setUserTeam(data.team);
+          setUserTeamExpects(data.expect);
+          setTotalTeamPoints(data.totalTeamPoints);
         }
       },[])
 
@@ -43,7 +48,9 @@ const TeamComponent = () => {
     <TeamContext.Provider value={{
         showcreateTeam,setShowCreateTeam,
         showJoinTeam, setShowJoinTeam,
-        user_team,setUserTeam
+        user_team,setUserTeam,
+        userTeamExpects,setUserTeamExpects,
+        totalPoints
         }}>
 
         <div className={`TeamComponent-containetr ${isDark ? 'dark' : null}`}>

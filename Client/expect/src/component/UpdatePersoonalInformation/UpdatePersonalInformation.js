@@ -76,7 +76,7 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
         let token = cookie.get("token");
 
         try{
-            console.log(userGlob);
+            
             const response = await axios.put(`/users/edituser/${userGlob}`,
                 {payload : JSON.stringify(updatedDetails)},
                 {headers : {

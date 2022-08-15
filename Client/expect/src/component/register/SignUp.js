@@ -9,7 +9,6 @@ import SmallLaoding from '../loading/small.loading/smallLoading';
 import Cookies from 'universal-cookie';
 import {moveToFirst,moveToSecond} from './utilites/Moving.js';
 import { globalUser, userContext } from '../../Context/HomeContext';
-import {tokenVerification} from './utilites/tokenVerification.js';
 const SignUp = () => {
     const cookie = new Cookies();
     const [countriesOption, setCountries] = useState([]);

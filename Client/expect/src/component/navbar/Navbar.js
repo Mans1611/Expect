@@ -83,7 +83,7 @@ const Navbar = () => {
                             <div onClick={
                                 ()=>{
                                 localStorage.setItem('isDark',!isDark);
-                                console.log(isDark)
+                                
                                 setDark(!isDark);
                             }
                                 } className={`dropdownItem ${isDark? 'dark':''}` }>

@@ -4,7 +4,7 @@
 const PlayerStateToObject = (playerName,state,country,min)=>{
     let icon = null;
 
-    console.log("passed in switch");
+    
     switch (state) {
         case "Score Long Goal (6PTS)":
             icon = "http://www.banglacentre.com/wp-content/uploads/2013/06/game-sport-football-kick-ball-goal-league-player-33d581e26d0d5ed4-512x512.png";

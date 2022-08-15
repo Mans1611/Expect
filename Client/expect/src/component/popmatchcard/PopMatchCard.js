@@ -21,7 +21,6 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                 document.getElementById(userExpect.mutatePlayer1.playerName).checked = true;  
                 document.getElementById(userExpect.mutatePlayer2.playerName).checked = true; 
             }
-            console.log(userExpect.userPoints);
         }
     },[])
     
@@ -87,7 +86,6 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
 
         const handlePost = async (e)=>{
             e.preventDefault();
-            console.log("passed in post request");
             const winnerValue = document.querySelector('input[name="countryWinner"]:checked').id;
             const result1_value = document.querySelector('input[id="result_1"]').value;
             const result2_value = document.querySelector('input[id="result_2"]').value;
