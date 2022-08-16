@@ -21,9 +21,12 @@ const States = ()=> {
         <div className="statesTitle">
           Statistics
         </div>
-       
-        <TopPlayers/>
-        <TopVotes/>
+        <div className='tops-container'>
+          <TopPlayers/>
+        </div>
+        <div className="tops-container">
+          <TopVotes/>
+        </div>
         <HomeStanding/>
     </div>
   )

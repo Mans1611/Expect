@@ -97,9 +97,15 @@ team.put('/leaveteam',async(req,res)=>{
             res.status(200).send("done");
         }
         else{
-            
             // so we filter out the speceific team member. 
-            team.teamMembers = team.teamMembers.filter((member)=> member.userName !== userName);
+            team.teamMembers = team.teamMembers.filter((member)=> {
+                if(member.userName !== userName)
+                    return member;
+                else {
+                    // so this member will be removed, but his share points will stays with the team.
+                    team.leftPoints += member.sharePoints;
+                }
+            });
             // so we make it null since he left the team.
             user.team = null ;
             await User.updateOne({userName},user);
@@ -131,7 +137,6 @@ team.get('/myteam/:userName',async(req,res)=>{
         const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
         
         await SortingTeams();
-        console.log("passed");
         res.status(200).send({team ,expect,totalTeamPoints}); 
     }
     catch(err){
@@ -152,7 +157,16 @@ team.get('/myteam/:userName',async(req,res)=>{
 //     }
 // })
 
-
+team.get('/teamstanding',async(req,res)=>{ 
+    const {limit} = req.query;
+    let SortedTeams = await Teams.find().sort({teamsPoints :  -1}).limit(limit);
+   
+    SortedTeams = SortedTeams.map(team =>  {
+        let filter = {teamName:team.teamName , points:team.teamPoints,noMembers:team.teamMembers.length}
+        return filter;
+    } )
+    res.send(SortedTeams)
+})
 
 
 team.get('/sort',async(req,res)=>{

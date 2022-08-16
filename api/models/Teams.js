@@ -20,9 +20,13 @@ const teamSchema = new Schema({
     },
     teamStanding : {
         type : Number,
-        required : false,
-        
+        required : false, 
+    },
+    leftPoints : {
+        type : Number,
+        default : 0,
     }
+    
 
 })
 

@@ -113,6 +113,14 @@
                         color: #cdb91f;
                     }
                 }
+                &.myuser{
+                    border-bottom: 1px solid #111;
+                    background-color: #ffe10094;
+                    &:hover{
+                        color: #fff;
+                    }
+                
+                }
             }
         }
     }

@@ -1,0 +1,61 @@
+.userStanding-admin{
+    background-color: #333333de;
+    border-radius: 10px;
+    flex: 7;
+    width: 90%;
+}
+.standing-container{
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    text-align: center;
+    &>h1{
+        background-color: #171717;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        color: #f03;
+        padding: 10px;
+        font-size: 48px;
+        &.team{
+            font-size: 48px;
+        }
+    }
+    
+    .row{
+        padding: 4px 15px ;
+        display: grid;
+        grid-template-columns: 10% 30% 20% 30% 10%;
+        
+        color: #fff;
+        // since teams has 4 columns
+        &.teams{
+            padding: 4px ;
+            grid-template-columns: 10% 30% 30% 30% ;
+        }
+        
+        &:hover:not(.standing-header){
+            background-color: #171717b5;
+            cursor: pointer;
+            color: #ffbf00;
+        }
+    }
+    .standing-header{
+        font-weight: 600;
+        font-size: 25px;
+        border-bottom: #171717  2px solid;
+        color: #ffbf00;
+    }
+    .users-row{
+        border-bottom: 1px solid #181818;
+        &:last-child{
+            border-bottom: none;
+            
+        }
+        
+    }
+}
+.teamStanding{
+    background-color: #333333de;
+    border-radius: 10px;
+    margin-left: 5px;
+    flex: 5;
+}
