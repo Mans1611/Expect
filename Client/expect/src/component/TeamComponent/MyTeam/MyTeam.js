@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Axios from '../../../Axios/axios';
 import SmallLaoding from '../../loading/small.loading/smallLoading';
 import io from 'socket.io-client';
+import TeamInstructions from './Instructions';
 
 const soket = io.connect('http://localhost:8000');
 
@@ -36,12 +37,7 @@ const MyTeam = () => {
     }
   }
   if(user_team === '' || !user_team)
-    return (
-      <div className="NoTeam">
-        You haven't joined a team yet.<br/>
-        <Link to='/expect/team/teamjoin'>Create or Join team</Link> 
-      </div>
-    )
+    return <TeamInstructions/>
   
   return (
     <div className='myteam-container'>

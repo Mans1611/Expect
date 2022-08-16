@@ -12,7 +12,7 @@ const Navbar = () => {
     const [width , setWidth] = useState(window.innerWidth);
     const [scale, setScale] = useState(((width<680)? true : false));
     let items = document.getElementsByClassName('navbarLink');
-    const navbarItems = ["Home", "Matches", "MyExpects", "Team" , "Standing"];
+    const navbarItems = ["Home", "Matches", "MyExpects", "Team/myteam" , "Standing"];
     const {isDark,setDark} = globalUser();
     const cookie = new Cookies();
    
@@ -66,7 +66,7 @@ const Navbar = () => {
                 <div className="navbarRight">
                     {!scale && <>
                     {   navbarItems.map((item,index)=>{ // to reduce the code lines 
-                        return <Link key={index} id = {`${item.toLowerCase()}`} to = {`${item.toLowerCase()}`} className={`navbarLink`}><span className="navbarRightItem" key={index}>{item}</span></Link>    
+                        return <Link key={index} id = {`${item.toLowerCase()}`} to = {`${item.toLowerCase()}`} className={`navbarLink`}><span className="navbarRightItem" key={index}>{item.split('/')[0]}</span></Link>    
                     })
                     }
                     </>

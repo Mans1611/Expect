@@ -37,7 +37,6 @@ const TeamComponent = () => {
     useEffect(()=>{
         return async()=>{
           const {data} = await Axios.get(`/team/myteam/${userGlob}`);
-          console.log(data);
           setUserTeam(data.team);
           setUserTeamExpects(data.expect);
           setTotalTeamPoints(data.totalTeamPoints);
@@ -63,7 +62,6 @@ const TeamComponent = () => {
             </div>
             <div className="teamContent">
                 <Routes>
-                    <Route path='' element={<TeamInstructions/>}></Route>
                     <Route path="myTeam" element={<MyTeam />} />
                     <Route path="teamjoin" element={ <CreateJoinTeam  />} />
                 </Routes>
@@ -77,12 +75,6 @@ const TeamComponent = () => {
 
 
 
-const TeamInstructions = ()=>{
-    return (
-        <div className="teamInstruction">
-            Instructions
-        </div>
-    )
-}
+
 
 export default TeamComponent
