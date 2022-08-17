@@ -41,6 +41,7 @@ $betiured : #ec0323;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 @mixin scrollbar-style{
     &::-webkit-scrollbar {

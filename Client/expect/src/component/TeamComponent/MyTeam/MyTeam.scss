@@ -223,5 +223,44 @@
             }
         }
     }
+}
 
+.popup-contianer{
+    @include popupContainer ;
+    .boxmsg{
+        padding: 10px 5px;
+        width: 50%;
+        background-color: #1e1e1e;
+        border: 2px solid #ff2424;
+        border-radius: 5px;
+        text-align: center;
+        h2{
+            color: #cc3737;
+            font-size: 48px;
+        }
+        p{
+            font-size: 25px;
+            margin-top: 10px;
+            color: #fff;
+        }
+        .buttons-container{
+            display: flex;
+            justify-content: center;
+            button{
+                padding: 5px 10px;
+                font-size: 28px;
+                font-weight: 600;
+                margin: 5px;
+                color: #fff;
+                &.green{
+                    background-color: #266300;
+                }
+                &.danger{
+                    background-color: #aa0000d4;
+
+                }
+            }
+        }
+
+    }
 }

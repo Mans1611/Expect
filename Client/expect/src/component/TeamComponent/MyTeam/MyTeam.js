@@ -14,26 +14,38 @@ import TeamInstructions from './Instructions';
 const soket = io.connect('http://localhost:8000');
 
 const MyTeam = () => {
+  document.getElementsByTagName('body')[0].style.overflow = 'visible';
   const [showClipBoard,setShowClipBoard] = useState(false);
   const [showDelete,setShowDelete] = useState(false);
   const [isLoading,setLoading] = useState(false);
+  const [warnMsg,setWarnMsg] = useState(false);
   const {userGlob} = globalUser();
   const {user_team,setUserTeam ,userTeamExpects,setUserTeamExpects,totalPoints} = useContext(TeamContext);
+  const [confirm,setConfirm] = useState(false);
 
-  
+
 
 
   const handleLeave = async(e)=>{
     e.preventDefault();
-    try{
+    if(user_team.teamMembers.length === 1  && !confirm){
+      setWarnMsg(true);
+      setConfirm(true);
+      return ; 
+    }
+    else if (warnMsg || user_team.teamMembers.length !== 1 ){
+
+      try{
+        setWarnMsg(false)
         setLoading(true);
         const response = await Axios.put('/team/leaveteam',{userName:userGlob});
         if(response.status === 200)
-          setUserTeam(null);
-
+        setUserTeam(null);
+        
         setLoading(false);
-    }catch(err){
-      console.log(err);
+      }catch(err){
+        console.log(err);
+      }
     }
   }
   if(user_team === '' || !user_team)
@@ -76,10 +88,27 @@ const MyTeam = () => {
               </div>
             }
           </div>
+          {warnMsg && <PopWarnMsg handleLeave = {handleLeave} setWarnMsg ={setWarnMsg} setConfirm={setConfirm } />}
         </>
   }
     </div>
   )
 }
 
-export default MyTeam
+const PopWarnMsg = ({handleLeave,setWarnMsg,setConfirm})=>{
+  document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+  return(
+    <div className="popup-contianer">
+      <div className="boxmsg">
+        <h2>Warning !</h2>
+        <p>You are the last one in this team. If You leave, all your team data will be erased</p>
+        <div className="buttons-container">
+          <button onClick={()=> {setWarnMsg(false);setConfirm(false)}} className="green">Cancel</button>
+          <button onClick={handleLeave} className="danger">Confirm</button>
+      </div>
+     </div>
+    
+    </div>
+  )
+}
+export default MyTeam;
