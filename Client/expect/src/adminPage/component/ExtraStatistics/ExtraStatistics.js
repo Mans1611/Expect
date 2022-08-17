@@ -15,10 +15,9 @@ const ExtraStatistics = () => {
                 <option>Top selected Countries</option>
             </select>
         </div>
-        <div className="extraStatistics-container">
-            <SelectedState selected={selectStatitics}/>
-        </div>
-
+        
+        <SelectedState selected={selectStatitics}/>
+        
     </div>
   )
 }

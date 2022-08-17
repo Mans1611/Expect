@@ -1,6 +1,7 @@
 import React from 'react'
 import TopPlayers from '../../../../component/TopPlayers/TopPlayers'
 import TopVotes from '../../../../component/TopVotes/TopVotes'
+import TopVotedGames from './TopVotedGames/TopVotedGames'
 
 const SelectedState = ({selected}) => {
     switch(selected){
@@ -8,10 +9,8 @@ const SelectedState = ({selected}) => {
             return <TopPlayers/>
         case "Top voted Players" : 
             return <TopVotes/>
-        case "Top players" : 
-            return <>MAnsour</>
         case "Top voted Games" : 
-            return <>Top voted Games.</>
+            return <TopVotedGames/>
         case "top Teams" : 
             return <>top Teams.</>
         case "" : 

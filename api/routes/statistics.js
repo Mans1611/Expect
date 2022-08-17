@@ -41,6 +41,27 @@ statistics.get('/topvoted',async (req,res)=>{
     res.status(200).send(top5)
 })
 
+statistics.get('/topvotedgames',async(req,res)=>{
+    let topVotedGames = await Matches.find().sort({votes : -1}).limit(5);
+    topVotedGames = topVotedGames.map(game=>{
+        let Game = {
+                votes : game.votes,
+                matchId : game.matchId,
+                firstCountry : {
+                    countryName : game.firstCountry.countryName,
+                    logo : game.firstCountry.logo
+                },
+                secondCountry : {
+                    countryName : game.secondCountry.countryName,
+                    logo : game.secondCountry.logo
+                },
+                matchTime : game.matchTime
+            } 
+            return Game;
+    })
+    res.status(200).send(topVotedGames);
+})
+
 statistics.get('/topcountries',async(req,res)=>{
     const topCountries = await User.aggregate([
         {$match : {}},

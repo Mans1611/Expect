@@ -25,7 +25,8 @@ const TeamStanding = () => {
                 <span className="field">No</span>
                 <span className="field">Team Name</span>
                 <span className="field">Members</span>
-                <span className="field">Total Points</span>
+                <span className="field">Status</span>
+                
             </div>
             {
                 teams.map((team,index)=><TeamAdmin_Row key={index} order = {index+1} team={team}/>)
