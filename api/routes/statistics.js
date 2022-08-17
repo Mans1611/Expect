@@ -55,7 +55,8 @@ statistics.get('/topvotedgames',async(req,res)=>{
                     countryName : game.secondCountry.countryName,
                     logo : game.secondCountry.logo
                 },
-                matchTime : game.matchTime
+                matchTime : game.matchTime,
+                matchStatus : game.matchStatue
             } 
             return Game;
     })
@@ -82,7 +83,7 @@ statistics.get('/gettotal',async(req,res)=>{
     // object to collect all of the wanted data.
     const totalObjects = [
         {title : "Total Users",number : totalUsers},
-        {title : "Total Votes",number:totalTeams},
+        {title : "Total Teams",number:totalTeams},
         {title : "Total Expects" , number : total.totalExpects}
     ]
     res.status(200).send(totalObjects)

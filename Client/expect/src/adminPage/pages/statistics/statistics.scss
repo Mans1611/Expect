@@ -1,30 +1,31 @@
 .statistics{
-    .totalContainer{
-        display: grid;
-        grid-template-columns: repeat(3,33.3%);
-        margin-top: 20px;
-        .totalWrapper{
-            background-color: #373737;
-            border-radius: 10px;
-            padding: 10px 30px;
-            width: 70%;
-            margin: auto;
-            box-shadow: 3px 3px #1111119b;
-            h4{
-                color: #eee;
-                font-size: 38px;
-            }
-            h1{
-                color: rgb(255, 191, 0);
-                font-size: 60px;
-                text-align: end;
-                }
-
-        }
-    }
+   
     .standing-Admin{
         padding: 20px 10px ;
         display: flex;
         margin-top: 20px;
+    }
+}
+.totalContainer{
+    display: grid;
+    grid-template-columns: repeat(3,33.3%);
+    margin-top: 20px;
+    .totalWrapper{
+        background-color: #373737;
+        border-radius: 10px;
+        padding: 10px 30px;
+        width: 70%;
+        margin: auto;
+        box-shadow: 3px 3px #1111119b;
+        h4{
+            color: #eee;
+            font-size: 38px;
+        }
+        h1{
+            color: rgb(255, 191, 0);
+            font-size: 60px;
+            text-align: end;
+            }
+
     }
 }

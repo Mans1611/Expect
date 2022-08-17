@@ -27,13 +27,8 @@ const TopVotedGames = () => {
         </div>
         {
           isLoading ? <SmallLaoding/> : 
-            <>
-            {
               topGames.map((game,index)=><MatchAdmin_Row key={index} match={game} order = {index+1}/>)
-            }
-            </>
-        }
-        
+        }   
     </div>
   )
 }

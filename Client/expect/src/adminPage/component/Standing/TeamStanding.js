@@ -14,10 +14,8 @@ const TeamStanding = () => {
         setLoading(false); 
     }
   })
-    if(isLoading)
-        return <SmallLaoding/>
-
-    return (
+  
+  return (
     <div className='teamStanding'>
         <div className="standing-container">
             <h1 className='team'>Teams Standing</h1>
@@ -29,7 +27,9 @@ const TeamStanding = () => {
                 
             </div>
             {
-                teams.map((team,index)=><TeamAdmin_Row key={index} order = {index+1} team={team}/>)
+              isLoading ? <SmallLaoding/>
+              :
+              teams.map((team,index)=><TeamAdmin_Row key={index} order = {index+1} team={team}/>)
             }
             
         </div>

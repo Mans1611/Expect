@@ -8,11 +8,8 @@ import { globalUser } from '../../Context/HomeContext';
 import filteringExpects from './utilites/filteringExpects';
 import axios from 'axios';
 import Expected from './Component/Expected/Expected';
-import Cookies from 'universal-cookie';
-import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import SmallLaoding from '../../component/loading/small.loading/smallLoading';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MatchCardPhone from '../../component/matchcards/MatchCardPhone/MatchCardPhone';
 
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
@@ -23,18 +20,14 @@ const Matches = () => {
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false); 
-    const [mobileMatch,setMobileMatch] = useState(false);
     const [width,setWidth] = useState(window.innerWidth);
-    const cookie = new Cookies();
-    const navigate = useNavigate();
     const {userGlob} = globalUser();
     const [expandButton,setExpandButton] = useState('See All Matches');
 
 const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
 
 useEffect(()=>{
-    return async () => { 
-
+    return async () => {
         try{
             const response = await axios.get(`/expects/${userGlob}`);
             const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
@@ -123,7 +116,6 @@ useEffect(()=>{
                     <div className="matchCard-container">
                             {isLoading ? <SmallLaoding/> : 
                             <div className="matchCardGrid">
-
                                     { width > 480 ?
                                     data.map((value,key)=>{
                                         if(!value.expected) return <MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>;   
@@ -141,7 +133,6 @@ useEffect(()=>{
                             )}}>{expandButton}</button>
                         </div>
                     </div>
-                    
                 </div>
             </div>
           

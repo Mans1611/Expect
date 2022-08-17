@@ -24,10 +24,10 @@ const MathchCard = ({match}) => {
             <div className={`matchCard ${isDark?'dark':''}`}>
             
                 <div className="matchcardHeader">
-                <div className="matchCardCountry"> {/* country1.*/ }
-                    <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
-                    <span className='countryLabel'>{match.firstCountry.countryName}</span>
-                </div>
+                    <div className="matchCardCountry"> {/* country1.*/ }
+                        <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
+                        <span className='countryLabel'>{match.firstCountry.countryName}</span>
+                    </div>
                     VS
                     <div className="matchCardCountry">
                         <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />

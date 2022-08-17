@@ -12,7 +12,7 @@ const MatchAdmin_Row = ({match,order}) => {
                 <img src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="logo" />
 
             </div>
-            <span className="field">FT</span>
+            <span className="field">{match.matchStatus}</span>
             <span className="field">{match.votes}</span>
         </div>
     </div>

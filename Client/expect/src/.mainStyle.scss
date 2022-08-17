@@ -67,3 +67,8 @@ $betiured : #ec0323;
     cursor: pointer;
     color: #eee;
 }
+
+@mixin Container {
+    border-radius: 10px ;
+    padding: 10px;
+}

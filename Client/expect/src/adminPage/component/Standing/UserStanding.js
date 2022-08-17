@@ -14,9 +14,6 @@ const UserStanding = () => {
             setLoading(false);
         }
     })
-    if(isLoading)
-        return <SmallLaoding/>;
-
   return (
     <div className='userStanding-admin'>
         <div className="standing-container">
@@ -29,7 +26,7 @@ const UserStanding = () => {
                 <span className="field">Points</span>
             </div>
             
-                {   
+                {   isLoading ? <SmallLaoding/> : 
                     users.map((user,index)=><UserAdmin_Row key={index} order = {index+1} user = {user} />)
                 }
             

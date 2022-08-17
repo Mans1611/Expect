@@ -1,0 +1,70 @@
+.todayMatches-container{
+    background-color: #383838;
+    border-radius: 10px;
+    margin: 10px auto;
+    height: fit-content;
+    width: 90%;
+    h1{
+        color: #ffbf00 ;
+        font-size: 52px;
+        font-weight: 600;
+        text-align: center;
+        padding: 10px ;
+        background-color: #171717;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+    }
+    .matches-wrapper{
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3,33.3%);
+        .noContent{
+            grid-column: 1/4 ;
+            color: #fff;
+            font-size: 42px;
+            text-align: center;
+
+        }
+        .MatchCard_Dashboard{
+            background: #272727;
+            border-radius: 10px;
+            .header-wrapper{
+                background: #1a1a1a;
+                border-radius: inherit;
+                .matchcardHeader{
+                    background: #1a1a1a;
+                    .matchCardCountryImg{
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        
+                    }
+                }
+                .matchTime{
+                    margin-top: 5px;
+                    color: #fff;
+                    text-align: center;
+                    font-size: 28px;
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    span{
+                        color: #ffbf00;
+                    }
+                }
+                .matchResultComp{
+                    padding: 0;
+                    .circle{
+                        color: #fff;
+                    }
+                    h1{
+                        background-color: transparent;
+                        font-size: 33px;
+                        color: #fff;
+                    }
+                }
+            }
+
+        }
+    }
+
+}

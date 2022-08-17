@@ -27,8 +27,8 @@ const MathcesAdm = () => {
         return async()=>{
             
             try{
-                const response = await axios.get('/matches/getmatches')
-                store.setMatches(response.data);
+                const {data} = await axios.get('/matches/getmatches')
+                store.setMatches(data);
                 store.setLoading(false);
             }
             catch(err){
