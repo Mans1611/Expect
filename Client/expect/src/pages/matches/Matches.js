@@ -64,7 +64,7 @@ useEffect(()=>{
                 }
                 setLoading(false);
         })
-
+        console.log("socet change");
     },[socket])
 
     const getMatchesDate = async(date)=>{

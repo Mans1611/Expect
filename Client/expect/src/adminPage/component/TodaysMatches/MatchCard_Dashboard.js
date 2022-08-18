@@ -5,6 +5,7 @@ const MatchCard_Dashboard = ({match}) => {
 
     const [timeUp, setTimeUp] = useState(false); 
     const matchTime = match.matchTime.slice(11,16);
+    
   return (
     <div className='MatchCard_Dashboard'>
         <div className="header-wrapper">
@@ -20,7 +21,7 @@ const MatchCard_Dashboard = ({match}) => {
                 <span className='countryLabel'>{match.secondCountry.countryName}</span>
             </div>
         </div>
-        {!timeUp && <MatchResultComp  time = {match.matchTime} 
+        {timeUp && <MatchResultComp  time = {match.matchTime} 
                             FT={match.fullTime} 
                             result_1={match.firstCountry.result} 
                             result_2={match.secondCountry.result}

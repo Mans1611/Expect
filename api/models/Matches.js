@@ -45,6 +45,10 @@ const matchSchema = new Schema({
         type : Array,
         default : [],
         required : false
+    },
+    round : {
+        type : String,
+        required : true
     }
     
 })

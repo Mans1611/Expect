@@ -13,6 +13,7 @@ const ExtraStatistics = () => {
                 <option>Top voted Players</option>
                 <option>Top voted Games</option>
                 <option>Top selected Countries</option>
+                <option>Top Users For Round</option>
             </select>
         </div>
         

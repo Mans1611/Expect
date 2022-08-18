@@ -2,7 +2,7 @@ import '../../pages/myProfile/myProfile.scss';
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
 
-const ExpectsInfo = () => {
+const ExpectsInfo = ({user}) => {
     const {isDark} = useContext(ThemeContext);
    
     return ( 
@@ -10,12 +10,14 @@ const ExpectsInfo = () => {
             <div className={`information ${isDark? 'dark': ''}`}>
                 <h2 className="InformationHeader">Expect Info</h2> 
                 <div className="userInformation">
-                    <h3 className="feild">Standing : <span className="value">#35</span></h3>
-                    <h3 className="feild">TotalPoints : <span className="value">96 PTS</span></h3>
-                    <h3 className="feild">TotalExpects : <span className="value">8</span></h3>
+                    <h3 className="feild">Standing : <span className="value">{user[0].userStanding}</span></h3>
+                    <h3 className="feild">TotalPoints : <span className="value">{user[0].userPoints}</span></h3>
+                    <h3 className="feild">TotalExpects : <span className="value">{user[1]}</span></h3>
+                    <h3 className="feild">Team : <span className="value">{user[0].team ? user[0].team : "-"}</span></h3>
+                    
                     <div className='imageWrapper'>
-                       <h3 className="userCountry">Country : <span className="value">KSA</span></h3>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Saudi_Arabia.svg/1200px-Flag_of_Saudi_Arabia.svg.png" alt="" />
+                       <h3 className="userCountry">Country : <span className="value">{user[0].countries.countryName}</span></h3>
+                        <img src={user[0].countries.logo} alt="" />
                     </div>
                 </div>
             </div>

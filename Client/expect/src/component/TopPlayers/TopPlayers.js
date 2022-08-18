@@ -14,10 +14,10 @@ const TopPlayers = () => {
     useEffect(()=>{
         return async()=>{
             try{
-                const response = await axios.get('/statistics/topplayers');
-                setTopPlayers(response.data);
+                const {data} = await axios.get('/statistics/topplayers');
+                console.log(data);
+                setTopPlayers(data);
                 setLoading(false);
-
             }catch(err){
                 console.log(err);
             }

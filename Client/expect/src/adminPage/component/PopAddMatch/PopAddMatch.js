@@ -8,7 +8,7 @@ import CountryPop from '../countryPop/CountryPop';
 import AddIcon from '@mui/icons-material/Add';
 import { matchesStore } from '../../Context/matchesContext';
 const PopAddMatch = ({showPop,setShowPop}) => {
-  
+  document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   const hidePop = (e)=>{
       if(e.target.className === 'popaddMatch'){
         setShowPop(false);
@@ -19,8 +19,9 @@ const PopAddMatch = ({showPop,setShowPop}) => {
   const [firstCountry,setFirstCountry] = useState(null)
   const [secondCountry,setSecondCountry] = useState(null);
   const [showCountry,setShowCountry] = useState(false);
+  const [round,setRound] = useState('Group Stage Round-1');
   const store = matchesStore();
-
+  console.log(round);
   useEffect(()=>{
     return async ()=>{
       try{
@@ -75,7 +76,8 @@ const PopAddMatch = ({showPop,setShowPop}) => {
           matchTime,
           firstCountry,
           secondCountry,
-          matchId
+          matchId,
+          round 
         })
         const response = await axios.get('/matches/getmatches')
         store.setMatches(response.data);
@@ -122,11 +124,30 @@ const PopAddMatch = ({showPop,setShowPop}) => {
                             <input type="time" name="time" id="matchtime"/>
                           </div>
                         </div>
+
+                      <div className="timeSelection">
+                        <div className="timing">
+                          <label htmlFor="matchId">Match Id</label>
+                          <input type="text" name="matchId" id ="matchId"  />
+                        </div>
+
+                        <div className="timing">
+                          <label htmlFor="round">Round </label>
+                          <select onChange={(e)=>setRound(e.target.value)} type="text" name="round" id ="round" >
+                              <option>Group Stage Round-1</option>
+                              <option>Group Stage Round-2</option>
+                              <option>Group Stage Round-3</option>
+                              <option>Round-16</option>
+                              <option>Quarter-Final</option>
+                              <option>Semi-Final</option>
+                              <option>3rd Place Winner</option>
+                              <option>Final</option>
+                          </select>
+                        </div>
                     </div>
-                    <div className="fieldContainer">
-                      <label htmlFor="matchId">Match Id : </label>
-                      <input type="text" name="matchId" id="matchId" />
                     </div>
+
+                    
                     {showCountry&&
                     (
                       <div className="countriesSelection">

@@ -3,7 +3,6 @@
 .palyerCard{
     min-width: 150px;
     border-radius: 10px;
-    padding: 4px 0;
     margin: 0 4px 5px 0 ;
     cursor: pointer;
     margin-right: 5px;
@@ -17,17 +16,35 @@
     }
 
     .playerCardInfo{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        
+        border-top-right-radius: inherit;
+        border-top-left-radius: inherit;
+        
+
         .imgBackground{
-               
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #e7e7e732;
+            border-bottom: 2px solid #eee;
+            padding: 2px 0;
+            border-top-right-radius: inherit;
+            border-top-left-radius: inherit;
+            
             .playerCardImg{
-                width: 60px;
-                height: 60px;
+                width: 65px;
+                height: 65px;
                 object-fit: cover;
+                padding: 2px;
                 border-radius: 50%;
+                border: 2px solid #171717;
+                background-color: #2727278d;
+            }
+            .country-flag{
+                width: 30px;
+                height: 20px;
+                margin: 5px 0;
+                border: 2px solid #111;
             }
         }
         .playerDetails{
@@ -36,6 +53,14 @@
             text-align: center;
             color: #fff;
             width: 100%;
+
+            .details{
+                color: #c0c0c0;
+                &.name{
+                    color: #fff;
+                    font-size: 25px;
+                }
+            }
             .PlayerStateSelction{
                 width: 100%;
                 outline: none;
@@ -121,6 +146,7 @@
                     border-radius: 50%;
                 }
             }
+            
             .playerDetails{
                 padding-top: 5px;
                 font-size: 30px;

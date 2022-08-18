@@ -2,12 +2,7 @@
 .myProfile{
     padding:30px 20px;
     background-color: #eee;
-    &.dark{
-        background-color: #444;
-        .profileTitle{
-            color: #fff;
-        }
-    }
+    
 .profileTitle{
     text-align: center;
     font-size: 100px;
@@ -18,7 +13,7 @@
 .informationContainer{
 
     display: flex;
-    height: 300px;
+    height: fit-content;
     margin-top: 20px;
     .informationWrapper {
         width: 50%;
@@ -70,16 +65,7 @@
                 }
             }
         }
-        &.dark{
-            background-color: #373737;
-            .InformationHeader{
-                border-bottom: 4px solid #fff;
-            }
-            .feild{
-                border-bottom: 4px solid #fff;
-            }
-            
-        }
+        
         width: 90%;
         height: fit-content;
         border-bottom-left-radius: 20px;
@@ -100,12 +86,7 @@
         }
 
     }
-    .informationWrapper{
-        .information{
-            
-
-        }
-    }
+   
     .expectInformationWrapper{
         background-color: #aaa;
     }
@@ -211,7 +192,22 @@
 
 
 }
-
+&.dark{
+    background-color: #444;
+    .profileTitle{
+        color: #fff;
+    }
+    .information{
+        background-color: #373737;
+        .InformationHeader{
+            border-bottom: 4px solid #fff;
+        }
+        .feild{
+            border-bottom: 4px solid #fff;
+        }
+        
+    }
+}
 
 }
 #email{

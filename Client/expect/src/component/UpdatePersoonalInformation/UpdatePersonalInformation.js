@@ -12,6 +12,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const UpdatePersonalInformation = ({PI,setShow}) => {
+    document.getElementsByTagName("body")[0].style.overflow = "hidden"; // to disable scrollbar
     const cookie = new Cookies();
     const [showUserName,setShowUserName] = useState(false);
     const [showEmail,setShowEmail] = useState(false);

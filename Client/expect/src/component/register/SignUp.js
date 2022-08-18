@@ -30,7 +30,6 @@ const SignUp = () => {
 
        
         return async()=>{
-            
             try{
             const response = await axios.get('/country/countries');
             setCountries(response.data);
@@ -201,7 +200,7 @@ const SignUp = () => {
                                     <option className='defaultSelection' defaultChecked  value=''>Select Your fan country</option>
                                     {countriesOption.map((country,id)=>{
                                         const countrylogo = { backgroundImage : `url(${country.logo})` }; 
-                                        return <option style= {countrylogo} value={country.countryName.toLowerCase()} key={id}>{country.countryName}</option> 
+                                        return <option style= {countrylogo} value={country.countryName} key={id}>{country.countryName}</option> 
                                     })}
                                 </select>
                             }

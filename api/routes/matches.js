@@ -60,7 +60,7 @@ matches.get('/match/',SessionVerification,async(req,res)=>{
 
 
 matches.post('/addgame', async(req,res)=>{
-    const {firstCountry,secondCountry} = req.body;
+    const {firstCountry,secondCountry,matchId} = req.body;
     const votes = 0;
     
     /* 
@@ -72,10 +72,11 @@ matches.post('/addgame', async(req,res)=>{
     const {players:players_2} = secondCountry;
     const result = 0;
     const newPlayers_1 = [],newPlayers_2 = [];
-    const length = (players_1.length>players_2.length)? players_1.length : players_2.length;
     
+    // to take the length of the longest array.
+    const length = (players_1.length>players_2.length)? players_1.length : players_2.length;
     // so the match Id is unique for every match . 
-    const existMatch = await Matches.findOne({matchId:req.body.matchId})
+    const existMatch = await Matches.findOne({matchId})
     if(existMatch)
         res.status(203).send("This Match Is Already Exist")
         
@@ -88,7 +89,8 @@ matches.post('/addgame', async(req,res)=>{
                 position,
                 playerImg,
                 votes,
-                playerPoints: 0};
+                playerPoints: 0
+            };
             newPlayers_1.push(newObj);
         }
         if(players_2[i]){

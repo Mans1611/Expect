@@ -14,7 +14,7 @@ import { MatchCardProvider } from '../../../Context/MatchCardContext';
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
 const MathcesAdm = () => {
-    
+    document.getElementsByTagName('body')[0].style.overflow = 'visible';
     const [showPop,setShowPop] = useState(false) ;
     const store = matchesStore();
 
@@ -52,8 +52,9 @@ const MathcesAdm = () => {
                     store.isLoading? <SmallLaoding/>:
                     (
                         store.matches.map((match,index)=> 
-                        <MatchCardProvider match={match} 
-                                           childeren = {<MatchCardAdm  key={index}/>}></MatchCardProvider>)
+                        <MatchCardProvider 
+                            match={match} childeren = {<MatchCardAdm  key={index}/>}>
+                        </MatchCardProvider>)
                     )
                 }
             </div>

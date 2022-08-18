@@ -1,8 +1,11 @@
 import express from 'express';
 import Country from '../models/Country.js';
+import Expects from '../models/Expects.js';
+
 import Matches from '../models/Matches.js';
 import Teams from '../models/Teams.js';
 import User from '../models/User.js';
+
 
 const statistics = express.Router();
 
@@ -19,11 +22,19 @@ const FindAllPlayers = async()=>{
 
 statistics.get('/topplayers',async(req,res)=>{
     try{
-        const players = await FindAllPlayers();
-        // so it will sort theme desc . 
-        const sorted = players.sort((nextValue,currentValue)=> currentValue.totalPoints - nextValue.totalPoints);
-        const top5 = sorted.slice(0,5); // just to take the top 5 of the top players.
-        res.status(200).send(top5)
+        // const players = await FindAllPlayers();
+        // so it will sort theme desc.
+        // const sorted = players.sort((nextValue,currentValue)=> currentValue.totalPoints - nextValue.totalPoints);
+        // const top5 = sorted.slice(0,5); // just to take the top 5 of the top players.
+
+        const allPlayer = await Country.aggregate([
+            {$unwind : "$players"},
+            {$sort : {"players.totalPoints":-1}},
+            {$limit : 5},
+            {$project : {eliminated : 0,_id : 0 } }
+        ])  ;
+        res.status(200).send(allPlayer)
+
 
     }
     catch(err){
@@ -32,13 +43,20 @@ statistics.get('/topplayers',async(req,res)=>{
 })
 
 statistics.get('/topvoted',async (req,res)=>{
-    const players = await FindAllPlayers();
+    // const players = await FindAllPlayers();
 
     // so it will sort theme desc . 
-    const sorted = players.sort((nextValue,currentValue)=> currentValue.totalVotes - nextValue.totalVotes);
-    const top5 = sorted.slice(0,5); // just to take the top 5 of the top players.
+    // const sorted = players.sort((nextValue,currentValue)=> currentValue.totalVotes - nextValue.totalVotes);
+    // const top5 = sorted.slice(0,5); // just to take the top 5 of the top players.
 
-    res.status(200).send(top5)
+    const Top5Voted = await Country.aggregate([
+        {$unwind : "$players"},
+        {$sort : {"players.totalVotes" : -1}},
+        {$limit : 5},
+        {$project : {eliminated : 0,_id : 0 } }
+    ])
+
+    res.status(200).send(Top5Voted)
 })
 
 statistics.get('/topvotedgames',async(req,res)=>{
@@ -60,6 +78,7 @@ statistics.get('/topvotedgames',async(req,res)=>{
             } 
             return Game;
     })
+
     res.status(200).send(topVotedGames);
 })
 
@@ -71,6 +90,21 @@ statistics.get('/topcountries',async(req,res)=>{
         {$limit : 2}
     ])
     res.status(200).send(topCountries)
+})
+statistics.get('/topusers',async(req,res)=>{
+    const {round} = req.query;
+
+    const topUsers = await Expects.aggregate([
+        {$unwind : "$expects"},
+        {$match : {"expects.round" : round}},
+        {$group : {_id:"$userName", roundPoints : {$sum : "$expects.userPoints"}}},
+        {$sort : {"roundPoints" : -1}},
+    ]);
+    
+   
+    res.send(topUsers)
+
+
 })
 statistics.get('/gettotal',async(req,res)=>{
     const totalUsers = await User.find().count();
@@ -84,7 +118,7 @@ statistics.get('/gettotal',async(req,res)=>{
     const totalObjects = [
         {title : "Total Users",number : totalUsers},
         {title : "Total Teams",number:totalTeams},
-        {title : "Total Expects" , number : total.totalExpects}
+        {title : "Total Expects" , number : (total? total.totalExpects : 0)}
     ]
     res.status(200).send(totalObjects)
 })

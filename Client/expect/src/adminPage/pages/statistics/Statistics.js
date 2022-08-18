@@ -10,7 +10,7 @@ const Statistics = () => {
         <div className="statistics">
            <TotalStatistics/>
            <div className="standing-Admin">
-                <UserStanding/>
+                <UserStanding totalUsers={true}/>
                 <TeamStanding/>
            </div>
            <ExtraStatistics/>

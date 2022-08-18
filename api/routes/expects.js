@@ -29,10 +29,10 @@ expects.get('/:userName',SessionVerification,async(req,res)=>{
     }
 });
 
-
 expects.post('/addexpect/:userName',async(req,res)=>{
     try{
-        const user = await Expects.findOne({userName:req.params.userName});
+        const {userName} = req.params ; 
+        const user = await Expects.findOne({userName});
         const {mutatePlayer1,mutatePlayer2} = req.body;
         const match = await Matches.findOne({matchId : req.body.matchId});
 
@@ -40,10 +40,11 @@ expects.post('/addexpect/:userName',async(req,res)=>{
         match.firstCountry.players[mutatePlayer1.index].votes +=1 ; 
         match.secondCountry.players[mutatePlayer2.index].votes +=1 ;
         match.votes += 1;
+        console.log(req.body);
         await Matches.updateOne({matchId : req.body.matchId},match);
         // here I add the match time to the user expectes, as I will need it in the Team Calculation if he joined a team.
-        user.expects.push({matchTime : match.matchTime,...req.body});
-        await Expects.updateOne({userName:req.params.userName},user);
+        user.expects.push({matchTime : match.matchTime,round : match.round,...req.body});
+        await Expects.updateOne({userName},user);
         
         const teamUser = await User.findOne({userName:user.userName});
         // so if the user is join a team it will push the expect also to the teamMember in the team Model.
@@ -56,6 +57,8 @@ expects.post('/addexpect/:userName',async(req,res)=>{
 
     }
 })
+
+
 expects.put('/editexpect/:userName',async(req,res)=>{
     try{
         const {mutatePlayer1,mutatePlayer2,matchId} = req.body;

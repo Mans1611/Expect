@@ -4,7 +4,7 @@ import User from '../models/User.js';
 import Expects from '../models/Expects.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-
+import Country from '../models/Country.js';
 const users = express.Router();
 
 users.get('/standing',async(req,res)=>{
@@ -18,9 +18,22 @@ users.get('/standing',async(req,res)=>{
 })
 
 users.get("/profile/:userName",async(req,res)=>{
+    const {userName} = req.params;
     try{
-        const user = await User.find({userName:req.params.userName})
-        res.status(200).send(user);
+        let USER = await User.aggregate([
+            {$match : {"userName" :userName }},
+            {$lookup:{
+                from : "countries",
+                localField : "userCountry",
+                foreignField : "countryName",
+                as : "countries"
+            }},
+            {$project : {"countries.players" : 0,password:0,isAdmin : 0 ,_id: 0}},
+            {$unwind : "$countries"}
+        ])
+        const {expects} = await Expects.findOne({userName})
+        USER.push(expects.length);
+        res.status(200).send(USER);
     }catch(err){
         console.log(err);
     }
@@ -75,5 +88,7 @@ users.put('/edituser/:userName', async(req,res)=>{
     res.status(201).setHeader('token',token).json({userName:Updated_Data.userName, msg : "Successfully Updating"});
 
 })
+
+
 
 export default users;

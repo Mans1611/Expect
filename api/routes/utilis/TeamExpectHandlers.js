@@ -1,12 +1,12 @@
 
 import Teams from "../../models/Teams.js";
 
-const PushExpectToMember = async(user,expect,matchTime)=>{
+const PushExpectToMember = async(user,expect,matchTime,round)=>{
 
     let team = await Teams.findOne({teamName : user.team.teamName});
     team.teamMembers.map(async (member,index)=>{
         if(member.userName === user.userName){
-            team.teamMembers[index].expect.push({matchTime,...expect})
+            team.teamMembers[index].expect.push({matchTime,round,...expect})
             await Teams.updateOne({teamName : user.team.teamName},team)
             return null;
         }

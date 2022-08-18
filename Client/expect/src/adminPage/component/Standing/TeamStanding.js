@@ -23,7 +23,7 @@ const TeamStanding = () => {
                 <span className="field">No</span>
                 <span className="field">Team Name</span>
                 <span className="field">Members</span>
-                <span className="field">Status</span>
+                <span className="field">Total Points</span>
                 
             </div>
             {

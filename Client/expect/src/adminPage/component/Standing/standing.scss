@@ -43,11 +43,18 @@
                 font-size: 25px;
             }
         }
+        &.round{
+            grid-template-columns: 20% 60% 20% ;  
+        }
         
         &:hover:not(.standing-header){
             background-color: #171717b5;
             cursor: pointer;
             color: #ffbf00;
+            &:last-child{
+                border-bottom-left-radius: inherit;
+                border-bottom-right-radius: inherit;
+            }
         }
         .field{
             margin: auto;
