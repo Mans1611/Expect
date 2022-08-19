@@ -1,7 +1,7 @@
 import Teams from "../../models/Teams.js";
 import User from "../../models/User.js";
 
-// this function sort the team and give each team its standing 
+// this function sort the team among all teams, and give each team its standing 
 const SortingTeams = async()=>{
     const orderedTeams = await Teams.find().sort({teamPoints:-1})
     /* as the bulkwrite access many documents so I use map and return all the ordered docs

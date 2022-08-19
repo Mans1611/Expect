@@ -26,10 +26,9 @@ const CalculateTotalTeamPoints = async(team)=>{
     }
 
     totalExpects.forEach(expect=> {totalTeamPoints += expect.userPoints});
-    console.log(team.leftPoints);
     const UpdatedTeam = {
         teamPoints : totalTeamPoints + team.leftPoints ,  // in case of any members who might left the team. 
-        teamMembers : updateTeamMembersExpects 
+        teamMembers : team.teamMembers.sort((a,b) => b.sharePoints - a.sharePoints ) 
     }
     await Teams.updateOne({teamName : team.teamName},UpdatedTeam);
 

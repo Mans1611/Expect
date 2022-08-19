@@ -1,3 +1,6 @@
+$font1: 'Yanone Kaffeesatz', sans-serif;
+$primaryColor : #F1003A;
+$secondaryColor : #0000f4;
 
 @mixin darkBackground {
     &::after{
@@ -10,167 +13,219 @@
         left: 0;
     }
 }
-$font1: 'Yanone Kaffeesatz', sans-serif;
-$primaryColor : #F1003A;
-$secondaryColor : #0000f4;
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: $font1;
 }
-body{
-    
-}
-
-.welcomeSentenceWrapper{
-    margin: 40px 0 0 100px;
-    text-align: center;
-    .welcomeSentence{
-        color: #fff;
-        font-size: 60px;
-        text-align: center;
-        font-weight: 700;
-        span{
-            color: #FFD600;
-        }
-    }
-}
-.tipsTitleWrapper{
-    margin-top: 40px;
-    text-align: center;
-    .tipsTitle{
-        color: $primaryColor;
-        font-size: 55px;
-        text-align: center;
-        font-weight: 600;
-    }
-}
-.welcomePage{
-    background-image: url(file:///C:/Users/hp/Downloads/darkness.png);
-    width: 100%;
-    height:100vh;
-    padding: 0 10px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow-x: hidden;
-
-    .playerImage {
-        width: 300px;
-        height:100%;
-        position: absolute;
-        right: -20px;
-        top: 0;
-        z-index: 10;
-    } 
-    .wrapperPoint{
-        margin-left: 60px;
-        position: relative;
-        margin-top: -40px;
-        z-index: 999;
-        .headingPoint{
-            color: #fff;
-            font-size: 45px;
-            margin-bottom: 10px;
-        }
-        
-    }
-    .cardExplainContainer{
-        width: 350px;
-        height: 250px;
-        border-radius: 5px;
-        margin-left: 10px;
-        position: relative;
-        z-index: 999;
-        overflow: hidden;
-        background-color: rgba(85, 85, 85, 0.685);
-        .imgExplainContainer{
-            height: 150px;
-            .explainImg{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-                border-bottom: $primaryColor solid 6px;
-            }
-        }
-        .explenationCont{
-            color: #ddd;
-            padding: 8px 10px 20px;
-            transition: all 300ms;
-        }
-        .explainBottom{
-            position: absolute;
-            bottom: 0;
-            z-index: 10;
-            background-color: $primaryColor ;
-            width: 100%;
-            color: #fff;
-            height: 40px;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            border-top:#333 solid 2px;
-            justify-content: center;
-            cursor: pointer;
-            .showmore{
-                font-size: 1.4em;
-                font-weight: 600;
-                
-            }
-        }
-    }
-    &.second{
-        background-color: rgba(51, 51, 51, 0.584);
-        .playerImage {
-            position: absolute;
-            right: 0px;
-        }
-    }
-    
-}
 .topnavbar{ 
     height:fit-content;
     width: 100%;
     background-color: #212121c7;
     z-index: 999;
-}
-.buttonscontainer{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    overflow: hidden;
-    .buttonsWrapper{
-        margin-right: 10px;
+    
+    background-color: #000;
+    h1{
+        font-size: 56px;
+        color : #fff;
+    }
+    .buttonscontainer{
+        padding : 5px 15px;
+        background-color: #b29600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+        .buttonsWrapper{
+            margin-right: 10px;
+            .WelcomeNavbarButtons{
+                text-decoration: none;
+                font-size: 48px;
+                font-weight: 600;
+                color: #fff;
+                background-color: #181818 ;
+                color: #f1003a;
+                border: #f1003a solid 5px;
+                margin-left: 10px;
+                padding: 2px 15px;
+                border-radius: 10px;
+                &.blueButton{
+                    color: #FFD600;
+                    border:  #FFD600 solid 5px;
+                    &:hover{
+                        color: #fff ;
+                    border: #fff solid 5px;
+                    }
+                }    
+            }
+            .WelcomeNavbarButtons:hover{
+                background-color: #272727;
+                color: #fff;
+                border: #fff solid 5px;
+            }
+        }
     }
 }
-.WelcomeNavbarButtons{
-    text-decoration: none;
-    font-size: 30px;
-    font-weight: 500;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.4) ;
-    color: $primaryColor;
-    border: $primaryColor solid 2px;
-    margin-left: 10px;
-    padding:  5px 15px;
-    border-radius: 10px;
-    &.blueButton{
-        color: $secondaryColor;
-        border:  $secondaryColor solid 2px;
-        &:hover{
-            color: $secondaryColor;
-        border: $secondaryColor solid 2px;
+.WelcomePageCover{
+    height: calc(100vh - 83px);
+    padding: 50px 20px 20px 10px;
+    position: relative;
+    background-image: url('https://cdn.kibrispdr.org/data/151/football-hd-pics-4.jpg');
+    background-size: cover;
+    &::before{
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 997;
+        background-color: #272727d8;
+    }
+    .firstTitle{
+        color: #fff;
+        font-size: 84px;
+        position: relative;
+        text-align: center;
+        z-index: 999;
+        span{
+            color: #FFD600;
         }
-    }    
+    }
+
+    .cards-container{
+        display: grid;
+        padding: 50px 20px  10px;
+        grid-template-columns: repeat(3,33.3%);
+        position: relative;
+        z-index: 999;
+        .card-wrapper{
+            &:hover{
+                animation: scaleUp 260ms forwards;
+             }
+            .step{
+                color: #fff;
+                font-weight: 700;
+                font-size: 50px;
+                text-align: center;
+                margin-bottom: 20px;
+                span{
+                    padding: 5px 10px;
+                    border-radius: 10px;
+                    border : 5px solid #FFD600;
+                    color: #fff;
+                }
+
+            }
+            .card{
+                width: 80%;
+                margin: auto;
+                color: #fff;
+                background-color: #181818;
+                border-radius: 10px;
+                cursor: pointer;
+                height: fit-content;
+                &.flipcard{
+                    height: 320px;
+                    position: relative;
+                    transform-style: preserve-3d;
+                    transition: transform 800ms;
+                    &:hover{
+                        transform:  rotateY(-180deg) ;
+                    }
+                    .card-face,.card-back{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: inherit;
+                        background-color: #181818;
+                    }
+                    .card-face{
+                        backface-visibility: hidden;
+                        .text{
+                            padding: 20px 5px;
+                            position: absolute;
+                            bottom: 0;
+                        }
+    
+                    }
+                    .card-back{
+                        padding: 10px;   
+                        background-color: #1818185d ;
+                        transform: rotateY(180deg);
+                        
+                        .rules{
+                            .points{
+                                color : #FFD600;
+                                margin-top: 30px;
+                            }
+                            &.expects{
+                                padding: 5px;
+                                font-size: 24px;
+                                p{
+                                    margin: 4px 0;
+                                }
+                                .green{
+                                    color: #0f0;
+                                    font-weight: 500;
+                                }
+                                .highlighted{
+                                    color: #f1003a;
+                                    font-size: 26px;
+                                }
+                                &.players{
+                                    font-size: 30px;
+                                    button{
+                                        margin : auto;
+                                        background: linear-gradient(90deg, #ffd600 60%, rgba(0,175,210,1) 100%);margin-top: 15px;
+                                        font-weight: 600;
+                                        color: #181818;
+                                        &:hover{
+                                            transform: scale(1.05);
+                                            background: linear-gradient(90deg, #ffd600 0%, rgba(0,175,210,1) 100%);margin-top: 15px;
+                                        }
+                                        font-size: 30px;
+                                        padding: 10px 15px;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                .text{
+                    margin-top: 20px;
+                    width: 100%;
+                    background-color: #FFD600;
+                    padding: 5px 10px;
+                    font-size: 36px;
+                    border-bottom-left-radius: inherit;
+                    border-bottom-right-radius: inherit;
+                    color: #222;
+                    font-weight: 600;
+                    text-align: center;
+                }
+                .imgage-wrapper{
+                    padding: 10px ;
+                    display: flex;
+                    img{
+                        margin: auto;
+                        opacity: 0.8;
+                        border-radius: 10px;
+                    }
+                }
+
+                
+    
+            }
+        }
+    }
 }
-.WelcomeNavbarButtons:hover{
-    background-color: #272727;
-    color: $primaryColor;
-    border: $primaryColor solid 2px;
-}
+
+
+
 svg{
 }
 #firstPoly,#secondPoly{
@@ -189,4 +244,11 @@ svg{
     position: absolute;
     left: -40px;
     border: #FFD600;
+}
+@keyframes scaleUp {
+    from{}
+
+    to{
+        transform: scale(1.15);
+    }
 }

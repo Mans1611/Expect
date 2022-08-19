@@ -79,6 +79,7 @@ const MyExpects = () => {
                                     expected.map((val,index)=>{
                                         return <MatchCardProvider match = {val} childeren = {<Expect 
                                                 match= {val} 
+                                                key= {index}
                                                 setUserExpections = {setUserExpections} 
                                                 userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
                                                 />}></MatchCardProvider>

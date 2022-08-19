@@ -132,8 +132,9 @@ team.get('/myteam/:userName',async(req,res)=>{
         if(!user.team)
             return res.status(200).send(null);
 
-        const team = await Teams.findOne({teamName : user.team.teamName});
-        const {expect} = team.teamMembers.find(member=>member.userName === userName) ; 
+        let team = await Teams.findOne({teamName : user.team.teamName});
+        const {expect} = team.teamMembers.find(member=>member.userName === userName);
+        
         const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
         
         await SortingTeams();

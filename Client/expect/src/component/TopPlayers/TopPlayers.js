@@ -15,7 +15,6 @@ const TopPlayers = () => {
         return async()=>{
             try{
                 const {data} = await axios.get('/statistics/topplayers');
-                console.log(data);
                 setTopPlayers(data);
                 setLoading(false);
             }catch(err){

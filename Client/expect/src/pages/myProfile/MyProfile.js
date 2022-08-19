@@ -19,7 +19,6 @@ const MyProfile = () => {
                 // it is important to note that we are reurning array from this route.
                 const response = await Axios.get(`/users/profile/${userName}`);  
                 setUser(response.data);
-                console.log(response.data);
                 setLoading(false);
             }
             catch(err){
