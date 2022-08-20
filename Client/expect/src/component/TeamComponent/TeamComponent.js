@@ -16,7 +16,7 @@ const TeamComponent = () => {
     const [user_team,setUserTeam] = useState(null);
     const [userTeamExpects,setUserTeamExpects] = useState([]);
     const [totalPoints,setTotalTeamPoints]  = useState(0);
-
+    const [loading,setLoading] = useState(true)
     let location = useLocation().pathname.split("/")[3]; 
     let item = document.getElementById(location)
 
@@ -40,6 +40,7 @@ const TeamComponent = () => {
           setUserTeam(data.team);
           setUserTeamExpects(data.expect);
           setTotalTeamPoints(data.totalTeamPoints);
+          setLoading(false)
         }
       },[])
 
@@ -49,6 +50,7 @@ const TeamComponent = () => {
         showJoinTeam, setShowJoinTeam,
         user_team,setUserTeam,
         userTeamExpects,setUserTeamExpects,
+        loading,setLoading,
         totalPoints
         }}>
 

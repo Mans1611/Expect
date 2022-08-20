@@ -1,6 +1,7 @@
 @import '../../../.mainStyle.scss';
 .popup{
     @include popupContainer;
+    background-color: #171717c2;
     .slideShow-Container{
         width: 75%;
         height: 90vh;
@@ -10,18 +11,21 @@
        
         .slide{
             width: 100%;
-            height: 80%;
+            height: 100%;
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
             .imagewrapper{
                 width: 100%;
-                height: 100%;
+                height: 70%;
                 border-radius: inherit;
+                overflow: hidden;
                 img{
                     border-radius: inherit ;
                     width: 100%;
-                    height: 100%;
                     object-fit: cover;
+                    &.movingup{
+                        transform: translateY(-100px);
+                    }
                 }
             }
             .textWrapper{
@@ -29,6 +33,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                margin: 30px auto;
                 .details{
                     font-size: 50px;
                     color: #272727;
@@ -50,7 +55,7 @@
                         border-top-right-radius: inherit;
                     }
                     .point{
-                        font-size: 78px;
+                        font-size: 100px;
                         font-weight: 600;
                         color: $gold;
                         padding: 5px 0;
@@ -66,6 +71,8 @@
         font-size: 80px;
         cursor: pointer;
         margin: 0 5px;
+        text-align: center;
     }
+
     
 }

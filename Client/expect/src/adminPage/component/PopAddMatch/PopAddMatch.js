@@ -21,7 +21,6 @@ const PopAddMatch = ({showPop,setShowPop}) => {
   const [showCountry,setShowCountry] = useState(false);
   const [round,setRound] = useState('Group Stage Round-1');
   const store = matchesStore();
-  console.log(round);
   useEffect(()=>{
     return async ()=>{
       try{
@@ -66,8 +65,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
   const handlePost = async()=>{
     let time = document.querySelector('input[name="time"]').value;
     let date = document.querySelector('input[name="date"]').value;
-    const matchId = document.querySelector('input[name="matchId"]').value;
-    if(time !=='' && date !=='' && firstCountry  && secondCountry && matchId !==''){
+    if(time !=='' && date !=='' && firstCountry  && secondCountry){
       date = date.split('-');
       const matchTime = `${date[1]},${date[2]},${date[0]},${time}`;
       
@@ -76,7 +74,6 @@ const PopAddMatch = ({showPop,setShowPop}) => {
           matchTime,
           firstCountry,
           secondCountry,
-          matchId,
           round 
         })
         const response = await axios.get('/matches/getmatches')
@@ -126,12 +123,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
                         </div>
 
                       <div className="timeSelection">
-                        <div className="timing">
-                          <label htmlFor="matchId">Match Id</label>
-                          <input type="text" name="matchId" id ="matchId"  />
-                        </div>
-
-                        <div className="timing">
+                         <div className="timing">
                           <label htmlFor="round">Round </label>
                           <select onChange={(e)=>setRound(e.target.value)} type="text" name="round" id ="round" >
                               <option>Group Stage Round-1</option>

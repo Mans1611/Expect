@@ -15,7 +15,7 @@ const Minute = ({matchTime,min,setMin})=> {
     
     const store = MatchStateCentral();
 
-    setInterval(()=>{
+    const interval = setInterval(()=>{
         setRefresh(refresh+1);
     },MINUTE)
 
@@ -23,6 +23,7 @@ const Minute = ({matchTime,min,setMin})=> {
         const now = new Date().getTime();
         const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
         setMin(passed - (store.match.stoppingTime));
+        return ()=> clearInterval(interval)
     },[refresh])
 
     useEffect(()=>{

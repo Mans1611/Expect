@@ -75,7 +75,7 @@ const Navbar = () => {
                     <div className="navbarMenu">
                        <div className="imgContainer">
                        
-                            <span className="username">{store.userGlob}</span>
+                            <span className="username">{store.userGlob.split(" ").splice(0,12)[0]}</span>
                        
                        </div>
                        <div className='navbarDropdown'>

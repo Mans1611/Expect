@@ -17,10 +17,9 @@ const MyTeam = () => {
   document.getElementsByTagName('body')[0].style.overflow = 'visible';
   const [showClipBoard,setShowClipBoard] = useState(false);
   const [showDelete,setShowDelete] = useState(false);
-  const [isLoading,setLoading] = useState(false);
   const [warnMsg,setWarnMsg] = useState(false);
   const {userGlob} = globalUser();
-  const {user_team,setUserTeam ,userTeamExpects,setUserTeamExpects,totalPoints} = useContext(TeamContext);
+  const {user_team,setUserTeam , loading,setLoading,totalPoints} = useContext(TeamContext);
   const [confirm,setConfirm] = useState(false);
 
 
@@ -28,7 +27,7 @@ const MyTeam = () => {
 
   const handleLeave = async(e)=>{
     e.preventDefault();
-    if(user_team.teamMembers.length === 1  && !confirm){
+    if(user_team.teamMembers.length === 1  && !confirm ){
       setWarnMsg(true);
       setConfirm(true);
       return ; 
@@ -41,19 +40,18 @@ const MyTeam = () => {
         const response = await Axios.put('/team/leaveteam',{userName:userGlob});
         if(response.status === 200)
         setUserTeam(null);
-        
         setLoading(false);
       }catch(err){
         console.log(err);
       }
     }
   }
-  if(user_team === '' || !user_team)
+  if(( user_team === '' || !user_team) && !loading )
     return <TeamInstructions/>
   
   return (
     <div className='myteam-container'>
-      { isLoading ? <SmallLaoding/> :
+      { loading ? <SmallLaoding/> :
         <>
           <div className="myteamHeader">
               <div className="teamNameWrapper">

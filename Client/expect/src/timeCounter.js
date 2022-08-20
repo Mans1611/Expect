@@ -8,22 +8,30 @@ const TimeCounter = ({matchTime,setTimeUp})=>{
     const [hours,setHours] = useState(0);
     const [min,setMin] = useState(0);
     const [sec,setSec] = useState(0);
-    useEffect(()=>{
-        let current = new Date().getTime();
-        left = time-current;
-        if(left <= 0){
-            setTimeUp(true);
-        }
-        setInterval(()=>{
+    let Hours = null,Min = null,Sec = null;
+
+    if(time > (new Date().getTime())){
+        useEffect(()=>{
+            let current = new Date().getTime();
+            left = time-current;
+            if(left <= 0){
+                setTimeUp(true);
+            }
+            const interval = setInterval(()=>{
         current = new Date().getTime();
         left = time-current;
-        let Hours = Math.floor(left/(1000*60*60));
-        let Min = Math.floor((left%(1000*60*60))/(1000*60));
-        let Sec = Math.floor((left%(1000*60))/(1000));
+        Hours = Math.floor(left/(1000*60*60));
+        Min = Math.floor((left%(1000*60*60))/(1000*60));
+        Sec = Math.floor((left%(1000*60))/(1000));
         setHours(Hours);setMin(Min);setSec(Sec);
-        },1000)
-
-    },[sec])
+    },1000)
+    return ()=> clearInterval(interval);
+    
+},[sec])
+}
+else{
+    setTimeUp(true)
+}
 
 
 
