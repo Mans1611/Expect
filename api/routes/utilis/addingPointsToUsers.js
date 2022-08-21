@@ -17,9 +17,10 @@ export default async function AddingPointsToUSers(matches,userExpections){
                    matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer2.index].playerPoints;  
                    
                      // so this for the winner points it will be calculated just if the match ends (fullTime) 
-                
-                        if(match.fullTime){
-                            let WINNER = null, WinnerPoints = 0;
+                     let result_Points = 0 , WinnerPoints = 0;  
+                       
+                     if(match.fullTime){
+                            let WINNER = null;
                             const winnerMath = match.firstCountry.result - match.secondCountry.result;
                             if(winnerMath > 0 ){
                                 WINNER = match.firstCountry.countryName; 
@@ -37,7 +38,33 @@ export default async function AddingPointsToUSers(matches,userExpections){
                                 matchPoints += WinnerPoints;
                             }
                         }
-                    
+                        // for result calculations 
+                        if(match.fullTime){
+                            let difference = 0;
+                            difference = Math.abs(match.firstCountry.result - userExpections[i].result1_value) + Math.abs(match.secondCountry.result - userExpections[i].result2_value);
+                            
+                            switch(difference){
+                                case 0 : 
+                                    result_Points = 5;
+                                    matchPoints += result_Points;
+                                    break;
+                                    case 1 : 
+                                    result_Points = 3 ;
+                                    matchPoints += result_Points;
+                                    break;
+                                    case 2 : 
+                                    result_Points = 1 ;
+                                    matchPoints += result_Points;
+                                    break;
+                                default : 
+                                    result_Points = 0;
+                            }
+
+                        }
+                    /* so in this code beleow we just add two more property which is WinnerPoints & result_points 
+                    / just to show them in the client side when the match ended.*/
+                    userExpections[i].WinnerPoints = WinnerPoints;
+                    userExpections[i].result_Points = result_Points;
                     userExpections[i].userPoints = matchPoints;
                     totalPoints += matchPoints;
                 }  

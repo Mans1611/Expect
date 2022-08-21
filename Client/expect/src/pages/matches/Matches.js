@@ -1,9 +1,7 @@
 
 import MathchCard from '../../component/matchcards/MatchCard';
-import { useState, useEffect, useContext } from 'react';
-import Loading from '../../component/loading/big.loading/Loading';
+import { useState, useEffect, useReducer, useCallback, useMemo } from 'react';
 import './match.scss';
-import NotFound from '../../component/NotFound/NotFound';
 import { globalUser } from '../../Context/HomeContext';
 import filteringExpects from './utilites/filteringExpects';
 import axios from 'axios';
@@ -11,6 +9,8 @@ import Expected from './Component/Expected/Expected';
 import io from 'socket.io-client';
 import SmallLaoding from '../../component/loading/small.loading/smallLoading';
 import MatchCardPhone from '../../component/matchcards/MatchCardPhone/MatchCardPhone';
+import RoundFilter from './Component/RoundFilter';
+import { FilterState, ReduceFn } from './utilites/ReduceFn';
 
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
@@ -21,32 +21,32 @@ const Matches = () => {
     const [isLoading,setLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false); 
     const [width,setWidth] = useState(window.innerWidth);
+    
     const {userGlob} = globalUser();
-    const [expandButton,setExpandButton] = useState('See All Matches');
-
-const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
-
-useEffect(()=>{
-    return async () => {
-        try{
-            const response = await axios.get(`/expects/${userGlob}`);
-            const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
-            const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
-            setData(MatchesWithFlag);
-            setLoading(false);
-            
-        }catch(err){
-            setLoading(false);  
-        }
-    } 
-},[]);
-
-
+    const [expandButton,setExpandButton] = useState("See All Matches");
+    
+    const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
+    
+    useEffect(()=>{
+        return async () => {
+            try{
+                setLoading(true);
+                const response = await axios.get(`/expects/${userGlob}`);
+                const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
+                const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
+                setData(MatchesWithFlag);
+                setLoading(false); 
+            }catch(err){
+                setLoading(false);  
+            }
+        } 
+    },[]);
     window.addEventListener('resize',()=>{
         setWidth(window.innerWidth)
 })
 
-
+    const [filterState,filterDispatch] = useReducer(ReduceFn,FilterState);
+        
 
     useEffect(()=>{
         socket.on("updatingMatches",async(matches)=>{
@@ -68,8 +68,10 @@ useEffect(()=>{
 
     const getMatchesDate = async(date)=>{
         const Date = date.split('-'); //year - month - day 
+
         if(Date[0] > 2020 && Date[0] < 2024){
             const searchDate = `${Date[1]},${Date[2]},${Date[0]}`;
+            filterDispatch({type : "DateChange",payload : searchDate});
             try{
                 const Response = await axios.get(`/expects/${userGlob}`);
                 const {data:dateMatches} = await axios.get(`/matches/?date=${searchDate}`);
@@ -90,7 +92,6 @@ useEffect(()=>{
             setData(MatchesWithFlag);
             setExpandButton("Just Todays' Matches");  
         }
-
         else if(expandButton === `Just Todays' Matches`){
             const response = await axios.get(`/expects/${userGlob}`);
             const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
@@ -98,28 +99,36 @@ useEffect(()=>{
             setData(MatchesWithFlag);
             setExpandButton("See All Matches");  
         }
-        setLoading(false);
-            
+        setLoading(false);    
     }
+
     return ( 
            
             <div className= {`match  ${isDark?'dark':''}` } >
                 <div className="matchWrapper">
-                    <h1 className="matchTitle">Today Matches</h1>
-                    <div className="dateContainer">
-                        <label htmlFor="NavigateToThisDate">
-                            <h1>Pick a Date : </h1>
-                            <input onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
-                        </label>
+                    <h1 className="matchTitle">{filterState.title}</h1>
+                    <div className="filter-container">
+                       
+                       <RoundFilter filterDispatch={filterDispatch} setData={setData} setLoading={setLoading}/>
+                        <div className="dateContainer">
+                            <label htmlFor="NavigateToThisDate">
+                                <h1>Pick a Date : </h1>
+                                <input onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
+                            </label>
+                        </div>
                     </div>
                     <div className="matchCard-container">
                             {isLoading ? <SmallLaoding/> : 
                             <div className="matchCardGrid">
                                     { width > 480 ?
+                                    // this will :
+                                    // matchcard -> if the user did not expect this game.
+                                    // expected card -> if he expected it. 
                                     data.map((value,key)=>{
-                                        if(!value.expected) return <MathchCard timeUp={timeUp} setTimeUp={setTimeUp} dark={isDark} key={key} match ={value}/>;   
-                                        else { return <Expected  key={key} match ={value}/>};
+                                        if(!value.expected) return <MathchCard  expected = {false} key={key} match ={value}/>;   
+                                        else { return <Expected expected = {true}  key={key} match ={value}/>};
                                     }) : 
+                                        // the same as above but for phone component
                                         data.map((value,index)=>{
                                             return <MatchCardPhone timeUp ={timeUp} setTimeUp = {setTimeUp} key={index} match = {value}   />
                                         })
@@ -129,7 +138,7 @@ useEffect(()=>{
                         <div className="matchcardButton-wrapper">
                             <button onClick={(e)=>{expandMatches(e);setExpandButton(
                                 expandButton === "See All Matches" ? "Just Today's" : "See All Matches" 
-                            )}}>{expandButton}</button>
+                            ); filterDispatch({type : "expand",payload : expandButton })}}>{expandButton}</button>
                         </div>
                     </div>
                 </div>

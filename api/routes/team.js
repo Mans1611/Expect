@@ -67,7 +67,7 @@ team.put('/jointeam',joinTeamValidation,async(req,res)=>{
     team.teamMembers.push({
         userName : user.userName,
         joinedTime,
-        expect : user_Expects_To_Team,
+        expects : user_Expects_To_Team,
         sharePoints:0
     });
     user.team = team;
@@ -133,12 +133,12 @@ team.get('/myteam/:userName',async(req,res)=>{
             return res.status(200).send(null);
 
         let team = await Teams.findOne({teamName : user.team.teamName});
-        const {expect} = team.teamMembers.find(member=>member.userName === userName);
+        const {expects} = team.teamMembers.find(member=>member.userName === userName);
         
         const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
         
         await SortingTeams();
-        res.status(200).send({team ,expect,totalTeamPoints}); 
+        res.status(200).send({team ,expects,totalTeamPoints}); 
     }
     catch(err){
         console.log(err);
@@ -146,17 +146,6 @@ team.get('/myteam/:userName',async(req,res)=>{
 })
 
 
-// team.get("/:teamName",async(req,res)=>{
-//     const {teamName} = req.params;
-//     try{
-//         const team = await Teams.findOne({teamName}); // contains team members.
-//         const {totalExpects} = await CalculateTotalTeamPoints(team);
-//         res.send(totalExpects);
-
-//     }catch(err){
-//         console.log(err);
-//     }
-// })
 
 team.get('/teamstanding',async(req,res)=>{ 
     const {limit} = req.query;

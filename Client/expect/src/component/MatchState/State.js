@@ -14,10 +14,14 @@ const  State = ({state,userExpect})=> {
 
             <div className="stateContainer">
                 <div className={`state first ${expected ? 'expected':''}`}>
-                    <img src={state.icon} className="icon" />
-                    {state.playerName} {state.state} 
+                    <div className="icon-wrapper">
+                        <img src={state.icon} className="icon" />
+                    </div>
+                   <p>{state.playerName} {state.state}</p>
                 </div>
-                <div className="circle">{state.min}</div> 
+                <div className="circleWrapper">
+                    <div className="circle">{state.min}</div>     
+                </div>
                 <div className='state empltyState'></div>
             </div>
             
@@ -31,9 +35,14 @@ const  State = ({state,userExpect})=> {
             return (
                 <div className="stateContainer">
                     <div className={`state empltyState`}></div>
-                    <div className="circle">{state.min}</div> 
-                    <div className={`state second ${expected ? 'expected':''}`}>{state.playerName} {state.state}
-                        <img src={state.icon} className="icon" />
+                    <div className="circleWrapper">
+                    <div className="circle">{state.min}</div>     
+                </div>
+                    <div className={`state second ${expected ? 'expected':''}`}>
+                        <p>{state.playerName} {state.state}</p>
+                        <div className="icon-wrapper">
+                            <img src={state.icon} className="icon" />
+                        </div>
                     </div>
                 </div>
             )
@@ -41,11 +50,14 @@ const  State = ({state,userExpect})=> {
         else if(state.country === "both"){
 
             return (
-                <div className="stateContainer">
-                    <div className='middleState'>{state.playerName} {state.state}
-                        <img src={state.icon} className="icon" />
+                <>
+                    <div className="middleState-wrapper">
+                        <div className='middleState'>{state.playerName} {state.state}
+                            <img src={state.icon} className="icon" />
+                        </div>
                     </div>
-                </div>
+                    
+                </>
             )
         }
 

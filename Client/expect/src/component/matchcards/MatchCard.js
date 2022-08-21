@@ -9,7 +9,7 @@ import { MatchCardProvider } from '../../Context/MatchCardContext';
 
 
 const MathchCard = ({match}) => {
-
+    document.getElementsByTagName("body")[0].style = "visible";
     const [pop,setPop] = useState(false);
     const [timeUp, setTimeUp] = useState(false); 
     const {isDark} = globalUser(); 
@@ -17,23 +17,26 @@ const MathchCard = ({match}) => {
     return ( 
     <MatchCardProvider match={match} childeren={
 
-        (
-            
+        ( 
             <>
         
             <div className={`matchCard ${isDark?'dark':''}`}>
-            
-                <div className="matchcardHeader">
-                    <div className="matchCardCountry"> {/* country1.*/ }
-                        <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
-                        <span className='countryLabel'>{match.firstCountry.countryName}</span>
+                <div className="matchcardHeader-wrapper">
+
+                    <div className="matchcardHeader">
+                        <div className="matchCardCountry"> {/* country1.*/ }
+                            <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
+                            <span className='countryLabel'>{match.firstCountry.countryName}</span>
+                        </div>
+                        <h2>VS</h2>
+                        <div className="matchCardCountry">
+                            <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
+                            <span className='countryLabel'>{match.secondCountry.countryName}</span>
+                        </div>
                     </div>
-                    VS
-                    <div className="matchCardCountry">
-                        <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
-                        <span className='countryLabel'>{match.secondCountry.countryName}</span>
-                    </div>
+                    <div className="round">{match.round}</div>
                 </div>
+
                 { !timeUp &&
                 <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/>
                 }
@@ -59,7 +62,7 @@ const MathchCard = ({match}) => {
                     </div>
             }
             </div>
-            { pop && timeUp && <MatchState setPop = {setPop} match={match}/>}   
+            { pop && timeUp && <MatchState expected = {false}  setPop = {setPop} match={match}/>}   
         </>
 
     )}>

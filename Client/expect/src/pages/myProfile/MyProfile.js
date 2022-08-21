@@ -30,7 +30,7 @@ const MyProfile = () => {
     const {isDark} = globalUser();
     return ( loading ? <Loading/> : 
               <div className={`myProfile ${isDark?'dark':null}`}>
-                    <h1 className="profileTitle">Your Profile</h1>
+                    <h1 className="profileTitle"><span>{userName}</span> Profile</h1>
                     <div className="informationContainer">
                     <PersonalComp user = {user}/>
                     <ExpectsInfo user = {user} />

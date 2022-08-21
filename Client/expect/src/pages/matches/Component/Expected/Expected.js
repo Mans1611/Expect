@@ -14,17 +14,19 @@ const Expected = ({match})=> {
 
       <div className='expectedContainer'>
         <div className={`matchCard ${isDark?'dark':''}`}>
-        
-        <div className="matchcardHeader">
-          <div className="matchCardCountry"> {/* country1.*/ }
-            <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
-            <span className='countryLabel'>{match.firstCountry.countryName}</span>
-          </div>
-            VS
-            <div className="matchCardCountry">
-                <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
-                <span className='countryLabel'>{match.secondCountry.countryName}</span>
+        <div className="matchcardHeader-wrapper">
+          <div className="matchcardHeader">
+            <div className="matchCardCountry"> {/* country1.*/ }
+              <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
+              <span className='countryLabel'>{match.firstCountry.countryName}</span>
             </div>
+            <h2>VS</h2>
+              <div className="matchCardCountry">
+                  <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
+                  <span className='countryLabel'>{match.secondCountry.countryName}</span>
+              </div>
+          </div>
+          <div className="round">{match.round}</div>
         </div>
 
         { !timeUp &&

@@ -15,6 +15,7 @@ const soket = io.connect('http://localhost:8000');
 
 const MyTeam = () => {
   document.getElementsByTagName('body')[0].style.overflow = 'visible';
+
   const [showClipBoard,setShowClipBoard] = useState(false);
   const [showDelete,setShowDelete] = useState(false);
   const [warnMsg,setWarnMsg] = useState(false);
@@ -60,7 +61,7 @@ const MyTeam = () => {
               </div>
               <div className="details">
                 <TeamDetail detail={user_team.teamStanding} detailTitle={"Team Standing"}/>
-                <TeamDetail detail={totalPoints} detailTitle={"Total points"}/>
+                <TeamDetail detail={user_team.teamPoints} detailTitle={"Total points"}/>
                 {
                   user_team.teamMembers.map(member =>{
                     if(member.userName === userGlob)

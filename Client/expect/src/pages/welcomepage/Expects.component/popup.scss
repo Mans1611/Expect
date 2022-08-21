@@ -22,10 +22,7 @@
                 img{
                     border-radius: inherit ;
                     width: 100%;
-                    object-fit: cover;
-                    &.movingup{
-                        transform: translateY(-100px);
-                    }
+                    height: 100%;
                 }
             }
             .textWrapper{

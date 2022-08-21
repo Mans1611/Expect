@@ -20,7 +20,11 @@ matches.get('/getmatches',SessionVerification,async(req,res)=>{
     }
 
 })
-
+// matches.get('/',async(req,res)=>{
+//     const {round} = req.query;
+//     const roundMatches = await Matches.find({round});
+//     res.send(roundMatches);
+// })
 matches.get('/match/:id', async (req,res)=>{
     try{
         const match = await Matches.findOne({matchId:req.params.id});
@@ -35,9 +39,17 @@ matches.get('/match/:id', async (req,res)=>{
  // in this route we can get the information by just the date of this day 
  matches.get('/', async (req,res)=>{
     try{
-        const regEX = new RegExp(`${req.query.date}`,'ig'); // use regular expression to just find all matches with this date no matter the time
-        const match = await Matches.find({matchTime: regEX });
-        res.status(200).send(match);
+        const {round,date} = req.query;
+        console.log(round + "----" + date);
+        if(round){
+            const roundMatches = await Matches.find({round});
+            return res.status(200).send(roundMatches);
+        }
+        else if(!round && date){
+            const regEX = new RegExp(`${req.query.date}`,'ig'); // use regular expression to just find all matches with this date no matter the time
+            const match = await Matches.find({matchTime: regEX });
+            return res.status(200).send(match);
+        }
     }
     catch(err){
         console.log(err);

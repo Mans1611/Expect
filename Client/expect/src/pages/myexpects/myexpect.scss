@@ -2,13 +2,12 @@
 
 .myexpects{
     height: fit-content;
-    background: linear-gradient(180deg, #a1a1a1 0%, #ffffff 100%);
+    background:#eee;
     .headlineWrapper{
         padding: 20px 0 ;
         .headline{
-            color: $gold;
-            text-shadow: 2px 1px #000,2px 1px #000;
-            font-size: 60px;
+            color: #212121;
+            font-size: 70px;
             text-align: center;
             font-weight: 600;
         }
@@ -43,7 +42,10 @@
 
 
     &.dark{
-        background: linear-gradient(180deg, #373737 52%, #171717 100%);
+        background: linear-gradient(180deg, #171717 52%,#fff 100%);
+        .headline{
+            color: #eee;
+        }
         .userTotalPoints{
             background-color: #171717;
             .text{
@@ -61,6 +63,7 @@
         height: 100%;
         display: grid;
         grid-template-columns: repeat(4,25%);
+        background-color: #ccccff;
         
     }
 
@@ -71,6 +74,12 @@
         .headlineWrapper{
             padding: 20px 0 ;  
         }
+        .expectsContainer{
+           
+            background-color: #000019;
+            
+        }
+    
         
 }
 }

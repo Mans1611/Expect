@@ -5,9 +5,11 @@ import State from './State';
 import CloseIcon from '@mui/icons-material/Close';
 import { MatchStateCentral } from '../../Context/MatchCardContext';
 
-const MatchState = ({match,setPop,userExpect}) => {
+const MatchState = ({match,setPop,userExpect,expected}) => {
+    
+    document.getElementsByTagName("body")[0].style.overflow = "hidden";
+    
     const {isDark} = globalUser();
-
     const hidePop = (e)=>{
         if(e.target.className === 'popMatchFullPage'){
             setPop(false);
@@ -39,7 +41,25 @@ const MatchState = ({match,setPop,userExpect}) => {
                         {
                             match.states.map( (state,index) => <State userExpect={userExpect} key={index} state = {state} /> )
                         }
-                        
+                        {
+                            expected &&
+                            <div className="points-container">
+                                <div className="points winnerPoints">
+                                    <h1 className="head">Winner Points</h1>
+                                    <h2 className="point">{userExpect.WinnerPoints}</h2>
+                                </div>
+
+                                <div className="points resultPoints">
+                                    <h1 className="head">Result Points</h1>
+                                    <h2 className="point">{userExpect.result_Points}</h2>
+                                </div>
+
+                                <div className="points totalPoints">
+                                    <h1 className="head">Total Points</h1>
+                                    <h2 className="point">{userExpect.userPoints}</h2>
+                                </div>
+                        </div>
+                        }
                     </div>
                 </div>
         </div>

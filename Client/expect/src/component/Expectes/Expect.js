@@ -11,6 +11,7 @@ import AddingPoints from '../../utilis/AddingPoints';
 import axios from 'axios';
 import MatchState from '../MatchState/MatchState';
 const Expect = ({match,userExpect,setUserExpections})=> {
+    document.getElementsByTagName("body")[0].style.overflow = "visible";
     
     if(!userExpect)
         return;
@@ -55,7 +56,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
                     <span className='countryLabel'>{match.secondCountry.countryName}</span>
                 </div>
             </div>
-
+          
             <div className={`yourExpect ${isDark?'dark':''}`}>
                 <h3>YourExpections</h3>
                 <div className="ExpectionsContent"> Winner : <span className="userExpect"> {userExpect.winnerValue}</span>  </div>
@@ -94,9 +95,10 @@ const Expect = ({match,userExpect,setUserExpections})=> {
                 Match Points : {userExpect.userPoints} PT
             </div>
         </div>
-
+            {/* so if the deadline did not hit so you will be able to update match PopMatchCard*/}
+            {/* so if the deadline did  hit so you will be able to see the match state*/}
         {pop && <PopMatchCard  userExpect={userExpect} match={match} setPop={setPop} /> }
-        {showState && <MatchState userExpect={userExpect} match = {match} setPop = {setShowState}/>}
+        {showState && <MatchState expected = {true} userExpect={userExpect} match = {match} setPop = {setShowState}/>}
         </div>
   )
 }

@@ -127,14 +127,10 @@ $secondaryColor : #0000f4;
                 border-radius: 10px;
                 cursor: pointer;
                 height: fit-content;
+                overflow-y: hidden;
                 &.flipcard{
                     height: 320px;
                     position: relative;
-                    transform-style: preserve-3d;
-                    transition: transform 800ms;
-                    &:hover{
-                        transform:  rotateY(-180deg) ;
-                    }
                     .card-face,.card-back{
                         position: absolute;
                         width: 100%;
@@ -142,7 +138,16 @@ $secondaryColor : #0000f4;
                         border-radius: inherit;
                         background-color: #181818;
                     }
+                    &:hover{
+                        .card-face{
+                            transition: transform 800ms;
+                            transform:  translateY(-400px) ;
+                        }
+                        
+                    }
                     .card-face{
+                       
+                       
                         backface-visibility: hidden;
                         .text{
                             padding: 20px 5px;
@@ -154,7 +159,7 @@ $secondaryColor : #0000f4;
                     .card-back{
                         padding: 10px;   
                         background-color: #1818185d ;
-                        transform: rotateY(180deg);
+                      
                         
                         .rules{
                             .points{
