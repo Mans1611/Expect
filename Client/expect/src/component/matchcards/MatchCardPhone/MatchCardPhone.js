@@ -9,8 +9,9 @@ import { MatchCardProvider } from '../../../Context/MatchCardContext';
 import MatchState from '../../MatchState/MatchState';
 
 const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
-   
+    document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
     const [pop,setPop] = useState(false);
+    const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
 
   return (
@@ -46,11 +47,11 @@ const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
     </div>
 
     <div className="ExpectPhoneWrap">
-       {timeUp ?   <button> See State </button> : 
-                    <button onClick={()=>setPop(true)}> Expect  </button>
+       {timeUp ?   <button onClick={()=>setStatePop(true)}> See State </button> : 
+                    <button onClick={()=>setPop(true)}> Expect </button>
         }
     </div>
-    
+    { statePop && timeUp && <MatchState expected = {false}  setPop = {setStatePop} match={match}/>}   
 </div>
     }/>
     

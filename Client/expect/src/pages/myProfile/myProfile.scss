@@ -92,13 +92,9 @@
    
     .expectInformationWrapper{
         background-color: #aaa;
-    }
-
-    
-    
-    
+    }  
 }
-@media screen  and (max-width : 960px){
+@media (min-width : 790px)  and (max-width : 960px){
 
     .profileTitle{
         text-align: center;
@@ -109,7 +105,7 @@
     
    
     .informationContainer{
-        height: 300px;
+        
         margin-top: 20px;
         .informationWrapper {
             width: 50%;
@@ -171,7 +167,6 @@
 /* Profile Expects Section */
 
 .userExpectContainer{
-   
     background-color: #fff;
     @include shadowMainStyle;   
     width: 90%;
@@ -221,4 +216,94 @@
 #verifiy{
     color: #0f0;
     font-weight: 600;
+}
+
+@media (min-width : 250px) and (max-width : 370px){
+
+.myProfile{
+    padding:20px 10px;
+.profileTitle{
+    font-size: 60px;
+    font-weight: 600;
+}
+}
+
+.informationContainer{
+
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    margin-top: 20px;
+    .informationWrapper {
+        width: 90% !important;
+        margin: 10px !important;        
+    }
+    .information{
+        background-color: #fff;
+        .editIcon{
+            font-size: 18px;
+            top: 0 !important;
+            right: 0 !important;
+            span{
+                display: none ;
+            }
+           
+
+        }
+        .userInformation{
+            padding: 10px 0;
+            width: 100%;
+            .feild{
+                display: flex;
+                align-items: center;
+                font-size: 20px !important;
+                margin: 0 !important;
+                border-bottom: 2px solid #222 !important;
+                width: 100%;
+                .icons{
+                    width: 25px !important;
+                    height: 25px !important;
+                   
+                }
+
+            }
+            .value{
+                color: #FFD600;
+                margin-left: 10px;
+                font-size: 18px;
+            }
+            .userCountry{
+                font-size:30px;
+                margin: 10px 0;
+            }
+            .imageWrapper{
+                img{
+                    width: 80px;
+                    height: 50px;
+                }
+            }
+        }
+        
+        width: 90%;
+      
+        @include shadowMainStyle ;
+
+        margin: auto;
+        .InformationHeader{
+            color: $gold;
+            text-align: center;
+            background-color: $qatar;
+            font-size: 25px !important;
+            padding: 5px 10px;
+            border-bottom: 4px solid #161616;
+            
+
+        }
+
+    }
+   
+    .expectInformationWrapper{
+        background-color: #aaa;
+    }  
+}
 }

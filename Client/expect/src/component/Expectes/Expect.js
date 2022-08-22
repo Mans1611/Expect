@@ -98,6 +98,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
             {/* so if the deadline did not hit so you will be able to update match PopMatchCard*/}
             {/* so if the deadline did  hit so you will be able to see the match state*/}
         {pop && <PopMatchCard  userExpect={userExpect} match={match} setPop={setPop} /> }
+        
         {showState && <MatchState expected = {true} userExpect={userExpect} match = {match} setPop = {setShowState}/>}
         </div>
   )

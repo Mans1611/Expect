@@ -19,8 +19,7 @@ const PersonalComp = ({user}) => {
     <div className="informationWrapper">
         <div className={`information ${isDark? 'dark':null}`}>
             <span className='editIcon' onClick={()=>setUPI(true)}>
-                Edit
-                <EditIcon/>
+                <span>Edit</span> <EditIcon/>
                 </span> 
             <h2 className='InformationHeader'>Personal Information</h2>
             <div className="userInformation">

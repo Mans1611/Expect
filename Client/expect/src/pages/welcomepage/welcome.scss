@@ -252,9 +252,161 @@ svg{
     border: #FFD600;
 }
 @keyframes scaleUp {
-    from{}
-
+    
     to{
         transform: scale(1.15);
     }
+}
+@media (min-width : 370px) and (max-width : 490px) {
+    .topnavbar{ 
+        h1{
+            font-size: 40px;
+        }
+        .buttonscontainer{
+            padding : 2px 7px;
+            justify-content: space-between;
+            align-items: center;
+            .buttonsWrapper{
+                margin-right: 5px;
+                .WelcomeNavbarButtons{
+                    font-size: 30px;
+                    font-weight: 500;
+                    border: #f1003a solid 2px;
+                    margin-left: 5px;
+                    padding: 2px 8px;
+                    &.blueButton{
+                        border:  #FFD600 solid 2px;
+                        &:hover{
+                            color: #fff ;
+                        border: #fff solid 2px;
+                        }
+                    }    
+                }
+                .WelcomeNavbarButtons:hover{
+                    border: #fff solid 2px;
+                }
+            }
+        }
+    }  
+    .WelcomePageCover{
+        height: fit-content;
+        padding: 30px 20px 10px 10px;
+        background-size: cover;
+
+        .firstTitle{
+            font-size: 50px;
+           
+        }
+    
+        .cards-container{
+            padding: 20px 10px  10px;
+            grid-template-columns: repeat(1,100%);
+            position: relative;
+            z-index: 999;
+            margin-top: 20px;
+            .card-wrapper{
+                &:hover{
+                    animation:none;
+                 }
+                .step{
+                   font-weight: 500;
+                    font-size: 35px;
+                    span{
+                        padding: 5px 10px;
+                        border-radius: 10px;
+                        border : 5px solid #FFD600;
+                        color: #fff;
+                    }
+    
+                }
+                .card{
+                    width: 80%;
+                    margin: 20px auto;
+                    color: #fff;
+                    background-color: #181818;
+                    border-radius: 10px;
+                    
+                    &.flipcard{
+                        height: 320px;
+                        position: relative;
+                        .card-face,.card-back{
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: inherit;
+                            background-color: #181818;
+                        }
+                        &:hover{
+                            .card-face{
+                                transition: transform 800ms;
+                                transform:  translateY(-400px) ;
+                            }
+                            
+                        }
+                        .card-face{
+                            backface-visibility: hidden;
+                            .text{
+                                padding: 20px 5px;
+                                position: absolute;
+                                bottom: 0;
+                            }
+        
+                        }
+                        .card-back{
+                            padding: 5px;   
+                            .rules{
+                                .points{
+                                    
+                                }
+                                &.expects{
+                                    padding: 5px;
+                                    font-size: 24px;
+                                    p{
+                                        margin: 4px 0;
+                                    }
+                                    .green{
+                                        color: #0f0;
+                                        font-weight: 500;
+                                        font-size: 24px;
+                                    }
+                                    .highlighted{
+                                        color: #f1003a;
+                                        font-size: 24px;
+                                    }
+                                    &.players{
+                                        font-size: 18px;
+                                        button{
+                                            font-size: 28px;
+                                        }
+                                    }
+                                }
+    
+                            }
+                        }
+                    }
+                    .text{
+                        margin-top: 10px;
+                        width: 100%;
+                        background-color: #FFD600;
+                        padding: 5px ;
+                        font-size: 26px;
+                    }
+                    .imgage-wrapper{
+                        padding: 10px ;
+                        display: flex;
+                        img{
+                            margin: auto;
+                            opacity: 0.8;
+                            border-radius: 10px;
+                            width: 90%;
+                        }
+                    }
+    
+                    
+        
+                }
+            }
+        }
+    }
+    
 }

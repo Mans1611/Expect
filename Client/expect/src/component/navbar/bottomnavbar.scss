@@ -3,11 +3,11 @@
 
 .bottomNavbar{
     position: fixed;
-    z-index: 999;
+    z-index: 990;
     bottom: 0;
     width: 100vw;
     height: fit-content;
-    box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+    box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43); 
     -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     border-top: 2px solid #ddd;
@@ -44,7 +44,7 @@
                     display: block;
                     position: absolute;
                     transition: top 200ms ;
-                    top: -205px;
+                    top: -35px;
                     right: -5px;
                     z-index: 999;
                     width: 150px;
@@ -75,6 +75,81 @@
                 width: 100%;
             }
 
+        }
+    }
+}
+@media (min-width : 250px) and (max-width : 370px) {
+    .bottomNavbar{
+        
+        #{&}Link{ 
+            text-decoration: none;
+            display: flex;
+            font-size: 12px;
+            span{
+                font-size: 13px;
+            }
+            &.selected{
+                background-color: rgb(193, 0, 39);
+                color: #eee;
+                padding: 0px;
+            }
+        }
+       
+        #{&}Item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px ;
+            background-color: inherit;
+            &:hover{
+                background-color: rgb(193, 0, 39);
+                
+            }
+            &.dropUpBarWrapper{
+                position: relative;
+                &:hover{
+                    .dropUpBar{
+                        display: block;
+                        position: absolute;
+                        transition: top 200ms ;
+                        top: -72px;
+                        right: -5px;
+                        z-index: 999;
+                        width: 150px;
+                        border-radius: 2px;
+                        text-align: center;
+                        box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+                        -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+                        -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
+                        
+                        .bottomNavbarItemDropUP{
+                            &:hover{
+                                background-color: rgb(193, 0, 39);
+                                color: #eee;
+                            }
+                            display: flex;
+                            align-content: center;
+                            align-items: center;
+                            padding: 5px;
+                            justify-content: center;
+                        }
+                        a{
+                            color: #111;
+                            text-decoration: none;
+                            
+                        }
+                    }
+                }
+            }
+            .dropUpBar{
+                display: none;
+                background-color: #ccc;
+                .bottomNavbarItemDropUP{
+                    width: 100%;
+                }
+    
+            }
         }
     }
 }

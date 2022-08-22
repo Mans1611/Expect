@@ -5,17 +5,19 @@ import './phoneExpect.scss';
 import TimeCounter from '../../../TimeCounter';
 import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import '../../popupmatchcard.scss';
+import MatchState from '../../MatchState/MatchState';
+
 const ExpectPhone = ({match,userExpect})=> {
+    document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
 
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false);
     const [pop,setPop] = useState(false);
+    const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
    
 
-    const togglePop = (e)=>{
-        setUpdatePop(false);
-    }
+ 
 
     return (
     <div className='expectPhone'>
@@ -43,11 +45,13 @@ const ExpectPhone = ({match,userExpect})=> {
             </div>
         </div>
         <div className="ExpectPhoneWrap">
-           {timeUp ?   <button> See State </button> : 
+           {timeUp ?   <button onClick={()=>setStatePop(true)}> See My Expect </button> : 
                         <button onClick={()=>setPop(true)}> Edit Expect </button>
             }
         </div>
         {pop && <PopMatchCard userExpect={userExpect} match={match}  setPop = {setPop} />}
+        { statePop && timeUp && <MatchState expected = {true} userExpect={userExpect}  setPop = {setStatePop} match={match}/>} 
+          
     </div>
   )
 }

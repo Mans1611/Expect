@@ -132,3 +132,25 @@
     
     
 }
+
+@media (min-width : 250px) and (max-width:339px) {
+    .myexpects{
+        .expectsContainer{
+            padding: 10px;
+            background: linear-gradient(180deg, #a1a1a1 0%, #ffffff 100%);
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(2,50%);   
+        }
+        .headlineWrapper{
+            .headline{
+                font-size: 55px;
+                color: $gold;
+                font-weight: 400;
+            }
+        }
+    }
+    
+    
+    
+}

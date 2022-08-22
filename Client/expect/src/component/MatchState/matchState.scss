@@ -189,3 +189,177 @@
 }
 
 }
+
+@media (min-width : 370px) and (max-width : 490px) {
+ .popMatchContainer{
+    width: 90% !important;
+    height: 80vh !important;
+    .CloseIcon{
+        font-size: 30px;
+    }
+    .matchStateContainer{
+        
+    .matchStateTitle{
+        font-size: 35px;
+    }
+    .matchState{
+        padding: 5px 2px; 
+        .icon{
+            width: 30px;
+            height: 30px;
+        }
+        .stateContainer{
+            display: grid;
+            grid-template-columns: 45% 10% 45%;
+            
+            .state{
+                position: relative;
+                font-size: 16px;
+                margin: 5px 0 ;
+                &.first{
+                    text-align: end ;
+                    margin-left: 0;
+                    padding-right: 5px;
+                }
+                &.second{
+                    text-align: start ;
+                }
+                
+            }
+            .expected{
+                background-color: #459e00;
+                border-radius: 5px;
+                padding: 5px;
+                color: #fff;
+                font-size: 16px;
+                text-align: center;
+            }
+            .circleWrapper{
+                .circle{
+                    border: 3px solid #090;
+                    width: 30px;
+                    height: 30px;
+                    font-size: 18px;
+                }
+            }
+        }
+        .middleState-wrapper{
+           
+            border-bottom: 2px solid #333;
+            
+        }
+        .points-container{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 0;
+            .points{
+                .head{
+                    padding:  6px;
+                    font-size: 20px;
+                }
+                .point{
+                    padding: 2px;
+                    font-size: 36px;
+                }
+
+            }
+        }
+       
+        
+    }
+    
+}
+ }   
+}
+
+@media (min-width : 260px) and (max-width : 369px) {
+ .popMatchContainer{
+    width: 95% !important;
+    height: fit-content !important;
+    max-height: 80vh !important;
+    .CloseIcon{
+        font-size: 30px;
+    }
+    .matchStateContainer{
+        
+    .matchStateTitle{
+        font-size: 25px;
+    }
+    .matchState{
+        padding: 5px 2px; 
+        .icon{
+            width: 30px;
+            height: 30px;
+        }
+        .stateContainer{
+            
+            .state{
+                position: relative;
+                font-size: 12px;
+                margin: 5px 0 ;
+                &.first{
+                    text-align: end ;
+                    margin-left: 0;
+                    padding-right: 2px;
+                }
+                &.second{
+                    text-align: start ;
+                }
+                
+            }
+            .expected{
+                background-color: #459e00;
+                border-radius: 5px;
+                padding: 2px;
+                color: #fff;
+                font-size: 15px;
+            }
+            .circleWrapper{
+                .circle{
+                    border: 2px solid #090;
+                    width: 30px;
+                    height: 30px;
+                    font-size: 15px;
+                }
+            }
+        }
+        .middleState-wrapper{
+            border-bottom: 2px solid #333;
+            .middleState{
+               
+                margin:  10px 0;
+                font-size: 26px;
+               
+                .icon{
+                    margin-left: 5px;
+                    transform: rotate(45deg);
+                    
+                }
+            }
+        }
+        .points-container{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 0;
+            .points{
+                height: fit-content;
+                .head{
+                    padding:  6px;
+                    font-size: 16px;
+                }
+                .point{
+                    padding: 2px;
+                    font-size: 26px;
+                }
+
+            }
+        }
+       
+        
+    }
+    
+}
+ }   
+}

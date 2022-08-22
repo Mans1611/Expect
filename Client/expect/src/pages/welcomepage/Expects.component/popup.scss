@@ -70,6 +70,62 @@
         margin: 0 5px;
         text-align: center;
     }
-
+@media (min-width : 370px) and (max-width :490px) {
+    .slideShow-Container{
+        width: 75%;
+        height: fit-content;
+        background-color: $gold;
+        border-radius: 10px;
+        .slide{
+            width: 100%;
+            height: 100%;
+           
+            .imagewrapper{
+                width: 100%;
+                height: 50%;
+               
+                img{
+                    border-radius: inherit ;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+            .textWrapper{
+                padding: 5px 10px;
+                margin: 10px auto;
+                .details{
+                    font-size: 25px;
+                    color: #272727;
+                    font-weight: 600;
+                    width: 70% ;
+                }
+                .total-Points{
+                    height: fit-content;
+                    margin: auto;
+                    border-radius: 5px;
+                    h1{
+                        font-size: 20px;
+                        background-color: #171717;
+                        padding: 4px;
+                        
+                    }
+                    .point{
+                        font-size: 60px;
+                        
+                    }  
+                }
+            }
+        }
+    }
+    .arrow{
+        color: #171717;
+        background-color: #fff;
+        border-radius: 50%;
+        font-size: 50px;
+        margin: 0 5px;
+        text-align: center;
+    }
+}
     
 }
