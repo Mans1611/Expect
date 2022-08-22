@@ -157,7 +157,7 @@ const PopAddMatch = ({showPop,setShowPop}) => {
                             <input type="radio" name="country" id={country.countryName} value = {country.countryName} />
                             
                             <label htmlFor={country.countryName}>
-                              <img value={country.countryName} className='countryFlage' src={country.logo} alt="" />
+                              <img value={country.countryName} className='countryFlage' src={country.logo} alt={country.logo} />
                               {country.countryName}
                             </label>
                         </div>

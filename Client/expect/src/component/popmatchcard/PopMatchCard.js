@@ -7,11 +7,17 @@ import BalanceIcon from '@mui/icons-material/Balance';
 import { globalUser } from '../../Context/HomeContext';
 import PlayerCardRadio from '../PlayerCardRadio/PlayerCardRadio';
 import CreatingExpect from '../../utilis/CreatingExpectObject';
+import SelectPlayerCard from './playercard/SelectPlayerCard';
+import { ReducePlayerFn, statePlayers } from './ReducerPlayer';
+import { CreatePlayerObject } from '../PlayerCardRadio/CreatePlayerObject';
+import PlayerCard from './playercard/PlayerCard';
 
 const PopMatchCard = ({match,setPop,type,userExpect}) => {
-
+    document.body.style.overflow = 'hidden';
     const {isDark,userGlob} = globalUser();
-   
+    
+    const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
+
     useEffect(()=>{
         return async()=>{
             if(userExpect){
@@ -24,6 +30,16 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
         }
     },[])
     
+    const handleSelect = (country,countryPlayers)=>{
+       if (!document.querySelector(`input[name=${country}]:checked`))
+            return null;
+       
+        let player = document.querySelector(`input[name=${country}]:checked`).id;
+        player = CreatePlayerObject(countryPlayers,player);
+        dispatchPlayer({type :`PlayerSelect${playersState.selected}` , payload : player});
+    }
+    console.log(playersState);
+
     const hidePop = (e)=>{
         if(e.target.className === 'popMatchFullPage'){
             setPop(false);
@@ -35,7 +51,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
     const reducerFN = (state, action)=>{
         switch(action.type){
             case 'warnMsg' : 
-                return { msg : 'Your Expected Result Do Not Match With The Winner',className : "warnMsg",showMsg:true};
+                return { msg : action.payload ,className : "warnMsg",showMsg:true};
             
             case 'success':
                 return {msg : action.payload ,showMsg:true,className : 'succsess' };
@@ -55,7 +71,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
         const result2_value = document.querySelector('input[id="result_2"]').value;
         
         if((result1_value === result2_value && winnerValue !== 'draw') || (result1_value !== result2_value && winnerValue === 'draw') ){
-            dispatch({type:"warnMsg"})
+            dispatch({type:"warnMsg", payload : "Your Expected Result Do Not Match With The Winner"})
             return 0 ;
         }
         if(
@@ -91,7 +107,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
             const result2_value = document.querySelector('input[id="result_2"]').value;
             
             if((result1_value === result2_value && winnerValue !== 'draw') || (result1_value !== result2_value && winnerValue === 'draw') ){
-                dispatch({type:"warnMsg"})
+                dispatch({type:"warnMsg",payload : "Check The Result And the Winner State"})
                 return 0 ;
             }
             if(
@@ -103,9 +119,13 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                     dispatch({type : "warnMsg",payload : "Check The Result And the Winner State"});
                     return 0;
                 }
+                if(playersState.player1.playerName === playersState.player2.playerName || playersState.player3.playerName === playersState.player4.playerName){
+                    dispatch({type : "warnMsg",payload : "Check the players selection again !!"});
+                    return 0 ;
+                }
 
             try{
-                const expectObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players);
+                const expectObject = CreatingExpect(playersState);
                 
                 const response = await axios.post(`/expects/addexpect/${userGlob}`,{
                     matchId : match.matchId,
@@ -176,16 +196,60 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                         </div>
                         <div className="matchCardPlayers">
                             <h2 className="countryLabel">Select Player from {match.firstCountry.countryName}</h2>
-                            <div className="playersContainer">
-                            {match.firstCountry.players.map((player,index)=>
-                                <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
-                                )}
+                            
+                            <div className="choose-container">
+                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer1`})}}>
+                                        {playersState.player1 ? 
+                                            <PlayerCard player={playersState.player1}/> : 
+                                            <SelectPlayerCard order = {1} playersState={playersState} dispatchPlayer={dispatchPlayer}/>}
+                                    </div>
+                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer2`})}}>
+                                        { playersState.player2 ? 
+                                            <PlayerCard  player={playersState.player2}/> : 
+                                            <SelectPlayerCard order = {2} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="FirstCountry"  playerOrder="Player2"/>}</div>
+                                    </div>
+                            
+                            <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
+                                {
+                                    playersState.showPlayer1? 
+                                    match.firstCountry.players.map((player,index)=>
+                                        <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
+                                        ) : null
+                                }
+                                {
+                                    playersState.showPlayer2? 
+                                    match.firstCountry.players.map((player,index)=>
+                                        <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
+                                        ) : null
+                                }
+                                
                             </div>
                             <h2 className="countryLabel"> Select Player from {match.secondCountry.countryName}</h2>
-                            <div className="playersContainer">
-                                {match.secondCountry.players.map((player,index)=>{
-                                    return <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
-                                })}
+                                <div className="choose-container">
+                                 <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`})}} >
+                                    { playersState.player3 ? <PlayerCard player={playersState.player3}/> : <SelectPlayerCard order = {3} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry" playerOrder="Player1"/>}
+                                </div>  
+                                <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`})}}>
+                                    { playersState.player4 ? <PlayerCard  player={playersState.player4}/> : <SelectPlayerCard order = {4} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry"  playerOrder="Player2"/>}
+                                </div> 
+                                </div>
+                            <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
+                                    {
+                                        playersState.showPlayer3 ? 
+                                        match.secondCountry.players.map((player,index)=>{
+                                            return(
+                                                <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
+                                            )
+                                        }) : null
+                                        
+                                    }
+                                    {
+                                        playersState.showPlayer4 ?
+                                        match.secondCountry.players.map((player,index)=>{
+                                            return <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
+                                        }) : null
+                                        
+                                    }
                             </div>
                         </div>
                         {Msg.showMsg && <div className={Msg.className}>{Msg.msg} </div>}

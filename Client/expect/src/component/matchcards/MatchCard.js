@@ -9,17 +9,15 @@ import { MatchCardProvider } from '../../Context/MatchCardContext';
 
 
 const MathchCard = ({match}) => {
-    document.getElementsByTagName("body")[0].style = "visible";
+    document.body.style.overflow = 'visible';
     const [pop,setPop] = useState(false);
     const [timeUp, setTimeUp] = useState(false); 
     const {isDark} = globalUser(); 
    
     return ( 
     <MatchCardProvider match={match} childeren={
-
         ( 
             <>
-        
             <div className={`matchCard ${isDark?'dark':''}`}>
                 <div className="matchcardHeader-wrapper">
 

@@ -201,9 +201,18 @@ form{
         background-color: #000;
     }
     .matchCardPlayers{
+        h2{
+            color: #262626;
+        }
         .playersContainer{
             padding: 5px;
             background-color: #ddd;
+        }
+        .choose-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px auto;
         }
         
 
@@ -221,6 +230,12 @@ form{
         display: flex;
         overflow-y: hidden;
         position: relative;
+        .choose-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
         
         
     }

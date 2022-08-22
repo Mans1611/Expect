@@ -10,7 +10,7 @@
     -webkit-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     background: linear-gradient(90deg, #513333 50%, #9d0116 50%);
-    border: 4px solid #272727;
+    border: 3px solid #272727;
     &.dark{
         border: 3px solid #d7d7d7;
     }
@@ -57,8 +57,9 @@
             .details{
                 color: #c0c0c0;
                 &.name{
-                    color: #fff;
-                    font-size: 25px;
+                    color: rgb(255, 191, 0);
+                    font-size: 22px;
+                    
                 }
             }
             .PlayerStateSelction{
