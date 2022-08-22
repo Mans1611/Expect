@@ -66,10 +66,10 @@
         justify-content: space-around;
         align-items: center;
         .popMatchCardCountryImg{
-            width: 60px;
-            height:60px;
+            width: 70px;
+            height:70px;
             border-radius: 50%;
-            border : 2px solid $gold ;
+            border : 2px solid $gold !important;
             
             &.flex{
                 width: fit-content;
@@ -213,6 +213,7 @@ form{
             justify-content: center;
             align-items: center;
             margin: 5px auto;
+
         }
         
 
@@ -226,6 +227,7 @@ form{
             
         }
     }
+
     .playersContainer{
         display: flex;
         overflow-y: hidden;
@@ -290,26 +292,17 @@ form{
             
         } 
     }
-    @media screen and (max-width:960px) {
-        .popMatchContainer{
-            width:70%;
-
-        }
-    }
-    @media screen and (max-width:860px) {
-        .popMatchContainer{
-            width:80%;
-
-        }
-    }
+    
+   
     @media screen and (max-width:760px) {
         .popMatchContainer{
             width:90%;
         }
     }
+
     @media screen and (max-width:480px) {    
         .popMatchContainer{
-            width: 90%;
+            width: 90% ;
             height: 70vh;
             .popMatchWinner{
                 text-align: center;
@@ -356,7 +349,6 @@ form{
         
             }
             .popFormMatch{
-                
                     .popFormLabels{
                         font-size: 18px;
                         margin-right: 5px;
@@ -440,6 +432,29 @@ form{
         margin-top: 5px;
       }
 
+@media screen and (max-width:960px) {
+    .popMatchContainer{
+        width:70% !important;
+        .choose-container{
+            margin: 5px auto;
+            .palyerCard{
+                margin: 0 10px !important;
+            }   
+        }
+
+    }
+}
+@media (min-width : 761px) and (max-width:860px) {
+    .popMatchContainer{
+        width:80%;
+        .choose-container{
+            margin: 5px auto;
+            .palyerCard{
+                margin: 0 5px !important;
+            }   
+        }
+    }
+}
 @keyframes popup {
     from{
         width: 0;

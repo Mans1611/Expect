@@ -3,17 +3,21 @@ import { useEffect } from 'react';
 
 const  State = ({state,userExpect})=> {
     let expected = false;
-    
+    let secondExpect = false;
     
     
     if(state.country === "first"){
 
-        if(userExpect)
-            expected = (state.playerName === userExpect.mutatePlayer1.playerName) ? true : false;
+        if(userExpect){
+            expected = state.playerName === userExpect.mutatePlayer1.playerName  ? true : false;
+            secondExpect = state.playerName === userExpect.mutatePlayer2.playerName  ? true : false;
+        }
+    
+
         return (
 
             <div className="stateContainer">
-                <div className={`state first ${expected ? 'expected':''}`}>
+                <div className={`state first ${expected ? 'expected':''} ${secondExpect ? 'secondExpect':''} `}>
                     <div className="icon-wrapper">
                         <img src={state.icon} className="icon" />
                     </div>
@@ -29,8 +33,10 @@ const  State = ({state,userExpect})=> {
         }
 
         else if(state.country === "second"){
-            if(userExpect)
-                expected = (state.playerName === userExpect.mutatePlayer2.playerName) ? true : false;
+            if(userExpect){
+                expected = state.playerName === userExpect.mutatePlayer3.playerName  ? true : false;
+                secondExpect = state.playerName === userExpect.mutatePlayer4.playerName
+            }
 
             return (
                 <div className="stateContainer">
@@ -38,7 +44,7 @@ const  State = ({state,userExpect})=> {
                     <div className="circleWrapper">
                     <div className="circle">{state.min}</div>     
                 </div>
-                    <div className={`state second ${expected ? 'expected':''}`}>
+                    <div className={`state second ${expected ? 'expected':''} ${secondExpect ? 'secondExpect':''}`}>
                         <p>{state.playerName} {state.state}</p>
                         <div className="icon-wrapper">
                             <img src={state.icon} className="icon" />

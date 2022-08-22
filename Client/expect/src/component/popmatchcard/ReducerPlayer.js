@@ -12,7 +12,6 @@ export const statePlayers = {
 
 
 export const ReducePlayerFn = (state,action)=>{
-    console.log(action.type);
     switch(action.type){
         case 'showFirstCountryPlayer1' : 
             state.showPlayer2 = state.showPlayer3 = state.showPlayer4 = false; 

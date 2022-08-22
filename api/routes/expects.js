@@ -23,7 +23,6 @@ expects.get('/:userName',SessionVerification,async(req,res)=>{
         await User.findOneAndUpdate({userName},{userPoints:totalPoints});
         await Expects.updateOne({userName},{expects : userExpections});
         res.status(200).json({matches,userExpections,totalPoints});
-
     }catch(err){
         console.log(err);
     }
@@ -40,7 +39,6 @@ expects.post('/addexpect/:userName',async(req,res)=>{
         match.firstCountry.players[mutatePlayer1.index].votes +=1 ; 
         match.secondCountry.players[mutatePlayer2.index].votes +=1 ;
         match.votes += 1;
-        console.log(req.body);
         await Matches.updateOne({matchId : req.body.matchId},match);
         // here I add the match time to the user expectes, as I will need it in the Team Calculation if he joined a team.
         user.expects.push({matchTime : match.matchTime,round : match.round,...req.body});
@@ -61,7 +59,7 @@ expects.post('/addexpect/:userName',async(req,res)=>{
 
 expects.put('/editexpect/:userName',async(req,res)=>{
     try{
-        const {mutatePlayer1,mutatePlayer2,matchId} = req.body;
+        const {mutatePlayer1,mutatePlayer2,mutatePlayer3,mutatePlayer4,matchId} = req.body;
         const {userName} = req.params;
         let user = await Expects.findOne({userName});
         let matchindex = 0;
@@ -71,13 +69,17 @@ expects.put('/editexpect/:userName',async(req,res)=>{
             if(expect.matchId === matchId){
                 matchindex = index;
                 Match.firstCountry.players[expect.mutatePlayer1.index].votes -= 1 ;
-                Match.secondCountry.players[expect.mutatePlayer2.index].votes -= 1 ;
+                Match.firstCountry.players[expect.mutatePlayer2.index].votes -= 1 ;
+                Match.secondCountry.players[expect.mutatePlayer3.index].votes -= 1 ;
+                Match.secondCountry.players[expect.mutatePlayer4.index].votes -= 1 ;
                 return expect;
             } 
         }))
-
-        Match.firstCountry.players[mutatePlayer1.index].votes +=1 ;
-        Match.secondCountry.players[mutatePlayer2.index].votes +=1 ;
+        
+        Match.firstCountry.players[mutatePlayer1.index].votes +=1;
+        Match.firstCountry.players[mutatePlayer2.index].votes +=1;
+        Match.secondCountry.players[mutatePlayer3.index].votes +=1;
+        Match.secondCountry.players[mutatePlayer4.index].votes +=1;
 
         await Matches.updateOne({matchId},Match);
         user.expects[matchindex] = req.body; // so we just replacce it where it found.

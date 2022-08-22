@@ -40,7 +40,6 @@ matches.get('/match/:id', async (req,res)=>{
  matches.get('/', async (req,res)=>{
     try{
         const {round,date} = req.query;
-        console.log(round + "----" + date);
         if(round){
             const roundMatches = await Matches.find({round});
             return res.status(200).send(roundMatches);

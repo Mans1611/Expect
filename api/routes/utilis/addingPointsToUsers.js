@@ -2,7 +2,7 @@
 // game in mutateplyar i have attached the index of each player so we can reach it in the array
 // without searching for it.
 
-//import expects from "../../models/Expects.js";
+
 
 export default async function AddingPointsToUSers(matches,userExpections){
     let totalPoints = 0;
@@ -14,8 +14,9 @@ export default async function AddingPointsToUSers(matches,userExpections){
                 let matchPoints = 0;
                 if(match.matchId === userExpections[i].matchId){
                    matchPoints += match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints;
-                   matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer2.index].playerPoints;  
-                   
+                   matchPoints += match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints;  
+                   matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints;
+                   matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints;
                      // so this for the winner points it will be calculated just if the match ends (fullTime) 
                      let result_Points = 0 , WinnerPoints = 0;  
                        
@@ -38,7 +39,7 @@ export default async function AddingPointsToUSers(matches,userExpections){
                                 matchPoints += WinnerPoints;
                             }
                         }
-                        // for result calculations 
+                        // for result points calculations 
                         if(match.fullTime){
                             let difference = 0;
                             difference = Math.abs(match.firstCountry.result - userExpections[i].result1_value) + Math.abs(match.secondCountry.result - userExpections[i].result2_value);

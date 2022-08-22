@@ -75,7 +75,7 @@ const MyExpects = () => {
 
            
                 {
-                    (width > 580) ?
+                    (width > 480) ?
                     (   // if condition 
                     <div className="expectsContainer"> 
                                 {
@@ -83,8 +83,8 @@ const MyExpects = () => {
                                         return <MatchCardProvider match = {val} childeren = {<Expect 
                                             match= {val} 
                                             key= {index}
-                                                setUserExpections = {setUserExpections} 
-                                                userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
+                                            setUserExpections = {setUserExpections} 
+                                            userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
                                                 />}></MatchCardProvider>
                                                 
                                             })}

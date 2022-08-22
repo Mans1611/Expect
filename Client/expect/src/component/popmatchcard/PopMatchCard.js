@@ -17,15 +17,17 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
     const {isDark,userGlob} = globalUser();
     
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
-
+    
     useEffect(()=>{
         return async()=>{
             if(userExpect){
                 document.getElementById('result_1').value = userExpect.result1_value;
                 document.getElementById('result_2').value = userExpect.result2_value;
-                document.getElementById(userExpect.winnerValue).checked = true;   
-                document.getElementById(userExpect.mutatePlayer1.playerName).checked = true;  
-                document.getElementById(userExpect.mutatePlayer2.playerName).checked = true; 
+                document.getElementById(userExpect.winnerValue).checked = true;
+                dispatchPlayer({type : `PlayerSelect1`,payload : userExpect.mutatePlayer1})
+                dispatchPlayer({type : `PlayerSelect2`,payload : userExpect.mutatePlayer2})
+                dispatchPlayer({type : `PlayerSelect3`,payload : userExpect.mutatePlayer3})
+                dispatchPlayer({type : `PlayerSelect4`,payload : userExpect.mutatePlayer4})
             }
         }
     },[])
@@ -38,7 +40,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
         player = CreatePlayerObject(countryPlayers,player);
         dispatchPlayer({type :`PlayerSelect${playersState.selected}` , payload : player});
     }
-    console.log(playersState);
+    
 
     const hidePop = (e)=>{
         if(e.target.className === 'popMatchFullPage'){
@@ -59,8 +61,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                 return {msg : action.payload, showMsg : true, className : "succsess"};
             default : 
             throw new Error('error in reducer')    
-            }
-            
+            }  
         }
     const [Msg,dispatch] = useReducer(reducerFN,{msg : '',className:'',showMsg : false} )
     
@@ -84,7 +85,8 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                 return 0;
             }
 
-        let updateObject = CreatingExpect(match.firstCountry.players,match.secondCountry.players,userExpect.userPoints);
+        let updateObject = CreatingExpect(playersState);
+        
         try{
             const updatedResponse = await axios.put(`/expects/editexpect/${userGlob}`,{
             matchId : match.matchId,

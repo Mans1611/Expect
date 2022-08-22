@@ -27,13 +27,13 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
                     <span className='countryLabel'>{match.firstCountry.countryName}</span>
                     <span className='countryLabel'>{match.firstCountry.result}</span>
                 </div>
-                    VS
-                    <div className="matchCardCountry">
-                        <img src={match.secondCountry.logo} alt="" className="countryImgState" />
-                        <span className='countryLabel'>{match.secondCountry.countryName}</span>
-                        <span className='countryLabel'>{match.secondCountry.result}</span>
-                        
-                    </div>
+                    <h1>VS</h1>
+                <div className="matchCardCountry">
+                    <img src={match.secondCountry.logo} alt="" className="countryImgState" />
+                    <span className='countryLabel'>{match.secondCountry.countryName}</span>
+                    <span className='countryLabel'>{match.secondCountry.result}</span>
+                    
+                </div>
                 </div>
                 <div className="matchStateContainer">
                     <h1 className="matchStateTitle">Match Satate</h1>
@@ -42,7 +42,7 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
                             match.states.map( (state,index) => <State userExpect={userExpect} key={index} state = {state} /> )
                         }
                         {
-                            expected &&
+                            expected && match.fullTime && 
                             <div className="points-container">
                                 <div className="points winnerPoints">
                                     <h1 className="head">Winner Points</h1>

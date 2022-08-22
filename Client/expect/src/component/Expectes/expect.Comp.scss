@@ -1,17 +1,23 @@
 @import '../../.mainStyle.scss';
 
 .expectComp{
-       
+    .matchCard{
+        background-color: #93002C;
+
+    }
     .matchcardHeader{
         padding: 10px;
         justify-content: space-around;
       
         &.expectCard{
-            background: linear-gradient(90deg, #0282ce8a 0%, #003d86 100%);  
+            background: #FFD600;  
             position: relative;
             overflow: hidden;
            
         
+        }
+        .countryLabel{
+            font-size: 30px;
         }
         .result{
             font-size: 33px;
@@ -30,6 +36,7 @@
         }
     }
     .yourExpect{
+        background-color: transparent;
        .ExpectionsContent{
         display: flex;
         align-items: center;
