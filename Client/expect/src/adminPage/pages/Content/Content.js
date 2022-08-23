@@ -3,7 +3,7 @@ import Adminaccount from '../account/Adminaccount';
 import DashBoard from '../Dashboard/DashBoard';
 import MathcesAdm from '../Mathces/MathcesAdm';
 import Statistics from '../statistics/Statistics';
-import AddNews from '../AddNews/AddNews';
+import AddNews from '../AddNews/Add';
 import './content.scss';
 
 const Content = () => {

@@ -1,7 +1,7 @@
 
+import './match.scss';
 import MathchCard from '../../component/matchcards/MatchCard';
 import { useState, useEffect, useReducer, useCallback, useMemo } from 'react';
-import './match.scss';
 import { globalUser } from '../../Context/HomeContext';
 import filteringExpects from './utilites/filteringExpects';
 import axios from 'axios';
@@ -119,6 +119,11 @@ const Matches = () => {
                     </div>
                     <div className="matchCard-container">
                             {isLoading ? <SmallLaoding/> : 
+                            data.length === 0 ? 
+                            <div className="noContent"> 
+                                <h1>No Matches</h1>
+                                <p>Use above filter to get matches you want </p>
+                            </div> :
                             <div className="matchCardGrid">
                                     { width > 480 ?
                                     // this will :

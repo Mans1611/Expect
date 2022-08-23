@@ -1,0 +1,31 @@
+.playersToExpect{
+    width: 70%;
+    border-radius: 10px;
+    background-color: #eee;
+    height: fit-content;
+    margin: 30px auto;
+    .headline{
+        padding: 10px;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        background-color: #FFD600;
+        color: #fff;
+        font-size: 50px;
+        text-align: center;
+        font-weight: 600;
+    }
+    .playersContainer{
+        display: grid;
+        grid-template-columns: repeat(4,25%);
+        padding: 10px;
+    }
+
+
+    &.dark{
+        background-color: #292929;
+        .headline{
+            background-color: #171717;
+            color: #f04;
+        }
+    }
+}

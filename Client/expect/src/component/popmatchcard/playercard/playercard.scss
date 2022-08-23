@@ -47,6 +47,18 @@
                 border: 2px solid #111;
             }
         }
+        .details{
+            color: #c0c0c0;
+            &.name{
+                color: rgb(255, 191, 0);
+                font-size: 22px;
+                
+            }
+            &.country{
+
+                font-size: 22px;
+            }
+        }
         .playerDetails{
             padding-top: 5px;
             font-size: 30px;
@@ -54,14 +66,7 @@
             color: #fff;
             width: 100%;
 
-            .details{
-                color: #c0c0c0;
-                &.name{
-                    color: rgb(255, 191, 0);
-                    font-size: 22px;
-                    
-                }
-            }
+           
             .PlayerStateSelction{
                 width: 100%;
                 outline: none;

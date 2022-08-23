@@ -11,7 +11,8 @@
         padding: 10px;
         .matchTitle{
             text-align: center;
-            font-size: 52px;
+            font-size: 72px;
+            margin-bottom: 20px;
             color: inherit;
         }
     }
@@ -20,6 +21,15 @@
         margin-bottom: 20px;
         background-color: #ffd50056;
         transition: 300ms;
+        .noContent{
+            padding: 20px;
+            text-align: center;
+            h1{
+                font-size: 45px;
+                color: #FFD600;
+                font-weight: 600;
+            }
+        }
         .matchCardGrid{
             margin: 20px 0;
             padding: 10px;
@@ -49,6 +59,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 5px 0;
         .round-filter-container{
             margin: 0 10px ;
             select{
@@ -100,7 +111,9 @@
         background-color: #333;
         color: #eee;
         transition: 300ms;
-
+        .matchTitle{
+            color: #FFD600;
+        }
         .matchCard-container{
             background-color:#222;
            
@@ -236,7 +249,7 @@
 
 .filter-container{
     display: flex;
-    flex-direction: column;
+   
     justify-content: center;
     align-items: center;
     .round-filter-container{

@@ -24,7 +24,7 @@ import States from './pages/States/States';
 import AdminLogin from './adminPage/pages/AdminLogin/AdminLogin';
 import AdminSignUp from './adminPage/pages/AdminLogin/AdminSignUp';
 import { ProtectedAdminProvider } from './adminPage/Context/ProtectedAdmin';
-import AddNews from './adminPage/pages/AddNews/AddNews';
+import AddNews from './adminPage/pages/AddNews/Add';
 import Team from './pages/Team/Team';
 import MyTeam from './component/TeamComponent/MyTeam/MyTeam';
 import CreateJoinTeam from './component/TeamComponent/JoinCrateTeam/CreateJoinTeam';

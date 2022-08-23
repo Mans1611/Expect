@@ -9,8 +9,17 @@ country.get('/countries',async(req,res)=>{
 })
 
 
-// must be an autorization for admins.
+country.get('/players',async(req,res)=>{
+    
+    const country = await Country.findOne({countryName : req.query.countryName});
+    if(!country)
+        return res.status(404).send("this Country is not found");
+    res.status(200).send(country.players);
+    
+    
+})
 
+// must be an autorization for admins.
 country.get('/:country_name',async(req,res)=>{
     const country = await Country.findOne({countryName:req.params.country_name})
     if(!country)
@@ -44,4 +53,5 @@ country.post('/addcountry',async(req,res)=>{
         msg:"Country is added successfully"
     });
 })
+
 export default country;

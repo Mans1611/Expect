@@ -3,8 +3,10 @@ import Country from '../models/Country.js';
 import Expects from '../models/Expects.js';
 
 import Matches from '../models/Matches.js';
+import playerToExpect from '../models/PlayersToExpect.js';
 import Teams from '../models/Teams.js';
 import User from '../models/User.js';
+import { checkPlayersToExpect } from './utilis/checkPlayerstoExpet.js';
 
 
 const statistics = express.Router();
@@ -100,8 +102,6 @@ statistics.get('/topusers',async(req,res)=>{
         {$group : {_id:"$userName", roundPoints : {$sum : "$expects.userPoints"}}},
         {$sort : {"roundPoints" : -1}},
     ]);
-    
-   
     res.send(topUsers)
 
 
@@ -122,6 +122,24 @@ statistics.get('/gettotal',async(req,res)=>{
     ]
     res.status(200).send(totalObjects)
 })
+statistics.post('/createPlayertoexpect',async(req,res)=>{
+    const {Player:player} = req.body
+
+
+    const Player = new playerToExpect({...req.body});
+    await Player.save(()=>{
+        console.log("players to watch is done");
+    }); 
+    res.status(200).json({player,msg:"Succussfully Added To Players to Expect"});
+    
+
+})
+
+statistics.get('/getplayerstoExpect',async(req,res)=>{
+    const players = await playerToExpect.find().limit(4);
+    res.status(200).send(players);
+})
+
 
 
 
