@@ -20,6 +20,7 @@ const MyExpects = () => {
     const [width,setWidth] = useState(window.innerWidth);
     const [totalPoints,setTotalPoints] = useState(0);
     const [loading,setLoading] = useState(true);
+    
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
     })
@@ -34,6 +35,7 @@ const MyExpects = () => {
                 setExpected(filterdExpectedMatches); // matches 
                 setTotalPoints(response.data.totalPoints);
                 setLoading(false);
+                console.log("rendered mansir");
             }catch(err){
                 console.log(err);
             }
@@ -60,9 +62,7 @@ const MyExpects = () => {
     },[socket])
 
     return ( 
-        <div className={`myexpects ${isDark? 'dark':''}`}>
-            {loading?
-                <Loading/> :   
+        <div className={`myexpects ${isDark? 'dark':''}`}> 
                   
             <>
                 <div className="headlineWrapper">
@@ -74,8 +74,9 @@ const MyExpects = () => {
                 </div>
 
            
-                {
-                    (width > 480) ?
+                { 
+                loading ? <SmallLaoding/> : 
+                    width > 480 ?
                     (   // if condition 
                     <div className="expectsContainer"> 
                                 {
@@ -93,10 +94,12 @@ const MyExpects = () => {
 
                                 : // else condition
                             (
-                                <div className="phoneContainer">
+                                <div className={`phoneContainer ${isDark ? 'dark' : null}`}>
                                     {
                                         expected.map((val,index)=>{    
-                                            return <MatchCardProvider match = {val} childeren = {<ExpectPhone key = {index} userExpect = {userExpections[index]} match={val}/>}></MatchCardProvider>
+                                            return <MatchCardProvider match = {val} childeren = {<ExpectPhone key = {index} setUserExpections = {setUserExpections}  
+                                            userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
+                                            match={val}/>}></MatchCardProvider>
                                         })
                                 }
                                 </div>
@@ -104,7 +107,7 @@ const MyExpects = () => {
                             
                         }
                         </>
-                        }
+                        
             </div>
      );
 }

@@ -4,6 +4,8 @@ import Axios from '../../Axios/axios'
 import { globalUser } from '../../Context/HomeContext'
 import SmallLaoding from '../loading/small.loading/smallLoading'
 import PlayerCard from '../popmatchcard/playercard/PlayerCard'
+import PlayerCardGridContainer from './PlayerCard/PlayerCardGridContainer'
+import PlayerRowCard from './PlayerCard/PlayerRowCardContainer'
 import './playerstoexpect.scss'
 const PlayersToExpect = () => {
     const [isLoading,setLoading] = useState(true);
@@ -25,15 +27,9 @@ const PlayersToExpect = () => {
 
   return (
     <div className={`playersToExpect ${isDark? 'dark' : null}`}>
-        <div className="headline">Players To Expect</div>
-        <div className="playersContainer">
-            {isLoading ? <SmallLaoding/> : 
-                Players.length === 0 ? <div className="noContent">No Player Were Add</div> : 
-                Players.map((player,index)=> <PlayerCard key={index} player={player}/>)
-            
-        }
-        </div>
-
+        <div className="headline">Recommendation</div>
+        {/* <PlayerCardGridContainer Players = {Players}  isLoading = {isLoading}/> */}
+        <PlayerRowCard isLoading={isLoading} Players = {Players}/>
     </div>
   )
 }

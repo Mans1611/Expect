@@ -70,7 +70,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
             {
                 <div className="matchCardStart">
                     {timeUp ?
-                        <button onClick={()=> setShowState(true)}  className='matchCardbutton'>Expect State </button> 
+                        <button onClick={()=> setShowState(true)}  className='matchCardbutton'>Expect Points</button> 
                         : 
                         <>
                         { showDelete ? 

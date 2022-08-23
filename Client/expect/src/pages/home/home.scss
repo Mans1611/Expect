@@ -7,11 +7,20 @@
 }
 .pageContainer{
     margin: auto;
-    display: grid;
-    grid-template-columns: 55% 40%;
-    grid-template-rows: repeat(4,300px);
+    display: flex;
+   
   
-    row-gap: 15px;
+    .column{
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        &.fisrtColumn{
+            flex: 7;
+        }
+        &.secondColumn{
+            flex: 5;
+        }
+    }
 }
 
 

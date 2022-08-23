@@ -2,13 +2,13 @@
 
 .homeStanding{
     width: 90%;
-    height: 300px;
+    height: fit-content;
     border-radius: 20px;
     background-color: #fff;
     transition: 200ms;
     margin: 20px ;
-    grid-column: 2;
-    grid-row: 2;
+    grid-column: 1;
+    grid-row: 5;
     .headline{
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
@@ -63,6 +63,14 @@
         align-items: center;
         background-color: #ccc;
         border-bottom: 1px solid #999;
+        &:last-child{
+            border-bottom-right-radius: inherit;
+            border-bottom-left-radius: inherit;
+            &:hover{
+            border-bottom-right-radius: inherit;
+            border-bottom-left-radius: inherit;
+            }
+        }
         &:hover{
             transform: scaleX(1.01);
             background-color: rgb(181, 0, 48) ;

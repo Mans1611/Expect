@@ -20,20 +20,23 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
   return (
     <div onClick={hidePop} className='popMatchFullPage'>
         <div className={`popMatchContainer ${isDark? 'dark':''}`}>
-            <CloseIcon onClick = {()=>setPop(false)} className='CloseIcon'/>
+                <CloseIcon onClick = {()=>setPop(false)} className='CloseIcon'/>
             <div className="matchcardHeader">
+                
                 <div className="matchCardCountry"> {/* country1.*/ }
                     <img src={match.firstCountry.logo} alt="" className="countryImgState" />
                     <span className='countryLabel'>{match.firstCountry.countryName}</span>
                     <span className='countryLabel'>{match.firstCountry.result}</span>
                 </div>
-                    <h1>VS</h1>
+                <h1>VS</h1>
                 <div className="matchCardCountry">
                     <img src={match.secondCountry.logo} alt="" className="countryImgState" />
                     <span className='countryLabel'>{match.secondCountry.countryName}</span>
                     <span className='countryLabel'>{match.secondCountry.result}</span>
                     
                 </div>
+
+                
                 </div>
                 <div className="matchStateContainer">
                     <h1 className="matchStateTitle">Match Satate</h1>

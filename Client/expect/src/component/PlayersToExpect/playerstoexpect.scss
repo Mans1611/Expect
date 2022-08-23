@@ -1,9 +1,15 @@
 .playersToExpect{
-    width: 70%;
+    width: 90%;
     border-radius: 10px;
     background-color: #eee;
     height: fit-content;
     margin: 30px auto;
+    grid-row: 3/5;
+    grid-column: 2/3;
+    .playerCard{
+        width: 90%;
+        margin: 5px auto;
+    }
     .headline{
         padding: 10px;
         border-top-left-radius: inherit;
@@ -16,7 +22,7 @@
     }
     .playersContainer{
         display: grid;
-        grid-template-columns: repeat(4,25%);
+        grid-template-columns: repeat(2,50%);
         padding: 10px;
     }
 
@@ -26,6 +32,17 @@
         .headline{
             background-color: #171717;
             color: #f04;
+        }
+    }
+}
+
+@media screen and(max-width : 1090px) {
+    .playersToExpect{
+        .playerCard{
+            width: 70%;
+        }
+        .playersContainer{
+            grid-template-columns: repeat(1,100%);   
         }
     }
 }

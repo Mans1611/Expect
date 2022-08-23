@@ -1,25 +1,27 @@
 @import '../../.mainStyle.scss';
 .matchcardHeader{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background: linear-gradient(90deg, rgb(81, 51, 51) 0%, rgb(157, 1, 22) 50%);
-    font-size: 30px;
-    font-weight: 600;
-    color: #fff;
-     border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-    padding: 10px;
-    .matchCardCountry{
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-        .countryLabel{
-            font-size: 40px;
-        }
+        justify-content: space-around;
+        font-size: 30px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(90deg, #513333 0%, #9d0116 50%);
+        .matchCardCountry{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .countryLabel{
+                font-size: 40px;
+            }
+            
         
     }
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    padding: 10px;
+    
     
     .countryImgState{
         width: 70px;
@@ -34,8 +36,10 @@
 .popMatchContainer{
     width: 50% ;
     position: relative;
+    background: linear-gradient(90deg, rgb(81, 51, 51) 0%, rgb(157, 1, 22) 50%);
     .CloseIcon{
-        position: fixed;
+        position: sticky;
+        top: 0;
         cursor: pointer;
         color: #fff;
         font-size: 40px;
@@ -43,13 +47,13 @@
     }
     .matchStateContainer{
         text-align: center;
+        background-color: #373737;
     .matchStateTitle{
         font-size: 40px;
         padding: 5px;
     }
     .matchState{
         padding: 10px 5px;
-        
         .icon{
             width: 40px;
             height: 40px;
@@ -58,7 +62,6 @@
         .stateContainer{
             display: grid;
             grid-template-columns: 45% 10% 45%;
-            
             .state{
                 position: relative;
                 font-size: 19px;
@@ -126,7 +129,7 @@
                 margin:  10px 0;
                 font-size: 30px;
                 font-weight: 700;
-                color: #a71a2d;
+                color: #ffe600;
                 .icon{
                     margin-left: 5px;
                     transform: rotate(45deg);
@@ -310,9 +313,13 @@
                     text-align: end ;
                     margin-left: 0;
                     padding-right: 2px;
+                    margin: 0 auto;
+                    width: 95%;
                 }
                 &.second{
                     text-align: start ;
+                    margin: 0 auto;
+                    width: 95%;
                 }
                 
             }

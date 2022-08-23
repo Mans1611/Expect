@@ -194,6 +194,9 @@
             font-size: 44px;
             color: #FFD600;
         }
+        .filter-container{
+            flex-direction: column;
+        }
     }
     .dateContainer{
         justify-content:center;    
@@ -215,6 +218,9 @@
             font-size: 36px;
             color: #ddb800;
             font-weight: 500;
+        }
+        .filter-container{
+            flex-direction: column;
         }
     }
     .dateContainer{

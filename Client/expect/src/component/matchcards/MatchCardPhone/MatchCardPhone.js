@@ -7,6 +7,7 @@ import { globalUser } from '../../../Context/HomeContext';
 import Minute from '../../../adminPage/component/MatchCardComponent/Minute';
 import { MatchCardProvider } from '../../../Context/MatchCardContext';
 import MatchState from '../../MatchState/MatchState';
+import PopMatchCard from '../../popmatchcard/PopMatchCard';
 
 const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
     document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
@@ -43,6 +44,7 @@ const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
     </div>
     <div className="countryNameWrapper">
         <span className="countryName">{match.firstCountry.countryName}</span>
+        {match.expected && <div className="checkExpected">Expected</div>}
         <span className="countryName">{match.secondCountry.countryName}</span>
     </div>
 
@@ -52,6 +54,8 @@ const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
         }
     </div>
     { statePop && timeUp && <MatchState expected = {false}  setPop = {setStatePop} match={match}/>}   
+    {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop}  match={match}/>}
+
 </div>
     }/>
     

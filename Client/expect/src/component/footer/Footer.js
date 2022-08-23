@@ -28,9 +28,7 @@ const Footer = () => {
 
                 </div>
                 <div className="feedBackContainer">
-                    <h2>Send Your FeedBack</h2>
-                    <textarea>mans</textarea>
-                    <button>Submit</button>
+                    <Link to = '/home'>FeedBack</Link>
                 </div>
             <div>
                 <Link to='/'>Help & Support</Link>

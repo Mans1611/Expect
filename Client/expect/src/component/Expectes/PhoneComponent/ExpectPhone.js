@@ -6,8 +6,9 @@ import TimeCounter from '../../../TimeCounter';
 import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import '../../popupmatchcard.scss';
 import MatchState from '../../MatchState/MatchState';
+import Axios from '../../../Axios/axios';
 
-const ExpectPhone = ({match,userExpect})=> {
+const ExpectPhone = ({match,userExpect,setUserExpections})=> {
     document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
 
     const {isDark} = globalUser();
@@ -15,16 +16,14 @@ const ExpectPhone = ({match,userExpect})=> {
     const [pop,setPop] = useState(false);
     const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
-   
-
- 
+    const [popDelete,setPopDelete] = useState(false);
 
     return (
     <div className='expectPhone'>
         <div className="upperExpectWrapper">
             <div className="countryWrapper">
                 <img className='countryFlages' src={match.firstCountry.logo} alt="" />
-                <div className="dimond firstDimond">
+                <div className={`dimond firstDimond ${!timeUp && 'transparent'}`}>
                     <div className='dimondContent'>
                         {timeUp && match.firstCountry.result}
                     </div>
@@ -36,7 +35,7 @@ const ExpectPhone = ({match,userExpect})=> {
 
             </div>
             <div className="countryWrapper">
-                <div className="dimond secondDimond">
+                <div className={`dimond secondDimond ${!timeUp && 'transparent'}`}>
                     <div className='dimondContent'>
                         {timeUp && match.secondCountry.result}
                     </div>
@@ -44,16 +43,54 @@ const ExpectPhone = ({match,userExpect})=> {
                 <img className='countryFlages' src={match.secondCountry.logo} alt="" />
             </div>
         </div>
+        {
+            timeUp &&
+            <div className="points-wrapper">
+                Total Points : {userExpect.userPoints}
+            </div>
+
+        }
         <div className="ExpectPhoneWrap">
-           {timeUp ?   <button onClick={()=>setStatePop(true)}> See My Expect </button> : 
-                        <button onClick={()=>setPop(true)}> Edit Expect </button>
+           {timeUp ?
+                <button onClick={()=>setStatePop(true)}>Expect Points</button> : 
+               
+                        <div className='button-wrapper'>
+                            <button onClick={()=>setPopDelete(true)} className='danger'> Delete Expect </button>
+                            <button onClick={()=>setPop(true)}> Edit Expect </button>
+                        </div>
             }
         </div>
         {pop && <PopMatchCard userExpect={userExpect} match={match}  setPop = {setPop} />}
+        {popDelete && <PopDelete match={match} setUserExpections={setUserExpections} firstCountry = {match.firstCountry.countryName}  secondCountry = {match.secondCountry.countryName} setPopDelete={setPopDelete}/> }
         { statePop && timeUp && <MatchState expected = {true} userExpect={userExpect}  setPop = {setStatePop} match={match}/>} 
           
     </div>
   )
 }
 
+const PopDelete = ({setPopDelete,match,setUserExpections})=>{
+    const {userGlob,isDark} = globalUser();
+    const handldeDeleteExpect = async(e) =>{
+        e.preventDefault();
+        try{
+            const response = await Axios.delete(`/expects/deleteExpect/${userGlob}/${match.matchId}`)
+            console.log(response.data);
+            setUserExpections(response.data);
+            setPopDelete(false);
+        
+        }catch(err){
+            console.log(err);
+        }
+
+}
+    return(
+        <div className="popMatchFullPage">
+            <div className="deleteContainer">
+                <h1 className="title">Delete Expect</h1>
+                <p>Please Confirm that you want to delete <span className='dangerWord'>{match.firstCountry.countryName} - {match.secondCountry.countryName} </span>Expect</p>
+                <button onClick={handldeDeleteExpect} className='danger'>Confirm</button>
+            </div>
+        </div>
+    )
+}
 export default ExpectPhone
