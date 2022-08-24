@@ -26,6 +26,7 @@ const MyExpects = () => {
     })
 
     useEffect(()=>{
+        document.title = "My Expects"
         return async()=>{
             try{
                 const response = await axios.get(`/expects/${userGlob}`);

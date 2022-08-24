@@ -1,9 +1,12 @@
+@import '../../.mainStyle.scss';
+
 .TeamComponent-containetr{
     padding:  30px 0  ;
     background-color:transparent ;
     .teamNavbar{
         margin-left: 30px;
         ul{
+            @include shadowMainStyle;
             list-style: none;
             display: flex;
             width: fit-content;
@@ -39,20 +42,21 @@
         }
     }
     .TeamComponent{
-      
         padding:  10px ;
-        width: 600px;
+        width: 80% ;
         margin: 10px auto; 
         .selected{
             background-color: #fee504;
+       
             border-radius: 10px;
             color: #111;
         } 
         .teamContent{
             padding:  0px ;
             border-radius: 20px;
-            width: 600px;
-            background: linear-gradient(-135deg, rgba(248,222,222,1) 0%, #fee504af); 
+            width: 100%;
+            background-color: #c9c9c9; 
+            @include shadowMainStyle;
            
         } 
         .teamJoin{
@@ -63,7 +67,7 @@
                     margin: 10px auto;
                     padding: 5px 10px;
                     font-size: 40px;
-                    background-color: rgba(34, 34, 34, 0.697);
+                    background-color: rgba(34, 34, 34, 0.871);
                     outline: none;
                     &:hover{
                         background-color: #222;
@@ -71,16 +75,16 @@
                     }
                 }
                 form{
-
+                    padding-top: 10px;
                     input{
                         width: 70%;
                         height: 50px;
-                        border: solid #eee 2px;
                         outline: none;
                         background-color: #373737;
                         font-size: 24px;
                         padding: 10px;
                         color: #eee;
+                        border-radius: 10px;
                         &:focus{
                             border: solid #c40027 2px;   
                         }
@@ -230,3 +234,134 @@
         height: fit-content;
     }
 }
+
+@media screen and(max-width : 680px){
+    
+.TeamComponent-containetr{
+    padding:  20px 0  ;
+  
+    .teamNavbar{
+        margin-left: 20px;
+        ul{
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            a{
+                li{
+                    font-size: 30px;
+                    padding: 5px;
+                    &:hover{
+                        border-radius: 5px;
+                    }
+                   
+                }
+            }
+        }
+    }
+    .TeamComponent{
+        padding:  10px ;
+        width: 80% ;
+        margin: 10px auto; 
+        .selected{
+            background-color: #fee504;
+            border-radius: 10px;
+            color: #111;
+        } 
+        .teamContent{
+            padding:  0px ;
+            border-radius: 10px;
+        } 
+        .teamJoin{
+            .options{
+                padding: 5px;
+                &>button{
+                    width: 80%;
+                    padding: 5px;
+                    font-size: 35px;
+                }
+                form{
+                    
+                        .cancel{
+                            background : #ffffff88;
+                            border: 2px solid #c40027 ;
+                            color: #c40027 ;
+                           
+                        }
+                        .generateCode{
+                            background-color: #ffffff88 ;
+                            color: #111;
+                            border: 2px solid rgb(0, 186, 0);
+                            color: rgb(0, 186, 0);
+                            
+                        }
+
+                    .button-Wrapper{
+                        display: flex;
+                        justify-content: center;
+                        width: 70%;
+                        margin: 10px auto;
+                        button{
+                            width: fit-content;
+                            font-size: 24px;
+                            padding: 2px;
+                        }
+
+                    }
+                   
+                }
+            }
+        }
+    }
+}
+}
+
+@media screen and(max-width : 479px){
+    
+    .TeamComponent-containetr{
+        padding:  10px 0  ;
+        form{
+            #teamName{
+                width: 90%;
+                border: none;
+                border-radius: 5px;
+                &:focus{
+                    border: 2px solid #d5002b;
+                }
+            }
+        }
+        .teamNavbar{
+            margin-left: 10px;
+            ul{
+                a{
+                    li{
+                        font-size: 24px;  
+                    }
+                }
+            }
+        }
+        .TeamComponent{
+            padding:  10px ;
+            width: 90% ;
+          
+            .selected{
+                border-radius: 5px;
+            } 
+            .teamContent{
+                border-radius: 5px;
+            } 
+            .teamJoin{
+                .options{
+                    padding: 5px;
+                    &>button{
+                        width: 90% !important;
+                        font-size: 28px !important;
+                        &.generateCode{
+                            
+                            font-size: 20px !important;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    }

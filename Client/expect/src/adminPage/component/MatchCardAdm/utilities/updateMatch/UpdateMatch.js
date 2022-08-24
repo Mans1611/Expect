@@ -90,13 +90,16 @@ const handleUpdate = async(e)=>{
     if(updatePlayerState){
       const selcted_player_1 = document.querySelector('input[name="firstCountry"]:checked').id;
       const selcted_player_2 = document.querySelector('input[name="secondCountry"]:checked').id;
+      const selcted_player_1_index = document.querySelector('input[name="firstCountry"]:checked').value;
+      const selcted_player_2_index = document.querySelector('input[name="secondCountry"]:checked').value;
       const state_1Player = document.getElementById('firstCountryState').value;
       const state_2Player = document.getElementById('secondCountryState').value;
-      // here i senf the minute with the player to be able to show it in the state to the users
-      updatedPlayer_1 = PlayerStateToObject(selcted_player_1,state_1Player,"first",min)
+
+      // here i send the minute with the player to be able to show it in the state to the users
+      updatedPlayer_1 = PlayerStateToObject(selcted_player_1,state_1Player,"first",min,selcted_player_1_index)
       // i set a prop which is country just to aside each country in the state component
       // for example first country will be to the righ and the second will be to the left
-      updatedPlayer_2 =  PlayerStateToObject(selcted_player_2,state_2Player,"second",min)
+      updatedPlayer_2 =  PlayerStateToObject(selcted_player_2,state_2Player,"second",min,selcted_player_2_index)
     }
 
   
@@ -188,11 +191,11 @@ const handleUpdate = async(e)=>{
                   <div className="matchCardPlayers">
                       <span className="countryLabel">Select Player from {match.firstCountry.countryName}</span>
                       <div className="playersContainer">
-                        {match.firstCountry.players.map((player)=> <PlayerCardRadio auth={true} countryOrder= 'firstCountry' player={player} />)}
+                        {match.firstCountry.players.map((player,index)=> <PlayerCardRadio key={index} index={index} auth={true} countryOrder= 'firstCountry' player={player} />)}
                       </div>
                       <span className="countryLabel"> Select Player from {match.secondCountry.countryName}</span>
                       <div className="playersContainer">
-                          {match.secondCountry.players.map((player)=><PlayerCardRadio auth={true} countryOrder= 'secondCountry' player={player} />)}
+                          {match.secondCountry.players.map((player,index)=><PlayerCardRadio key={index} index={index} auth={true} countryOrder= 'secondCountry' player={player} />)}
                       </div>
                   </div>
                       }

@@ -1,5 +1,4 @@
-.createTeamform{
-    
+.createTeamform{  
     .invitation{
         color :#111; 
         margin: 10px 0;
@@ -46,4 +45,29 @@
         }
 
     }
+}
+
+@media screen and (max-width : 479px) {
+    .createTeamform{
+        .invitation{
+            margin: 5px 0;
+        }
+    }
+    .code-Wrapper{
+        background-color: #222;
+        width: 90%;
+        margin: 5px auto;
+        overflow: hidden;
+        .codeCotenet{
+            text-align: center;
+            padding: 2px; 
+            text-align: center !important;
+            font-size: 18px;
+        }
+        .copyButton{
+            font-size: 15px !important;
+            padding: 0;
+        }
+    }
+    
 }

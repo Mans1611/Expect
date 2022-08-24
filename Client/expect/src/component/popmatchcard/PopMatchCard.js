@@ -259,6 +259,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                             </div>
                         </div>
                         {Msg.showMsg && <div className={Msg.className}>{Msg.msg} </div>}
+                        {type !== "GET" ? 
                         <div className="buttonsWrapper">
                             { type === "POST" ? 
                              <button onClick={handlePost} className='matchCardButton save' >Save</button>
@@ -267,7 +268,9 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
 
                                 
                             }
-                        </div>
+                        </div> : null
+                        
+                        }
 
 
 

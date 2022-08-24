@@ -5,10 +5,13 @@ import './expected.scss';
 import TimeCounter from '../../../../TimeCounter';
 import MatchResultComp from '../../../../adminPage/component/MatchCardComponent/MatchResultComp';
 import { MatchCardProvider } from '../../../../Context/MatchCardContext';
-const Expected = ({match})=> {
+import PopMatchCard from '../../../../component/popmatchcard/PopMatchCard';
+import PopExpectCard from '../../../../component/popmatchcard/PopExpectCard';
+const Expected = ({match,userExpect})=> {
     
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false); 
+    const [seeExpect,setSeeExpect] = useState(false);
   return (
     <MatchCardProvider match = {match} childeren = {(
 
@@ -37,11 +40,14 @@ const Expected = ({match})=> {
         {timeUp && <MatchResultComp matchId = {match.matchId} FT = {match.fullTime} time = {match.matchTime} result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> }
         {
             <div className="matchCardStart">
-                { <button className='matchCardbutton'>See MyExpect</button>}
+                { <button onClick={(e)=>setSeeExpect(true)} className='matchCardbutton'>My Expect</button>}
             </div>
-    } 
-            
+    }       
        </div>
+       {
+        seeExpect && <PopExpectCard match = {match} setPop = {setSeeExpect} userExpect = {userExpect} />
+       }
+
     </div>
   )}></MatchCardProvider>
   )

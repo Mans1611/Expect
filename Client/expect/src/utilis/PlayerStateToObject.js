@@ -1,7 +1,7 @@
 
 // this function is mainly about just coverting the state into Object
 // and to assign the state icon to that object to be displayed in the states
-const PlayerStateToObject = (playerName,state,country,min)=>{
+const PlayerStateToObject = (playerName,state,country,min,index)=>{
     let icon = null;
 
     
@@ -40,7 +40,7 @@ const PlayerStateToObject = (playerName,state,country,min)=>{
     }
 
 
-    return {playerName,state,country,min,icon:icon};
+    return {playerName,state,country,min,icon:icon,index};
 }
 
 export {PlayerStateToObject};

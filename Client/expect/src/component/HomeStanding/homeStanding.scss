@@ -6,7 +6,7 @@
     border-radius: 20px;
     background-color: #fff;
     transition: 200ms;
-    margin: 20px ;
+    margin: 20px  auto;
     grid-column: 1;
     grid-row: 5;
     .headline{
@@ -51,7 +51,6 @@
         }
 
     }
-    margin: auto;
     @include shadowMainStyle;
         
     

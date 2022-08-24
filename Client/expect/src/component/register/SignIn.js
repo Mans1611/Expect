@@ -28,7 +28,7 @@ const SignIn = () => {
     }
 
     useEffect(()=>{
-    
+        document.title = "Sign in"
         return async()=>{
             try{ 
                 const token = cookie.get("token");
@@ -75,7 +75,17 @@ const SignIn = () => {
                 });
                 store.setUserGlob(userName)
                 store.setAuth(true)
+                //const audio = `<audio autoplay> <source src='../../sounds/correct.mp3' type='audio/mp3'></source></audio>`
+                const audio = new Audio()
+                audio.controls = true;
+                audio.src = 'http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a';
+                audio.autoplay = true;
+                audio.style.display = 'none';
+                document.getElementById('root').appendChild(audio);
                 navigate('/expect/home');
+                setTimeout(()=>{
+                    document.getElementById('root').removeChild(audio);
+                },800)
             }
             else if(response.status === 203){
                 setErrorMSg(true);

@@ -15,7 +15,7 @@
 .popMatchContainer{
     outline: none;
     width: 60%;
-    height: 90vh;
+    max-height: 90vh;
     overflow-y: scroll;
     @include scrollbar-style;
     background-color: #ddd ;
@@ -156,6 +156,10 @@ form{
         color: #eee;
         .formContainerPopup{
             background-color: #262626;
+            .countryLabel{
+               color: #eeeeee;
+                
+            }
             .playersContainer{
                 background-color: #222;
                 border-radius: 5px;

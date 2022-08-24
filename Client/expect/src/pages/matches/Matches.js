@@ -21,13 +21,14 @@ const Matches = () => {
     const [isLoading,setLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false); 
     const [width,setWidth] = useState(window.innerWidth);
-    
+    const [userExpections,setUserExpections] = useState([]); 
     const {userGlob} = globalUser();
     const [expandButton,setExpandButton] = useState("See All Matches");
     
     const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
     
     useEffect(()=>{
+        document.title = "Matches"
         return async () => {
             try{
                 setLoading(true);
@@ -35,6 +36,7 @@ const Matches = () => {
                 const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
                 const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
                 setData(MatchesWithFlag);
+                setUserExpections(response.data.userExpections);
                 setLoading(false); 
             }catch(err){
                 setLoading(false);  
@@ -131,11 +133,15 @@ const Matches = () => {
                                     // expected card -> if he expected it. 
                                     data.map((value,key)=>{
                                         if(!value.expected) return <MathchCard  expected = {false} key={key} match ={value}/>;   
-                                        else { return <Expected expected = {true}  key={key} match ={value}/>};
+                                        else { return <Expected expected = {true}  key={key} match ={value} userExpect = {
+                                            userExpections.find((expect)=> expect.matchId === value.matchId)
+                                        }/>};
                                     }) : 
                                         // the same as above but for phone component
                                         data.map((value,index)=>{
-                                            return <MatchCardPhone timeUp ={timeUp} setTimeUp = {setTimeUp} key={index} match = {value}   />
+                                            return <MatchCardPhone timeUp ={timeUp} setTimeUp = {setTimeUp} key={index} match = {value} userExpect = {
+                                                userExpections.find((expect)=> expect.matchId === value.matchId)
+                                            }   />
                                         })
                                     }
                             </div>

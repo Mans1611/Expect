@@ -8,13 +8,14 @@ import Minute from '../../../adminPage/component/MatchCardComponent/Minute';
 import { MatchCardProvider } from '../../../Context/MatchCardContext';
 import MatchState from '../../MatchState/MatchState';
 import PopMatchCard from '../../popmatchcard/PopMatchCard';
+import PopExpectCard from '../../popmatchcard/PopExpectCard';
 
-const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
+const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
     document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
     const [pop,setPop] = useState(false);
     const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
-
+    const [popShowExpect,setpopShowExpect] = useState(false);
   return (
     <MatchCardProvider match={match} childeren={
         <div className='expectPhone'>
@@ -50,12 +51,12 @@ const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
 
     <div className="ExpectPhoneWrap">
        {timeUp &&   <button onClick={()=>setStatePop(true)}> See State </button>} 
-        { match.expected ? <button onClick={()=>setPop(true)}> Expect </button> : <button> See Expect </button>}
+        { match.expected ? <button onClick={()=>setpopShowExpect(true)}> My Expect </button> : <button onClick={()=>setPop(true)}>Expect</button>  }
         
     </div>
     { statePop && timeUp && <MatchState expected = {false}  setPop = {setStatePop} match={match}/>}   
     {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop}  match={match}/>}
-
+    {popShowExpect && <PopExpectCard match={match} userExpect = {userExpect} setPop={setpopShowExpect} /> }
 </div>
     }/>
     

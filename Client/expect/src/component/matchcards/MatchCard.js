@@ -61,6 +61,7 @@ const MathchCard = ({match}) => {
             }
             </div>
             { pop && timeUp && <MatchState expected = {false}  setPop = {setPop} match={match}/>}   
+            
         </>
 
     )}>

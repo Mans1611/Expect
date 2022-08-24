@@ -92,7 +92,6 @@ matches.post('/addgame', async(req,res)=>{
                     req.body.round.split(" ")[0];
 
     
-    console.log(matchId);
     const existMatch = await Matches.findOne({matchId})
     if(existMatch)
         res.status(203).send("This Match Is Already Exist")
@@ -185,8 +184,19 @@ matches.put('/updatestate/:matchId/:stateIndex',async(req,res)=>{
     try{
         console.log(stateIndex);
         let match = await Matches.findOne({matchId});
-        match.states = match.states.filter((_state,index)=> index != stateIndex);
+        
+        const playerDetails = match.states[stateIndex]; // an object has min playerName countryOrder, index.
 
+        if(playerDetails.country === 'second'){
+            // the internal inline condition is for the negative sign, so i take the first number after ( and then check if it is a negative or not 
+            const points = parseInt(playerDetails.state.split('(')[1][0] === '-' ? `-${playerDetails.state.split('(')[1][1]}` : playerDetails.state.split('(')[1][0]); // this is just to get the points from state Ex :  Score a goal (4PTS);
+             match.secondCountry.players[playerDetails.index].playerPoints -= points;
+        }else {
+            const points = parseInt(playerDetails.state.split('(')[1][0] === '-' ? `-${playerDetails.state.split('(')[1][1]}` : playerDetails.state.split('(')[1][0]); // this is just to get the points from state Ex :  Score a goal (4PTS);
+            match.firstCountry.players[playerDetails.index].playerPoints -= points;
+        }
+       
+        match.states = match.states.filter((_state,index)=> index != stateIndex);
         await Matches.updateOne({matchId},match)
         res.status(200).send(match)
     }catch(err){
