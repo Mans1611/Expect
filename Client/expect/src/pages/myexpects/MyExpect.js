@@ -80,7 +80,9 @@ const MyExpects = () => {
                     (   // if condition 
                     <div className="expectsContainer"> 
                                 {
+                                    
                                     expected.map((val,index)=>{
+                                        console.log("big expext");
                                         return <MatchCardProvider match = {val} childeren = {<Expect 
                                             match= {val} 
                                             key= {index}
@@ -98,6 +100,7 @@ const MyExpects = () => {
                                     {
                                         expected.map((val,index)=>{    
                                             return <MatchCardProvider match = {val} childeren = {<ExpectPhone key = {index} setUserExpections = {setUserExpections}  
+                                            setLoading = {setLoading}
                                             userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
                                             match={val}/>}></MatchCardProvider>
                                         })

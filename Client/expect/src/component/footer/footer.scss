@@ -81,6 +81,9 @@
         align-items: center;
         font-weight: 400;
         justify-content: center;
+        &.fake{
+            border: none;
+        }
         span{
             font-size: 30px;
             margin: 4px 0 ;

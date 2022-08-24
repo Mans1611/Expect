@@ -21,8 +21,8 @@ const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
     <div className="upperExpectWrapper">
         <div className="countryWrapper">
             
-            <img className='countryFlages' src={match.firstCountry.logo} alt="" />
-            <div className="dimond firstDimond">
+            <img className='countryFlages' src={match.firstCountry.logo} alt={match.firstCountry.logo} />
+            <div className={`dimond firstDimond ${ !timeUp && 'transparent'}`}>
                 <div className='dimondContent'>
                     {timeUp && match.firstCountry.result}
                 </div>
@@ -34,24 +34,24 @@ const MatchCardPhone = ({match,timeUp,setTimeUp}) => {
 
         </div>
         <div className="countryWrapper">
-            <div className="dimond secondDimond">
+            <div className={`dimond secondDimond ${!timeUp && 'transparent'}`}>
                 <div className='dimondContent'>
                     {timeUp && match.secondCountry.result}
                 </div>
             </div>
-            <img className='countryFlages' src={match.secondCountry.logo} alt="" />
+            <img className='countryFlages' src={match.secondCountry.logo} alt={match.secondCountry.logo} />
         </div>
     </div>
     <div className="countryNameWrapper">
-        <span className="countryName">{match.firstCountry.countryName}</span>
-        {match.expected && <div className="checkExpected">Expected</div>}
-        <span className="countryName">{match.secondCountry.countryName}</span>
+        <span className="countryName firstCountry">{match.firstCountry.countryName}</span>
+            {match.expected ? <div className="checkExpected">Expected</div> :  <span className='vs'>VS</span>}
+        <span className="countryName secondCountry">{match.secondCountry.countryName}</span>
     </div>
 
     <div className="ExpectPhoneWrap">
-       {timeUp ?   <button onClick={()=>setStatePop(true)}> See State </button> : 
-                    <button onClick={()=>setPop(true)}> Expect </button>
-        }
+       {timeUp &&   <button onClick={()=>setStatePop(true)}> See State </button>} 
+        { match.expected ? <button onClick={()=>setPop(true)}> Expect </button> : <button> See Expect </button>}
+        
     </div>
     { statePop && timeUp && <MatchState expected = {false}  setPop = {setStatePop} match={match}/>}   
     {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop}  match={match}/>}

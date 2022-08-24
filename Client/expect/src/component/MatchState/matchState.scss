@@ -32,7 +32,136 @@
         border: 4px solid #ffae00;
     }
 }
+.matchStateContainer{
+    text-align: center;
+    background-color: #373737;
+.matchStateTitle{
+    font-size: 40px;
+    padding: 5px;
+}
+.matchState{
+    padding: 10px 5px;
+    .icon{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .stateContainer{
+        display: grid;
+        grid-template-columns: 45% 10% 45%;
+        .state{
 
+            position: relative;
+            font-size: 19px;
+            font-weight: 500;
+            text-align: center;
+            margin: 5px 0 ;
+            width: 100%;
+            margin: 10px 0 ;
+            display: flex;
+            align-items: center;
+            &.first{
+                text-align: end ;
+                padding-right: 10px;
+                margin-left: 5px;
+            }
+            &.second{
+                text-align: start ;
+                padding-left: 10px;
+                margin-right: 15px;
+                
+            }
+            .close{
+                cursor: pointer;
+               
+            }
+            p{
+                width: 80%;
+                text-align: center;
+            }
+        }
+        .expected,.secondExpect{
+            background-color: #459e00;
+            border-radius: 5px;
+            padding: 5px;
+            color: #fff;
+            font-size: 24px;
+            text-align: center;
+            
+        }
+        .secondExpect{
+            background-color: #ffae00;
+
+        }
+        .circleWrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .circle{
+                border: 3px solid #090;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+                font-weight: 500;
+                
+            }
+        }
+    }
+    .middleState-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 2px solid #333;
+        .middleState{
+            display: flex;
+            align-items: center;
+            margin:  10px 0;
+            font-size: 30px;
+            font-weight: 700;
+            color: #ffe600;
+            .icon{
+                margin-left: 5px;
+                transform: rotate(45deg);
+                
+            }
+        }
+    }
+    .points-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 0;
+        .points{
+            height: 90px;
+            border-radius: 10px;
+            color: #fff;
+            background-color: #c7c7c7;
+            border: 2px solid #414141;
+            .head{
+                padding:  6px;
+                background-color: #a71a2d;
+                border-top-left-radius: inherit;
+                border-top-right-radius: inherit;
+                font-size: 28px;
+            }
+            .point{
+                padding: 2px;
+                font-size: 42px;
+                font-weight:600;
+                color: #a71a2d;
+            }
+
+        }
+    }
+   
+    
+}
+
+}
 .popMatchContainer{
     width: 50% ;
     position: relative;
@@ -40,135 +169,13 @@
     .CloseIcon{
         position: sticky;
         top: 0;
+        z-index: 88;
         cursor: pointer;
         color: #fff;
         font-size: 40px;
         font-weight: 700;
     }
-    .matchStateContainer{
-        text-align: center;
-        background-color: #373737;
-    .matchStateTitle{
-        font-size: 40px;
-        padding: 5px;
-    }
-    .matchState{
-        padding: 10px 5px;
-        .icon{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-        .stateContainer{
-            display: grid;
-            grid-template-columns: 45% 10% 45%;
-            .state{
-                position: relative;
-                font-size: 19px;
-                font-weight: 500;
-                text-align: center;
-                margin: 5px 0 ;
-                width: 100%;
-                margin: 10px 0 ;
-                display: flex;
-                align-items: center;
-                &.first{
-                    text-align: end ;
-                    padding-right: 10px;
-                    margin-left: 5px;
-                }
-                &.second{
-                    text-align: start ;
-                    padding-left: 10px;
-                    margin-right: 15px;
-                }
-                p{
-                    width: 80%;
-                    text-align: center;
-                }
-            }
-            .expected,.secondExpect{
-                background-color: #459e00;
-                border-radius: 5px;
-                padding: 5px;
-                color: #fff;
-                font-size: 24px;
-                text-align: center;
-                
-            }
-            .secondExpect{
-                background-color: #ffae00;
-
-            }
-            .circleWrapper{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                .circle{
-                    border: 3px solid #090;
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 50%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 20px;
-                    font-weight: 500;
-                    
-                }
-            }
-        }
-        .middleState-wrapper{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 2px solid #333;
-            .middleState{
-                display: flex;
-                align-items: center;
-                margin:  10px 0;
-                font-size: 30px;
-                font-weight: 700;
-                color: #ffe600;
-                .icon{
-                    margin-left: 5px;
-                    transform: rotate(45deg);
-                    
-                }
-            }
-        }
-        .points-container{
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 10px 0;
-            .points{
-                height: 90px;
-                border-radius: 10px;
-                color: #fff;
-                background-color: #c7c7c7;
-                border: 2px solid #414141;
-                .head{
-                    padding:  6px;
-                    background-color: #a71a2d;
-                    border-top-left-radius: inherit;
-                    border-top-right-radius: inherit;
-                    font-size: 28px;
-                }
-                .point{
-                    padding: 2px;
-                    font-size: 42px;
-                    font-weight:600;
-                    color: #a71a2d;
-                }
-
-            }
-        }
-       
-        
-    }
-    
-}
+ 
 &.dark{
     background-color: #373737;
     .matchStateTitle{

@@ -127,10 +127,13 @@
             }
         }
         .showPlayersbutton-wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             button{
-                background-color: rgb(215, 18, 61);
+                background-color: #171717;
                 color: #ddd;
-                margin: 10px auto;
+                margin: 10px 5px;
                 font-size: 30px;
                 padding: 5px;
                 width: 200px;

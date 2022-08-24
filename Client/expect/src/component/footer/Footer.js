@@ -40,6 +40,9 @@ const Footer = () => {
                     <span>&copy;</span>All Rights Conserved To Expect 2022
                 </h3>
             </div>
+            <div className="bottomFooter fake">
+                
+            </div>
            
         </div>
      );

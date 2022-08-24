@@ -1,10 +1,20 @@
 import React from 'react'
 import { useEffect } from 'react';
-
-const  State = ({state,userExpect})=> {
+import CloseIcon from '@mui/icons-material/Close';
+import Axios from '../../Axios/axios';
+const  State = ({state,auth,userExpect,index,matchId})=> {
     let expected = false;
     let secondExpect = false;
     
+    const handleDeleteState = async(index)=>{
+        try{
+            const response = await Axios.put(`/matches/updatestate/${matchId}/${index}`);
+            console.log(response);
+        }catch(err){
+            console.log(err);
+        }
+        
+    }
     
     if(state.country === "first"){
 
@@ -17,7 +27,8 @@ const  State = ({state,userExpect})=> {
         return (
 
             <div className="stateContainer">
-                <div className={`state first ${expected ? 'expected':''} ${secondExpect ? 'secondExpect':''} `}>
+                <div className={`state first ${expected ? 'expected':null} ${secondExpect ? 'secondExpect':''} `}>
+                    {auth && <CloseIcon onClick = {(e)=>{e.preventDefault(); handleDeleteState(index)}} className='close'/>}
                     <div className="icon-wrapper">
                         <img src={state.icon} className="icon" />
                     </div>
@@ -31,13 +42,13 @@ const  State = ({state,userExpect})=> {
             
             )
         }
-
+        
         else if(state.country === "second"){
             if(userExpect){
                 expected = state.playerName === userExpect.mutatePlayer3.playerName  ? true : false;
                 secondExpect = state.playerName === userExpect.mutatePlayer4.playerName
             }
-
+            
             return (
                 <div className="stateContainer">
                     <div className={`state empltyState`}></div>
@@ -49,6 +60,7 @@ const  State = ({state,userExpect})=> {
                         <div className="icon-wrapper">
                             <img src={state.icon} className="icon" />
                         </div>
+                    {auth && <CloseIcon onClick = {(e)=>{e.preventDefault(); handleDeleteState(index)}} className='close '/>}
                     </div>
                 </div>
             )

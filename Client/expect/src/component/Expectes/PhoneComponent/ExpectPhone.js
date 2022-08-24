@@ -7,10 +7,12 @@ import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import '../../popupmatchcard.scss';
 import MatchState from '../../MatchState/MatchState';
 import Axios from '../../../Axios/axios';
+import axios from 'axios';
 
-const ExpectPhone = ({match,userExpect,setUserExpections})=> {
+const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
     document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
-
+    if(!userExpect)
+        return null;
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false);
     const [pop,setPop] = useState(false);
@@ -61,24 +63,26 @@ const ExpectPhone = ({match,userExpect,setUserExpections})=> {
             }
         </div>
         {pop && <PopMatchCard userExpect={userExpect} match={match}  setPop = {setPop} />}
-        {popDelete && <PopDelete match={match} setUserExpections={setUserExpections} firstCountry = {match.firstCountry.countryName}  secondCountry = {match.secondCountry.countryName} setPopDelete={setPopDelete}/> }
+        {popDelete && <PopDelete match={match} setUserExpections={setUserExpections} setLoading ={setLoading} setPopDelete={setPopDelete}/> }
         { statePop && timeUp && <MatchState expected = {true} userExpect={userExpect}  setPop = {setStatePop} match={match}/>} 
           
     </div>
   )
 }
 
-const PopDelete = ({setPopDelete,match,setUserExpections})=>{
+const PopDelete = ({setPopDelete,match,setLoading,setUserExpections})=>{
     const {userGlob,isDark} = globalUser();
+
     const handldeDeleteExpect = async(e) =>{
+        setLoading(true)
         e.preventDefault();
         try{
-            const response = await Axios.delete(`/expects/deleteExpect/${userGlob}/${match.matchId}`)
-            console.log(response.data);
-            setUserExpections(response.data);
+            const response = await axios.delete(`/expects/deleteExpect/${userGlob}/${match.matchId}`)
             setPopDelete(false);
-        
-        }catch(err){
+            setUserExpections(response.data);
+            setLoading(false);
+        }
+        catch(err){
             console.log(err);
         }
 

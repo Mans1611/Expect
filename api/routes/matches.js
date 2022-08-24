@@ -180,6 +180,19 @@ matches.put('/editmatch/:matchID',async (req,res)=>{
         console.log(err);
     }
 })
+matches.put('/updatestate/:matchId/:stateIndex',async(req,res)=>{
+    const {matchId,stateIndex} = req.params;
+    try{
+        console.log(stateIndex);
+        let match = await Matches.findOne({matchId});
+        match.states = match.states.filter((_state,index)=> index != stateIndex);
+
+        await Matches.updateOne({matchId},match)
+        res.status(200).send(match)
+    }catch(err){
+        console.log(err);
+    }
+})
 
 matches.put('/fullTime/:matchId',async(req,res)=>{
     try{

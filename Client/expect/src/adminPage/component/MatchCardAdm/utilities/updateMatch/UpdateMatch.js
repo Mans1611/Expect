@@ -1,5 +1,7 @@
-import React , {useState} from 'react'
+// style file
 import './updateMatch.scss'
+
+import React , {useState} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { matchesStore } from '../../../../Context/matchesContext';
 import PlayerCardRadio from '../../../../../component/PlayerCardRadio/PlayerCardRadio';
@@ -7,6 +9,7 @@ import SportsIcon from '@mui/icons-material/Sports';
 import { PlayerStateToObject } from '../../../../../utilis/PlayerStateToObject';
 import io from 'socket.io-client';
 import { MatchStateCentral } from '../../../../../Context/MatchCardContext';
+import State from '../../../../../component/MatchState/State';
 
 
 
@@ -23,21 +26,10 @@ const UpdateMatch = ({match,min})=> {
   const [showFullTime , setShowFT] = useState(false);
   const [pauseState,setPauseState] = useState('');
   const [showPauseState,setShowPauseState] = useState(false);
+  const [showMatchState,setShowMatchState] = useState(false);  
+  // this code down below is to cahnge the background color when you select a player 
 
-  // this code down below is to cahnge the background color when you select a player
-
-  // const playerNavigator = document.querySelector(`input:checked`)
-  // useEffect(()=>{
-  //   console.log(playerNavigator);
-  //   return ()=>{
-  //     if(playerNavigator == null)
-  //       return 0
-  //     if(playerNavigator.tagName === 'INPUT'){
-  //       playerNavigator.nextSibling.firstChild.style.backgroundColor = '#ec0323';
-  //       console.log( playerNavigator.nextSibling);
-  //     }
-  //   }
-  // },playerNavigator)
+  
 
   const {state,dispatch} = MatchStateCentral();
 
@@ -176,28 +168,33 @@ const handleUpdate = async(e)=>{
                     <input maxLength='1' onChange={(e)=>setResult2(e.target.value)} type="number" name="result" id="country_2_result" />
                   </div>
                   <div className="showPlayersbutton-wrapper">
-                    <button className="showPlayerState" onClick={(e)=>{e.preventDefault();setUpdatePlayerState(!updatePlayerState)}}>
+                    <button onClick={(e)=>{e.preventDefault();setShowMatchState(true)}}>Show Match State</button>
+                    <button  onClick={(e)=>{e.preventDefault();setUpdatePlayerState(!updatePlayerState)}}>
                       {
                         updatePlayerState ? "Hide Players" : "Show Players"
                       }
                     </button>
                   </div>
-                
+                {showMatchState && 
+                  <div className="matchStateContainer">
+                    <h1 className="matchStateTitle">Match Satate</h1>
+                    <div className="matchState">
+                        {match.states.map( (state,index) => <State matchId = {match.matchId} index={index} auth={true}  key={index} state = {state}/>)}
+                        
+                    </div>
+              </div>
+                }
                 {updatePlayerState &&
                   <div className="matchCardPlayers">
-                    <span className="countryLabel">Select Player from {match.firstCountry.countryName}</span>
-                    <div className="playersContainer">
-                      {match.firstCountry.players.map((player)=> <PlayerCardRadio auth={true} countryOrder= 'firstCountry' player={player} />)}
-                    </div>
-                    <span className="countryLabel"> Select Player from {match.secondCountry.countryName}</span>
-                    <div className="playersContainer">
-                        {match.secondCountry.players.map((player)=>{
-                          return (
-                            <PlayerCardRadio auth={true} countryOrder= 'secondCountry' player={player} />
-                            )
-                          })}
-                    </div>
-                </div>
+                      <span className="countryLabel">Select Player from {match.firstCountry.countryName}</span>
+                      <div className="playersContainer">
+                        {match.firstCountry.players.map((player)=> <PlayerCardRadio auth={true} countryOrder= 'firstCountry' player={player} />)}
+                      </div>
+                      <span className="countryLabel"> Select Player from {match.secondCountry.countryName}</span>
+                      <div className="playersContainer">
+                          {match.secondCountry.players.map((player)=><PlayerCardRadio auth={true} countryOrder= 'secondCountry' player={player} />)}
+                      </div>
+                  </div>
                       }
                       {
                         state.showStopingTime &&

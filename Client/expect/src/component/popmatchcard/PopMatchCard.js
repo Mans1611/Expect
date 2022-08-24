@@ -211,45 +211,49 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                             <SelectPlayerCard order = {2} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="FirstCountry"  playerOrder="Player2"/>}</div>
                                     </div>
                             
-                            <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
+                            
                                 {
-                                    playersState.showPlayer1? 
-                                    match.firstCountry.players.map((player,index)=>
-                                        <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
-                                        ) : null
+                                playersState.showPlayer1&&
+                                <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
+                                    { match.firstCountry.players.map((player,index)=>
+                                            <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
+                                            ) 
+                                    }
+                                </div>
                                 }
                                 {
-                                    playersState.showPlayer2? 
-                                    match.firstCountry.players.map((player,index)=>
-                                        <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
-                                        ) : null
+                                    playersState.showPlayer2 && 
+                                    <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
+                                        {match.firstCountry.players.map((player,index)=>
+                                            <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
+                                            )}
+                                    </div> 
                                 }
                                 
-                            </div>
                             <h2 className="countryLabel"> Select Player from {match.secondCountry.countryName}</h2>
                                 <div className="choose-container">
-                                 <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`})}} >
-                                    { playersState.player3 ? <PlayerCard player={playersState.player3}/> : <SelectPlayerCard order = {3} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry" playerOrder="Player1"/>}
-                                </div>  
-                                <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`})}}>
-                                    { playersState.player4 ? <PlayerCard  player={playersState.player4}/> : <SelectPlayerCard order = {4} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry"  playerOrder="Player2"/>}
-                                </div> 
+                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`})}} >
+                                        { playersState.player3 ? <PlayerCard player={playersState.player3}/> : <SelectPlayerCard order = {3} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry" playerOrder="Player1"/>}
+                                    </div>  
+                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`})}}>
+                                        { playersState.player4 ? <PlayerCard  player={playersState.player4}/> : <SelectPlayerCard order = {4} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry"  playerOrder="Player2"/>}
+                                    </div> 
                                 </div>
-                            <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
                                     {
-                                        playersState.showPlayer3 ? 
-                                        match.secondCountry.players.map((player,index)=>{
-                                            return(
-                                                <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
-                                            )
-                                        }) : null
+                                        playersState.showPlayer3 &&
+                                        <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
+
+                                            {match.secondCountry.players.map((player,index)=>  <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
+                                        
+                                        )}
+                                        </div>
                                         
                                     }
                                     {
-                                        playersState.showPlayer4 ?
-                                        match.secondCountry.players.map((player,index)=>{
-                                            return <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
-                                        }) : null
+                                        playersState.showPlayer4 &&
+                                        <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
+                                            {match.secondCountry.players.map((player,index)=>  <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>) }
+                                        </div>
                                         
                                     }
                             </div>
@@ -267,7 +271,6 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
 
 
 
-                </div>
                 </form>
 
                 

@@ -16,11 +16,9 @@ const Expect = ({match,userExpect,setUserExpections})=> {
     if(!userExpect)
         return;
     else{
-
         const {isDark,userGlob} = globalUser();
         const [timeUp, setTimeUp] = useState(false);
         const [pop,setPop] = useState(false);
-        const matchPoints = AddingPoints(match,userExpect);
         const [min,setMin] = useState(1);
         const [showDelete,setShowDelete] = useState(false);
         const [showState,setShowState] = useState(false);
@@ -34,6 +32,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
             }catch(err){
                 console.log(err);
             }
+            
     }
   return (
 
