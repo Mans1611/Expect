@@ -50,7 +50,7 @@ const  App = ()=> {
               <Route path="teamjoin" element = {<CreateJoinTeam />} />
             </Route>
             
-            <Route path="standing" element={<RequiredAuth childern={<States/>}></RequiredAuth> }/>
+            <Route path="states" element={<RequiredAuth childern={<States/>}></RequiredAuth> }/>
             <Route path="myprofile/:userName" element={<MyProfile/>}/>
           </Route>
           
@@ -70,7 +70,7 @@ const  App = ()=> {
             <Route path="account" element = {<Adminaccount/>}/>
             <Route path='dashboard' element={<DashBoard/>}/>
             <Route path='matches' element={<MathcesAdm/>}/>
-            <Route path='statistics' element={<Statistics/>}/>
+            <Route path='states' element={<Statistics/>}/>
             <Route path='news' element={<AddNews/>}/>
         </Route>
         <Route path='*' element = {<NotFound/>}/>

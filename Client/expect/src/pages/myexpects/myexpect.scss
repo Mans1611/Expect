@@ -59,15 +59,19 @@
     
         }
     }
+        .nogrid,.expectsContainer{
+            background-color: #ccccff;
+            padding: 10px;
+            height: 100%;
+            width: 80%;
+            margin: auto;
+            border-radius: 10px;
+            
+        }
         .expectsContainer{
-        padding: 10px;
-        height: 100%;
-        width: 95%;
-        margin: auto;
-        border-radius: 10px;
-        display: grid;
-        grid-template-columns: repeat(4,25%);
-        background-color: #ccccff;
+            width: 95%;
+            display: grid;
+            grid-template-columns: repeat(4,25%);
         
     }
 

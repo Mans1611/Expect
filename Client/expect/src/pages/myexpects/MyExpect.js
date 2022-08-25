@@ -9,11 +9,12 @@ import io from 'socket.io-client';
 import { MatchCardProvider } from "../../Context/MatchCardContext";
 import SmallLaoding from "../../component/loading/small.loading/smallLoading";
 import Loading from "../../component/loading/big.loading/Loading";
-
+import { Link } from "react-router-dom";
 const socket = io.connect('http://localhost:8000');
 
 const MyExpects = () => {
     document.getElementsByTagName("body")[0].style.overflow = "visible";
+
     const {userGlob,isDark,setExpected : setGlobalExpections} = globalUser();
     const [expected,setExpected] = useState([]) // this hold the full infornmtion about the game
     const [userExpections,setUserExpections] = useState([]); // this for the details about each expections like weinner and result 
@@ -26,22 +27,31 @@ const MyExpects = () => {
     })
 
     useEffect(()=>{
-        document.title = "My Expects"
-        return async()=>{
+        document.title = "My Expects" ;
+        localStorage.setItem("page","myexpects");
+        let  isSubscribe = true;
+        const fetchData = async()=>{
+            
             try{
-                const response = await axios.get(`/expects/${userGlob}`);
-                const matchesWithFlage = filteringExpects(response.data.matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
+                const {data} = await axios.get(`/expects/${userGlob}`);
+                const matchesWithFlage = filteringExpects(data.matches,data.userExpections); // where we assign a flag to each expected match to be filtered again
                 const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
-                setUserExpections(response.data.userExpections);
+                setUserExpections(data.userExpections);
                 setExpected(filterdExpectedMatches); // matches 
-                setTotalPoints(response.data.totalPoints);
+                setTotalPoints(data.totalPoints);
                 setLoading(false);
-                console.log("rendered mansir");
             }catch(err){
                 console.log(err);
             }
         }
-    },[])
+
+        if (isSubscribe && userGlob) fetchData();
+
+        return ()=> {isSubscribe = false};
+    },[userGlob])
+
+
+
 
     useEffect(()=>{
         return async()=>{
@@ -76,14 +86,17 @@ const MyExpects = () => {
 
            
                 { 
-                loading ? <SmallLaoding/> : 
+                (loading) ? <SmallLaoding/> : 
                     width > 480 ?
                     (   // if condition 
-                    <div className="expectsContainer"> 
+                    <div className={` ${(expected.length === 0) ? 'nogrid' : 'expectsContainer'}` }> 
                                 {
-                                    
+                                    expected.length === 0 ? 
+                                    <div className="noContent">
+                                        <h2>You have not expected any matches yet</h2>
+                                        <h4>Nav to <Link to='/expect/matches'>Matches Page</Link> to expect</h4>
+                                    </div> : 
                                     expected.map((val,index)=>{
-                                        console.log("big expext");
                                         return <MatchCardProvider match = {val} childeren = {<Expect 
                                             match= {val} 
                                             key= {index}

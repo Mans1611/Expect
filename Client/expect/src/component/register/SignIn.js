@@ -7,6 +7,7 @@ import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
 import Loading from '../loading/big.loading/Loading';
 import FetchingToken from '../../utilis/FetchingToken';
+import Axios from '../../Axios/axios';
 
 
 const SignIn = () => {
@@ -28,27 +29,9 @@ const SignIn = () => {
     }
 
     useEffect(()=>{
-        document.title = "Sign in"
-        return async()=>{
-            try{ 
-                const token = cookie.get("token");
-                
-                // if(token){
-                //     store.setAuth(true);
-                //     navigate('/expect/home')
-                //     const {data} = await axios.get(`/register/verifySession/${token}`);
-                    
-                //     store.setUserGlob(data.payload.userName);
-                //     cookie.set("token",token,{
-                //         maxAge : 60*60*8*1
-                //     })
-                // }
-                }catch(err){
-                    console.log(err);
-                }
-
-        }
-
+        document.title = "Sign in";
+           
+       
         
     },[])
 
@@ -70,12 +53,11 @@ const SignIn = () => {
         try{
             const response = await axios.post('/register/login',{userName,password});
             if(response.status === 200){
-                cookie.set('token',response.data.token,{
-                    maxAge:30
-                });
+                // cookie.set('token',response.data.token,{
+                //     maxAge:30
+                // });
                 store.setUserGlob(userName)
                 store.setAuth(true)
-                //const audio = `<audio autoplay> <source src='../../sounds/correct.mp3' type='audio/mp3'></source></audio>`
                 const audio = new Audio()
                 audio.controls = true;
                 audio.src = 'http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a';

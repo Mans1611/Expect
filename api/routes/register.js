@@ -9,10 +9,10 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import Expects from '../models/Expects.js';
 import CreateUserSession from '../middleware/createUSerSession.js';
+import mongoose from 'mongoose';
 dotenv.config();
 
 const router = express.Router();
-
 
 
 
@@ -67,7 +67,17 @@ router.post('/signup',async(req,res)=>{
 
 })
 
+router.post('/verifysession',async(req,res)=>{
+    let  {session_id} = req.body;
+    session_id = session_id.slice(2,34);
+    if(req.sessionID === session_id){
+        return res.status(200).json({user : req.session.user});
+    }else{
+        return res.status(200).json({user : null });
 
+    }
+   
+})
 
 router.post('/login',async(req,res)=>{
     const {userName,password} = req.body;

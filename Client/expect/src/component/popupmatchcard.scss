@@ -51,8 +51,8 @@
         justify-content: space-around;
         align-items: center;
         .popMatchCardCountryImg{
-            width: 70px;
-            height:70px;
+            width: 80px;
+            height:80px;
             border-radius: 50%;
             border : 2px solid $gold !important;
             
@@ -73,6 +73,8 @@
     top: 5px;
     z-index: 99;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
 
 form{
@@ -347,48 +349,64 @@ form{
         width: 90% ;
         height: 70vh;
         .popMatchWinner{
-            text-align: center;
             .winnerTitle{
                 font-size: 35px !important;  
             }
-        }
-        
+        }        
         .headerPopUp{ 
             .winnerTitle{
-                color: #eee;
                 font-size: 42px;
                 
             }
         
     }
-    
+    .playersContainer{
+        display: flex;
+        overflow-y: hidden;
+        position: relative;
+        flex-direction: column;
+        overflow-y: scroll;
+        height: 240px;
+        border-radius: 10px;
+        .radioContaineter{
+            display: flex;
+            align-items: center;
+            label{
+                flex: 9;
+                .palyerCard{
+                    margin-left:5px ;
+                    height: fit-content;
+                    width: 100% !important;
+                    .playerCardInfo{
+                        flex-direction: row ;
+                        .imgBackground{
+                            margin-left: 5px;
+                            background-color: transparent;
+                            border: none;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        
+        
+    }
     }
     
     .matchCardCountry{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        
-        
-    
-    
     .countryLabel{
         margin: 5px 0 ;
         font-size: 24px !important;
-        
     }
         .matchCardResult{
-            height: 100px;
-            background-color: #000;
+            height: 100px;  
         }
         .matchCardPlayers{
             .playersContainer{
                 padding: 5px;
-                background-color: #ddd;
             }
-            
-    
         }
         .popFormMatch{
                 .popFormLabels{
@@ -398,39 +416,7 @@ form{
                 
             }
         }
-        .playersContainer{
-            display: flex;
-            overflow-y: hidden;
-            position: relative;
-            flex-direction: column;
-            overflow-y: scroll;
-            height: 240px;
-            border-radius: 10px;
-            .radioContaineter{
-                display: flex;
-                align-items: center;
-                label{
-                    flex: 9;
-                    .palyerCard{
-                        margin-left:5px ;
-                        height: fit-content;
-                        width: 100% !important;
-                        .playerCardInfo{
-                            flex-direction: row ;
-                            .imgBackground{
-                                margin-left: 5px;
-                                background-color: transparent;
-                                border: none;
-
-                            }
-                        }
-                    }
-                }
-            }
-
-            
-            
-        }
+       
         .warnMsg,.succsess{
             width: fit-content;
             height: 35px;
@@ -441,17 +427,8 @@ form{
             margin: 5px auto ;
             animation: popup 200ms;
         }
-        .warnMsg{
-            background-color: #df3b51;
-            border-left: #9d0116 5px solid;
-    
-        }
-        .succsess{
-            background-color: rgb(0, 151, 0);
-            border-left: rgb(0, 123, 0) solid 10px;
-        }
+       
         .buttonsWrapper{
-           
             .matchCardButton{
                 width: 120px;
                 height: 45px;
@@ -464,20 +441,8 @@ form{
                 cursor: pointer;
                 font-size: 30px;
     
-                &:hover{
-                    transform: scale(1.1);
-                    
-                }
-                &.save{
-                    background-color: rgb(193, 0, 58);
-                    color: #eee;
-                    &:hover{
-                        background-color: rgb(255, 204, 0);
-                        color: #fff ; 
-                    }
-                    
-                }
-                
+               
+               
             } 
         }
     

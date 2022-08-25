@@ -15,7 +15,8 @@ import { FilterState, ReduceFn } from './utilites/ReduceFn';
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
 const Matches = () => {
-
+    document.body.style.overflow = "visible";
+    localStorage.setItem("page","matches");
     const {isDark} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);

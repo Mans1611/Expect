@@ -15,10 +15,12 @@ const expects = express.Router();
 expects.get('/:userName',SessionVerification,async(req,res)=>{
     try{
         const {userName} = req.params;
+        console.log(userName);
         const user = await Expects.findOne({userName});
         const matches = await Matches.find();
         if(!user.expects)
             return res.send({matches,userExpections:[],totalPoints:0})
+
         const {userExpections,totalPoints} = await AddingPointsToUsers(matches,user.expects);
         await User.findOneAndUpdate({userName},{userPoints:totalPoints});
         await Expects.updateOne({userName},{expects : userExpections});

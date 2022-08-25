@@ -8,15 +8,17 @@ import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
 
 const Navbar = () => {
+    
+   
 
     const [width , setWidth] = useState(window.innerWidth);
     const [scale, setScale] = useState(((width<680)? true : false));
     let items = document.getElementsByClassName('navbarLink');
-    const navbarItems = ["Home", "Matches", "MyExpects", "Team/myteam" , "Standing"];
+    const navbarItems = ["Home", "Matches", "MyExpects", "Team/myteam" , "States"];
     const {isDark,setDark} = globalUser();
     const cookie = new Cookies();
    
-    let location = useLocation().pathname.split("/")[2]; 
+    let location = useLocation().pathname.split("/")[2].split('/')[0]; 
     let item = document.getElementById(location)
     
     if(item)
@@ -29,9 +31,13 @@ const Navbar = () => {
     },[isDark])
     
     useEffect(()=>{
+        document.getElementById('navbar').addEventListener('reload',()=>{
+            console.log("mansour");
+        })
         for(let i = 0 ; i<items.length;i++){
             items[i].addEventListener('click',function(){
                 let previousSelected = document.getElementsByClassName('selected');
+                console.log(previousSelected[0]);
                 if(previousSelected[0]){
                     previousSelected[0].className = previousSelected[0].className.replace(' selected','');
                 }
@@ -58,7 +64,7 @@ const Navbar = () => {
     return ( 
         <>
         <>
-        <div  className={`navbar ${isDark? 'dark': null}`}>
+        <div id='navbar'  className={`navbar ${isDark? 'dark': null}`}>
             <div className="navbarContainer">
                 <div className="navbarLeft">
                     <Link to="/" className={`navbarLink ${isDark? 'dark': ""}`}><h1>Expect</h1></Link>
@@ -75,7 +81,7 @@ const Navbar = () => {
                     <div className="navbarMenu">
                        <div className="imgContainer">
                        
-                            <span className="username">{store.userGlob.split(" ").splice(0,12)[0]}</span>
+                            <span className="username">{store.userGlob?.split(" ").splice(0,12)[0]}</span>
                        
                        </div>
                        <div className='navbarDropdown'>

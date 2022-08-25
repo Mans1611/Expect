@@ -21,7 +21,7 @@ const BottomNavbar = () => {
             <Link to='home'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"> <HomeOutlined/> <span className="dropdownItem">Home</span></div></Link>
             <Link to='matches'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><SportsSoccerIcon/> <span className="dropdownItem">Matches</span></div></Link>
             <Link to='myexpects'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><StadiumIcon/> <span className="dropdownItem">MyExpects</span></div></Link>   
-            <Link to='standing'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"> <AlignVerticalBottomIcon/> <span className="dropdownItem">Standing</span></div></Link>
+            <Link to='states'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"> <AlignVerticalBottomIcon/> <span className="dropdownItem">Standing</span></div></Link>
             <div className="bottomNavbarItem dropUpBarWrapper"><AccountCircleIcon/> <span className="dropdownItem">{userGlob}</span>
                 <div className="dropUpBar">
                     <Link to={`myprofile/${userGlob}`}>

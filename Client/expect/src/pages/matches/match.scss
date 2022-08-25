@@ -21,15 +21,7 @@
         margin-bottom: 20px;
         background-color: #ffd50056;
         transition: 300ms;
-        .noContent{
-            padding: 20px;
-            text-align: center;
-            h1{
-                font-size: 45px;
-                color: #FFD600;
-                font-weight: 600;
-            }
-        }
+        
         .matchCardGrid{
             margin: 20px 0;
             padding: 10px;
@@ -116,6 +108,11 @@
         }
         .matchCard-container{
             background-color:#222;
+            .noContent{
+                h1{
+                    color: #FFD600;
+                }
+            }
            
         .matchcardButton-wrapper{
             button{
@@ -280,4 +277,15 @@
    
 }
 
+}
+.noContent{
+          
+    padding: 20px;
+    text-align: center;
+    h1,h2{
+        font-size: 45px;
+        color: #000;
+        font-weight: 600;
+    }
+    
 }

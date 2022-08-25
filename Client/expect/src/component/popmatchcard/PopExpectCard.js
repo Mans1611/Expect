@@ -10,20 +10,31 @@ import SmallLaoding from '../loading/small.loading/smallLoading';
 const PopExpectCard = ({match,setPop,userExpect}) => {
     const {isDark} = globalUser();
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
-    console.log(playersState.player1);
-
+    document.body.style.overflow = "hidden";
     useEffect(()=>{
-        return async()=>{
-            console.log(playersState.player1);
-            if(userExpect){
-                document.getElementById('result_1').value = userExpect.result1_value;
-                document.getElementById('result_2').value = userExpect.result2_value;
-                document.getElementById(userExpect.winnerValue).checked = true;
-                dispatchPlayer({type : `PlayerSelect1`,payload : userExpect.mutatePlayer1})
-                dispatchPlayer({type : `PlayerSelect2`,payload : userExpect.mutatePlayer2})
-                dispatchPlayer({type : `PlayerSelect3`,payload : userExpect.mutatePlayer3})
-                dispatchPlayer({type : `PlayerSelect4`,payload : userExpect.mutatePlayer4})
+        let isSubscribed = true;
+
+        const fetchData = async()=>{
+            try{
+                if(userExpect){
+                    document.getElementById('result_1').value = userExpect.result1_value;
+                    document.getElementById('result_2').value = userExpect.result2_value;
+                    document.getElementById(userExpect.winnerValue).checked = true;
+                    dispatchPlayer({type : `PlayerSelect1`,payload : userExpect.mutatePlayer1})
+                    dispatchPlayer({type : `PlayerSelect2`,payload : userExpect.mutatePlayer2})
+                    dispatchPlayer({type : `PlayerSelect3`,payload : userExpect.mutatePlayer3})
+                    dispatchPlayer({type : `PlayerSelect4`,payload : userExpect.mutatePlayer4})
+                }
             }
+            catch(err){
+                console.log(err);
+            }
+        }
+
+        fetchData().catch(err=>console.log(err));
+        return ()=>{
+            isSubscribed = false;
+            document.body.style.overflow = "visible";
         }
     },[])
 
