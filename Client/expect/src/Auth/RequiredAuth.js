@@ -1,4 +1,4 @@
-import { Navigate, useNavigate,useLocation } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { globalUser } from "../Context/HomeContext"
 import Cookies from 'universal-cookie';
 import { useEffect } from "react";
@@ -6,10 +6,8 @@ import Axios from "../Axios/axios";
 
 const RequiredAuth = ({childern})=>{
     const store = globalUser();
-    const location = useLocation();
     const cookie = new Cookies();
     const navigate = useNavigate();
-    console.log("render rw=dfsafr");
     useEffect(()=>{
         const session_id = cookie.get("connect.sid");
         const token = cookie.get("token");
@@ -17,7 +15,7 @@ const RequiredAuth = ({childern})=>{
             try{
                 const {data} = await Axios.post('/register/verifySession',{session_id});
                 if(data.user && token){
-                    setToken(token)
+                    store.setToken(token)
                     cookie.set("token",token,{
                         maxAge : 3600 // for one 
                     });

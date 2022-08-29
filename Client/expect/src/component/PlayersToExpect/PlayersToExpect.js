@@ -7,13 +7,16 @@ import PlayerCard from '../popmatchcard/playercard/PlayerCard'
 import PlayerCardGridContainer from './PlayerCard/PlayerCardGridContainer'
 import PlayerRowCard from './PlayerCard/PlayerRowCardContainer'
 import './playerstoexpect.scss'
-const PlayersToExpect = ({dark,setPlayers,Players,isLoading,setLoading}) => {
+const PlayersToExpect = ({dark}) => {
 
     const {isDark} = globalUser();
     const darkTheme = isDark || dark;
-    
+    const [Players,setPlayers] = useState([]);
+    const [isLoading,setLoading] = useState(true);
+
     useEffect(()=>{
-        return async()=>{
+        let isSubscribe = true;
+        const fetchPlayers = async ()=>{
             try{
                 const {data} = await Axios.get('/statistics/getplayerstoExpect');
                 setPlayers(data);
@@ -22,6 +25,10 @@ const PlayersToExpect = ({dark,setPlayers,Players,isLoading,setLoading}) => {
                 console.log(err);
             }
         }
+        if(isSubscribe) fetchPlayers();
+
+        return ()=> isSubscribe = false;
+        
     },[])
 
   return (

@@ -69,7 +69,7 @@ app.use('/team',team);
 app.use(cors());
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file
-mongoose.connect('mongodb://127.0.0.1:27017/expect',{useNewUrlParser:true}); // we connect it to the database
+mongoose.connect(process.env.ATLAS_URI,{useNewUrlParser:true}); // we connect it to the database
 
 mongoose.connection.once('open',()=>{
     console.log("You are connected to the cloud database");

@@ -8,17 +8,14 @@ import './dashboard.scss';
 
 const DashBoard = () => {
     const {adminAuth,setAdminAuth} = AdminContext();
-    const [Players,setPlayers] = useState([]);
-    const [isLoading,setLoading] = useState(true);
-
+    
     const handleDeletePlayers = async()=>{
         try{
-            setLoading(true);
+            
             const response = await Axios.delete('/statistics/deleterecomendation');
             if(response.status === 200){
-                setPlayers([])
+                
             }
-            setLoading(false)
         }catch(err){
             console.log(err);
         }
