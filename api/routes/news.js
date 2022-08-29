@@ -7,9 +7,7 @@ const news = express.Router();
 
 news.get('/getnews',SessionVerification,async(req,res)=>{
     try{
-        console.log(req.session.user);
         
-    
         const allNews = await News.find();
 
         res.status(200).send(allNews.reverse().slice(0,3)) // to send the updated matches since the newest will be the downward

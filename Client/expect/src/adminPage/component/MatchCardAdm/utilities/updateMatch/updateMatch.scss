@@ -125,6 +125,20 @@
                     accent-color: $betiured;
                 }
             }
+            .MatchStateSelect{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                select{
+                    background-color: #171717;
+                    color: #fff;
+                    margin: 5px auto;
+                    height:40px;
+                    width: 200px;
+                    font-size: 24px;
+                    text-align: center;
+                }
+            }
         }
         .showPlayersbutton-wrapper{
             display: flex;

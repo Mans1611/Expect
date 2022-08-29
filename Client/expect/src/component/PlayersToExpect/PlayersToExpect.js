@@ -7,18 +7,17 @@ import PlayerCard from '../popmatchcard/playercard/PlayerCard'
 import PlayerCardGridContainer from './PlayerCard/PlayerCardGridContainer'
 import PlayerRowCard from './PlayerCard/PlayerRowCardContainer'
 import './playerstoexpect.scss'
-const PlayersToExpect = () => {
-    const [isLoading,setLoading] = useState(true);
-    const [Players,setPlayers] = useState([]);
-    const {isDark} = globalUser();
+const PlayersToExpect = ({dark,setPlayers,Players,isLoading,setLoading}) => {
 
+    const {isDark} = globalUser();
+    const darkTheme = isDark || dark;
+    
     useEffect(()=>{
         return async()=>{
             try{
                 const {data} = await Axios.get('/statistics/getplayerstoExpect');
                 setPlayers(data);
                 setLoading(false);
-               
             }catch(err){
                 console.log(err);
             }
@@ -26,10 +25,10 @@ const PlayersToExpect = () => {
     },[])
 
   return (
-    <div className={`playersToExpect ${isDark? 'dark' : null}`}>
+    <div className={`playersToExpect ${darkTheme? 'dark' : null}`}>
         <div className="headline">Recommendation</div>
         {/* <PlayerCardGridContainer Players = {Players}  isLoading = {isLoading}/> */}
-        <PlayerRowCard isLoading={isLoading} Players = {Players}/>
+        <PlayerRowCard dark = {darkTheme}   isLoading={isLoading} Players = {Players}/>
     </div>
   )
 }

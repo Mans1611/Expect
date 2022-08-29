@@ -29,9 +29,6 @@ const MatchCardAdm = () => {
         }
     }
 
-
-
-
     return (
         
             <div className="matchCard dark admin">
@@ -49,11 +46,11 @@ const MatchCardAdm = () => {
                     </div>
 
                 </div>
-                {timeUp && !MatchCenteral.match.fullTime && <Minute matchId = {MatchCenteral.match.matchId} min={min} setMin = {setMin} matchTime = {MatchCenteral.match.matchTime}/>}
+                {timeUp && !MatchCenteral.match.fullTime && <Minute halfsTime = {MatchCenteral.match.time}  matchId = {MatchCenteral.match.matchId} min={min} setMin = {setMin} matchTime = {MatchCenteral.match.matchTime}/>}
                 
                 {
                     !timeUp &&
-                <TimeCounter matchTime = {MatchCenteral.match.matchTime}  setTimeUp={setTimeUp}/>
+                <TimeCounter  matchId = {MatchCenteral.match.matchId} matchTime = {MatchCenteral.match.matchTime}  setTimeUp={setTimeUp}/>
             }
                 <div className="matchCardCounter">
                         <div className="timeLeftLabel">Match Date : <span className="timeLeft">{date}</span></div>

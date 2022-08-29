@@ -6,6 +6,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import BottomNavbar from './bottomnavbar/BottomNavbar';
 import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
+import Axios from '../../Axios/axios';
 
 const Navbar = () => {
     
@@ -31,13 +32,11 @@ const Navbar = () => {
     },[isDark])
     
     useEffect(()=>{
-        document.getElementById('navbar').addEventListener('reload',()=>{
-            console.log("mansour");
-        })
+        
         for(let i = 0 ; i<items.length;i++){
             items[i].addEventListener('click',function(){
                 let previousSelected = document.getElementsByClassName('selected');
-                console.log(previousSelected[0]);
+               
                 if(previousSelected[0]){
                     previousSelected[0].className = previousSelected[0].className.replace(' selected','');
                 }
@@ -55,10 +54,17 @@ const Navbar = () => {
 
     const store = globalUser();
     
-    const handleLogOut = ()=>{
+    const handleLogOut = async()=>{
         store.setAuth(false);
         store.setUserGlob(false);
-        cookie.remove('token');
+        cookie.remove('connect.sid');
+        try{
+            await Axios.get('/register/logout');
+        }catch(err){
+            console.log(err);
+        }
+        
+
     }
 
     return ( 

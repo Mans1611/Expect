@@ -8,20 +8,26 @@ import './homeStanding.scss' ;
 
 const HomeStanding = () => {
     const navigate = useNavigate();
-    const {isDark} = globalUser();
+    const {isDark,token} = globalUser();
     const [standing,setStanding] = useState([]);
     const cookie = new Cookies();
 
     useEffect(()=>{
         return async()=>{
-            const response = await axios.get('/users/standing');
+            console.log(token);
+            const response = await axios.get('/users/standing',{
+                headers : {
+                    token : token || cookie.get("token")
+                }
+            });
             if(response.status === 203){
                 const token = cookie.get('token'); 
                 if(token){
                     cookie.remove('token');
                 }
                 navigate('/register/signin');
-            }else{
+            }
+            else{
                 setStanding(response.data);
             }
 

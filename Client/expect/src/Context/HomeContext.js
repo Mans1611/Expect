@@ -10,7 +10,7 @@ export const Provider = ({children})=>{
     const [userGlob,setUserGlob] = useState(null);
     const [auth,setAuth] = useState(false);
     const [expectedMatches,setExpected] = useState([]);
-
+    const [token,setToken] = useState(null);
     
     
 
@@ -19,8 +19,8 @@ export const Provider = ({children})=>{
             isDark,setDark,
             userGlob,setUserGlob,
             auth,setAuth,
-            expectedMatches,setExpected
-            
+            expectedMatches,setExpected,
+            token,setToken
             }}>
             {children}
         </userContext.Provider>

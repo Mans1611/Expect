@@ -10,6 +10,7 @@ import { PlayerStateToObject } from '../../../../../utilis/PlayerStateToObject';
 import io from 'socket.io-client';
 import { MatchStateCentral } from '../../../../../Context/MatchCardContext';
 import State from '../../../../../component/MatchState/State';
+import NextMatchStep from './NextMatchStep';
 
 
 
@@ -23,10 +24,10 @@ const UpdateMatch = ({match,min})=> {
   const [StoppingTime,setStoppingTime] = useState(match.stoppingTime);
   const [country_1_result,setResult1] = useState(match.firstCountry.result);
   const [country_2_result,setResult2] = useState(match.secondCountry.result);
-  const [showFullTime , setShowFT] = useState(false);
   const [pauseState,setPauseState] = useState('');
   const [showPauseState,setShowPauseState] = useState(false);
   const [showMatchState,setShowMatchState] = useState(false);  
+
   // this code down below is to cahnge the background color when you select a player 
 
   
@@ -40,37 +41,6 @@ const UpdateMatch = ({match,min})=> {
   
 }
 
-const handleUpdateState = (e)=>{
-  e.preventDefault();
-  let stoppingTime = null , matchStatue = null;
-
-  if(state.currentState === 'GoingOn' && state.nextState === "Pause"){
-    // here i will check if it shown or not and if it is i will dispatch 
-    
-    if(showPauseState){
-      dispatch({type : "PAUSE-MATCH"});
-     matchStatue = pauseState;
-   }
-   setShowPauseState(!showPauseState);
- }
-
- if(state.currentState === 'Paused' && state.nextState === "Resume"){
-   dispatch({type : "RESUME-MATCH"});
-   matchStatue = "GoingOn";
-   stoppingTime = StoppingTime;    
-}  
-
-try{
-  socket.emit('updatingMatch',{
-    matchStatue,
-    stoppingTime,
-    matchId : match.matchId
-  })
-}catch(err){
-  console.log(err);
-}
-
-}
 
 
 const handleUpdate = async(e)=>{
@@ -78,6 +48,7 @@ const handleUpdate = async(e)=>{
     let editDate = document.getElementById('dateEdit').value;
     let editTime = document.getElementById('timeEdit').value;
     let updateMatchTime = null;
+    let matchStatus = document.getElementById('matchStatus').value;
 
     // this code below is to just arrange the date and time to be used in Date();
     if(editDate && editTime){
@@ -101,9 +72,6 @@ const handleUpdate = async(e)=>{
       // for example first country will be to the righ and the second will be to the left
       updatedPlayer_2 =  PlayerStateToObject(selcted_player_2,state_2Player,"second",min,selcted_player_2_index)
     }
-
-  
-  
     
     try{
       socket.emit('updatingMatch',{
@@ -113,34 +81,20 @@ const handleUpdate = async(e)=>{
         updatedPlayer_2 ,
         matchId: match.matchId,
         fullTime : false,
-        matchTime : updateMatchTime
+        matchTime : updateMatchTime,
+        matchStatus
       })
       dispatch({type : "hideUpdate" })
     }
     catch(err){
       console.log(err);
-    }
-    
-    
-    
-  }
-
-  const fullTime = async(e)=>{
-    e.preventDefault();
-    try{
-        socket.emit("updatingMatch",{matchStatue : "FT" , matchId:match.matchId,fullTime :true });
-        dispatch({type : "hideUpdate" })
-        
-      }catch(err){
-      console.log(err);
-    }
+    } 
   }
 
   return (
     <div className='UpdateMatchContainer' onClick={hidePop}>
         <div className="updatePop">
           <CloseIcon onClick = {hidePop} className='closeIcon' />
-          
           <div className="matchcardHeader">
                 <div className="matchCardCountry"> {/* country1.*/ }
                     <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
@@ -199,14 +153,7 @@ const handleUpdate = async(e)=>{
                       </div>
                   </div>
                       }
-                      {
-                        state.showStopingTime &&
-
-                        <div className="changeResult stoppingTime">
-                          Stopping Time : 
-                          <input maxLength='1' defaultValue={match.stoppingTime} onChange={(e)=>setStoppingTime(e.target.value)} type="number" name="result" id="stoppingPoints" />
-                        </div>  
-                      }
+                      
                       {
                         showPauseState && 
                           <div className="changeResult stoppingTime">
@@ -215,18 +162,12 @@ const handleUpdate = async(e)=>{
                           </div>
                       }
 
+                  {!match.fullTime && <NextMatchStep/>}
                 <div className="buttonWrapper">
                   <button  onClick={handleUpdate}>Update</button>
-                  {(state.currentState == 'UpComing' || match.matchStatue == 'FT') ? null : <button  onClick={handleUpdateState} className='pause'>{ state.nextState }</button> }
                 </div>
-                <div className="buttonWrapper">
-                    { match.matchStatue !== "FT" && state.currentState !== 'UpComing' && 
-                    <button onClick={(e) =>{e.preventDefault(); 
-                            setShowFT(!showFullTime)}}  
-                            className='fulltime'>End Match</button>}
 
-                    { showFullTime && <button onClick={fullTime}   className='fulltime Whistle'> <SportsIcon/>  </button> }
-                </div>
+               
               </form>
             </div>
         </div>

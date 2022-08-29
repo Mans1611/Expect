@@ -37,10 +37,14 @@ const matchSchema = new Schema({
         default : "UpComing" 
     },
     
-    stoppingTime : {
-        type : Number,
-        default : 0
-    },
+   time : {
+    type : Object,
+    default : {
+        secondHalf_start : null,
+        firstExtra_start : null,
+        secondExtra_start : null,
+    }
+   },
     states : {
         type : Array,
         default : [],

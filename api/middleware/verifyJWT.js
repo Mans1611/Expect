@@ -1,0 +1,27 @@
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+
+
+const verify = (req,res,next)=>{
+    const token = req.header('token');
+
+    if(!token){
+        return res.status(404).json({msg:"token is not found"});
+    }
+    console.log(token);
+    try{
+        jwt.verify(token,process.env.JWT,(err,user)=>{
+            if(err){
+                return res.status(498).json({msg:"token is not valid"});
+            }
+            req.user = user;
+            next()
+        });    
+    }
+    catch(err){
+        res.status(404).json({msg:err});
+    }
+}
+
+export default verify;

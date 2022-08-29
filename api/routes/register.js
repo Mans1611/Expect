@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 import  express,{Router} from 'express'
 import  User  from '../models/User.js';
-import verify  from '../middleware/verify.js';
+import verify  from '../middleware/verifyJWT.js';
 import mailVerification from '../maller/mailVerification.js'; 
 import Token  from '../models/Token.js';
 import dotenv from 'dotenv';
@@ -35,18 +35,18 @@ router.post('/signup',async(req,res)=>{
         existUser = await User.findOne({email})
     if(existUser)
         return res.status(203).json({msg:"This email is already exist"});
-    
-    
+
     const genSalt = await bcrypt.genSalt(parseInt(process.env.SALT));
     const hashed = await bcrypt.hash(password,genSalt);
     const userStanding = await User.find().count() + 1;
-    const user =  new User({
-        userName,password:hashed,phoneNumber,email,userCountry,userStanding
-    });
     // const msg = `hello expecter ${userName}`;
     // await mailVerification(email,msg);
     const token = jwt.sign({userName,email},process.env.JWT);
     
+    const user =  new User({
+        userName,password:hashed,phoneNumber,email,userCountry,userStanding,token
+    });
+
     const expects = new Expects({userName})// creating a new expect documentation 
     await expects.save(()=>{
     })
@@ -55,8 +55,7 @@ router.post('/signup',async(req,res)=>{
     await user.save(()=>{
         res.status(201).json({
             msg:"User is created succussfully",
-
-        
+            token,
         });
     })
     
@@ -81,17 +80,18 @@ router.post('/verifysession',async(req,res)=>{
 
 router.post('/login',async(req,res)=>{
     const {userName,password} = req.body;
-    
     try{
         const userDB = await User.findOne({userName});
-
         if(!userDB)
             return res.status(203).json({msg:"this user is not found in database"});
         const checkPass = await bcrypt.compare(password,userDB.password);
         if(checkPass){
-            const token = jwt.sign({userName},process.env.JWT);  
+            // create new token for the user 
+            const token = jwt.sign({userName},process.env.JWT,{
+                expiresIn : 60 * 60 * 1000 // one hour
+            });  
             // creating a session to that user
-            CreateUserSession(req)
+            CreateUserSession(req);
             return res.status(200).json({msg:"login successfully",token});
         }
         res.status(203).json({msg:"The Passowrd is incorrect"}); 
@@ -107,6 +107,10 @@ router.get('/verifySession/:token',async(req,res)=>{
         return  res.status(203).json({msg:"token is not defined"});
     const verifyToken = await jwt.decode(req.params.token,process.env.JWT);
     res.status(200).json({payload:verifyToken});
+})
+router.get('/logout',async(req,res)=>{
+    req.session.destroy();
+    res.status(200).send("done")
 })
 
 

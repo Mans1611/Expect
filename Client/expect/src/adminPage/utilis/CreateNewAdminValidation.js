@@ -1,4 +1,5 @@
 import axios from "axios";
+import Axios from "../../Axios/axios";
 
 const  CreateNewAdmin = async(userName,password,repass,adminKey)=>{
 
@@ -29,7 +30,6 @@ const  CreateNewAdmin = async(userName,password,repass,adminKey)=>{
 }
 
 const signInValidation = async (userName,password,adminKey)=>{
-
     // check the inputs are not empty
     if(userName === '' || password === ''  || adminKey === '' )
     return "Check all the inputs fields";
@@ -39,7 +39,7 @@ const signInValidation = async (userName,password,adminKey)=>{
     return "Check all the inputs fields";
 
    try{
-    const response = await axios.post('/admin/login',{userName,password,adminKey});
+    const response = await Axios.post('/admin/login',{userName,password,adminKey});
         return response;
    }
    catch(err){

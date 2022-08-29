@@ -1,25 +1,27 @@
 import Matches from "../models/Matches.js";
 import addingPointsPlayer from "../routes/utilis/addingPointsPlayers.js";
+import { MatchHalfs } from "../routes/utilis/MatchHalfs.js";
 import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCountry.js";
 
 const updateMatch = async(data)=>{
-
+    
     const fullTime = data.fullTime ? data.fullTime : false;
     try{
 
     let match = await Matches.findOne({matchId:data.matchId});
-
+        if(data.matchStatus){
+            match = MatchHalfs(match,data.matchStatus);
+        }
+        
     if(fullTime && data.matchStatue === "FT"){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
         const icon = 'https://www.pngrepo.com/png/277622/512/whistle.png'    
-        match.states.push({playerName : "",state : `Full Time ${match.firstCountry.result} - ${match.secondCountry.result} `, min : "FT" , icon,country:'both'});     
-        
+        match.states.push({playerName : "",state : `Full Time ${match.firstCountry.result} - ${match.secondCountry.result} `, min : "FT" , icon,country:'both'});       
     }
     
     // so this code for uodating the time if the admin wants to
     
     match.matchStatue = data.matchStatue ? data.matchStatue : match.matchStatue;
-    match.stoppingTime = data.stoppingTime ? data.stoppingTime : match.stoppingTime;
     
     if(data.matchTime){
         match.matchTime = data.matchTime;

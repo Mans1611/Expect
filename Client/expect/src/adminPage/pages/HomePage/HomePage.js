@@ -6,7 +6,6 @@ import './homepage.scss';
 const HomeAdminPage = () => {
 
     return ( 
-    <ProtectedAdminProvider childern={(
         <div className="homeAdminPgae">
             <div className="dashbboard">
                 <SideNavbar/>
@@ -16,8 +15,6 @@ const HomeAdminPage = () => {
                 </div>
             </div>
         </div>
-        )}>
-    </ProtectedAdminProvider>
      );
 }
  

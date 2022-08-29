@@ -28,6 +28,7 @@ import AddNews from './adminPage/pages/AddNews/Add';
 import Team from './pages/Team/Team';
 import MyTeam from './component/TeamComponent/MyTeam/MyTeam';
 import CreateJoinTeam from './component/TeamComponent/JoinCrateTeam/CreateJoinTeam';
+import ProtectedAdminPage from './Context/ProtectedAdminPage';
 export const ThemeContext = createContext(true);
 
 
@@ -38,8 +39,6 @@ const  App = ()=> {
       <Provider children={(
       <MatchesProvider childern={(
         <ProtectedAdminProvider childern={
-
-        
         <Routes>
           <Route path='/expect' element={<RequiredAuth childern={<><Navbar/><Footer/></>}/>}> 
             <Route path='matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
@@ -63,16 +62,16 @@ const  App = ()=> {
 
       {/* Admin pages */}
 
+          <Route path='/adminpage/login' element={<AdminLogin/>}/>
+          <Route path='/adminpage/signup' element={<AdminSignUp/>}/>
+          <Route exact path='/adminpage' element = {<ProtectedAdminPage childern = {<HomeAdminPage/>}> </ProtectedAdminPage>}>  
+              <Route path="account" element = {<ProtectedAdminPage childern={<Adminaccount/>}></ProtectedAdminPage>}/>
+              <Route path='dashboard' element={<ProtectedAdminPage childern={<DashBoard/>}></ProtectedAdminPage>}/>
+              <Route path='matches' element={<ProtectedAdminPage childern={<MathcesAdm/>}></ProtectedAdminPage>}/>
+              <Route path='statistics' element={<ProtectedAdminPage childern={<Statistics/>}></ProtectedAdminPage>}/>
+              <Route path='news' element={<ProtectedAdminPage childern={<AddNews/>}></ProtectedAdminPage>}/>
+          </Route>
 
-        <Route path='/adminpage/login' element={<AdminLogin/>}/>
-        <Route path='/adminpage/signup' element={<AdminSignUp/>}/>
-        <Route exact path='/adminpage' element = {<HomeAdminPage/>}>       
-            <Route path="account" element = {<Adminaccount/>}/>
-            <Route path='dashboard' element={<DashBoard/>}/>
-            <Route path='matches' element={<MathcesAdm/>}/>
-            <Route path='states' element={<Statistics/>}/>
-            <Route path='news' element={<AddNews/>}/>
-        </Route>
         <Route path='*' element = {<NotFound/>}/>
       </Routes> 
   }></ProtectedAdminProvider>

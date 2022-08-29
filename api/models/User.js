@@ -11,7 +11,8 @@ const UserSchema = new Schema ({
     isAdmin:{type:Boolean,default:false},
     isVerified : {type:Boolean,default:false},
     team : {type : Object, default : null},
-    userStanding : {type:Number,required:true}
+    userStanding : {type:Number,required:true},
+    token : {type : String, required : true}
 })
 
 const User = model('User' , UserSchema );

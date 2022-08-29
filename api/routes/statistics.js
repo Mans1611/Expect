@@ -1,4 +1,5 @@
 import express from 'express';
+import verifyAdmin from '../middleware/verifyAdmin.js';
 import Country from '../models/Country.js';
 import Expects from '../models/Expects.js';
 
@@ -122,10 +123,9 @@ statistics.get('/gettotal',async(req,res)=>{
     ]
     res.status(200).send(totalObjects)
 })
-statistics.post('/createPlayertoexpect',async(req,res)=>{
-    const {Player:player} = req.body
-
-
+statistics.post('/createPlayertoexpect',verifyAdmin,async(req,res)=>{
+    const {Player:player} = req.body;
+    
     const Player = new playerToExpect({...req.body});
     await Player.save(()=>{
         console.log("players to watch is done");
@@ -138,6 +138,10 @@ statistics.post('/createPlayertoexpect',async(req,res)=>{
 statistics.get('/getplayerstoExpect',async(req,res)=>{
     const players = await playerToExpect.find().limit(4);
     res.status(200).send(players);
+})
+statistics.delete('/deleterecomendation',async(req,res)=>{
+    const players = await playerToExpect.deleteMany();
+    return res.status(200).send("Done!")
 })
 
 

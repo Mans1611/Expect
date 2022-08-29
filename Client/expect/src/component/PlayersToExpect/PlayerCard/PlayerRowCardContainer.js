@@ -2,15 +2,16 @@ import React from 'react'
 import { globalUser } from '../../../Context/HomeContext';
 import SmallLaoding from '../../loading/small.loading/smallLoading';
 import './playerCardRow.scss';
-const PlayerRowCard = ({Players,isLoading}) => {
+const PlayerRowCard = ({Players,isLoading,dark}) => {
 
   const {isDark} = globalUser();
+  const darkTheme = isDark || dark
   return (
     <div className='PlayerRowCardContainer'>
       {isLoading ? <SmallLaoding/> :
         Players.length === 0  ? <div className="noContent">No Player Were Add</div> : 
         <>
-        <div className={`playersrowcontainer ${isDark ? 'dark' : null}`}>
+        <div className={`playersrowcontainer ${darkTheme ? 'dark' : null}`}>
           <div className="rowHead row">
             <div className="item">Player Name</div>
             <div className="item">Country</div>

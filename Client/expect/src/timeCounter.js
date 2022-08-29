@@ -1,6 +1,7 @@
 import {useEffect,useState} from 'react'
+import Axios from './Axios/axios';
 
-const TimeCounter = ({matchTime,setTimeUp})=>{
+const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
     
     const time = new Date(matchTime).getTime();
     let left = 999999;
@@ -9,14 +10,28 @@ const TimeCounter = ({matchTime,setTimeUp})=>{
     const [min,setMin] = useState(0);
     const [sec,setSec] = useState(0);
     let Hours = null,Min = null,Sec = null;
+    const updatematch = async()=>{
+        try{
+            await Axios.put(`/matches/editmatch/${matchId}`,{
+                started : true,
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 
     if(time > (new Date().getTime())){
         useEffect(()=>{
             let current = new Date().getTime();
             left = time-current;
+            
+           
             if(left <= 0){
                 setTimeUp(true);
+               
             }
+
             const interval = setInterval(()=>{
         current = new Date().getTime();
         left = time-current;
@@ -25,15 +40,17 @@ const TimeCounter = ({matchTime,setTimeUp})=>{
         Sec = Math.floor((left%(1000*60))/(1000));
         setHours(Hours);setMin(Min);setSec(Sec);
     },1000)
+
     return ()=> clearInterval(interval);
     
 },[sec])
+
 }
 else{
     setTimeUp(true)
+    updatematch();
+    console.log("finishes");
 }
-
-
 
     return (
             <div className="matchCardCounter">

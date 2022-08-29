@@ -6,9 +6,8 @@ import LockIcon from '@mui/icons-material/Lock';
 import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { CreateNewAdmin } from '../../utilis/CreateNewAdminValidation';
-
-import Cookies from 'universal-cookie';
 import { AdminContext } from '../../Context/ProtectedAdmin';
+import Cookies from 'universal-cookie';
 
 const HOURS = 60 * 60;
 
@@ -26,7 +25,6 @@ const AdminSignUp = ()=> {
 
     const {isAuth,setAdminAuth} = AdminContext();
 
-    console.log(isAuth);
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
@@ -41,7 +39,7 @@ const AdminSignUp = ()=> {
                     maxAge :  HOURS * 1 // for just one hour
                 });
                 setAdminAuth(true);
-                navigate('/adminpage/');
+                navigate('/adminpage/dashboard');
 
             }
             else if(response.status === 203){

@@ -19,7 +19,6 @@ const SignIn = () => {
     const navigate = useNavigate();
     const store = globalUser();
     const cookie = new Cookies();
-    const [loading,setLoading] = useState(true);
     const inputs = document.getElementsByClassName('inputFeild');
     
     for(let input of inputs){
@@ -53,11 +52,13 @@ const SignIn = () => {
         try{
             const response = await axios.post('/register/login',{userName,password});
             if(response.status === 200){
-                // cookie.set('token',response.data.token,{
-                //     maxAge:30
-                // });
+                cookie.set('token',response.data.token,{
+                    maxAge : 60 * 60 * 1 
+                });
                 store.setUserGlob(userName)
-                store.setAuth(true)
+                store.setAuth(true);
+                store.setToken(response.data.token);
+
                 const audio = new Audio()
                 audio.controls = true;
                 audio.src = 'http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a';

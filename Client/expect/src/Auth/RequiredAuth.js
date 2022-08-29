@@ -9,19 +9,27 @@ const RequiredAuth = ({childern})=>{
     const location = useLocation();
     const cookie = new Cookies();
     const navigate = useNavigate();
-
+    console.log("render rw=dfsafr");
     useEffect(()=>{
         const session_id = cookie.get("connect.sid");
+        const token = cookie.get("token");
         const verifySession = async ()=>{
             try{
                 const {data} = await Axios.post('/register/verifySession',{session_id});
-                if(data.user){
+                if(data.user && token){
+                    setToken(token)
+                    cookie.set("token",token,{
+                        maxAge : 3600 // for one 
+                    });
+
+
                     store.setAuth(true);
                     store.setUserGlob(data.user.userName);
                     let page = localStorage.getItem('page') || 'home';
                     navigate(`/expect/${page}`);
+
                 }
-                else if(data.user === null) {
+                else if(data.user === null || !token) {
                     navigate('/register/signin')
                     store.setUserGlob(null);
                     store.setAuth(false);
@@ -34,6 +42,8 @@ const RequiredAuth = ({childern})=>{
         }
         if(session_id){
             verifySession();
+        }else{
+            navigate('/register/signin')
         }
         
     },[])

@@ -130,10 +130,17 @@ const SignUp = () => {
                     setLoadingPost(false);
                     store.setUserGlob(userName);
                     store.setAuth(true);
+                    store.setToken(response.data.token);
                     navigate('/expect/home');
+                    let token = ''
+                    for(let letter of response.headers.token){
+                        token += letter.indexOf()
+                    }
                     cookie.set('token',response.headers.token,{
                         maxAge : 60*60*8 // the token is valid for 8 hours 
                     })
+
+
                 }
 
 

@@ -49,10 +49,10 @@ const MathcesAdm = () => {
             {showPop && <PopAddMatch showPop={showPop} setShowPop={setShowPop}/>}
             <div className='matchesContainer'>
                 {
-                    store.isLoading? <SmallLaoding/>:
+                    store.isLoading ? <SmallLaoding/>:
                     (
                         store.matches.map((match,index)=> 
-                        <MatchCardProvider 
+                        <MatchCardProvider key={index}
                             match={match} childeren = {<MatchCardAdm  key={index}/>}>
                         </MatchCardProvider>)
                     )

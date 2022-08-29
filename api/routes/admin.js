@@ -41,8 +41,11 @@ admin.post('/login',async(req,res)=>{
         return res.status(203).send("The Password Is Incorrect");
     if(adminKey !== process.env.adminKey)
         return res.status(203).send("The Admin Key IS Invalid");
-    
-    res.status(200).send("Login Successfully")
+    const token = jwt.sign({userName,isAdmin : true},process.env.JWT,{
+        expiresIn : 60 * 60 * 1000
+    })
+
+    res.status(200).json({msg : "Login succussfully" , token})
     
 })
 

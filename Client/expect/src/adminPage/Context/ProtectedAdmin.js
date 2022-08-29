@@ -1,15 +1,21 @@
 
-
 import react , {useState,useContext,createContext} from 'react' ; 
+import { useNavigate } from 'react-router-dom';
 
 
-const AdminProvider = createContext(null)
+
+const AdminProvider = createContext(null);
 
 export const ProtectedAdminProvider = ({childern})=>{
-    const [isAuth,setAdminAuth] = useState(false);
-    
+    const [adminAuth,setAdminAuth] = useState(false);
+    const [token,setToken] = useState(null);
+
+    console.log("render context");
     return(
-        <AdminProvider.Provider value= {{isAuth,setAdminAuth}}>
+        <AdminProvider.Provider value= {{
+            adminAuth,setAdminAuth,
+            token, setToken
+            }}>
             {childern}
         </AdminProvider.Provider>
 

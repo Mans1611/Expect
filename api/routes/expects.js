@@ -5,6 +5,7 @@ import AddingPointsToUsers from './utilis/addingPointsToUsers.js';
 import FilteringExpects from './utilis/FilteringExpects.js';
 //import Filter_User_Expects_4Team from './utilis/FilterUserExpectsForTeam'
 import User from '../models/User.js';
+import verifyJwt from '../middleware/verifyJWT.js';
 import SessionVerification from "../middleware/sessionVerify.js";
 import Teams from '../models/Teams.js';
 import { PushExpectToMember , DeleteExpectFromMember, UpdateExpectForMember } from './utilis/TeamExpectHandlers.js';
@@ -12,10 +13,9 @@ import { PushExpectToMember , DeleteExpectFromMember, UpdateExpectForMember } fr
 const expects = express.Router();
 
 
-expects.get('/:userName',SessionVerification,async(req,res)=>{
+expects.get('/:userName',SessionVerification,verifyJwt,async(req,res)=>{
     try{
         const {userName} = req.params;
-        console.log(userName);
         const user = await Expects.findOne({userName});
         const matches = await Matches.find();
         if(!user.expects)

@@ -8,7 +8,7 @@ import PlayersToExpect from '../../component/PlayersToExpect/PlayersToExpect';
 
 const Home = () => {
     localStorage.setItem("page","home");
-    const {isDark,userGlob} = globalUser();
+    const {isDark,userGlob,token} = globalUser();
    return ( 
             <div className={`home ${isDark?'dark':''}`}>
                 <div className="pageContainer">

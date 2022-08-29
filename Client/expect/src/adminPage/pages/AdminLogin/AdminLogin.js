@@ -6,6 +6,9 @@ import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { signInValidation } from '../../utilis/CreateNewAdminValidation';
 import { AdminContext } from '../../Context/ProtectedAdmin';
+import Cookies from 'universal-cookie';
+import { LogoDev } from '@mui/icons-material';
+
 const AdminLogin = ()=> {
     const [userName,setUserName] = useState('');
     const [password,setPassword] = useState('');
@@ -13,8 +16,9 @@ const AdminLogin = ()=> {
     const [msg,setMsg] = useState('');
     const [showMsg,setShowMsg] = useState(false);
     const navigate = useNavigate();
+    const cookie = new Cookies();
 
-    const {isAuth, setAdminAuth} = AdminContext();
+    const adminStore = AdminContext();
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
@@ -28,8 +32,15 @@ const AdminLogin = ()=> {
                 setShowMsg(true);
                 return setMsg(response.data);
             }
-            setAdminAuth(true);
+            console.log(response.data.token);
+            adminStore.setAdminAuth(true);
+            adminStore.setToken(response.data.token);
+
             navigate('/adminpage/dashboard');
+
+            cookie.set('adminToken',response.data.token,{
+                maxAge : 60 * 60
+            });
 
 
         }catch(err){

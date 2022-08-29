@@ -9,13 +9,17 @@ import io from 'socket.io-client';
 import { MatchCardProvider } from "../../Context/MatchCardContext";
 import SmallLaoding from "../../component/loading/small.loading/smallLoading";
 import Loading from "../../component/loading/big.loading/Loading";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import Axios from "../../Axios/axios";
 const socket = io.connect('http://localhost:8000');
 
 const MyExpects = () => {
     document.getElementsByTagName("body")[0].style.overflow = "visible";
+    const cookie = new Cookies();
+    const navigate = useNavigate();
 
-    const {userGlob,isDark,setExpected : setGlobalExpections} = globalUser();
+    const {userGlob,isDark,token,setToken,setExpected : setGlobalExpections} = globalUser();
     const [expected,setExpected] = useState([]) // this hold the full infornmtion about the game
     const [userExpections,setUserExpections] = useState([]); // this for the details about each expections like weinner and result 
     const [width,setWidth] = useState(window.innerWidth);
@@ -30,10 +34,21 @@ const MyExpects = () => {
         document.title = "My Expects" ;
         localStorage.setItem("page","myexpects");
         let  isSubscribe = true;
-        const fetchData = async()=>{
-            
+        const userToken = token || cookie.get("token");
+        console.log();
+        if(!userToken)
+            navigate("/register/signin");
+
+        const fetchData = async()=>{ 
             try{
-                const {data} = await axios.get(`/expects/${userGlob}`);
+                const {data,status} = await Axios.get(`/expects/${userGlob}`,{
+                    headers : {
+                        token : userToken
+                    }
+                });
+                if(status > 400)
+                    return navigate('/register/signin');
+
                 const matchesWithFlage = filteringExpects(data.matches,data.userExpections); // where we assign a flag to each expected match to be filtered again
                 const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
                 setUserExpections(data.userExpections);
@@ -44,7 +59,7 @@ const MyExpects = () => {
                 console.log(err);
             }
         }
-
+       
         if (isSubscribe && userGlob) fetchData();
 
         return ()=> {isSubscribe = false};
@@ -57,6 +72,7 @@ const MyExpects = () => {
         return async()=>{
             try{
                 socket.on("updatingMatches",async(matches)=>{
+                    console.log("repated task in soket");
                     const response = await axios.get(`/expects/${userGlob}`);
                     const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
                     const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
@@ -86,7 +102,7 @@ const MyExpects = () => {
 
            
                 { 
-                (loading) ? <SmallLaoding/> : 
+                loading ? <SmallLaoding/> : 
                     width > 480 ?
                     (   // if condition 
                     <div className={` ${(expected.length === 0) ? 'nogrid' : 'expectsContainer'}` }> 

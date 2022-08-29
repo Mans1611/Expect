@@ -25,7 +25,7 @@ const CalculateTotalTeamPoints = async(team)=>{
         updateTeamMembersExpects.push({...member,expects : teamUserExpects, sharePoints});
         await User.updateOne({userName:member.userName} , {$set : {"team.sharePoints" : sharePoints}});
     }
-    console.log(updateTeamMembersExpects);
+  
 
     totalExpects.forEach(expect=> {totalTeamPoints += expect.userPoints});
     const UpdatedTeam = {

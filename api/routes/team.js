@@ -63,7 +63,7 @@ team.put('/jointeam',joinTeamValidation,async(req,res)=>{
     const {expects : userExpects} =  await Expects.findOne({userName:user.userName});
     //filter Expects 
     const user_Expects_To_Team = Filter_User_Expects_4Team(userExpects,joinedTime);
-    console.log(user_Expects_To_Team);
+
     team.teamMembers.push({
         userName : user.userName,
         joinedTime,

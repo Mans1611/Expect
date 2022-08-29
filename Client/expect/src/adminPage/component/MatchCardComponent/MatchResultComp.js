@@ -7,7 +7,7 @@ import Minute from './Minute';
 
 import { MatchStateCentral } from '../../../Context/MatchCardContext';
 
-const MatchResultComp =({result_1,result_2,FT/* which comes from DB */,time})=> {
+const MatchResultComp =({result_1,result_2,FT,matchId,time,halfsTime})=> {
   
   const matchStore = MatchStateCentral();
   const [min,setMin] = useState(0);
@@ -19,7 +19,7 @@ const MatchResultComp =({result_1,result_2,FT/* which comes from DB */,time})=> 
         {/* so if the match is full time it endes */}
 
         {
-            FT ? <div className="circle"><strong>FT</strong></div> :  <Minute setMin = {setMin} min={min} matchTime={time} /> 
+            FT ? <div className="circle"><strong>FT</strong></div> :  <Minute halfsTime = {halfsTime}   matchId={matchId} setMin = {setMin} min={min} matchTime={time} /> 
         }
         <h1 className="result">{result_2}</h1>
     </div>

@@ -11,13 +11,17 @@ import SmallLaoding from '../../component/loading/small.loading/smallLoading';
 import MatchCardPhone from '../../component/matchcards/MatchCardPhone/MatchCardPhone';
 import RoundFilter from './Component/RoundFilter';
 import { FilterState, ReduceFn } from './utilites/ReduceFn';
+import Axios from '../../Axios/axios';
+import { useNavigate } from 'react-router-dom';
 
 const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
 
 const Matches = () => {
     document.body.style.overflow = "visible";
-    localStorage.setItem("page","matches");
-    const {isDark} = globalUser();
+    localStorage.setItem("page","matches"); 
+    const navigate = useNavigate();
+
+    const {isDark,token} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false); 
@@ -25,25 +29,38 @@ const Matches = () => {
     const [userExpections,setUserExpections] = useState([]); 
     const {userGlob} = globalUser();
     const [expandButton,setExpandButton] = useState("See All Matches");
-    
+    const [matches, setMatches] = useState([]);
     const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
+    document.title = "Matches";
     
     useEffect(()=>{
-        document.title = "Matches"
-        return async () => {
+        let isSubscribe = true;
+        const fetchData = async() =>{
             try{
-                setLoading(true);
-                const response = await axios.get(`/expects/${userGlob}`);
+                const {data,status} = await Axios.get(`/expects/${userGlob}`,{
+                    headers : {token}
+                }); // the user Expects . 
+                if(status === 498 )
+                    navigate('/register/signin');
+                
                 const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
-                const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
+                const MatchesWithFlag = filteringExpects(matchesRes.data,data.userExpections);
                 setData(MatchesWithFlag);
-                setUserExpections(response.data.userExpections);
+                setMatches(data.matches);
+                setUserExpections(data.userExpections);
                 setLoading(false); 
             }catch(err){
                 setLoading(false);  
             }
-        } 
-    },[]);
+            
+        }
+        if(isSubscribe && userGlob ) fetchData();
+        
+        // cleanup function. 
+        return ()=> isSubscribe = false;
+
+    },[userGlob]);
+
     window.addEventListener('resize',()=>{
         setWidth(window.innerWidth)
 })
@@ -55,14 +72,13 @@ const Matches = () => {
         socket.on("updatingMatches",async(matches)=>{
             setLoading(true)
             if(expandButton === "Just Todays' Matches"){
-                    const Response = await axios.get(`/expects/${userGlob}`);
-                    const MatchesWithFlag = filteringExpects(matches,Response.data.userExpections);
+                    const MatchesWithFlag = filteringExpects(matches,userExpections);
                     setData(MatchesWithFlag);
                 }
+
             else if(expandButton === "See All Matches") {
-                    const Response = await axios.get(`/expects/${userGlob}`);
                     const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
-                    const MatchesWithFlag = filteringExpects(matchesRes.data,Response.data.userExpections);
+                    const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
                     setData(MatchesWithFlag);
                 }
                 setLoading(false);
@@ -71,14 +87,12 @@ const Matches = () => {
 
     const getMatchesDate = async(date)=>{
         const Date = date.split('-'); //year - month - day 
-
         if(Date[0] > 2020 && Date[0] < 2024){
             const searchDate = `${Date[1]},${Date[2]},${Date[0]}`;
             filterDispatch({type : "DateChange",payload : searchDate});
             try{
-                const Response = await axios.get(`/expects/${userGlob}`);
                 const {data:dateMatches} = await axios.get(`/matches/?date=${searchDate}`);
-                const MatchesWithFlag = filteringExpects(dateMatches,Response.data.userExpections);
+                const MatchesWithFlag = filteringExpects(dateMatches,userExpections);
                 setData(MatchesWithFlag); 
             }catch(err){
                 console.log(err);
@@ -90,15 +104,13 @@ const Matches = () => {
         e.preventDefault();
         setLoading(true);
         if(expandButton === 'See All Matches'){
-            const Response = await axios.get(`/expects/${userGlob}`);
-            const MatchesWithFlag = filteringExpects(Response.data.matches,Response.data.userExpections);
+            const MatchesWithFlag = filteringExpects(matches,userExpections);
             setData(MatchesWithFlag);
-            setExpandButton("Just Todays' Matches");  
+            setExpandButton("Just Today's");
         }
-        else if(expandButton === `Just Todays' Matches`){
-            const response = await axios.get(`/expects/${userGlob}`);
+        else if(expandButton === `Just Today's`){
             const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
-            const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
+            const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
             setData(MatchesWithFlag);
             setExpandButton("See All Matches");  
         }
@@ -112,7 +124,7 @@ const Matches = () => {
                     <h1 className="matchTitle">{filterState.title}</h1>
                     <div className="filter-container">
                        
-                       <RoundFilter filterDispatch={filterDispatch} setData={setData} setLoading={setLoading}/>
+                       <RoundFilter userExpections = {userExpections} filterDispatch={filterDispatch} setData={setData} setLoading={setLoading}/>
                         <div className="dateContainer">
                             <label htmlFor="NavigateToThisDate">
                                 <h1>Pick a Date : </h1>
@@ -148,7 +160,9 @@ const Matches = () => {
                             </div>
                             }
                         <div className="matchcardButton-wrapper">
-                            <button onClick={(e)=>{expandMatches(e);setExpandButton(
+                            <button onClick={(e)=>{
+                                expandMatches(e);
+                                setExpandButton(
                                 expandButton === "See All Matches" ? "Just Today's" : "See All Matches" 
                             ); filterDispatch({type : "expand",payload : expandButton })}}>{expandButton}</button>
                         </div>

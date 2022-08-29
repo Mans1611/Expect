@@ -8,7 +8,6 @@ export const FilterState = {
 
 }
 export function ReduceFn (state,action){
-    console.log(action.type);
     switch(action.type){
         case 'DateChange' :
             if(date === action.payload)

@@ -1,5 +1,5 @@
-import { useReducer,useContext,createContext } from "react";
-import axios from 'axios';
+import { useReducer,useContext,createContext,useEffect } from "react";
+import Axios from "../Axios/axios";
 
 const MatchContext  = createContext(null);
 
@@ -7,6 +7,8 @@ const MatchContext  = createContext(null);
 
 
 export const MatchCardProvider =  ({childeren,match})=>{
+
+    
     let nextState = null;
     let showStopingTime = false;
     let currentState = match.matchStatue
@@ -20,28 +22,33 @@ export const MatchCardProvider =  ({childeren,match})=>{
         showStopingTime = true;
     }
 
-    else if ( match.matchStatue === "UpComing")
+    else if ( match.matchStatue === "UpComing"){
         nextState = "GoingOn";
+        
+    }
 
     const initialState = {
         currentState,
         nextState,
         showUpdate : false,
-        showStopingTime ,
-        stoppingTime : match.stoppingTime 
+        showStopingTime,
+        GoingOn : true
     }
-
     const reduceFn =  (state,action)=>{
         switch(action.type){
+           
+            case "Pause" : 
+                return {...state , currentState : action.payload}; // where the payload is the HT ET 
             case "Started":
-                return {currentState: "GoingOn",nextState : "Pause" , ...state}; 
+                return {...state,currentState: "GoingOn",nextState : "Pause" }; 
             case 'PAUSE-MATCH':
                 return {currentState : "Paused",nextState : "Resume",showUpdate : true,showStopingTime:true};   
             case 'RESUME-MATCH' :
-                return {currentState : "GoingOn",nextState : "Pause", showUpdate : false, stoppingTime : action.payload};
+           
+            case 'RESUME-MATCH' :
+                return {currentState : "GoingOn",nextState : "Pause", showUpdate : false};
             case 'FT' : 
                 return { currentState : "FT" ,showUpdate : false};
-
 
             case "ShowUpdate" :
                 return { ...state,showUpdate : true};
@@ -51,7 +58,8 @@ export const MatchCardProvider =  ({childeren,match})=>{
         }
     }
 
-    const [state,dispatch] =   useReducer( reduceFn,initialState);
+    const [state,dispatch] =   useReducer(reduceFn,initialState);
+    
 
     return(
         <MatchContext.Provider value={{match,state,dispatch}}>

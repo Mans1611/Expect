@@ -60,7 +60,10 @@ matches.get('/match/:id', async (req,res)=>{
 matches.get('/match/',SessionVerification,async(req,res)=>{
     try{
         
-        const dontMissMatches = await Matches.find({fullTime : req.query.fullTime}).limit(2);
+        const dontMissMatches = await Matches.find({
+            fullTime : req.query.fullTime,
+            started : false
+        }).limit(2);
         res.status(200).send(dontMissMatches);
     }catch(err){
         console.log(err);
@@ -144,7 +147,7 @@ matches.post('/addgame', async(req,res)=>{
 
 matches.put('/editmatch/:matchID',async (req,res)=>{
     try{
-
+      
         let match = await Matches.findOne({matchId:req.params.matchID});
         
         const {updatedPlayer_1,updatedPlayer_2} = req.body;
@@ -171,6 +174,7 @@ matches.put('/editmatch/:matchID',async (req,res)=>{
         }
 
         match.started = req.body.started ? req.body.started : match.started;
+      
         
         await Matches.updateOne({matchId:req.params.matchID},match) 
         return res.status(200).send("done");
@@ -182,7 +186,6 @@ matches.put('/editmatch/:matchID',async (req,res)=>{
 matches.put('/updatestate/:matchId/:stateIndex',async(req,res)=>{
     const {matchId,stateIndex} = req.params;
     try{
-        console.log(stateIndex);
         let match = await Matches.findOne({matchId});
         
         const playerDetails = match.states[stateIndex]; // an object has min playerName countryOrder, index.

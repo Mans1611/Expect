@@ -1,13 +1,22 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Axios from '../../../Axios/axios';
 import PlayerCard from '../../../component/popmatchcard/playercard/PlayerCard';
+import { AdminContext } from '../../Context/ProtectedAdmin';
 
 const AddPlayerToExpect = () => {
     const [player,setPlayer] = useState(null);
     const [players,setPlayers] = useState(null);
     const [logo,setLogo] = useState(null);
     const [msg,setMsg] = useState(null);
+    const adminStore = AdminContext();
+
+    useEffect(() => {
+        console.log(adminStore.adminAuth);
+   
+    }, [])
+
+    
     const getPlayers = async(e)=>{
         e.preventDefault();
         const countryName = document.getElementById('countryName').value;
@@ -15,23 +24,27 @@ const AddPlayerToExpect = () => {
         setPlayers(data.country.players);
         setLogo(data.country.logo);
     }
+    
     const handlePost = async(e)=>{
         e.preventDefault();
         const countryName = document.getElementById('countryName').value;
         const playerIndex = document.getElementById('playerName').value;
         const nextMatch = document.getElementById('nextMatch').value;
         let Player = {...players[playerIndex],nextMatch,country : {logo,countryName}};
-        console.table(Player);
-
+        
+        
         try{
-            const response = await Axios.post('/statistics/createPlayertoexpect',Player);
+            console.log(adminStore.token);
+            const response = await Axios.post('/statistics/createPlayertoexpect',Player,{
+                headers : {token : adminStore.token}
+            });
             if(response.status === 200){
                 setPlayer(Player);
                 setMsg({msg : response.data.msg,color : 'green'});
             }
             else{
                 console.log("error occured");
-                setMsg({msg : "Error Occured please check the data",color : 'red'});
+                setMsg({msg : response.data.msg , color : 'red'});
             } 
 
         }catch(err){
@@ -45,7 +58,7 @@ const AddPlayerToExpect = () => {
             <div className="input-Container">
                     <label htmlFor="countryName">
                         Country Name 
-                        <input  className='playerInput' onChange={(e)=>setNewsImg(e.target.value)} id='countryName' type="text" placeholder='Enter Country Name' />
+                        <input  className='playerInput'  id='countryName' type="text" placeholder='Enter Country Name' />
                     </label>
                     {
                         !players &&
@@ -69,7 +82,7 @@ const AddPlayerToExpect = () => {
                         <div className="input-Container">
                             <label htmlFor="nextMatch">
                                 Next Match Opponent
-                                <input  className='playerInput' placeholder='Enter His Next Match' onChange={(e)=>setNewsDetails(e.target.value)} id='nextMatch'/>
+                                <input  className='playerInput' placeholder='Enter His Next Match'  id='nextMatch'/>
                             </label>
                         </div>
                         {player &&

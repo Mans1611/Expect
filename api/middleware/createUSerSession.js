@@ -5,7 +5,7 @@ const CreateUserSession = (req)=>{
         isAdmin : false,
         userName: req.body.userName,     
     };
-    console.log("sessionn is created");
+   
     return req;
 }
 

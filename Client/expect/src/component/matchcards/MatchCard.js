@@ -36,7 +36,7 @@ const MathchCard = ({match}) => {
                 </div>
 
                 { !timeUp &&
-                <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/>
+                <TimeCounter setTimeUp = {setTimeUp}  matchTime={match.matchTime}/>
                 }
 
                 {/* if the time is up the timer will display and you cant press the Expect button  */}
@@ -51,6 +51,8 @@ const MathchCard = ({match}) => {
                             FT={match.fullTime} 
                             result_1={match.firstCountry.result} 
                             result_2={match.secondCountry.result}
+                            matchId = {match.matchId}
+                            halfsTime = {match.time}
                             /> 
                 }
 

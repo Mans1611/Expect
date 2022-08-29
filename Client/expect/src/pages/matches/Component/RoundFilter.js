@@ -5,17 +5,17 @@ import { globalUser } from '../../../Context/HomeContext';
 
 
 
-const RoundFilter = ({setLoading,setData,filterDispatch}) => {
-  const {userGlob} = globalUser();
+const RoundFilter = ({setLoading,setData,filterDispatch,userExpections}) => {
+  const {userGlob,token} = globalUser();
   
 
   const handleChange = async(selected)=>{
      try{
       setLoading(true);
       filterDispatch({type : "changeRound",payload : selected});
-      const response = await Axios.get(`/expects/${userGlob}`);
+      
       const matchesRes = await Axios.get(`/matches/?${selected?`&round=${selected}` : '' }`); // array of todays' matches
-      const MatchesWithFlag = filteringExpects(matchesRes.data,response.data.userExpections);
+      const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
       setData(MatchesWithFlag);
       setLoading(false);
      }catch(err){

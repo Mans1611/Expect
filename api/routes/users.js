@@ -1,5 +1,5 @@
 import express from 'express';
-import verify from '../middleware/verify.js';
+import verifyJWT from '../middleware/verifyJWT.js';
 import User from '../models/User.js';
 import Expects from '../models/Expects.js';
 import jwt from 'jsonwebtoken';
