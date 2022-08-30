@@ -14,7 +14,8 @@ const PlayerExpects = ({setPop}) => {
             <div className="card flipcard">
             <div className="card-back">
                 <div className="rules expects players">
-                  Pick one Player from both countries you expect to shine in this game  
+                  Pick two players from both countries you expect to shine in this game.
+                  Your first pick will be <span  className="highlighted">x1.5</span> and the second will be <span  className="highlighted">x1</span> 
                     <h2 className="points">Points Calculation : </h2>
                     <button onClick={()=>setPop(true)}>Show Points Calculation</button>
                 </div>
@@ -25,7 +26,8 @@ const PlayerExpects = ({setPop}) => {
                         <img className='matchcard' src={player1} alt="" />
                         <img className='matchcard' src={player2} alt="" />
                     </div>
-                    <div className="text">Select  Player From Both Countries</div>
+                    <h1>Select a Two Players From each caountry</h1>
+                    <div className="text">Show More</div>
                 </div>
 
             </div>

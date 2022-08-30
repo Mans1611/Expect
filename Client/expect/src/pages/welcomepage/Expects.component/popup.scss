@@ -3,7 +3,7 @@
     @include popupContainer;
     background-color: #171717c2;
     .slideShow-Container{
-        width: 75%;
+        width: 60%;
         height: 90vh;
         background-color: $gold;
         border-radius: 20px;
@@ -30,7 +30,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin: 30px auto;
+               
                 .details{
                     font-size: 50px;
                     color: #272727;

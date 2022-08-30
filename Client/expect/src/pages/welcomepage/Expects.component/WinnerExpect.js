@@ -18,7 +18,8 @@ const WinnerExpect = () => {
                 <div className="imgage-wrapper">
                     <img className='matchcard' src={matchcard} alt={matchcard} />
                 </div>
-                <div className="text">Pick A Match & Expect Winner</div>
+                <h1>Pick A Match & Expect Winner</h1>
+                <div className="text">Show More</div>
             </div>
            
         </div>

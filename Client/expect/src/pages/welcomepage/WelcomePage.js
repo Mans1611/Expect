@@ -4,9 +4,10 @@ import './welcome.scss';
 import Polygon from './Polygon';
 import TopNavbar from './TopNavbar';
 import MainCom from './MainCom';
+import MatchesContainer from '../../component/MatchesContainer/MatchesContainer';
 
 const Welcome = () => {
-    
+    localStorage.setItem('visited', true);
     return (
         <> 
             <TopNavbar/>

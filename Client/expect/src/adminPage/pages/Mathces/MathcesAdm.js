@@ -18,9 +18,7 @@ const MathcesAdm = () => {
     const [showPop,setShowPop] = useState(false) ;
     const store = matchesStore();
 
-    const {isAuth, setAdminAuth} = AdminContext();
-
-    const navigate = useNavigate();
+    const {adminAuth, setAdminAuth} = AdminContext();
     
 
     useEffect(()=>{

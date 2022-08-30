@@ -39,6 +39,7 @@ $secondaryColor : #0000f4;
         align-items: center;
         overflow: hidden;
         .buttonsWrapper{
+            background-color: transparent;
             margin-right: 10px;
             .WelcomeNavbarButtons{
                 text-decoration: none;
@@ -69,7 +70,7 @@ $secondaryColor : #0000f4;
     }
 }
 .WelcomePageCover{
-    height: calc(100vh - 83px);
+    height: fit-content;
     padding: 50px 20px 20px 10px;
     position: relative;
     background-image: url('https://cdn.kibrispdr.org/data/151/football-hd-pics-4.jpg');
@@ -102,9 +103,6 @@ $secondaryColor : #0000f4;
         position: relative;
         z-index: 999;
         .card-wrapper{
-            &:hover{
-                animation: scaleUp 260ms forwards;
-             }
             .step{
                 color: #fff;
                 font-weight: 700;
@@ -126,10 +124,9 @@ $secondaryColor : #0000f4;
                 background-color: #181818;
                 border-radius: 10px;
                 cursor: pointer;
-                height: fit-content;
                 overflow-y: hidden;
                 &.flipcard{
-                    height: 320px;
+                    height: 420px;
                     position: relative;
                     .card-face,.card-back{
                         position: absolute;
@@ -141,12 +138,12 @@ $secondaryColor : #0000f4;
                     &:hover{
                         .card-face{
                             transition: transform 800ms;
-                            transform:  translateY(-400px) ;
+                            transform:  translateY(-500px) ;
                         }
                         
                     }
                     .card-face{
-                       
+                       text-align: center;
                        
                         backface-visibility: hidden;
                         .text{
@@ -157,7 +154,7 @@ $secondaryColor : #0000f4;
     
                     }
                     .card-back{
-                        padding: 10px;   
+                        padding: 20px;   
                         background-color: #1818185d ;
                       
                         
@@ -188,7 +185,6 @@ $secondaryColor : #0000f4;
                                         font-weight: 600;
                                         color: #181818;
                                         &:hover{
-                                            transform: scale(1.05);
                                             background: linear-gradient(90deg, #ffd600 0%, rgba(0,175,210,1) 100%);margin-top: 15px;
                                         }
                                         font-size: 30px;
@@ -251,12 +247,7 @@ svg{
     left: -40px;
     border: #FFD600;
 }
-@keyframes scaleUp {
-    
-    to{
-        transform: scale(1.15);
-    }
-}
+
 @media (min-width : 370px) and (max-width : 490px) {
     .topnavbar{ 
         h1{
@@ -268,6 +259,7 @@ svg{
             align-items: center;
             .buttonsWrapper{
                 margin-right: 5px;
+                
                 .WelcomeNavbarButtons{
                     font-size: 30px;
                     font-weight: 500;
@@ -346,7 +338,7 @@ svg{
                         .card-face{
                             backface-visibility: hidden;
                             .text{
-                                padding: 20px 5px;
+                                padding:  5px;
                                 position: absolute;
                                 bottom: 0;
                             }

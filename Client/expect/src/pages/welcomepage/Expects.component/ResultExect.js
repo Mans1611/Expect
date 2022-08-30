@@ -20,7 +20,8 @@ const ResultExect = () => {
                 <div className="imgage-wrapper">
                     <img className='matchcard' src={matchresult} alt="" />
                 </div>
-                <div className="text">Try to Expect The Match Result</div>
+                <h1>Try to Expect The Match Result</h1>
+                <div className="text">Show More</div>
             
             </div>
         </div>

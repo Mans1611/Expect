@@ -92,7 +92,7 @@ const AdminSignUp = ()=> {
                     </label>
                 </div>
                 {showMsg && <div className="msg">{msg}</div>}
-                <Link to='/adminpage/signup'>Already Have An Account</Link>
+                <Link to='/adminpage/login'>Already Have An Account</Link>
                 <button onClick={handleSubmit} type="submit">Create Account</button>
             </form> 
         </div>

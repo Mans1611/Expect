@@ -9,6 +9,7 @@ import { MatchCardProvider } from '../../../Context/MatchCardContext';
 import MatchState from '../../MatchState/MatchState';
 import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import PopExpectCard from '../../popmatchcard/PopExpectCard';
+import { useNavigate } from 'react-router-dom';
 
 const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
     document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
@@ -16,6 +17,15 @@ const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
     const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
     const [popShowExpect,setpopShowExpect] = useState(false);
+    const navigate = useNavigate();
+    const {auth} = globalUser(); 
+    
+    const checkAuth = ()=>{
+        if(auth)
+            return setPop(true);
+        navigate('/register/signin')
+    }
+
   return (
     <MatchCardProvider match={match} childeren={
         <div className='expectPhone'>
@@ -56,7 +66,7 @@ const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
             </>
             :
             match.expected ? <button onClick={()=>setpopShowExpect(true)}> My Expect </button> :
-            <button onClick={()=>setPop(true)}>Expect</button>
+            <button onClick={checkAuth}>Expect</button>
             
         
         } 

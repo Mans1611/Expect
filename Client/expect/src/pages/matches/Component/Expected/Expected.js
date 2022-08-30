@@ -37,7 +37,7 @@ const Expected = ({match,userExpect})=> {
         }
 
         {/* if the time is up the timer will display and you cant press the Expect button  */}
-        {timeUp && <MatchResultComp matchId = {match.matchId} FT = {match.fullTime} time = {match.matchTime} result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> }
+        {timeUp && <MatchResultComp halfsTime={match.time} matchId = {match.matchId} FT = {match.fullTime} time = {match.matchTime} result_1={match.firstCountry.result} result_2={match.secondCountry.result}/> }
         {
             <div className="matchCardStart">
                 { <button onClick={(e)=>setSeeExpect(true)} className='matchCardbutton'>My Expect</button>}

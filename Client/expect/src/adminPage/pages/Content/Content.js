@@ -5,8 +5,11 @@ import MathcesAdm from '../Mathces/MathcesAdm';
 import Statistics from '../statistics/Statistics';
 import AddNews from '../AddNews/Add';
 import './content.scss';
+import UsersStanding from '../UsersStanding/UsersStanding';
+import { useState } from 'react';
 
 const Content = () => {
+    const [totalUsers,setTotalUsers] = useState([]);
     return (
         
             <div className="maxcontent">
@@ -14,6 +17,7 @@ const Content = () => {
                     <Route path = "account" element = {<Adminaccount/>} />
                     <Route path="dashboard" element={<DashBoard/>}/>
                     <Route path='matches' element={<MathcesAdm/>}/>
+                    <Route path='usersstanding' element={<UsersStanding setTotalUsers = {setTotalUsers} totalUsers = {totalUsers} />}/>
                     <Route path='statistics' element={<Statistics/>}/>
                     <Route path='news' element={<AddNews/>}/>
                 </Routes>

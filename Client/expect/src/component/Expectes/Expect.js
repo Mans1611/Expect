@@ -46,7 +46,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
                 </div>
                { timeUp && <span className="result">{match.firstCountry.result}</span>}
                 
-                { timeUp ?  match.fullTime ? <div className="clashHolder">FT</div> : <div className="clashHolder"><Minute min = {min} setMin={setMin} matchTime={match.matchTime}/></div>  : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/>}
+                { timeUp ?  match.fullTime ? <div className="clashHolder">FT</div> : <div className="clashHolder"><Minute halfsTime={match.time} min = {min} setMin={setMin} matchTime={match.matchTime}/></div>  : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/>}
                     
                 
                 {timeUp &&<span className="result">{match.secondCountry.result}</span>}

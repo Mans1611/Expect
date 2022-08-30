@@ -1,0 +1,31 @@
+.usersStanding{
+    text-align: center;
+    padding: 10px;
+    h1{
+        padding: 10px;
+        margin-top: 30px;
+        font-size: 50px;
+        color: #ffffff;
+    }
+    .row:not(.standing-header){
+        font-size: 25px;
+        border-bottom: 2px solid #eeeeee;
+        background-color: #3e3e3e;
+        &:hover{
+            background-color: #272727;
+        }
+    }
+    .button-wrapper{
+        button{
+            padding: 10px;
+            width: 100%;
+            background-color: #ffa600;
+            font-size: 36px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            &:hover{
+                background-color: #ffc800;
+            }
+        }
+    }
+}

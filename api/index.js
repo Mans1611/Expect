@@ -69,7 +69,7 @@ app.use('/team',team);
 app.use(cors());
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file
-mongoose.connect(process.env.ATLAS_URI,{useNewUrlParser:true}); // we connect it to the database
+mongoose.connect('mongodb://localhost:27017/expect',{useNewUrlParser:true}); // we connect it to the database
 
 mongoose.connection.once('open',()=>{
     console.log("You are connected to the cloud database");
@@ -81,16 +81,11 @@ io.on('connection',(socket)=>{
             await updateMatch(data);
             const matches = await Matches.find();
             socket.broadcast.emit("updatingMatches",matches);  
-        })
-        
+        })   
     }
-
     catch(err){
         console.log(err);
     }
-
-    
-
 })
 
 server.listen(port,()=>{

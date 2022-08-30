@@ -3,7 +3,8 @@ import './standing.scss';
 import SmallLaoding from '../../../component/loading/small.loading/smallLoading';
 import Axios from '../../../Axios/axios';
 import UserAdmin_Row from './UserAdmin_Row';
-
+import { Link } from 'react-router-dom';
+import UserAdminHeadRow from './UserAdminHeadRow';
 const UserStanding = ({totalUsers,selectedRound}) => {
     const [isLoading,setLoading] =useState(true);
     const [users,setUsers] = useState([]) 
@@ -21,14 +22,13 @@ const UserStanding = ({totalUsers,selectedRound}) => {
         return (
             <div className='userStanding-admin'>
                 <div className="standing-container">
-                    <h1 className="title">User Standing</h1>
-                    <div className="standing-header row">
-                        <span className="field">No</span>
-                        <span className="field">User Name</span>
-                        <span className="field">Phone</span>
-                        <span className="field">Country</span>
-                        <span className="field">Points</span>
+                    <div className="header-wrapper">
+                        <h1 className="title">User Standing</h1>
+                        <div>
+                            <Link to ='/adminpage/usersstanding'>See More</Link>
+                        </div>
                     </div>
+                    <UserAdminHeadRow/>
                     
                         {   isLoading ? <SmallLaoding/> : 
                             users.map((user,index)=><UserAdmin_Row key={index} order = {index+1} user = {user} />)

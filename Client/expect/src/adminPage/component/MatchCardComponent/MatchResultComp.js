@@ -11,7 +11,6 @@ const MatchResultComp =({result_1,result_2,FT,matchId,time,halfsTime})=> {
   
   const matchStore = MatchStateCentral();
   const [min,setMin] = useState(0);
-  
   return (
     <div className='matchResultComp'>
         <h1 className="result">{result_1}</h1>

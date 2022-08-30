@@ -5,6 +5,7 @@ import Expects from '../models/Expects.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Country from '../models/Country.js';
+import verifyAdmin from '../middleware/verifyAdmin.js';
 const users = express.Router();
 
 users.get('/standing',async(req,res)=>{
@@ -14,6 +15,23 @@ users.get('/standing',async(req,res)=>{
     if(users.length>0){
         return res.status(200).json(users);
     }
+    res.status(203).json({msg:"No users yet"})
+})
+
+// this for admins 
+users.get('/standingforAdmins',verifyAdmin,async(req,res)=>{
+    
+    const {start,end} = req.query;
+    if(start == 1){
+        const users = await User.find().sort({userPoints : -1}).limit(1);
+        if(users.length>0){
+            return res.status(200).json(users);
+        }
+    }else{
+        const users = await User.find().sort({userPoints : -1}).skip(start-1).limit(1);
+        return res.status(200).json(users);
+    }
+    
     res.status(203).json({msg:"No users yet"})
 })
 

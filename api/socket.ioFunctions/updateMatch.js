@@ -6,6 +6,7 @@ import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCoun
 const updateMatch = async(data)=>{
     
     const fullTime = data.fullTime ? data.fullTime : false;
+    
     try{
 
     let match = await Matches.findOne({matchId:data.matchId});
@@ -13,15 +14,13 @@ const updateMatch = async(data)=>{
             match = MatchHalfs(match,data.matchStatus);
         }
         
-    if(fullTime && data.matchStatue === "FT"){
+    if(match.fullTime){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
-        const icon = 'https://www.pngrepo.com/png/277622/512/whistle.png'    
-        match.states.push({playerName : "",state : `Full Time ${match.firstCountry.result} - ${match.secondCountry.result} `, min : "FT" , icon,country:'both'});       
     }
-    
+    console.log(match.fullTime);
     // so this code for uodating the time if the admin wants to
     
-    match.matchStatue = data.matchStatue ? data.matchStatue : match.matchStatue;
+    //match.matchStatue = data.matchStatue ? data.matchStatue : match.matchStatue;
     
     if(data.matchTime){
         match.matchTime = data.matchTime;
@@ -31,7 +30,7 @@ const updateMatch = async(data)=>{
     const {updatedPlayer_1,updatedPlayer_2} = data;
     match.firstCountry.result = data.result1 ? data.result1 : match.firstCountry.result ;
     match.secondCountry.result = data.result2 ? data.result2 : match.secondCountry.result ;
-    match.fullTime = fullTime;
+
     
     if(updatedPlayer_1){
         match = await addingPointsPlayer(updatedPlayer_1,match.firstCountry.countryName,match);

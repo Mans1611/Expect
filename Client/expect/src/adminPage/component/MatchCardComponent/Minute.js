@@ -22,6 +22,7 @@ const Minute = ({matchTime,min,setMin,halfsTime})=> {
     
     useEffect( ()=>{ 
         const now = new Date().getTime();
+        
         if(halfsTime.secondHalf_start){
             const now = new Date().getTime();
             const Second_Half_StartTime = new Date(halfsTime.secondHalf_start).getTime();
@@ -47,10 +48,11 @@ const Minute = ({matchTime,min,setMin,halfsTime})=> {
             setMin(passed);
         }
         else{
-
             const now = new Date().getTime();
+         
             const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
-            setMin(passed - (store.match.stoppingTime));
+            
+            setMin(passed);
         }
 
         // if(min >= 1 ) {

@@ -17,7 +17,8 @@ export default async function AddingPointsToUSers(matches,userExpections){
                    matchPoints += match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints;  
                    matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints;
                    matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints;
-                     // so this for the winner points it will be calculated just if the match ends (fullTime) 
+                     // so this for the winner points it will be calculated just if the match ends (fullTime)
+
                      let result_Points = 0 , WinnerPoints = 0;  
                        
                      if(match.fullTime){
@@ -41,6 +42,7 @@ export default async function AddingPointsToUSers(matches,userExpections){
                         }
                         // for result points calculations 
                         if(match.fullTime){
+                            console.log("passed");
                             let difference = 0;
                             difference = Math.abs(match.firstCountry.result - userExpections[i].result1_value) + Math.abs(match.secondCountry.result - userExpections[i].result2_value);
                             

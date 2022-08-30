@@ -32,7 +32,7 @@ const AdminLogin = ()=> {
                 setShowMsg(true);
                 return setMsg(response.data);
             }
-            console.log(response.data.token);
+           
             adminStore.setAdminAuth(true);
             adminStore.setToken(response.data.token);
 

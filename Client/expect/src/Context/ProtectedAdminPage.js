@@ -4,10 +4,10 @@ import { AdminContext } from '../adminPage/Context/ProtectedAdmin';
 
 const ProtectedAdminPage = ({childern}) => {
   const navigate = useNavigate();
-  const {adminAuth} = AdminContext();
+  const admin = AdminContext();
   
   useEffect(()=>{
-    if(!adminAuth)
+    if(!admin.adminAuth && !admin.token)
         return navigate('/adminpage/login');
   },[]);
 

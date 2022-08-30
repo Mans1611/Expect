@@ -10,6 +10,7 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
     const [min,setMin] = useState(0);
     const [sec,setSec] = useState(0);
     let Hours = null,Min = null,Sec = null;
+    
     const updatematch = async()=>{
         try{
             await Axios.put(`/matches/editmatch/${matchId}`,{
@@ -25,32 +26,29 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
         useEffect(()=>{
             let current = new Date().getTime();
             left = time-current;
-            
-           
-            if(left <= 0){
+    
+            if(left <= 0)
                 setTimeUp(true);
                
-            }
 
             const interval = setInterval(()=>{
-        current = new Date().getTime();
-        left = time-current;
-        Hours = Math.floor(left/(1000*60*60));
-        Min = Math.floor((left%(1000*60*60))/(1000*60));
-        Sec = Math.floor((left%(1000*60))/(1000));
-        setHours(Hours);setMin(Min);setSec(Sec);
-    },1000)
+            current = new Date().getTime();
+            left = time-current;
+            Hours = Math.floor(left/(1000*60*60));
+            Min = Math.floor((left%(1000*60*60))/(1000*60));
+            Sec = Math.floor((left%(1000*60))/(1000));
+            setHours(Hours);setMin(Min);setSec(Sec);
+            },1000)
 
-    return ()=> clearInterval(interval);
+            return ()=> clearInterval(interval);
     
-},[sec])
+        },[sec])
 
-}
-else{
-    setTimeUp(true)
-    updatematch();
-    console.log("finishes");
-}
+    }
+    else{
+        setTimeUp(true)
+        updatematch();
+    }
 
     return (
             <div className="matchCardCounter">

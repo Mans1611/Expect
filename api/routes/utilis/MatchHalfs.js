@@ -45,8 +45,8 @@ const MatchHalfs = (match,status)=>{
             break;
     }
         case 'FullTime' : {
-            match.matchStatue = 'FT';
             match.fullTime = true;
+            match.matchStatue = 'FT';
             match.states.push({playerName : "",state : `Full Time ${match.firstCountry.result} - ${match.secondCountry.result} `, min : "FT" , icon,country:'both'}); 
 
             break;

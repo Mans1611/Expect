@@ -6,19 +6,28 @@ import TimeCounter from '../../TimeCounter';
 import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchResultComp';
 import MatchState from '../MatchState/MatchState';
 import { MatchCardProvider } from '../../Context/MatchCardContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const MathchCard = ({match}) => {
     document.body.style.overflow = 'visible';
     const [pop,setPop] = useState(false);
     const [timeUp, setTimeUp] = useState(false); 
-    const {isDark} = globalUser(); 
-   
+    const {isDark, auth} = globalUser(); 
+    const navigate = useNavigate();
+
+
+    const checkAuth = ()=>{
+        if(auth)
+            return setPop(true);
+        navigate('/register/signin')
+    }
+
     return ( 
     <MatchCardProvider match={match} childeren={
         ( 
             <>
-            <div className={`matchCard ${isDark?'dark':''}`}>
+            <div className={`matchCard ${isDark?'dark':null}`}>
                 <div className="matchcardHeader-wrapper">
 
                     <div className="matchcardHeader">
@@ -42,7 +51,7 @@ const MathchCard = ({match}) => {
                 {/* if the time is up the timer will display and you cant press the Expect button  */}
                 {!timeUp && 
                     <div className="matchCardStart">
-                        { <button onClick={()=>setPop(!pop)} className='matchCardbutton'>Expext</button>}
+                        { <button onClick={checkAuth} className='matchCardbutton'>Expect</button>}
                     </div>
                 } 
                     {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}

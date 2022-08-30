@@ -29,6 +29,7 @@ import Team from './pages/Team/Team';
 import MyTeam from './component/TeamComponent/MyTeam/MyTeam';
 import CreateJoinTeam from './component/TeamComponent/JoinCrateTeam/CreateJoinTeam';
 import ProtectedAdminPage from './Context/ProtectedAdminPage';
+import UsersStanding from './adminPage/pages/UsersStanding/UsersStanding';
 export const ThemeContext = createContext(true);
 
 
@@ -64,12 +65,14 @@ const  App = ()=> {
 
           <Route path='/adminpage/login' element={<AdminLogin/>}/>
           <Route path='/adminpage/signup' element={<AdminSignUp/>}/>
+
           <Route exact path='/adminpage' element = {<ProtectedAdminPage childern = {<HomeAdminPage/>}> </ProtectedAdminPage>}>  
               <Route path="account" element = {<ProtectedAdminPage childern={<Adminaccount/>}></ProtectedAdminPage>}/>
-              <Route path='dashboard' element={<ProtectedAdminPage childern={<DashBoard/>}></ProtectedAdminPage>}/>
-              <Route path='matches' element={<ProtectedAdminPage childern={<MathcesAdm/>}></ProtectedAdminPage>}/>
-              <Route path='statistics' element={<ProtectedAdminPage childern={<Statistics/>}></ProtectedAdminPage>}/>
-              <Route path='news' element={<ProtectedAdminPage childern={<AddNews/>}></ProtectedAdminPage>}/>
+              <Route path='dashboard' element = {<ProtectedAdminPage childern={<DashBoard/>}></ProtectedAdminPage>}/>
+              <Route path='matches' element = {<ProtectedAdminPage childern={<MathcesAdm/>}></ProtectedAdminPage>}/>
+              <Route path='usersstanding' element = {<ProtectedAdminPage childern={<UsersStanding/>}> </ProtectedAdminPage>}/>
+              <Route path='statistics' element = {<ProtectedAdminPage childern={<Statistics/>}></ProtectedAdminPage>}/>
+              <Route path='news' element = {<ProtectedAdminPage childern={<AddNews/>}></ProtectedAdminPage>}/>
           </Route>
 
         <Route path='*' element = {<NotFound/>}/>
