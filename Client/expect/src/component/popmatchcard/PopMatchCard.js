@@ -154,7 +154,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
 
     return (
         <div  onClick={hidePop}  className="popMatchFullPage">
-            <div className={`popMatchContainer ${isDark? 'dark':''}`}>
+            <div className={`popMatchContainer ${isDark && 'dark'}`}>
                 <CloseIcon onClick={()=> setPop(false)} className='Popicon'/>
                 <form>
                 <div className="headerPopUp">
@@ -258,7 +258,11 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                     }
                             </div>
                         </div>
-                        {Msg.showMsg && <div className={Msg.className}>{Msg.msg} </div>}
+                        {Msg.showMsg && 
+                        <div className="msg-wrapper">
+                            <div className={Msg.className}>{Msg.msg} </div>
+                        </div>
+                        }
                         {type !== "GET" ? 
                         <div className="buttonsWrapper">
                             { type === "POST" ? 

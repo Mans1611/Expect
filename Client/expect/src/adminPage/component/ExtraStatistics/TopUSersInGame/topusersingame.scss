@@ -1,0 +1,38 @@
+.TopUsersInGame-containetr{
+    width: 60%;
+    margin: 10px auto;
+    background-color: #212121;
+    border-radius: 10px;
+    padding: 5px;
+    .search-Wrapper{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        .searchfield{
+            width: 70%;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            background-color: #373737;
+            color: #ffffff;
+            margin-right: 10px;
+            border-radius: 5px;
+            height: 40px;
+            padding: 5px ;
+            &:focus{
+                border: 2px solid #f04;
+            }
+            &::placeholder{
+                font-size: 24px;
+            }
+        }
+        .search{
+            height: 40px;
+            background-color: #00ff00;
+            font-size: 24px;
+            color: #ffffff;
+            border-radius: 5px;
+            padding: 5px 15px;
+        }
+    }
+}

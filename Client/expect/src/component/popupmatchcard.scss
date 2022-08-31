@@ -22,7 +22,7 @@
     border-radius: 10px;
     position: fixed;
     border-bottom: 2px solid #000;
-    z-index: 999;
+    z-index: 1001;
     
     animation: popup 150ms  linear;
     
@@ -167,6 +167,10 @@ form{
                 border-radius: 5px;
             }
         }
+        .msg-wrapper{
+            background-color: #262626;
+           
+        }
       
     .expectResult{
         color: #fff;
@@ -234,6 +238,10 @@ form{
         }
         
         
+    }
+    .msg-wrapper{
+        background-color: #eeeeee;
+        padding: 5px;
     }
     .warnMsg,.succsess{
         width: fit-content;
@@ -347,7 +355,7 @@ form{
 @media screen and (max-width:480px) {    
     .popMatchContainer{
         width: 90% ;
-        height: 70vh;
+        max-height: 70vh;
         .popMatchWinner{
             .winnerTitle{
                 font-size: 35px !important;  
@@ -412,8 +420,7 @@ form{
                 .popFormLabels{
                     font-size: 18px;
                     margin-right: 5px;
-                }
-                
+                } 
             }
         }
        
@@ -425,7 +432,6 @@ form{
             border-radius: 5px;
             font-size: 20px;
             margin: 5px auto ;
-            animation: popup 200ms;
         }
        
         .buttonsWrapper{

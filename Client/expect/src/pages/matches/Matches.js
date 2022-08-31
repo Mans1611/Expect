@@ -149,7 +149,8 @@ const Matches = () => {
                                         else { return <Expected expected = {true}  key={key} match ={value} userExpect = {
                                             userExpections.find((expect)=> expect.matchId === value.matchId)
                                         }/>};
-                                    }) : 
+                                    }) 
+                                    : 
                                         // the same as above but for phone component
                                         data.map((value,index)=>{
                                             return <MatchCardPhone timeUp ={timeUp} setTimeUp = {setTimeUp} key={index} match = {value} userExpect = {

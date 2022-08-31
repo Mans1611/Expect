@@ -1,8 +1,9 @@
 import express from 'express';
 import verifyAdmin from '../middleware/verifyAdmin.js';
+import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
 import Country from '../models/Country.js';
 import Expects from '../models/Expects.js';
-
+import VerifyJWT from '../middleware/verifyJWT.js'
 import Matches from '../models/Matches.js';
 import playerToExpect from '../models/PlayersToExpect.js';
 import Teams from '../models/Teams.js';
@@ -104,9 +105,18 @@ statistics.get('/topusers',async(req,res)=>{
         {$sort : {"roundPoints" : -1}},
     ]);
     res.send(topUsers)
-
-
 })
+statistics.get('/topusersinmatch/:matchId',VerifyJWT,async(req,res)=>{
+    const {matchId} = req.params;
+    const topUsers = await Expects.aggregate([
+        {$unwind : "$expects"},
+        {$match : {"expects.matchId" : matchId}},
+        {$sort : {"roundPoints" : -1}},
+        {$project : {_id : 0}}
+    ]);
+    res.send(topUsers)
+})
+
 statistics.get('/gettotal',async(req,res)=>{
     const totalUsers = await User.find().count();
     const totalTeams = await Teams.find().count();

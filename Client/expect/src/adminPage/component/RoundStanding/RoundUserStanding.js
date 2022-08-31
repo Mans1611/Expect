@@ -38,13 +38,14 @@ const RoundUserStanding = ({selectedRound,users}) => {
     
   )
 }
-const RoundUserRow = ({order,user})=>{
+export const RoundUserRow = ({order,user,matchStanding})=>{
+    
     return(
         <div className='users-row'>
           <div className='row round'>
               <span className="field">{order}</span>
-              <span className="field">{user._id}</span>
-              <span className="field">{user.roundPoints}</span>
+              <span className="field">{matchStanding ? user.userName : user._id}</span>
+              <span className="field">{matchStanding ? user.expects.userPoints : user.roundPoints}</span>
           </div>
       </div>
     )

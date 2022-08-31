@@ -12,7 +12,7 @@ import PopExpectCard from '../../popmatchcard/PopExpectCard';
 import { useNavigate } from 'react-router-dom';
 
 const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
-    document.getElementsByTagName("body")[0].style.overflow = 'visible'; 
+    document.body.style.overflow = 'visible'; 
     const [pop,setPop] = useState(false);
     const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
@@ -41,7 +41,7 @@ const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
         </div>
         <div className="middle">
 
-            {timeUp ? match.fullTime ? "FT" : <Minute min = {min}  setMin = {setMin} matchTime={match.matchTime}/> : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/> }
+            {timeUp ? match.fullTime ? "FT" : <Minute halfsTime={match.time} min = {min}  setMin = {setMin} matchTime={match.matchTime}/> : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/> }
 
         </div>
         <div className="countryWrapper">

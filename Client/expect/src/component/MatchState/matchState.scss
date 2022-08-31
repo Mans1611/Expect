@@ -214,7 +214,7 @@
 @media (min-width : 370px) and (max-width : 490px) {
  .popMatchContainer{
     width: 90% !important;
-    height: 80vh !important;
+    max-height: 80vh !important;
     .CloseIcon{
         font-size: 30px;
     }

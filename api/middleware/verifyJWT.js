@@ -9,7 +9,6 @@ const verify = (req,res,next)=>{
     if(!token){
         return res.status(404).json({msg:"token is not found"});
     }
-    console.log(token);
     try{
         jwt.verify(token,process.env.JWT,(err,user)=>{
             if(err){
