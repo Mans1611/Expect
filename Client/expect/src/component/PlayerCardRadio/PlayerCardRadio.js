@@ -5,7 +5,6 @@ export default function PlayerCardRadio({player,countryOrder,auth,index}) {
   const [showPlayerState,setShowState] = useState(false);
   return (
     <>
-     
       <div  className="radioContaineter">
           <input onClick={()=>setShowState(true)} value={index}  type="radio" name={countryOrder}  id= {player.playerName} />
           <label  htmlFor={player.playerName}>

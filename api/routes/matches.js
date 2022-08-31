@@ -4,7 +4,7 @@ import Matches from '../models/Matches.js';
 import addingPointsPlayer from './utilis/addingPointsPlayers.js';
 import TransferingPointsToCountry from './utilis/TransferingPointsToCountry.js';
 import SessionVerification from "../middleware/sessionVerify.js";
-
+import verifyAdmin from '../middleware/verifyAdmin.js';
 
 
 const matches = express.Router();
@@ -73,10 +73,9 @@ matches.get('/match/',SessionVerification,async(req,res)=>{
 })
 
 
-matches.post('/addgame', async(req,res)=>{
+matches.post('/addgame',verifyAdmin ,async(req,res)=>{
     const {firstCountry,secondCountry} = req.body;
     const votes = 0;
-    
     /* 
         in this code we just assign to zero  votes varibale to each player 
         in the beginning of each match in order to make calculation based
@@ -168,6 +167,7 @@ matches.put('/editmatch/:matchID',async (req,res)=>{
             match = await addingPointsPlayer(updatedPlayer_1,match.firstCountry.countryName,match);
             match.states.push(updatedPlayer_1);
         }
+        
         if(updatedPlayer_2){
             match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
             match.states.push(updatedPlayer_2);
@@ -222,7 +222,7 @@ matches.put('/fullTime/:matchId',async(req,res)=>{
 })
 
 
-matches.delete('/deletematch/:matchID',async (req,res)=>{
+matches.delete('/deletematch/:matchID',verifyAdmin,async (req,res)=>{
     
    try{
         const match = await Matches.findOne({matchId:req.params.matchID});

@@ -9,6 +9,9 @@ import axios from 'axios';
 import TimeCounter from '../../../TimeCounter';
 import Minute from '../MatchCardComponent/Minute';
 import { MatchCardProvider , MatchStateCentral} from '../../../Context/MatchCardContext';
+import { AdminContext } from '../../Context/ProtectedAdmin';
+import { useNavigate } from 'react-router-dom';
+import Axios from '../../../Axios/axios';
 
 const MatchCardAdm = () => {
     const store = matchesStore();
@@ -18,10 +21,23 @@ const MatchCardAdm = () => {
     const [showDelete,setShowDelte] = useState(false);
     const [timeUp,setTimeUp] = useState(false); 
     const [min,setMin] = useState(null);
-    
+    const {token,setAdminAuth} = AdminContext();
+
+    const navigate = useNavigate();
+
+
     const handleDelte = async(matchId) =>{
         try{
-            const response = await axios.delete(`/matches/deletematch/${matchId}`);
+            const response = await Axios.delete(`/matches/deletematch/${matchId}`,{
+                headers : {
+                    token
+                }
+            });
+            
+            if(response.status >= 400){
+                setAdminAuth(false);
+                navigate('/adminpage/login')
+            }
             setShowDelte(false)
             store.setMatches(response.data.newMatches);
         }catch(err){

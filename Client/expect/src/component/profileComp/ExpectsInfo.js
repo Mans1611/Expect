@@ -8,7 +8,9 @@ const ExpectsInfo = ({user}) => {
     return ( 
         <div className="informationWrapper">
             <div className={`information ${isDark? 'dark': ''}`}>
+            <div className="informationHeader-Wrapper">
                 <h2 className="InformationHeader">Expect Info</h2> 
+            </div>
                 <div className="userInformation">
                     <h3 className="feild">Standing : <span className="value">{user[0].userStanding}</span></h3>
                     <h3 className="feild">TotalPoints : <span className="value">{user[0].userPoints}</span></h3>

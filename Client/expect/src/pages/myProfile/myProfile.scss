@@ -10,7 +10,6 @@
     span{
         color: #FFD600;
     }
-
 }
 
 .informationContainer{
@@ -25,14 +24,20 @@
     .information{
         background-color: #fff;
         position: relative;
-        .editIcon{
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-            color: #eee;
-            font-size: 30px;
-
+        .informationHeader-Wrapper{
+            background-color: #93002c ;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            .editWrapper{
+                text-align: end;
+                .editIcon{
+                    cursor: pointer;
+                    color: #eee;
+                    font-size: 25px;
+                }
+            }
+            
         }
         .userInformation{
             padding: 10px 0;
@@ -51,7 +56,10 @@
                     margin-right: 5px;
                     color: #999;
                 }
-
+                
+                &:last-child{
+                    border-bottom: none;
+                }
             }
             .value{
                 color: #FFD600;
@@ -79,11 +87,9 @@
         .InformationHeader{
             color: $gold;
             text-align: center;
-            background-color: $qatar;
-            font-size: 40px;
+            font-size: 35px;
             font-weight: 600;
-            padding: 5px 10px;
-            border-bottom: 4px solid #161616;
+            padding: 5px 0;
             
 
         }
@@ -120,15 +126,7 @@
         .information{
             background-color: #fff;
             position: relative;
-            .editIcon{
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                cursor: pointer;
-                color: #eee;
-                font-size: 25px;
-    
-            }
+            
             .userInformation{
                 padding: 10px 0;
                 text-align: center;
@@ -217,7 +215,20 @@
     color: #0f0;
     font-weight: 600;
 }
+@media screen and (max-width : 570px ){
+    .informationContainer{
+        display: flex;
+        height: fit-content;
+        flex-direction: column;
+        margin-top: 20px;
+        .informationWrapper {
+            width: 90% !important;
+            margin: 10px !important;
 
+        }
+    }
+
+}
 @media (min-width : 250px) and (max-width : 370px){
 
 .myProfile{
@@ -247,7 +258,6 @@
             span{
                 display: none ;
             }
-           
 
         }
         .userInformation{
@@ -283,11 +293,8 @@
                 }
             }
         }
-        
         width: 90%;
-      
         @include shadowMainStyle ;
-
         margin: auto;
         .InformationHeader{
             color: $gold;
@@ -306,4 +313,10 @@
         background-color: #aaa;
     }  
 }
+}
+.noContent{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+
 }

@@ -34,7 +34,8 @@
 }
 .matchStateContainer{
     text-align: center;
-    background-color: #373737;
+    background-color: #eeeeee;
+
 .matchStateTitle{
     font-size: 40px;
     padding: 5px;
@@ -160,7 +161,9 @@
    
     
 }
-
+&.dark{
+    background-color: #272727;
+}
 }
 .popMatchContainer{
     width: 50% ;

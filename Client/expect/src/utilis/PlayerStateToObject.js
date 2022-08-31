@@ -35,7 +35,7 @@ const PlayerStateToObject = (playerName,state,country,min,index)=>{
             break;
     
         default:
-            icon = "mansour";
+            icon = null;
             break;
     }
 

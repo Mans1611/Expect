@@ -38,7 +38,7 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
 
                 
                 </div>
-                <div className="matchStateContainer">
+                <div className={`matchStateContainer ${isDark && 'dark'}`}>
                     <h1 className="matchStateTitle">Match Satate</h1>
                     <div className="matchState">
                         {

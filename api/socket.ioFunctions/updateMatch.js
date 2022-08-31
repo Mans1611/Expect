@@ -17,7 +17,6 @@ const updateMatch = async(data)=>{
     if(match.fullTime){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
     }
-    console.log(match.fullTime);
     // so this code for uodating the time if the admin wants to
     
     //match.matchStatue = data.matchStatue ? data.matchStatue : match.matchStatue;
@@ -31,12 +30,14 @@ const updateMatch = async(data)=>{
     match.firstCountry.result = data.result1 ? data.result1 : match.firstCountry.result ;
     match.secondCountry.result = data.result2 ? data.result2 : match.secondCountry.result ;
 
+    // in the front end the admin dosn't have to choose both player so i put icon in fron end null so it mean it not required.
     
     if(updatedPlayer_1){
         match = await addingPointsPlayer(updatedPlayer_1,match.firstCountry.countryName,match);
         match.states.push(updatedPlayer_1);
     }
-    if(updatedPlayer_2){
+
+    if(updatedPlayer_2){ 
         match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
         match.states.push(updatedPlayer_2);
     }

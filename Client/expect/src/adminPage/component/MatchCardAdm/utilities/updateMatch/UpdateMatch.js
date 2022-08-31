@@ -59,26 +59,29 @@ const handleUpdate = async(e)=>{
     
 
     if(updatePlayerState){
-      const selcted_player_1 = document.querySelector('input[name="firstCountry"]:checked').id;
-      const selcted_player_2 = document.querySelector('input[name="secondCountry"]:checked').id;
-      const selcted_player_1_index = document.querySelector('input[name="firstCountry"]:checked').value;
-      const selcted_player_2_index = document.querySelector('input[name="secondCountry"]:checked').value;
-      const state_1Player = document.getElementById('firstCountryState').value;
-      const state_2Player = document.getElementById('secondCountryState').value;
-
+      const selcted_player_1 = document.querySelector('input[name="firstCountry"]:checked')?.id;
+      const selcted_player_2 = document.querySelector('input[name="secondCountry"]:checked')?.id;
+      const selcted_player_1_index = document.querySelector('input[name="firstCountry"]:checked')?.value;
+      const selcted_player_2_index = document.querySelector('input[name="secondCountry"]:checked')?.value;
+      const state_1Player = document.getElementById('firstCountryState')?.value;
+      const state_2Player = document.getElementById('secondCountryState')?.value;
+      
       // here i send the minute with the player to be able to show it in the state to the users
-      updatedPlayer_1 = PlayerStateToObject(selcted_player_1,state_1Player,"first",min,selcted_player_1_index)
+      if(selcted_player_1)
+        updatedPlayer_1 = PlayerStateToObject(selcted_player_1,state_1Player,"first",min,selcted_player_1_index)
       // i set a prop which is country just to aside each country in the state component
       // for example first country will be to the righ and the second will be to the left
-      updatedPlayer_2 =  PlayerStateToObject(selcted_player_2,state_2Player,"second",min,selcted_player_2_index)
+      
+      if(selcted_player_2)
+        updatedPlayer_2 =  PlayerStateToObject(selcted_player_2,state_2Player,"second",min,selcted_player_2_index)
+      
     }
-    
     try{
       socket.emit('updatingMatch',{
         result1 : country_1_result,
         result2 : country_2_result,
         updatedPlayer_1 ,
-        updatedPlayer_2 ,
+        updatedPlayer_2    ,
         matchId: match.matchId,
         fullTime : false,
         matchTime : updateMatchTime,

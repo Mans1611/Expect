@@ -13,8 +13,14 @@ const MyProfile = () => {
     const {userName} = useParams();
     const [user,setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const {isDark,userGlob} = globalUser();
+    
     useEffect(()=>{
-        return async()=>{
+
+        let isSubscribe = true ;
+
+        const fetchUser = async()=>{
             try{
                 // it is important to note that we are reurning array from this route.
                 const response = await Axios.get(`/users/profile/${userName}`);  
@@ -24,10 +30,14 @@ const MyProfile = () => {
             catch(err){
                 console.log(err);
             }
-    }
+        }
+
+        if(isSubscribe) fetchUser();
+
+        return ()=> isSubscribe = false;
+
 },[])
-        
-    const {isDark} = globalUser();
+    
     return ( loading ? <Loading/> : 
               <div className={`myProfile ${isDark?'dark':null}`}>
                     <h1 className="profileTitle"><span>{userName}</span> Profile</h1>

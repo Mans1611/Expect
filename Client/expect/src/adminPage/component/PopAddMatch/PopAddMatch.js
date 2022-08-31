@@ -7,8 +7,11 @@ import axios from 'axios';
 import CountryPop from '../countryPop/CountryPop';
 import AddIcon from '@mui/icons-material/Add';
 import { matchesStore } from '../../Context/matchesContext';
+import Axios from '../../../Axios/axios';
+import { AdminContext } from '../../Context/ProtectedAdmin';
+import { useNavigate } from 'react-router-dom';
 const PopAddMatch = ({showPop,setShowPop}) => {
-  document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
   const hidePop = (e)=>{
       if(e.target.className === 'popaddMatch'){
         setShowPop(false);
@@ -20,17 +23,26 @@ const PopAddMatch = ({showPop,setShowPop}) => {
   const [secondCountry,setSecondCountry] = useState(null);
   const [showCountry,setShowCountry] = useState(false);
   const [round,setRound] = useState('Group Stage Round-1');
+  
+  const {token,setAdminAuth} = AdminContext()
   const store = matchesStore();
+
+  const navigate = useNavigate()
   useEffect(()=>{
-    return async ()=>{
+    let subscribe = true ; 
+
+    const fetchCountries = async()=>{
       try{
-        const response = await axios.get('/country/countries');
-        setCountries(response.data);
+        const {data} = await Axios.get('/country/countries');
+        setCountries(data);
         setLoading(false);
       }catch(err){
         console.log(err);
       }
     }
+    if(subscribe) fetchCountries();
+
+    return ()=> subscribe = false;
   },[])
 
   const handleSelect = (e)=>{
@@ -70,12 +82,22 @@ const PopAddMatch = ({showPop,setShowPop}) => {
       const matchTime = `${date[1]},${date[2]},${date[0]},${time}`;
       
       try{
-        await axios.post('/matches/addgame',{
+        const Response = await Axios.post('/matches/addgame',{
           matchTime,
           firstCountry,
           secondCountry,
           round 
+        },{
+          headers : {
+            token
+          }
         })
+
+        if(Response.status >= 400) {
+          setAdminAuth(false)
+          return navigate('/adminpage/login')
+        }
+
         const response = await axios.get('/matches/getmatches')
         store.setMatches(response.data);
         setShowPop(false);

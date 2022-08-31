@@ -13,9 +13,9 @@ export default async function AddingPointsToUSers(matches,userExpections){
                 // userPoints variable is for the points in this expect not for all expects
                 let matchPoints = 0;
                 if(match.matchId === userExpections[i].matchId){
-                   matchPoints += match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints;
+                   matchPoints += Math.floor(match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints * 1.5 ) ;
                    matchPoints += match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints;  
-                   matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints;
+                   matchPoints += Math.floor(match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints * 1.5);
                    matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints;
                      // so this for the winner points it will be calculated just if the match ends (fullTime)
 

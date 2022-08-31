@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './updatePI.scss';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -12,7 +12,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const UpdatePersonalInformation = ({PI,setShow}) => {
-    document.getElementsByTagName("body")[0].style.overflow = "hidden"; // to disable scrollbar
+    //document.body.style.overflow = "hidden"; // to disable scrollbar
     const cookie = new Cookies();
     const [showUserName,setShowUserName] = useState(false);
     const [showEmail,setShowEmail] = useState(false);
@@ -21,6 +21,7 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
     const navigate = useNavigate();
     const state = {msg : '',showMsg : false }
     const {userGlob,setUserGlob} = globalUser();
+    
     const ReducerFn = (state,action)=>{
         switch(action.type){
             case 'passwords-Dont-Match' :
@@ -33,6 +34,15 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
                 return {msg : action.payload , showMsg : true};
         }
     }
+
+    useEffect(()=>{
+       
+        let fixedpage = true
+        if(fixedpage)  document.body.style.overflow = "hidden";
+
+        return ()=> fixedpage = false;  // to disable scrollbar
+    },[])
+
     const [stateMsg,dispatch] = useReducer(ReducerFn,state);
 
     const HandleUpdate = async(e)=>{
