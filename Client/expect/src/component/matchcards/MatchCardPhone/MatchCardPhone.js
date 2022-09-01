@@ -61,7 +61,7 @@ const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
 
     <div className="ExpectPhoneWrap">
        {timeUp ?   <>
-            <button onClick={()=>setStatePop(true)}> See State </button> 
+            <button onClick={()=>setStatePop(true)}>Match State</button> 
             {match.expected && <button onClick={()=>setpopShowExpect(true)}> My Expect </button>}
             </>
             :

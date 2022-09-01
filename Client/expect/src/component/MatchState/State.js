@@ -34,6 +34,8 @@ const  State = ({state,auth,userExpect,index,matchId})=> {
                         <img src={state.icon} className="icon" />
                     </div>
                    <p>{state.playerName} {state.state}</p>
+                   {expected && <span className="factor">X1.5</span> }
+                   {secondExpect &&  <span className="factor">X1</span> }
                 </div>
                 <div className="circleWrapper">
                     <div className="circle">{state.min}</div>     
@@ -57,6 +59,8 @@ const  State = ({state,auth,userExpect,index,matchId})=> {
                     <div className="circle">{state.min}</div>     
                 </div>
                     <div className={`state second ${expected ? 'expected':''} ${secondExpect ? 'secondExpect':''}`}>
+                        {expected && <span className="factor">X1.5</span> }
+                        {secondExpect &&  <span className="factor">X1</span> }
                         <p>{state.playerName} {state.state}</p>
                         <div className="icon-wrapper">
                             <img src={state.icon} className="icon" />

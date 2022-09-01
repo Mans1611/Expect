@@ -6,6 +6,7 @@ import MyTeam from './MyTeam/MyTeam';
 import CreateJoinTeam from './JoinCrateTeam/CreateJoinTeam';
 import { globalUser } from '../../Context/HomeContext';
 import Axios from '../../Axios/axios';
+import TeamStanding from '../../adminPage/component/Standing/TeamStanding';
 export const TeamContext = createContext(null);
 
 const TeamComponent = () => {
@@ -55,21 +56,22 @@ const TeamComponent = () => {
         }}>
 
         <div className={`TeamComponent-containetr ${isDark ? 'dark' : null}`}>
-        <div className="TeamComponent">
-            <div className="teamNavbar">
-                <ul>
-                    <Link to='myTeam'><li id='myTeam' className='navbar-item first'> My Team</li></Link>
-                    <Link to='teamjoin'> <li id ='teamjoin' className='navbar-item second'>Create-Join Team</li></Link>
-                </ul>
-            </div>
-            <div className="teamContent">
-                <Routes>
-                    <Route path="myTeam" element={<MyTeam />} />
-                    <Route path="teamjoin" element={ <CreateJoinTeam  />} />
-                </Routes>
-            </div>
 
-        </div>
+            <div className="TeamComponent">
+                <div className="teamNavbar">
+                    <ul>
+                        <Link to='myTeam'><li id='myTeam' className='navbar-item first'> My Team</li></Link>
+                        <Link to='teamjoin'> <li id ='teamjoin' className='navbar-item second'>Create-Join Team</li></Link>
+                    </ul>
+                </div>
+                <div className="teamContent">
+                    <Routes>
+                        <Route path="myTeam" element={<MyTeam />} />
+                        <Route path="teamjoin" element={ <CreateJoinTeam  />} />
+                    </Routes>
+                </div>
+            </div>
+            <TeamStanding />
         </div>
     </TeamContext.Provider>
   )

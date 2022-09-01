@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Axios from '../../../Axios/axios'
 import SmallLaoding from '../../../component/loading/small.loading/smallLoading'
+import MatchState from '../../../component/MatchState/MatchState'
 
 const RoundUserStanding = ({selectedRound,users}) => {
     
@@ -38,17 +39,31 @@ const RoundUserStanding = ({selectedRound,users}) => {
     
   )
 }
-export const RoundUserRow = ({order,user,matchStanding})=>{
+export const RoundUserRow = ({order,user,matchStanding,match,userExpect})=>{
     
+    const [showMatchState,setShowMatchState] = useState(false);
+    const handleShowState = ()=>{
+        if(matchStanding){
+            setShowMatchState(true);
+        }
+    }
     return(
-        <div className='users-row'>
-          <div className='row round'>
-              <span className="field">{order}</span>
-              <span className="field">{matchStanding ? user.userName : user._id}</span>
-              <span className="field">{matchStanding ? user.expects.userPoints : user.roundPoints}</span>
-          </div>
-      </div>
+        <>
+            <div className='users-row' onClick={handleShowState}>
+                <div className='row round'>
+                    <span className="field">{order}</span>
+                    <span className="field">{matchStanding ? user.userName : user._id}</span>
+                    <span className="field">{matchStanding ? user.expects.userPoints : user.roundPoints}</span>
+                </div>
+            </div>
+            {showMatchState && match && <MatchState match={match} 
+                                            userExpect = {userExpect} 
+                                            setPop = {setShowMatchState}
+                                            expected = {true}
+                                            />}
+        </>
     )
 }
+
 
 export default RoundUserStanding

@@ -17,10 +17,25 @@
                     background: linear-gradient(90deg, rgb(0, 72, 86) 39%, rgba(0,232,213,1) 100%);
         
                 }
-            
             }
         }
     }
+    .matchCardStart{
+        button{
+                &.expetedButton { 
+                background: #007bf1 ;
+                margin: 1px 3px;
+                padding: 5px;
+                font-size: 26px;
+                &:hover{
+                    background : #fff;
+                    color: #272727;
+                    
+                }
+            }
+        }
+    }
+
     .popMatchFullPage{
         .popMatchContainer {
             .matchcardHeader{

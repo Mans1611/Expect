@@ -7,7 +7,7 @@ import { MatchStateCentral } from '../../Context/MatchCardContext';
 
 const MatchState = ({match,setPop,userExpect,expected}) => {
     
-    document.getElementsByTagName("body")[0].style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     
     const {isDark} = globalUser();
     const hidePop = (e)=>{

@@ -106,15 +106,18 @@ statistics.get('/topusers',async(req,res)=>{
     ]);
     res.send(topUsers)
 })
-statistics.get('/topusersinmatch/:matchId',VerifyJWT,async(req,res)=>{
+
+statistics.get('/topusersinmatch/:matchId',async(req,res)=>{
     const {matchId} = req.params;
     const topUsers = await Expects.aggregate([
         {$unwind : "$expects"},
         {$match : {"expects.matchId" : matchId}},
-        {$sort : {"roundPoints" : -1}},
+        {$sort : {"expects.userPoints" : -1}},
         {$project : {_id : 0}}
     ]);
-    res.send(topUsers)
+    const match = await Matches.findOne({matchId});
+
+    res.status(200).json({topUsers,match});
 })
 
 statistics.get('/gettotal',async(req,res)=>{

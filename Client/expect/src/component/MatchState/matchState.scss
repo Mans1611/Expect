@@ -34,7 +34,7 @@
 }
 .matchStateContainer{
     text-align: center;
-    background-color: #eeeeee;
+    background-color: #eeeeee !important;
 
 .matchStateTitle{
     font-size: 40px;
@@ -88,6 +88,10 @@
             color: #fff;
             font-size: 24px;
             text-align: center;
+            .factor{
+                color : #272727;
+                font-size: 23px;
+            }
             
         }
         .secondExpect{
@@ -162,7 +166,7 @@
     
 }
 &.dark{
-    background-color: #272727;
+    background-color: #272727 !important;
 }
 }
 .popMatchContainer{

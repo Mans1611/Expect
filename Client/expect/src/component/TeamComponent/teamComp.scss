@@ -3,6 +3,8 @@
 .TeamComponent-containetr{
     padding:  30px 0  ;
     background-color:transparent ;
+    display: flex;
+
     .teamNavbar{
         margin-left: 30px;
         ul{
@@ -138,7 +140,28 @@
             }
         }
     }
-
+    .teamStanding{
+        margin: auto;
+        .team{
+            padding: 5px;
+            color: #ffffff;
+            background-color: #fee504;
+        }
+        .standing-header{
+            &.teams{
+                background-color: #eeeeee !important;
+                border-bottom: 4px solid #111;
+            }
+        }
+        .row{
+            &.teams:not(.standing-header){
+                height : 40px;
+                background-color: #eeeeee !important;
+                color: #171717;
+                font-size: 20px;
+            }
+        }
+    }
 
     /* dark mode*/
 
@@ -221,7 +244,27 @@
 
             }
         }
-                
+        .teamStanding{
+            .team{
+                color: #272727;
+                background-color: #fee504;
+            }
+            .standing-header{
+                &.teams{
+                    background-color: #171717 !important;
+                    border-bottom: 4px solid #eeeeee;
+                }
+            }
+            .row{
+                &.teams:not(.standing-header){
+                    background-color: #272727 !important;
+                    color: #ffffff;
+                    &.highligetd{
+                        background-color: #fee504b2;
+                    }
+                }
+            }
+        }      
 
     }
 

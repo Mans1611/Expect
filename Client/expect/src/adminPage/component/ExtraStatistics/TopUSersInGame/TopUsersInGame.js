@@ -7,11 +7,11 @@ import {AdminContext} from '../../../Context/ProtectedAdmin';
 const TopUsersInGame = () => {
 
     const [users,setUsers] = useState([]);
+    const [match,setMatch] = useState(null);
     const [msg,setMsg] = useState(null);
     const matchIdInput = useRef(null)
     const { token } = AdminContext();
-    console.log(token);
-
+  
     const fetchUsers = async()=>{
         const matchId = matchIdInput.current.value.trim();
         if(! matchIdInput.current.value || matchId === '' )
@@ -22,8 +22,8 @@ const TopUsersInGame = () => {
                     token
                 }
             })
-            setUsers(data);
-            console.log(data);
+            setUsers(data.topUsers);
+            setMatch(data.match)
         }catch(err){
             console.log(err);
         }
@@ -44,7 +44,13 @@ const TopUsersInGame = () => {
         {
             users.length === 0 ? <div className="noContent"></div> 
              :
-             users?.map((user,index) => <RoundUserRow matchStanding={true} order={index+1} user = {user} />)
+             users?.map((user,index) => <RoundUserRow 
+                                        matchStanding={true} 
+                                        order={index+1} 
+                                        user = {user} 
+                                        userExpect = {user.expects}
+                                        match = {match}
+                                        />)
         }
 
     </div>

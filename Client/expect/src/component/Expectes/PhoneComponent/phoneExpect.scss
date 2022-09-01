@@ -131,15 +131,16 @@
     }
     .ExpectPhoneWrap{
         padding: 5px;
+        display: flex;
         .button-wrapper{
             display: flex;
 
         }
         button{
-        width:fit-content ;
+            width:fit-content ;
             padding: 2px 5px ;
             margin: 0 5px ;
-            background-color: #d1ae00;
+            background-color: #007bf1;
             color: #fff ;
             margin: auto;
             font-weight: 600;

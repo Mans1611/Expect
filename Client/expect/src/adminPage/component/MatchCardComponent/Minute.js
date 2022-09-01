@@ -43,31 +43,17 @@ const Minute = ({matchTime,min,setMin,halfsTime})=> {
         if(halfsTime.secondHalf_start){
             const now = new Date().getTime();
             const Second_Half_StartTime = new Date(halfsTime.secondHalf_start).getTime();
-            console.log(Second_Half_StartTime);
-            const passed = Math.floor((now- Second_Half_StartTime)/(MINUTE)+45);
+            const passed = Math.floor((now- Second_Half_StartTime)/(MINUTE)+46);
             setMin(passed);
         }
         else{
             const now = new Date().getTime();
-         
             const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
             
             setMin(passed);
         }
 
-        // if(min >= 1 ) {
-        //     try{
-        //         store.dispatch({type : "Started"});
-        //         socket.emit('updatingMatch',{
-        //             matchStatue : "GoingOn",
-        //             matchId : store.match.matchId
-        //         })
-        //     }   
-        //     catch(err){
-        //         console.log(err);
-        //     }    
-            
-        // }  
+       
     },[])
 
 

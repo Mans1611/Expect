@@ -44,9 +44,7 @@ const MathchCard = ({match}) => {
                     <div className="round">{match.round}</div>
                 </div>
 
-                { !timeUp &&
-                <TimeCounter setTimeUp = {setTimeUp}  matchTime={match.matchTime}/>
-                }
+                { !timeUp && <TimeCounter setTimeUp = {setTimeUp}  matchTime={match.matchTime}/>}
 
                 {/* if the time is up the timer will display and you cant press the Expect button  */}
                 {!timeUp && 
@@ -68,6 +66,7 @@ const MathchCard = ({match}) => {
             {timeUp &&
                     <div className="matchCardStart">
                         <button onClick={()=> setPop(true)} className='matchCardbutton'>Match State</button>
+                        
                     </div>
             }
             </div>

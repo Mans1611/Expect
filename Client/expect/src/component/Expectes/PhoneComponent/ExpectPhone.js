@@ -54,12 +54,12 @@ const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
         }
         <div className="ExpectPhoneWrap">
            {timeUp ?
-                <button onClick={()=>setStatePop(true)}>Expect Points</button> : 
-               
-                        <div className='button-wrapper'>
-                            <button onClick={()=>setPopDelete(true)} className='danger'> Delete Expect </button>
-                            <button onClick={()=>setPop(true)}> Edit Expect </button>
-                        </div>
+                <button onClick={()=>setStatePop(true)}>Expect Points</button> 
+                : // else condition. 
+                <div className='button-wrapper'>
+                    <button onClick={()=>setPopDelete(true)} className='danger'> Delete Expect </button>
+                    <button onClick={()=>setPop(true)}> Edit Expect </button>
+                </div>
             }
         </div>
         {pop && <PopMatchCard userExpect={userExpect} match={match}  setPop = {setPop} />}
