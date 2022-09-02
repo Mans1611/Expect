@@ -12,6 +12,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const UpdatePersonalInformation = ({PI,setShow}) => {
+
     //document.body.style.overflow = "hidden"; // to disable scrollbar
     const cookie = new Cookies();
     const [showUserName,setShowUserName] = useState(false);
@@ -19,19 +20,21 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
     const [showPhone,setShowPhone] = useState(false);
     const [showPass,setShowPass] = useState(false);
     const navigate = useNavigate();
-    const state = {msg : '',showMsg : false }
-    const {userGlob,setUserGlob} = globalUser();
+    const state = {msg : '',showMsg : false , msgType : 'danger' }
+    const {userGlob, setUserGlob, isDark} = globalUser();
     
     const ReducerFn = (state,action)=>{
         switch(action.type){
             case 'passwords-Dont-Match' :
-                return { msg : "Your New Passswords Do Not match" , showMsg : true };
+                return { msg : "Your New Passswords Do Not match" , showMsg : true, msgType : 'danger' };
             case 'hide-Msg' : 
                 return {msg : '',showMsg: false};
             case 'Empty-Feild':
-                return {msg:action.payload, showMsg :true};
+                return {msg:action.payload, showMsg :true,msgType : 'danger' };
             case 'Server-Msg' :
-                return {msg : action.payload , showMsg : true};
+                return {msg : action.payload , showMsg : true,msgType : 'danger' };
+            case 'success update' : 
+                return {msg : action.payload, showMsg : true,msgType : 'green' } ; 
         }
     }
 
@@ -91,17 +94,22 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
             const response = await axios.put(`/users/edituser/${userGlob}`,
                 {payload : JSON.stringify(updatedDetails)},
                 {headers : {
-                    token 
+                    token ,
+                    userGlob : userGlob
                 }}
             ); 
             if(response.status === 203) 
                 dispatch({type : "Server-Msg", payload : response.data})
             else if(response.status === 204) 
-                navigate('/register/signin')
+                navigate('/register/signin');
             else if(response.status === 201){
                 setUserGlob(response.data.userName); // since it succesfully updated i will change the user Name
-                setShow(false)
+                dispatch({type : 'success update',payload : "Updated Successffully, you will be navigated to Login page..."});
+                setTimeout(()=>{
+                    return navigate('/register/signin');
+                },1200)
                 cookie.set("token", response.headers.token);
+
             }
         }catch(err){
             console.log(err);
@@ -111,34 +119,17 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
 
 
   return (
-    <div className='updatePersonalPopup'>
+    <div className={`updatePersonalPopup ${isDark ? 'dark' : ''}`}>
         <div className="updatePersonal-container">
             <CloseIcon className='close-icon' onClick={()=>setShow(false)}/>
             <div className="header">
                 <ManageAccountsIcon  />
                 <h1>Update Information</h1>
             </div>
+
             <h3>Select Which Field To Change</h3>
             <form>
-                
-                <div className="inputContainer">
-                    <span onClick={()=>setShowUserName(true)} 
-                          className={`showField }`}>
-                            {!showUserName && <>Change User Name <ModeEditIcon/></> }
-
-                    </span>
-                    { showUserName &&
-                        <>
-                            <span className='fieldHeader'>User Name {showUserName && <CloseIcon className='closeIcon' 
-                                    onClick = {()=>{setShowUserName(false);dispatch({type : 'hide-Msg'})}}/>}</span>
-
-                            <label htmlFor="update-userName">
-                                <input placeholder={PI.userName} type="text" name="userName" id="update-userName" />
-                            </label>
-                        </>
-                    }
-                    </div>
-                <div className="inputContainer">
+            <div className="inputContainer">
                     <span onClick={()=>setShowEmail(true)} 
                           className={`showField }`}>
                             {!showEmail && <> Change Email <ModeEditIcon/></>}
@@ -153,19 +144,7 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
                         </>   
                     }
                 </div>
-                <div className="inputContainer"> 
-                    <span onClick={()=>setShowPhone(true)} 
-                          className={`showField}`}>
-                            {!showPhone && <>Change Phone Number<ModeEditIcon/></>}</span>
-                    { showPhone &&
-                        <>
-                            <span className='fieldHeader'>Phone Number {showPhone && <CloseIcon className='closeIcon' onClick = {()=>setShowPhone(false)}/>}</span>
-                            <label htmlFor="update-PhoneNumber">
-                                <input placeholder={PI.phoneNumber} minLength={8} maxLength={8} type="number" name="PhoneNumber" id="update-PhoneNumber" />
-                            </label>
-                        </>
-                    }
-                </div>
+
                 <div className="inputContainer"> 
                     <span onClick={()=>setShowPass(true)} 
                           className={`showField }`}>
@@ -191,8 +170,41 @@ const UpdatePersonalInformation = ({PI,setShow}) => {
                     }
                 </div>
 
+                <div className="inputContainer">
+                    <span onClick={()=>setShowUserName(true)} 
+                          className={`showField }`}>
+                            {!showUserName && <>Change User Name <ModeEditIcon/></> }
+
+                    </span>
+                    { showUserName &&
+                        <>
+                            <span className='fieldHeader'>User Name {showUserName && <CloseIcon className='closeIcon' 
+                                    onClick = {()=>{setShowUserName(false);dispatch({type : 'hide-Msg'})}}/>}</span>
+                            <label htmlFor="update-userName">
+                                <input placeholder={PI.userName} type="text" name="userName" id="update-userName" />
+                            </label>
+                        </>
+                    }
+                    </div>
+                   
+                
+                <div className="inputContainer"> 
+                    <span onClick={()=>setShowPhone(true)} 
+                          className={`showField}`}>
+                            {!showPhone && <>Change Phone Number<ModeEditIcon/></>}</span>
+                    { showPhone &&
+                        <>
+                            <span className='fieldHeader'>Phone Number {showPhone && <CloseIcon className='closeIcon' onClick = {()=>setShowPhone(false)}/>}</span>
+                            <label htmlFor="update-PhoneNumber">
+                                <input placeholder={PI.phoneNumber} minLength={8} maxLength={8} type="number" name="PhoneNumber" id="update-PhoneNumber" />
+                            </label>
+                        </>
+                    }
+                </div>
+               
+
                 { stateMsg.showMsg && 
-                    <div className="msg-container">
+                    <div className={`msg-container ${stateMsg.msgType}`}>
                             {stateMsg.msg}
                     </div>
                 }

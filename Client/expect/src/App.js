@@ -30,6 +30,7 @@ import MyTeam from './component/TeamComponent/MyTeam/MyTeam';
 import CreateJoinTeam from './component/TeamComponent/JoinCrateTeam/CreateJoinTeam';
 import ProtectedAdminPage from './Context/ProtectedAdminPage';
 import UsersStanding from './adminPage/pages/UsersStanding/UsersStanding';
+import WhatIsExpect from './pages/WhatIsExpect/WhatIsExpect';
 export const ThemeContext = createContext(true);
 
 
@@ -56,6 +57,7 @@ const  App = ()=> {
           
       {/* Regestirng pages */}
         <Route path='/welcome' element={<Welcome/>}></Route>
+        <Route path='/whatisexpect' element={<WhatIsExpect/>}></Route>
         <Route path="/register" element = {<Register/>}>
           <Route path='signin' element = {<SignIn/>}/>
           <Route path='signup' element = {<SignUp/>}/> 

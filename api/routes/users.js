@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Country from '../models/Country.js';
 import verifyAdmin from '../middleware/verifyAdmin.js';
+import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
 const users = express.Router();
 
 users.get('/standing',async(req,res)=>{
@@ -57,7 +58,7 @@ users.get("/profile/:userName",async(req,res)=>{
     }
 })
 
-users.put('/edituser/:userName', async(req,res)=>{
+users.put('/edituser/:userName',VerifyUserJWT, async(req,res)=>{
     let Updated_Data = JSON.parse(req.body.payload); 
     let user = await User.findOne({userName : req.params.userName});
     let token = req.headers.token;

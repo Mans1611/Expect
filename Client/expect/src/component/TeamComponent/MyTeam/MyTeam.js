@@ -1,6 +1,6 @@
+import './MyTeam.scss';
 import React, {useContext, useEffect, useState} from 'react'
 import ClipBoardCopy from '../../CreateTeam/ClipBoard';
-import './MyTeam.scss';
 import TeamDetail from './TeamDetail/TeamDetail';
 import TeamTable from './TeamTable/TeamTable';
 import { globalUser } from '../../../Context/HomeContext';

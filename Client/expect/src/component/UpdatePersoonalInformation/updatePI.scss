@@ -1,10 +1,11 @@
 @import '../../.mainStyle.scss';
 
 .updatePersonalPopup{
+
     @include popupContainer;
     .updatePersonal-container{
         @include scrollbar-style;
-        background-color: #373737;
+        background-color: #ffffff;
         border-radius: 10px;
         width: 600px;
         max-height: 500px;
@@ -13,20 +14,27 @@
         height: fit-content;
         .close-icon{
             @include Top-Right-Icon;
+            color: #111111;
+            font-size: 35px;
         }
         .header{
-            background-color: #2a2a2a;
+            background-color: #e2e2e2;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 10px 5px;
-            color: #ddd;
+            color: #111111;
             svg{
                 font-size: 60px;
+                color: #111111;
             }
             h1{
                 font-size: 35px;
             }
+        }
+        h3{
+            padding: 10px;
+            font-size: 30px;
         }
         form{
             padding:10px 20px;
@@ -34,9 +42,10 @@
                 margin: 10px;
                 display: flex;
                 flex-direction: column;
-                color: #eee;
+                color: #373737;
                 text-align: start;
-                font-size: 25px;
+                font-size: 30px;
+                text-align: center;
                 .showField{
                     cursor: pointer;
                 }
@@ -51,31 +60,41 @@
                     }
                 }
                 input{
-                    width: 100%;
+                    width: 70%;
                     height: 40px;
                     margin: auto;
-                    background-color: #717171;
+                    background-color: #eeeeee;
                     outline: none;
                     border: none;
                     padding: 5px 10px;
-                    color: #fff;
+                    color: #000000;
                     font-size: 24px;
                     border-radius: 5px;
+
+                    &:focus{
+                        border: 3px solid #f04;
+                    }
                 }
                 input::-webkit-input-placeholder{
-                    color: rgba(221, 221, 221, 0.404);
+                    color: #575757;;
                 }
             }
         .msg-container{
             width : 60%;
             padding: 3px;
-           
-            background-color: rgb(255, 87, 132);
-            border-left: 10px solid #f01;
             border-radius: 5px;
             color: #fff;
             font-size: 24px;
             margin: 5px auto;
+            &.danger{
+                background-color: rgb(255, 87, 132);
+                border-left: 10px solid #f01;
+            }
+            &.green{
+                background-color: rgba(4, 218, 0, 0.795);
+                border-left: 10px solid #00821c;
+            }
+
         }
         .button-wrapper{
             button{
@@ -97,5 +116,53 @@
 
 
     }
-
+    // dark mode 
+    &.dark{
+        .updatePersonal-container{
+            background-color: #373737;
+            .header{
+                background-color: #2a2a2a;
+                color: #dddddd;
+                svg{
+                    font-size: 60px;
+                    color: #eeeeee;
+                }
+            }
+            .close-icon{
+                color: #ffffff;
+            }
+            form{
+                .inputContainer{
+                    color: #ffffff;
+                   
+                    
+                    input{
+                        background-color: #676767;
+                        color: #ffffff;
+                        
+    
+                        &:focus{
+                            border: 3px solid #f04;
+                        }
+                    }
+                    input::-webkit-input-placeholder{
+                        color: #eeeeee;;
+                    }
+                }
+            .button-wrapper{
+                button{
+                   
+                    background-color: #080;
+                    padding: 5px 10px;
+                    &:hover{
+                        background-color: #e7e7e7;
+                        color: #111111;
+    
+                    }
+                    
+                }
+            }
+            }
+        }
+    }
 }

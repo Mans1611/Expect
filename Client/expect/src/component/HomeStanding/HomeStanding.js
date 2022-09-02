@@ -14,7 +14,7 @@ const HomeStanding = () => {
 
     useEffect(()=>{
         return async()=>{
-            console.log(token);
+           
             const response = await axios.get('/users/standing',{
                 headers : {
                     token : token || cookie.get("token")

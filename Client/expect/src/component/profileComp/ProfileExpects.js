@@ -12,7 +12,7 @@ const ProfileExpects = ({userName}) => {
     const [loading,setLoading] = useState(true);
     const [expected,setExpected] = useState([])
     const [userExpections,setUserExpections] = useState([]);
-    const {isDark ,token} = globalUser();
+    const {isDark ,token,userGlob} = globalUser();
 
 
     useEffect(()=>{
@@ -44,7 +44,7 @@ const ProfileExpects = ({userName}) => {
 
     return ( 
         <div className={`userExpectContainer ${isDark? 'dark' : ''}`}>
-                <h1 className="profileTitle">Your Expects</h1>
+                <h1 className="profileTitle"> {userName === userGlob ? 'Your' : `${userName}'s`} Expects</h1>
                     {
                         loading? <SmallLaoding/> 
                         :
@@ -59,6 +59,7 @@ const ProfileExpects = ({userName}) => {
                                     return <PostMatchCard 
                                     key = {index}
                                     userExpect= {val} 
+                                    userName = {userName}
                                     setUserExpections = {setUserExpections} 
                                     match = {expected.find(match => match.matchId === val.matchId)} 
                                     />

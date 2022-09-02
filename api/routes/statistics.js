@@ -113,10 +113,10 @@ statistics.get('/topusersinmatch/:matchId',async(req,res)=>{
         {$unwind : "$expects"},
         {$match : {"expects.matchId" : matchId}},
         {$sort : {"expects.userPoints" : -1}},
-        {$project : {_id : 0}}
+        {$project : {_id : 0}},
+        {$limit : 10}
     ]);
     const match = await Matches.findOne({matchId});
-
     res.status(200).json({topUsers,match});
 })
 

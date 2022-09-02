@@ -82,7 +82,7 @@ $secondaryColor : #0000f4;
         right: 0;
         bottom: 0;
         left: 0;
-        z-index: 997;
+        z-index: 97;
         background-color: #272727d8;
     }
     .firstTitle{
@@ -101,7 +101,7 @@ $secondaryColor : #0000f4;
         padding: 50px 20px  10px;
         grid-template-columns: repeat(3,33.3%);
         position: relative;
-        z-index: 999;
+        z-index: 98;
         .card-wrapper{
             .step{
                 color: #fff;
@@ -294,7 +294,7 @@ svg{
             padding: 20px 10px  10px;
             grid-template-columns: repeat(1,100%);
             position: relative;
-            z-index: 999;
+            z-index: 9;
             margin-top: 20px;
             .card-wrapper{
                 &:hover{

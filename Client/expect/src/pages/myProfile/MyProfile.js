@@ -9,7 +9,7 @@ import Axios from '../../Axios/axios';
 import Loading from '../../component/loading/big.loading/Loading';
 
 const MyProfile = () => {
-    document.getElementsByTagName("body")[0].style.overflow = "visible"; // to disable scrollbar
+    document.body.style.overflow = "visible"; // to disable scrollbar
     const {userName} = useParams();
     const [user,setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -45,7 +45,7 @@ const MyProfile = () => {
                     <PersonalComp user = {user}/>
                     <ExpectsInfo user = {user} />
                     </div>
-                    <ProfileExpects userName = {userName}/>
+                    <ProfileExpects  userName = {userName}/>
                 </div>
      )
 }

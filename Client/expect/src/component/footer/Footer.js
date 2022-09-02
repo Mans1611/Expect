@@ -14,7 +14,7 @@ const Footer = () => {
             
             <div className="contentContainer">
                 <div className="contactUs">
-                    <Link to = '/home'>What Is The Expect</Link>
+                    <Link target="_blank" to = '/whatisexpect'>What Is The Expect</Link>
                     <Link to = '/home'>About Us</Link>
                     <Link to = '/home'>Contact Us</Link>
                     <div className="iconsContainer">
