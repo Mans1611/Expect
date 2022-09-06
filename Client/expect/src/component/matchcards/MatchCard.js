@@ -6,7 +6,7 @@ import TimeCounter from '../../TimeCounter';
 import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchResultComp';
 import MatchState from '../MatchState/MatchState';
 import { MatchCardProvider } from '../../Context/MatchCardContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const MathchCard = ({match}) => {
@@ -29,17 +29,21 @@ const MathchCard = ({match}) => {
             <>
             <div className={`matchCard ${isDark?'dark':null}`}>
                 <div className="matchcardHeader-wrapper">
-
                     <div className="matchcardHeader">
-                        <div className="matchCardCountry"> {/* country1.*/ }
-                            <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
-                            <span className='countryLabel'>{match.firstCountry.countryName}</span>
-                        </div>
+                        <Link to={`/country/${match.firstCountry.countryName}`}>
+                            <div className="matchCardCountry"> {/* country1.*/ }
+                                <img src={match.firstCountry.logo} alt="" className="matchCardCountryImg" />
+                                <span className='countryLabel'>{match.firstCountry.countryName}</span>
+                            </div>
+                        </Link>
+
                         <h2>VS</h2>
-                        <div className="matchCardCountry">
-                            <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
-                            <span className='countryLabel'>{match.secondCountry.countryName}</span>
-                        </div>
+                        <Link  to={`/country/${match.secondCountry.countryName}`}>
+                            <div className="matchCardCountry">
+                                <img src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="matchCardCountryImg" />
+                                <span className='countryLabel'>{match.secondCountry.countryName}</span>
+                            </div>
+                        </Link>
                     </div>
                     <div className="round">{match.round}</div>
                 </div>

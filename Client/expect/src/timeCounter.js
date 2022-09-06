@@ -52,8 +52,8 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
 
     return (
             <div className="matchCardCounter">
-                <span className="timeLeftLabel">Time Left:</span>
-                <span className="timeLeft">{(hours<10)? `0${hours}`: hours} : {(min<10)? `0${min}`: min} : {(sec<10)? `0${sec}`: sec}</span>
+                <span className="timeLeftLabel">Time Left :</span>
+                <span className="timeLeft"> {(hours<10)? `0${hours}`: hours} : {(min<10)? `0${min}`: min} : {(sec<10)? `0${sec}`: sec}</span>
             </div>
         
     )

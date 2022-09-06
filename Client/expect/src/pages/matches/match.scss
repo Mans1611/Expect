@@ -3,7 +3,7 @@
 
 .match{
     width: 100%;
-    height: fit-content;
+    min-height: 100vh;
     background-color: #d7d7d7;
     color: #222;
     transition: 300ms;

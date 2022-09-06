@@ -1,0 +1,24 @@
+.NextMatches{
+    width: 95%;
+    margin: auto;
+    .header{
+        >h1{
+            color: #171717;
+            text-align: center; 
+            background-color: #ffe100;
+            padding: 5px;
+            border-top-left-radius: 10px;   
+            border-top-right-radius: 10px;
+            font-size: 45px;   
+            color: #171717;
+        }
+    }
+    .nextMatches-container{
+        padding: 5px;
+        background-color: #cccccc;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    
+}

@@ -33,7 +33,7 @@ const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
             </div>
             <div className="middle">
 
-                {timeUp ? match.fullTime ? "FT" : <Minute min = {min}  setMin = {setMin} matchTime={match.matchTime}/> : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/> }
+                {timeUp ? match.fullTime ? "FT" : <Minute halfsTime={match.time} min = {min}  setMin = {setMin} matchTime={match.matchTime}/> : <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/> }
 
             </div>
             <div className="countryWrapper">

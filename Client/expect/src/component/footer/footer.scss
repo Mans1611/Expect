@@ -3,12 +3,12 @@
 
 .footer{
     height:fit-content;
-    padding: 20px 0;
+    padding-top: 20px;
     width: 100%;
     text-align: center;
-    background-color: #111;
-    color:#f5f5f5;
-   
+   background-color: #aaaaaa;
+   color:#171717;
+
     .Expect{
         padding: 10px 20px;
         position: relative;
@@ -36,7 +36,6 @@
 
         }
         .iconsContainer{
-            
             a{
                 &:hover{
                     background-color: transparent;
@@ -56,13 +55,13 @@
         }
         a{
             text-decoration: none;
-            font-size: 20px;
-            color: #fff;
+            font-size: 25px;
+            color: #171717;
             padding: 5px;
-            border-bottom: #111 3px solid;
+            border-bottom: #f5f5f5 3px solid;
+            font-weight: 600;
             &:hover{
                 animation : linedown 200ms alternate forwards  ;
-
             }
         }
         .feedBackContainer{
@@ -72,22 +71,54 @@
 
     }
     .bottomFooter{
-        color: #f5f5f5;
-        border-top: 2px solid #eee;
-        background-color: #000;
+        color: #272727;
+        background-color: #979797;
         height: 30px;
         padding: 20px;
+        font-size: 30px;
         display: flex;
         align-items: center;
         font-weight: 400;
         justify-content: center;
         &.fake{
             border: none;
+            background-color: #979797;
         }
         span{
             font-size: 30px;
             margin: 4px 0 ;
         }
+    }
+    &.dark{
+        background-color: #070707;
+        color:#f5f5f5;
+        .contentContainer{
+            .iconsContainer{
+                a{
+                    &:hover{
+                        background-color: transparent;
+                        
+                    }
+                }
+            }
+            a{
+                
+                color: #fff;
+                padding: 5px;
+                border-bottom: #111111 3px solid;
+                &:hover{
+                    animation: linedowndark 200ms alternate forwards  ;
+    
+                }
+            }
+        }
+
+        .bottomFooter{
+            color: #fff;
+            background-color: #020202;
+            
+        }
+
     }
  @media screen and (max-width:490px) {
     .Expect{
@@ -95,6 +126,7 @@
         h1{
             font-size: 64px ;
         }
+        
     }
     .contentContainer{
         display: flex;
@@ -102,6 +134,10 @@
         .feedBackContainer{
             width: 100%;
             margin: 10px auto;
+            border-bottom: #f5f5f5 3px solid;
+            a{
+                border-bottom: none;   
+            }
             textarea{
                 min-width: 40%;
                 width: 60% ;
@@ -117,12 +153,18 @@
     
 
 }
-@keyframes linedown {
-        from{
-
-        }   
+@keyframes linedown {   
         to{
             border-bottom : 3px solid #e04 ;
-            background-color: #222;
+            background-color: #999999;
+            border-radius: 5px;
+        }         
+    } 
+    @keyframes linedowndark {   
+        to{
+            border-radius: 5px;
+            border-bottom : 3px solid #e04 ;
+            background-color: #373737;
+            padding: 5px;
         }         
 } 

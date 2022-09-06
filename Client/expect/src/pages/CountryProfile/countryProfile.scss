@@ -1,0 +1,184 @@
+.country-Page{
+    min-height: 100vh;
+    background-color: #e7e7e7;
+    .countryHeader{
+        padding: 20px;
+        color: #fff;
+        font-size: 24px;
+        background: linear-gradient(90deg, #513333 0%, #9d0116 50%);
+        .countryavatar{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 100px;
+            .country-logo{
+                width: 130px;
+                height: 130px;
+                border-radius: 50%;
+                border: 4px solid #ffae00;
+            }
+            .countryName{
+                margin-left: 50px;
+                font-size: 60px;
+            }
+
+        }
+        .countryDetails{
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background-color: #22222263;
+            padding: 5px;
+            border-radius: 10px;
+            width: 70%;
+            margin: 20px auto 0;
+            .detail{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .key{
+                    font-size: 30px;
+                }
+                .value{
+                    font-size: 38px;
+                    color: #ffe100;
+                }
+            }
+        }
+
+    }
+    .matches{
+        display: flex;
+        padding: 20px 10px;
+        .perviousMatches{
+            flex: 8;
+        }
+        .nextMatches{
+            flex: 4;
+        }
+    }
+    .topPlayersContainer{
+        padding: 10px;
+       
+        .palyerCard {
+            width: 80%;
+            margin: auto;
+        }
+    }
+
+
+    // dark mode 
+    &.dark{
+        background-color: #3f3f3f;
+        .PerMatches-Contaier {
+            background-color: #303030;
+        }
+        .nextMatches-container{
+            background-color: #303030;
+        }
+    }
+    
+}
+@media screen and (max-width : 790px) {
+    .matches{
+        display: flex;
+        flex-direction: column;
+        .nextMatches{
+            width: 60%;
+            margin: 20px 0;
+            margin: 20px auto;
+        }
+    }
+    .playersContainer{
+        display: grid;
+        grid-gap: 10px 0px;
+        .palyerCard {
+            margin: 5px auto;
+    
+        }
+    }
+
+}
+
+@media screen and (max-width : 480px) {
+.country-Page{
+
+    .countryHeader{
+        .countryavatar{
+            padding-left: 30px;
+            .country-logo{
+                width: 120px;
+                height: 120px;
+            }
+            .countryName{
+                margin-left: 20px;
+            }
+
+        }
+        .countryDetails{
+          
+            width: 80%;
+            margin: 20px auto 0;
+            .detail{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .key{
+                    font-size: 25px;
+                }
+                .value{
+                    font-size: 38px;
+                }
+            }
+        }
+        
+    }
+
+    .matches{
+        display: flex;
+        flex-direction: column;
+        .nextMatches{
+            width: 80%;
+           
+        }
+    }
+
+    .playersContainer{
+        display: flex !important;
+        flex-direction: column;
+        .palyerCard{
+            background: #9d0116; 
+            border: 4px solid #272727;
+            border-radius: 12px;
+             width: 90% !important;
+             margin: 0px auto;
+             .playerCardInfo{
+                 display: flex;
+                 flex-direction: row;
+                 justify-content: center;
+                 align-items: center;
+
+                 .imgBackground{
+                     flex: 4;
+                     padding: 5px;
+                     background: #513333 !important;
+                     border-radius: 0px;
+                     border: none;
+                     border-radius: 10px ;
+                    }
+                    .playerDetails{
+                        flex: 8;
+                        .name{
+                      font-size: 28px ;
+
+                    }
+                  font-size: 26px ;
+              }
+          }
+
+        }
+    }
+    
+}
+}

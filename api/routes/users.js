@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt';
 import Country from '../models/Country.js';
 import verifyAdmin from '../middleware/verifyAdmin.js';
 import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
+import Teams from '../models/Teams.js';
 const users = express.Router();
 
 users.get('/standing',async(req,res)=>{
@@ -91,11 +92,22 @@ users.put('/edituser/:userName',VerifyUserJWT, async(req,res)=>{
             const new_encryptedPass = await bcrypt.hash(Updated_Data.password,parseInt(process.env.SALT));
             Updated_Data.password = new_encryptedPass;
         }
+        // for updating userName we need tu udate the userName also in the Team Collection.
         if(Updated_Data.userName){
             const already_Exist_User = await User.findOne({userName:Updated_Data.userName});
             if(already_Exist_User)
-                return res.status(203).send("This Username Is Already Exist");
-            // to update the Expect model as well.
+            return res.status(203).send("This Username Is Already Exist");
+            // to update the Expect collection as well.
+            if(user.team){
+                let team = await Teams.findOne({teamName : user.team.teamName });
+                for(let i = 0 ; i < team.teamMembers.length;i++){
+                    if(team.teamMembers[i].userName === req.params.userName){
+                        team.teamMembers[i].userName = Updated_Data.userName;
+                        break;
+                    }
+                }
+                await Teams.updateOne({teamName : user.team.teamName} , team);
+            }
             await Expects.updateOne({userName : req.params.userName},{
                 userName : Updated_Data.userName
             })

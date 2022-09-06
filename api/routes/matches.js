@@ -5,6 +5,7 @@ import addingPointsPlayer from './utilis/addingPointsPlayers.js';
 import TransferingPointsToCountry from './utilis/TransferingPointsToCountry.js';
 import SessionVerification from "../middleware/sessionVerify.js";
 import verifyAdmin from '../middleware/verifyAdmin.js';
+import FilterMatchesTimeLine from './utilis/FilterMatchesTimeLine.js';
 
 
 const matches = express.Router();
@@ -46,6 +47,7 @@ matches.get('/match/:id', async (req,res)=>{
         }
         else if(!round && date){
             const regEX = new RegExp(`${req.query.date}`,'ig'); // use regular expression to just find all matches with this date no matter the time
+            
             const match = await Matches.find({matchTime: regEX });
             return res.status(200).send(match);
         }
@@ -70,6 +72,20 @@ matches.get('/match/',SessionVerification,async(req,res)=>{
 
     }
 
+})
+
+matches.get('/country/:countryName',async(req,res)=>{
+    const {countryName} = req.params ;
+    const countryId = countryName.slice(0,3).toUpperCase();
+    const regEX = new RegExp(`${countryId}`,'ig');
+    try{   
+        const matches = await Matches.find({matchId :regEX });
+        const [pre,next] = FilterMatchesTimeLine(matches);
+        res.status(200).json({pre,next});
+
+    }catch(err){
+        console.log(err);
+    }
 })
 
 

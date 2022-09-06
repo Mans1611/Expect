@@ -8,14 +8,13 @@ import ExpectPhone from "../../component/Expectes/PhoneComponent/ExpectPhone";
 import io from 'socket.io-client';
 import { MatchCardProvider } from "../../Context/MatchCardContext";
 import SmallLaoding from "../../component/loading/small.loading/smallLoading";
-import Loading from "../../component/loading/big.loading/Loading";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Axios from "../../Axios/axios";
 const socket = io.connect('http://localhost:8000');
 
 const MyExpects = () => {
-    document.getElementsByTagName("body")[0].style.overflow = "visible";
+    document.body.style.overflow = "visible";
     const cookie = new Cookies();
     const navigate = useNavigate();
 

@@ -21,7 +21,7 @@ const Matches = () => {
     localStorage.setItem("page","matches"); 
     const navigate = useNavigate();
 
-    const {isDark,token} = globalUser();
+    const {isDark,token,setExpected} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false); 
@@ -30,6 +30,8 @@ const Matches = () => {
     const {userGlob} = globalUser();
     const [expandButton,setExpandButton] = useState("See All Matches");
     const [matches, setMatches] = useState([]);
+
+
     const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
     document.title = "Matches";
     
@@ -48,6 +50,7 @@ const Matches = () => {
                 setData(MatchesWithFlag);
                 setMatches(data.matches);
                 setUserExpections(data.userExpections);
+                setExpected(data.userExpections)
                 setLoading(false); 
             }catch(err){
                 setLoading(false);  

@@ -25,7 +25,7 @@
     .matchcardHeader-wrapper{
         background: linear-gradient(90deg, #513333 0%, #9d0116 50%);
         border-top-left-radius: inherit;
-       border-top-right-radius: inherit;
+        border-top-right-radius: inherit;
 
         .matchcardHeader{
             display: flex;
@@ -33,12 +33,15 @@
             justify-content: space-around;
             font-size: 30px;
             font-weight: 600;
-            color: #fff;
-             border-top-left-radius: inherit;
+            border-top-left-radius: inherit;
             border-top-right-radius: inherit;
             padding: 5px;
             .countryLabel{
                 font-size: 30px;
+            }
+            a{
+                color: #fff;
+                text-decoration: none;
             }
             
         }

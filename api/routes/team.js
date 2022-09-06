@@ -125,6 +125,7 @@ team.put('/leaveteam',async(req,res)=>{
 // this route is for myteam Component
 team.get('/myteam/:userName',async(req,res)=>{
     const {userName} = req.params;
+    console.log(userName);
     try{
         const user = await User.findOne({userName});
         if(!user)
@@ -133,12 +134,11 @@ team.get('/myteam/:userName',async(req,res)=>{
             return res.status(200).send(null);
 
         let team = await Teams.findOne({teamName : user.team.teamName});
-        const {expects} = team.teamMembers.find(member=>member.userName === userName);
-        
+        const member = team.teamMembers.find(member=>member.userName === userName);
         const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
         
         await SortingTeams();
-        res.status(200).send({team ,expects,totalTeamPoints}); 
+        res.status(200).send({team ,expects : member.expects,totalTeamPoints}); 
     }
     catch(err){
         console.log(err);

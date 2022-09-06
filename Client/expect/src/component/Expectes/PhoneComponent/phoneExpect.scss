@@ -3,12 +3,14 @@
 .phoneContainer{
     display: grid;
     grid-template-columns: 100%;
-    padding: 10px;
+    padding: 10px 5px;
     border-radius:10px;
+    background: #ddd;
 
     &.dark{
         background-color: #171717;
         .expectPhone{
+            border: none;
             background-color: #272727;
             @include shadowMainStyle;
             .upperExpectWrapper{
@@ -25,12 +27,12 @@
                         }
                     }
                     .firstDimond{
-                        border-bottom: 2px solid #ffffff;
-                        border-left: 2px solid #ffffff;
+                        border-bottom: 4px solid #fee504;
+                        border-left: 4px solid #fee504;
                     }
                     .secondDimond{
-                        border-top: 2px solid #ffffff;
-                        border-right: 2px solid #ffffff;
+                        border-top: 4px solid #fee504;
+                        border-right: 4px solid #fee504;
                     }
                 }
                 .middle{
@@ -47,11 +49,12 @@
     
 }
 .expectPhone{
-    width: 90%;
+    width: 95%;
     margin: 5px auto ;
-    background-color: #999999;
+    background-color: #eeeeee;
     height: fit-content;
     border-radius: 10px;
+    border: 2px solid #000000;
     @include shadowMainStyle;
 
     .upperExpectWrapper{
@@ -118,12 +121,18 @@
             align-items: center;
             font-weight: 600;
             font-size: 25px;
+            .matchCardCounter{
+                font-size: 20px;
+
+            }
+
             
         }
     }
     .points-wrapper{ 
-        background-color: #212121;
-        color: #fff;
+        background-color: #f5ea89;
+        color: #272727;
+        font-weight: 600;
         text-align: center;
         padding: 5px 0;
         font-size: 24px;
@@ -138,8 +147,7 @@
         }
         button{
             width:fit-content ;
-            padding: 2px 5px ;
-            margin: 0 5px ;
+            padding: 2px 15px ;
             background-color: #007bf1;
             color: #fff ;
             margin: auto;
@@ -155,8 +163,8 @@
     .countryNameWrapper{
         display: flex;
         justify-content: space-between;
-        background-color: #eee;
-        .checkExpected{
+        align-items: center;
+        background-color: #e4d68e;        .checkExpected{
             padding: 5px;
             background-color: rgb(0, 161, 0);
             border-radius: 10px;
@@ -204,16 +212,15 @@
 }
 
 .match{
-    
     .middle{
         color: #fff;
         font-size: 20px;
         .timeLeftLabel{
-            font-size: 21px;
+            font-size: 20px !important;
 
         }
         .timeLeft{
-            font-size: 15px;
+            font-size: 15px !important;
         }
     }
     .countryNameWrapper{

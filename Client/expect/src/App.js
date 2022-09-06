@@ -31,6 +31,7 @@ import CreateJoinTeam from './component/TeamComponent/JoinCrateTeam/CreateJoinTe
 import ProtectedAdminPage from './Context/ProtectedAdminPage';
 import UsersStanding from './adminPage/pages/UsersStanding/UsersStanding';
 import WhatIsExpect from './pages/WhatIsExpect/WhatIsExpect';
+import CountryProfile from './pages/CountryProfile/CountryProfile';
 export const ThemeContext = createContext(true);
 
 
@@ -62,7 +63,7 @@ const  App = ()=> {
           <Route path='signin' element = {<SignIn/>}/>
           <Route path='signup' element = {<SignUp/>}/> 
         </Route>
-
+        <Route path='/country/:countryName' element={<CountryProfile/>} />
       {/* Admin pages */}
 
           <Route path='/adminpage/login' element={<AdminLogin/>}/>

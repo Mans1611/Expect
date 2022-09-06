@@ -35,7 +35,7 @@
               background: #9d0116; 
               border: none;
                width: 90% !important;
-               margin: 4px auto;
+               margin: 0px auto;
                .playerCardInfo{
                    display: flex;
                    flex-direction: row;
@@ -44,6 +44,7 @@
 
                    .imgBackground{
                     flex: 4;
+                    padding: 5px;
                     background: #513333 !important;
                     border-radius: 0px;
                     border: none;
