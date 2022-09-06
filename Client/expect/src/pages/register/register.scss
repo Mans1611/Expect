@@ -6,14 +6,17 @@
 }
 .register{
     width: 100%;
-    height: 100vh;
-    display: flex;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    align-items: center;
+    justify-content: center;
     .registerImgContainer{
         flex-direction: column;
         @include center();
         background-color:#272727 ;
-        width: 50%;
-        height: 100%;
+        width: 100%;
+        min-height: 100%;
         .registerTitle{
             margin-bottom: 20px;
             font-weight: 600;
@@ -29,7 +32,8 @@
         }
     }
     .formContainer{
-        width: 50%;
+        padding: 10px;
+        width: 100%;
         height: 100%;
         @include center();
         flex-direction: column;
@@ -59,10 +63,12 @@
 
 
 @media screen and (max-width:760px) {
+
     .register{
         width: 100%;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(1,60%);
+    align-items: center;
         .registerImgContainer{
             display: none;
         }
@@ -73,7 +79,29 @@
             
             .divForm{
                 height: fit-content;
-                width: 300px;
+                width: 100%;
+                padding: 5px;
+                background-color: #ffffff;
+                border-radius: 20px;
+                box-shadow: rgba(77, 77, 77, 0.687) 2px 5px 10px 1px;
+                overflow: hidden;
+            
+            }
+        }
+    
+    }
+    
+    
+}
+@media screen and (max-width:310px) {
+    .register{
+        grid-template-columns: repeat(1,100%);
+        .formContainer{
+            width: 100%;
+            height: 100%;
+            .divForm{
+                height: fit-content;
+                width: 90%;
                 padding: 5px;
                 background-color: #ffffff;
                 border-radius: 20px;

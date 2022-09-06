@@ -1,14 +1,18 @@
 @import './global';
 .signup{
     
+    width: 100%;
+
     .headLineDiv{
         margin-bottom: 10px;
+        width: inherit;
     }
-    width: 290px;
+    
     .formSignup{
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(2,100%);
         width: 100%;
+        grid-gap: 0 20px;
         transition: all 300ms;
         .nextButton{
             @include center();
@@ -19,7 +23,7 @@
         }
         .firstForm{
              width: 100%;
-            margin-right: 30px;
+            margin: auto;
             .firstFormNext{
                 display: flex;
                 justify-content: end;
@@ -34,8 +38,9 @@
     }
 }
 .feild{
-    width: 270px ;
-    margin-bottom: 5px;
+    width: 90% ;
+    margin: 2px auto;
+
 }
 label{
     .notRequired{
@@ -47,6 +52,8 @@ label{
     }
 }
 .secondForm{
+    width: 100%;
+    margin-left: 20px;
     .feild{
         margin-bottom: 20px;
     }
@@ -85,16 +92,12 @@ button{
 @media screen and (max-width:760px) {
     
     .signup{ 
-        width: 290px;
+       
         .formSignup{
-            display: flex;
-            flex-direction: row;
-            width: 100%;
             transition: all 300ms;
             
             .firstForm{
                  width: 100%;
-                margin-right: 30px;
                 .firstFormNext{
                     display: flex;
                     justify-content: end;
