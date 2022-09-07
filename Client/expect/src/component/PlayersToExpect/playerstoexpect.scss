@@ -1,11 +1,16 @@
+@import '../../.mainStyle.scss';
 .playersToExpect{
     width: 90%;
     border-radius: 10px;
-    background-color: #eee;
+    background-color: #eeeeee;
     height: fit-content;
     margin: 30px auto;
     grid-row: 3/5;
     grid-column: 2/3;
+    @include shadowMainStyle;
+    .PlayerRowCardContainer{
+        box-shadow: none;
+    }
     .playerCard{
         width: 90%;
         margin: 5px auto;

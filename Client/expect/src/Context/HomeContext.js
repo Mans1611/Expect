@@ -11,7 +11,6 @@ export const Provider = ({children})=>{
     const [auth,setAuth] = useState(false);
     const [expectedMatches,setExpected] = useState([]);
     const [token,setToken] = useState(null);
-
     return(
         <userContext.Provider value={{
             isDark,setDark,

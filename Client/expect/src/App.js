@@ -32,6 +32,7 @@ import ProtectedAdminPage from './Context/ProtectedAdminPage';
 import UsersStanding from './adminPage/pages/UsersStanding/UsersStanding';
 import WhatIsExpect from './pages/WhatIsExpect/WhatIsExpect';
 import CountryProfile from './pages/CountryProfile/CountryProfile';
+import TeamProfile from './pages/TeamProfile/TeamProfile';
 export const ThemeContext = createContext(true);
 
 
@@ -55,7 +56,7 @@ const  App = ()=> {
             <Route path="states" element={<RequiredAuth childern={<States/>}></RequiredAuth> }/>
             <Route path="myprofile/:userName" element={<MyProfile/>}/>
           </Route>
-          
+          <Route path="/teams/:teamName" element= {<RequiredAuth childern={<TeamProfile/>}></RequiredAuth>}></Route>
       {/* Regestirng pages */}
         <Route path='/welcome' element={<Welcome/>}></Route>
         <Route path='/whatisexpect' element={<WhatIsExpect/>}></Route>

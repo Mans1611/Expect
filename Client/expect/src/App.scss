@@ -1,8 +1,11 @@
 @import './component/navbar/global';
+@import './.mainStyle.scss';
 
 
+body{
+    @include scrollbar-style-body;
 
-
+}
 .dark{
     background-color: $color;
     color: #eee;

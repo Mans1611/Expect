@@ -15,10 +15,10 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
             setPop(false);
         }
     }
-   
+ 
     
   return (
-    <div onClick={hidePop} className='popMatchFullPage'>
+    <div id='popup' onClick={hidePop} className='popMatchFullPage'>
         <div className={`popMatchContainer ${isDark? 'dark':''}`}>
                 <CloseIcon onClick = {()=>setPop(false)} className='CloseIcon'/>
             <div className="matchcardHeader">

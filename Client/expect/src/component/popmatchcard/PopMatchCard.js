@@ -14,7 +14,7 @@ import PlayerCard from './playercard/PlayerCard';
 
 const PopMatchCard = ({match,setPop,type,userExpect}) => {
     document.body.style.overflow = 'hidden';
-    const {isDark,userGlob} = globalUser();
+    const {isDark,userGlob,expectedMatches,setExpected} = globalUser();
     
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
     
@@ -93,6 +93,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
             ...updateObject
             });
             dispatch({type:"success Update",payload: updatedResponse.data.msg});
+            setExpected(updatedResponse.data.expects);
             setTimeout(()=>{
                 setPop(false)
             },1500);
@@ -136,7 +137,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
     
                 if(response.status === 201){
                     dispatch({type:"success",payload:response.data.msg});
-        
+                    setExpected(response.data.expects);
                     setTimeout(()=>{
                         setPop(false)
                 },2000);

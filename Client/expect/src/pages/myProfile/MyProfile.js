@@ -15,7 +15,9 @@ const MyProfile = () => {
     const [loading, setLoading] = useState(true);
 
     const {isDark,userGlob} = globalUser();
-    
+
+    document.title = (userGlob === userName ) ? "My Profile" : `${userName.slice(0,8)} Profile`; 
+
     useEffect(()=>{
 
         let isSubscribe = true ;

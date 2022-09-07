@@ -17,44 +17,52 @@ const Minute = ({matchTime,min,setMin,halfsTime})=> {
     const store = MatchStateCentral();
 
     const interval = setInterval(()=>{
-        setRefresh(refresh+1);
+        setRefresh((r)=>r+1);
     },MINUTE)
+
     
     useEffect( ()=>{ 
+
         const now = new Date().getTime();
-        
+        let passed = 0;
+        let isSubscribe = true ;
+
         if(halfsTime.secondHalf_start){
             const now = new Date().getTime();
             const Second_Half_StartTime = new Date(halfsTime.secondHalf_start).getTime();
-            const passed = Math.floor((now- Second_Half_StartTime)/(MINUTE)+45);
-            setMin(passed);
+            passed = Math.floor((now- Second_Half_StartTime)/(MINUTE)+45);
         }
         else{
-            const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
-             setMin(passed)
-
+            passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
         }
 
-        return ()=> clearInterval(interval)   
+        if(isSubscribe)
+            setMin(passed);
+
+        return ()=> {
+            clearInterval(interval)  
+            isSubscribe = false;
+        } 
+
     },[refresh])
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        if(halfsTime.secondHalf_start){
-            const now = new Date().getTime();
-            const Second_Half_StartTime = new Date(halfsTime.secondHalf_start).getTime();
-            const passed = Math.floor((now- Second_Half_StartTime)/(MINUTE)+46);
-            setMin(passed);
-        }
-        else{
-            const now = new Date().getTime();
-            const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
+    //     if(halfsTime.secondHalf_start){
+    //         const now = new Date().getTime();
+    //         const Second_Half_StartTime = new Date(halfsTime.secondHalf_start).getTime();
+    //         const passed = Math.floor((now- Second_Half_StartTime)/(MINUTE)+46);
+    //         setMin(passed);
+    //     }
+    //     else{
+    //         const now = new Date().getTime();
+    //         const passed = Math.floor((now-MATCH_Time_IN_SECONDS)/(MINUTE)+1);
             
-            setMin(passed);
-        }
+    //         setMin(passed);
+    //     }
 
        
-    },[])
+    // },[])
 
 
 

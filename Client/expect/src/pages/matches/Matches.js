@@ -21,49 +21,54 @@ const Matches = () => {
     localStorage.setItem("page","matches"); 
     const navigate = useNavigate();
 
-    const {isDark,token,setExpected} = globalUser();
+    const {isDark,token,userGlob,expectedMatches,setExpected} = globalUser();
+    
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
     const [timeUp, setTimeUp] = useState(false); 
     const [width,setWidth] = useState(window.innerWidth);
     const [userExpections,setUserExpections] = useState([]); 
-    const {userGlob} = globalUser();
+
     const [expandButton,setExpandButton] = useState("See All Matches");
     const [matches, setMatches] = useState([]);
-
-
+    
     const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
     document.title = "Matches";
     
     useEffect(()=>{
+        
+        
         let isSubscribe = true;
         const fetchData = async() =>{
-            try{
-                const {data,status} = await Axios.get(`/expects/${userGlob}`,{
-                    headers : {token}
-                }); // the user Expects . 
-                if(status === 498 )
-                    navigate('/register/signin');
-                
-                const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
-                const MatchesWithFlag = filteringExpects(matchesRes.data,data.userExpections);
+        try{
+            const {data,status} = await Axios.get(`/expects/${userGlob}`,{
+                headers : {token}
+            }); // the user Expects . 
+            
+            if(status === 498 )
+                navigate('/register/signin');
+
+            const matchesRes = await Axios.get(`/matches/?date=${date}`); //array of todays' matches
+            const MatchesWithFlag = filteringExpects(matchesRes.data,data.userExpections);
+            if(isSubscribe){
                 setData(MatchesWithFlag);
                 setMatches(data.matches);
                 setUserExpections(data.userExpections);
-                setExpected(data.userExpections)
-                setLoading(false); 
-            }catch(err){
-                setLoading(false);  
             }
             
+            setLoading(false);     
+        }catch(err){
+            setLoading(false);  
+        } 
         }
-        if(isSubscribe && userGlob ) fetchData();
+
+        if( userGlob ) fetchData();
         
         // cleanup function. 
         return ()=> isSubscribe = false;
 
-    },[userGlob]);
-
+    },[userGlob,expectedMatches]);
+    
     window.addEventListener('resize',()=>{
         setWidth(window.innerWidth)
 })
@@ -80,9 +85,14 @@ const Matches = () => {
                 }
 
             else if(expandButton === "See All Matches") {
-                    const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
+                try{
+
+                    const matchesRes = await Axios.get(`/matches/?date=${date}`); // array of todays' matches
                     const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
                     setData(MatchesWithFlag);
+                }catch(err){
+                    console.log(err);
+                }
                 }
                 setLoading(false);
         })

@@ -37,7 +37,8 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
             Hours = Math.floor(left/(1000*60*60));
             Min = Math.floor((left%(1000*60*60))/(1000*60));
             Sec = Math.floor((left%(1000*60))/(1000));
-            setHours(Hours);setMin(Min);setSec(Sec);
+            setHours((h)=>Hours);setMin((m)=>Min);setSec((s)=>Sec);
+            
             },1000)
 
             return ()=> clearInterval(interval);

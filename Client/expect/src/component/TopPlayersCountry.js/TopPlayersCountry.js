@@ -23,7 +23,7 @@ const TopPlayersCountry = ({countryName}) => {
 
         fetchTopPlayers();
 
-    },[])
+    },[countryName])
 
   return (
     <div className="topPlayersContainer">

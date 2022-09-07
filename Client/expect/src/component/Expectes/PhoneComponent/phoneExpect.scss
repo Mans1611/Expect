@@ -5,58 +5,54 @@
     grid-template-columns: 100%;
     padding: 10px 5px;
     border-radius:10px;
-    background: #ddd;
+    background: #dddddd;
 
     &.dark{
         background-color: #171717;
-        .expectPhone{
-            border: none;
-            background-color: #272727;
-            @include shadowMainStyle;
-            .upperExpectWrapper{
-                background-color: #272727;
-                .countryWrapper{
-                    
-                    .dimond{
-                        background-color: #373737;
-                        .dimondContent{
-                            color: #fff;
-                        }
-                        &.transparent{
-                            background-color: #272727; 
-                        }
-                    }
-                    .firstDimond{
-                        border-bottom: 4px solid #fee504;
-                        border-left: 4px solid #fee504;
-                    }
-                    .secondDimond{
-                        border-top: 4px solid #fee504;
-                        border-right: 4px solid #fee504;
-                    }
-                }
-                .middle{
-                    color: #fff;
-                    font-size: 20px;
-                }
-            }
-
-        }
+        
     }
     .secondCountry{
         text-align: right;
     }
     
 }
+
+
 .expectPhone{
     width: 95%;
-    margin: 5px auto ;
+    margin: 10px auto ;
     background-color: #eeeeee;
     height: fit-content;
     border-radius: 10px;
-    border: 2px solid #000000;
-    @include shadowMainStyle;
-
+    .circle{
+        border: 3px solid #FFD600;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 50%;
+        padding: 10px;
+        color: #272727;
+    }
+    .wingesContainer{
+        position: relative;
+        z-index: -1;
+        .squareStyle{
+            width: 100px;
+            height : 100px;
+            position: absolute;
+            z-index: -1;
+            top: 15%;
+            transform: rotate(45deg);
+            border-radius: 15px;
+            &.left{
+                left: -4px;
+                background-color: #138dff;
+            }
+            &.right{
+                background-color: #fb4931;
+                right: -4px;
+            }
+        }
+    }
     .upperExpectWrapper{
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
@@ -74,10 +70,14 @@
         .countryWrapper{
             display: flex;
             position: relative;
+            z-index: 20;
             width: 33%;
-            
+            a{
+                width: 100%;
+            }
             .dimond{
                 position: absolute;
+                z-index: 20;
                 width: 50px;
                 height: 50px;
                 background-color: #e1e1e1;
@@ -113,6 +113,7 @@
         }
         .middle{
             position: relative;
+
             z-index: 100;
             color: #171717;
             font-size: 20px;
@@ -164,7 +165,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #e4d68e;        .checkExpected{
+        background-color: #ffffff;
+        border-bottom: 2px solid #171717;
+        .checkExpected{
             padding: 5px;
             background-color: rgb(0, 161, 0);
             border-radius: 10px;
@@ -182,6 +185,52 @@
             font-weight: 600;
         }
     }
+    &.dark{
+      
+            position: relative;
+            border: none;
+            background-color: #272727;
+            .circle{
+                border-radius: 50%;
+                color: #e1e1e1;
+            }
+            .upperExpectWrapper{
+                background-color: hsl(0, 0%, 15%);
+                .countryWrapper{
+                    
+                    .dimond{
+                        background-color: #373737;
+                        .dimondContent{
+                            color: #fff;
+                        }
+                        &.transparent{
+                            background-color: #272727; 
+                        }
+                    }
+                    .firstDimond{
+                        border-bottom: 4px solid #fee504;
+                        border-left: 4px solid #fee504;
+                    }
+                    .secondDimond{
+                        border-top: 4px solid #fee504;
+                        border-right: 4px solid #fee504;
+                    }
+                }
+                .middle{
+                    color: #fff;
+                    font-size: 20px;
+                }
+            }
+            .countryNameWrapper{
+                background-color: #373737;
+                .countryName{
+                    color: #fff;
+                }
+    
+            }
+
+        }
+    
 
 }
 
@@ -243,19 +292,14 @@
           
         }
 
-        .countryNameWrapper{
-            background-color: #373737;
-            .countryName{
-                color: #fff;
-            }
-
-        }
+        
         background-color: #171717;
         .expectPhone{
             background-color: #272727;
-            @include shadowMainStyle;
+         
             .upperExpectWrapper{
                 background-color: #272727;
+                
                 .countryWrapper{
                   
                     .dimond{

@@ -28,8 +28,8 @@
                 padding: 5px;
                 font-size: 26px;
                 &:hover{
-                    background : #fff;
-                    color: #272727;
+                    background : #272727;
+                    color: #ffffff;
                     
                 }
             }
@@ -46,3 +46,17 @@
     }
 
    
+.dark{
+    .matchCardStart{
+        button{
+                &.expetedButton { 
+               
+                &:hover{
+                    background-color : #ffffff;
+                    color: #272727;
+                    
+                }
+            }
+        }
+    }
+}

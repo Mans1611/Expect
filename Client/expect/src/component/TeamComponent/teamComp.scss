@@ -142,6 +142,10 @@
     }
     .teamStanding{
         margin: auto;
+        a{
+            text-decoration: none
+        }
+        @include shadowMainStyle;
         .team{
             padding: 5px;
             color: #ffffff;
@@ -160,6 +164,18 @@
                 color: #171717;
                 font-size: 20px;
             }
+        }
+        .standing-container{
+            .user-row{
+                .row{
+
+                    &:last-child{
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                    }
+                }
+            }
+            
         }
     }
 
@@ -278,7 +294,19 @@
         height: fit-content;
     }
 }
-
+@media screen and (max-width : 750px) {
+    .TeamComponent-containetr{
+        display: flex;
+        flex-direction: column;
+        .TeamComponent{
+            width: 80%;
+        }
+    }
+    .teamStanding{
+        width: 80%;
+    }
+    
+}
 @media screen and(max-width : 680px){
     
 .TeamComponent-containetr{
@@ -303,7 +331,6 @@
     }
     .TeamComponent{
         padding:  10px ;
-        width: 80% ;
         margin: 10px auto; 
         .selected{
             background-color: #fee504;

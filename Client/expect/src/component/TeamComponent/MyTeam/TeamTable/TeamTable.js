@@ -1,5 +1,6 @@
 import React from 'react'
 import UserRow from './UserRow'
+import {Link} from 'react-router-dom';
 
 const TeamTable = ({teamMembers}) => {
   return (
@@ -13,7 +14,9 @@ const TeamTable = ({teamMembers}) => {
             </div>
             {
               teamMembers.map((member,index)=>
+              <Link key={index} to = {`/expect/myprofile/${member.userName}`}>
                 <UserRow key={index} standing={index+1} userName={member.userName} sharePoints={member.sharePoints}/>
+              </Link>
               )
 
             }

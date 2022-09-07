@@ -66,7 +66,6 @@ const CountryProfile = () => {
             <div className="perviousMatches">
                 <PerviousMatches previousMatches = {previousMatches}/>
             </div>
-
             <div className="nextMatches">
                 <NextMatches nextMatches = {nextMatches} />
             </div>

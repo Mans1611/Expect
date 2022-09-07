@@ -61,6 +61,23 @@ $betiured : #ec0323;
         margin-top: 5px;
       }
 }
+@mixin scrollbar-style-body{
+    &::-webkit-scrollbar {
+        width: 15px;
+        height: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 5px;
+        background-color: #888;
+      }
+       
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #272727; 
+        border-radius: 5px;
+        margin-top: 5px;
+      }
+}
 @mixin Top-Right-Icon {
     position: absolute;
     top: 5px;

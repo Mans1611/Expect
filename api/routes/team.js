@@ -125,7 +125,6 @@ team.put('/leaveteam',async(req,res)=>{
 // this route is for myteam Component
 team.get('/myteam/:userName',async(req,res)=>{
     const {userName} = req.params;
-    console.log(userName);
     try{
         const user = await User.findOne({userName});
         if(!user)
@@ -138,6 +137,7 @@ team.get('/myteam/:userName',async(req,res)=>{
         const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
         
         await SortingTeams();
+        console.log(totalTeamPoints);
         res.status(200).send({team ,expects : member.expects,totalTeamPoints}); 
     }
     catch(err){
@@ -163,6 +163,23 @@ team.get('/sort',async(req,res)=>{
     //this function will sort the team and updarte the database.
     await SortingTeams();
     res.send("done")
+});
+
+team.get('/:teamName',async(req,res)=>{
+    try{
+        const {teamName} = req.params ;
+        const team = await Teams.aggregate([
+            {$match : {"teamName" : teamName}},
+            {$project : {_id:0,teamCode : 0}}
+        ])
+        //const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
+        res.status(200).json({team:team[0]});
+    }catch(err){
+        console.log(err);
+    }
+
 })
+
+
 
 export default team;

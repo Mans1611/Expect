@@ -14,8 +14,7 @@ import TeamInstructions from './Instructions';
 const soket = io.connect('http://localhost:8000');
 
 const MyTeam = () => {
-  document.getElementsByTagName('body')[0].style.overflow = 'visible';
-
+  document.body.style.overflow = 'visible';
   const [showClipBoard,setShowClipBoard] = useState(false);
   const [showDelete,setShowDelete] = useState(false);
   const [warnMsg,setWarnMsg] = useState(false);
@@ -47,6 +46,9 @@ const MyTeam = () => {
       }
     }
   }
+  // useEffect(()=>{
+
+  // },[])
   if(( user_team === '' || !user_team) && !loading )
     return <TeamInstructions/>
   
@@ -61,11 +63,11 @@ const MyTeam = () => {
               </div>
               <div className="details">
                 <TeamDetail detail={user_team.teamStanding} detailTitle={"Team Standing"}/>
-                <TeamDetail detail={user_team.teamPoints} detailTitle={"Total points"}/>
+                <TeamDetail detail={totalPoints} detailTitle={"Total points"}/>
                 {
-                  user_team.teamMembers.map(member =>{
+                  user_team.teamMembers.map((member, index) =>{
                     if(member.userName === userGlob)
-                        return <TeamDetail detail={member.sharePoints} detailTitle={"Your Share"}/>
+                        return <TeamDetail key={index} detail={member.sharePoints} detailTitle={"Your Share"}/>
                   })
                 }
               </div>

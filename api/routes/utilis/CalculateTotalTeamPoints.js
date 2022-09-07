@@ -12,6 +12,7 @@ const CalculateTotalTeamPoints = async(team)=>{
     const updateTeamMembersExpects = []; // array which will include the updated data about members.
     for(let member of team.teamMembers){
         let sharePoints = 0;
+       
         const {expects} = await Expects.findOne({userName : member.userName});
         // return array
         const teamUserExpects = Filter_User_Expects_4Team(expects,member.joinedTime,totalTeamPoints);   
@@ -19,14 +20,12 @@ const CalculateTotalTeamPoints = async(team)=>{
         teamUserExpects.forEach(expect=> sharePoints += expect.userPoints);
        
         totalExpects = [...teamUserExpects,...totalExpects];
-        
-        
+
         // this to update the the team in the user model.
         updateTeamMembersExpects.push({...member,expects : teamUserExpects, sharePoints});
         await User.updateOne({userName:member.userName} , {$set : {"team.sharePoints" : sharePoints}});
     }
   
-
     totalExpects.forEach(expect=> {totalTeamPoints += expect.userPoints});
     const UpdatedTeam = {
         teamPoints : totalTeamPoints + team.leftPoints ,  // in case of any members who might left the team. 

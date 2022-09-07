@@ -25,6 +25,7 @@ const TeamComponent = () => {
         item.classList.add("selected");
     
     const navBar_Items = document.getElementsByClassName('navbar-item');
+    
     for(let item of navBar_Items){
         item.addEventListener('click',function(){
             const previous = document.getElementsByClassName('selected')[0];
@@ -36,13 +37,20 @@ const TeamComponent = () => {
     } 
 
     useEffect(()=>{
-        return async()=>{
+        let isSubscribe = true;
+        
+        const fetchTeam =  async()=>{
           const {data} = await Axios.get(`/team/myteam/${userGlob}`);
-          setUserTeam(data.team);
-          setUserTeamExpects(data.expect);
-          setTotalTeamPoints(data.totalTeamPoints);
-          setLoading(false)
+          if(isSubscribe){
+              setUserTeam(data.team);
+              setUserTeamExpects(data.expect);
+              setTotalTeamPoints(data.totalTeamPoints);
+          }
+          setLoading(false);
         }
+        fetchTeam()
+        return ()=> isSubscribe = false;
+
       },[])
 
   return (

@@ -1,6 +1,6 @@
+import './matchcard.scss';
 import {  createContext, useState } from 'react';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
-import './matchcard.scss';
 import { globalUser } from '../../Context/HomeContext';
 import TimeCounter from '../../TimeCounter';
 import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchResultComp';

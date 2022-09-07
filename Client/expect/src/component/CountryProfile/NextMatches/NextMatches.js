@@ -15,7 +15,7 @@ const NextMatches = ({nextMatches}) => {
                 nextMatches.length === 0 ? 
                 <div className="noContent"> No UpComing Matches for this Team</div>
                 :
-                nextMatches.map((match,index)=> 
+                nextMatches.map((match,index)=>
                     <MatchCardPhone timeUp = {timeUp} setTimeUp = {setTimeUp}   key = {index} match = {match}/>
                     
                     )
