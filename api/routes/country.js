@@ -35,6 +35,23 @@ country.get('/topPlayers/:countryName',async(req,res)=>{
     }
 })
 // must be an autorization for admins.
+country.get('/groupTable/',async(req,res)=>{
+    const {group} = req.query;
+
+    try{
+        const countries = await Country.aggregate([
+            {$match : {"group" : group}},
+            {$project : {players : 0,_id:0}},
+            {$sort : {points : -1}}
+        ])
+        res.status(200).json({countries});
+
+    }catch(err){
+        console.log(err);
+    }
+    
+})
+
 country.get('/:country_name',async(req,res)=>{
     const country = await Country.findOne({countryName:req.params.country_name})
     if(!country)
@@ -50,6 +67,8 @@ country.get('/:country_name',async(req,res)=>{
         msg : ` ${req.params.country_name} is Avaliable`
     })
 })
+
+
 
 
 

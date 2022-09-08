@@ -1,14 +1,14 @@
+import './playercard.scss';
 import { useState,useContext } from 'react';
 import { userContext } from '../../../Context/HomeContext';
-import './playercard.scss';
 import { matchesStore } from '../../../adminPage/Context/matchesContext';
 
-const PlayerCard = ({showPlayerState,player,countryOrder,auth}) => {
+const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock }) => {
 
     const {isDark} = useContext(userContext);
     const [state,setState] = useState(null);
     return ( 
-        <div className={`palyerCard ${isDark? 'dark':''}`}>
+        <div className={`palyerCard ${isDark? 'dark':''} ${lock ? 'lock' : ''}`}>
             <div className="playerCardInfo">
                 <div className="imgBackground">
                     <img className='playerCardImg' src={player.players? player.players.playerImg: player.playerImg } alt="" />
@@ -16,6 +16,7 @@ const PlayerCard = ({showPlayerState,player,countryOrder,auth}) => {
                     {player.country&&  <img src={player.country.logo} className="country-flag" />}
                     {player.country && <h6 className='details country'>{player.country.countryName}</h6>}
                 </div>
+
                 <div className="playerDetails">
                     <h6 className='details name'>{player.players?  player.players.playerName : player.playerName }</h6>
                     <h6 className='details'>PlayerPosition : {player.players? player.players.position : player.position}</h6>
@@ -34,9 +35,10 @@ const SelectionComp = ({countryOrder})=>{
     return (
         <select className = 'PlayerStateSelction' id = {`${countryOrder}State`}>
             <option value={null} disabled>None</option>
-            <option  className='goodPoints'>Score Long Goal (6PTS)</option>
             <option  className='goodPoints'> Score Goal From Free Kick (6PTS)</option>
-            <option className='goodPoints'>Score Goal (5PTS)</option>
+            <option  className='goodPoints'>Score Long Goal (5PTS)</option>
+            <option  className='goodPoints'>GoalKeeper Saves Penalty (5PTS)</option>
+            <option className='goodPoints'>Score Goal (4PTS)</option>
             <option className='goodPoints'>Make ASSIST (3PTS)</option>
             <option className='goodPoints'>Score Penalty (3PTS)</option>
             <option className='goodPoints'>Make Penalty(2PTS)</option>

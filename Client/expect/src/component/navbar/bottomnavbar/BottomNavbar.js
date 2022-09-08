@@ -33,7 +33,12 @@ const BottomNavbar = () => {
                         </div> 
                     </Link>
 
-                    <div onClick={()=>{setDark(!isDark)}} className={`dropdownItem ${isDark? 'dark':''}` }>
+                    <div onClick={
+                         ()=>{
+                            setDark(!isDark);
+                            localStorage.setItem('isDark', isDark ? 'false' : 'true');
+                        }
+                    } className={`dropdownItem ${isDark? 'dark':''}` }>
                         <span className="dropdownItem">Dark Mode</span>
                         <div className="circleContainer">
                             <LightModeIcon color="warning" className='darkModeIcons'/>

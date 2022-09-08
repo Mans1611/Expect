@@ -5,24 +5,35 @@ import axios from 'axios'
 import SmallLaoding from '../../loading/small.loading/smallLoading';
 import { globalUser } from '../../../Context/HomeContext';
 import { Link } from 'react-router-dom';
+import Axios from '../../../Axios/axios';
+import MatchCardPhone from '../../matchcards/MatchCardPhone/MatchCardPhone';
 
 const DontMissList = () => {
 
-    const {isDark} = globalUser();
+    const {isDark,userGlob} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
 
     useEffect(()=>{
-        return async()=>{
+        let isSubscribe = true;
+
+        const fetchMatches =  async()=>{
             try{
-                const response = await axios.get('/matches/match/?fullTime=false'); // so the match will not be en 
-                setData(response.data);
+                const response = await Axios.get(`/matches/dontmissmatch?userName=${userGlob}`); // so the match will not be en 
+                console.log(response.data);
+                if(isSubscribe)
+                    setData(response.data.filteredMatches);
                 
                 setLoading(false);
             }catch(err){
                 console.log(err);
             }
         }
+        fetchMatches();
+        
+        ()=> isSubscribe = false;
+
+
 
     },[])
 
@@ -36,7 +47,7 @@ const DontMissList = () => {
                 <h1>No Matches</h1>
                 <Link to = '/expect/matches'> Nav to matches page to see all matches</Link>
                 </div> : 
-            data.map((match,index)=><MatchCard match={match} key={index}/>)}
+            data.map((match,index)=><MatchCardPhone match={match} key={index}/>)}
         </div>
      );
 }

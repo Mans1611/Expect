@@ -1,14 +1,17 @@
 export default  function addingPointsPlayer(player,countryName,match){
     let points = 0;
     switch (player.state) {
-        case "Score Long Goal (6PTS)":
-            points = 6;
-            break;
         case "Score Goal From Free Kick (6PTS)":
             points = 6;
             break;
-        case "Score Goal (5PTS)":
+        case "Score Long Goal (5PTS)":
             points = 5;
+            break;
+        case "GoalKeeper Saves Penalty (5PTS)":
+            points = 5;
+            break;
+        case "Score Goal (4PTS)":
+            points = 4;
             break;
         case "Make ASSIST (3PTS)":
             points = 3;
@@ -18,6 +21,9 @@ export default  function addingPointsPlayer(player,countryName,match){
             break;
         case "Make Penalty(2PTS)":
             points = 2;
+            break;
+        case "GoalKeeper Saves A Chance (1PTS)":
+            points = 1;
             break;
         case "Conced Penalty (-2PTS)":
             points = -2;

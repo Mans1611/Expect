@@ -23,7 +23,6 @@
     position: fixed;
     border-bottom: 2px solid #000;
     z-index: 1001;
-    
     animation: popup 150ms  linear;
     
     .popMatchWinner{
@@ -42,7 +41,7 @@
         border: none;
         background:linear-gradient(90deg, #513333 0%, #9d0116 50%);
         .winnerTitle{
-            color: #eee;
+            color: #eeeeee;
             font-size: 42px;
             font-weight: 700;
         }
@@ -82,14 +81,12 @@ form{
         margin-top: 10px;
         font-size: 40px;
         font-weight: 600;
-        color: #444;
-        
+        color: #444444;    
     }
     svg{
         width: 45px;
         height:45px;
-        cursor: pointer;
-        
+        cursor: pointer;  
     }
     .inputcontainer{
         display: flex;
@@ -99,7 +96,7 @@ form{
             height: 50px;
             margin: 10px 0; 
             border-radius: 5px;
-            background-color: #555;
+            background-color: #555555;
             box-shadow:2px 2px 0 #83838387;
             border: none; 
             color: #eee;
@@ -155,7 +152,7 @@ form{
 }
     &.dark{
         
-        color: #eee;
+        color: #eeeeee;
         .formContainerPopup{
             background-color: #262626;
             .countryLabel{
@@ -203,7 +200,14 @@ form{
             color: #262626;
         }
         .playersContainer{
+            .palyerCard{
+                &.lock{
+                    background: linear-gradient(90deg, #191919 50%, #303030 50%);
+            
+                }
+            }
             padding: 5px;
+            padding-right: 10px ;
             background-color: #ddd;
         }
         .choose-container{
@@ -217,7 +221,6 @@ form{
 
     }
     .popFormMatch{
-        
             .popFormLabels{
                 font-size: 18px;
                 margin-right: 5px;
@@ -230,6 +233,7 @@ form{
         display: flex;
         overflow-y: hidden;
         position: relative;
+        
         .choose-container{
             display: flex;
             justify-content: center;
@@ -355,7 +359,7 @@ form{
 @media screen and (max-width:480px) {    
     .popMatchContainer{
         width: 90% ;
-        max-height: 70vh;
+        max-height: 50vh !important;
         .popMatchWinner{
             .winnerTitle{
                 font-size: 35px !important;  
@@ -370,28 +374,37 @@ form{
     }
     .playersContainer{
         display: flex;
-        overflow-y: hidden;
         position: relative;
         flex-direction: column;
         overflow-y: scroll;
-        height: 240px;
+        height: 60vh;
+        padding-right: 10px;
+        
         border-radius: 10px;
         .radioContaineter{
             display: flex;
             align-items: center;
+            margin : -8px 0;
             label{
                 flex: 9;
                 .palyerCard{
                     margin-left:5px ;
                     height: fit-content;
                     width: 100% !important;
+                    background: linear-gradient(90deg, #513333 30%, #9d0116 30%);
+                    &.lock{
+                        background: linear-gradient(90deg, #191919 30%, #303030 30%);
+                
+                    }
                     .playerCardInfo{
                         flex-direction: row ;
                         .imgBackground{
                             margin-left: 5px;
                             background-color: transparent;
                             border: none;
-
+                            .playerCardImg{
+                                margin-left: 8px;
+                            }
                         }
                     }
                 }

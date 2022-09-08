@@ -7,7 +7,6 @@ const CalculateSharePoints = async(userTeamExpects,userName)=>{
         return totalExpects.find(expect=>{
             if(expect.matchId === userTeamExpect.matchId){
                 sharePoints += userTeamExpect.userPoints;
-                console.log(userTeamExpect);
             }
         });
     

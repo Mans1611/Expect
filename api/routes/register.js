@@ -83,7 +83,7 @@ router.post('/login',async(req,res)=>{
     try{
         const userDB = await User.findOne({userName});
         if(!userDB)
-            return res.status(203).json({msg:"this user is not found in database"});
+            return res.status(203).json({msg:"Check your Username and password"});
         const checkPass = await bcrypt.compare(password,userDB.password);
         if(checkPass){
             // create new token for the user 
@@ -94,7 +94,7 @@ router.post('/login',async(req,res)=>{
             CreateUserSession(req);
             return res.status(200).json({msg:"login successfully",token});
         }
-        res.status(203).json({msg:"The Passowrd is incorrect"}); 
+        res.status(203).json({msg:"Check your Username and password"}); 
     }catch(err){
         res.status(402).json({msg:err}); 
     }
@@ -108,6 +108,7 @@ router.get('/verifySession/:token',async(req,res)=>{
     const verifyToken = await jwt.decode(req.params.token,process.env.JWT);
     res.status(200).json({payload:verifyToken});
 })
+
 router.get('/logout',async(req,res)=>{
     req.session.destroy();
     res.status(200).send("done")

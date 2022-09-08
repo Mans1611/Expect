@@ -14,7 +14,7 @@ import PlayerCard from './playercard/PlayerCard';
 
 const PopMatchCard = ({match,setPop,type,userExpect}) => {
     document.body.style.overflow = 'hidden';
-    const {isDark,userGlob,expectedMatches,setExpected} = globalUser();
+    const {isDark,userGlob,token,expectedMatches,setExpected} = globalUser();
     
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
     
@@ -63,6 +63,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
             throw new Error('error in reducer')    
             }  
         }
+
     const [Msg,dispatch] = useReducer(reducerFN,{msg : '',className:'',showMsg : false} )
     
     const handleUpdate = async (e)=>{
@@ -79,7 +80,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
             (result1_value > result2_value && winnerValue !== match.firstCountry.countryName) ||   
             (result1_value < result2_value && winnerValue !== match.secondCountry.countryName)
           )
-            // if statment implementation
+            // if statment implementation for error
             {
                 dispatch({type : "warnMsg",payload : "Check The Result And the Winner State"});
                 return 0;
@@ -91,12 +92,17 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
             const updatedResponse = await axios.put(`/expects/editexpect/${userGlob}`,{
             matchId : match.matchId,
             ...updateObject
+            },{
+                headers : {
+                    token,
+                    userGlob
+                }
             });
             dispatch({type:"success Update",payload: updatedResponse.data.msg});
             setExpected(updatedResponse.data.expects);
             setTimeout(()=>{
                 setPop(false)
-            },1500);
+            },1300);
         }catch(err){
         console.log(err);
 
@@ -133,6 +139,12 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                 const response = await axios.post(`/expects/addexpect/${userGlob}`,{
                     matchId : match.matchId,
                     ...expectObject
+                },
+                {
+                    headers : {
+                        token,
+                        userGlob
+                    }
                 });
     
                 if(response.status === 201){
@@ -217,7 +229,11 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                 playersState.showPlayer1&&
                                 <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
                                     { match.firstCountry.players.map((player,index)=>
-                                            <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
+                                            <PlayerCardRadio  
+                                            countryOrder= 'firstCountry' 
+                                            player={player}
+                                            position = {playersState.player2_position} 
+                                            key={index} />
                                             ) 
                                     }
                                 </div>
@@ -226,7 +242,11 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                     playersState.showPlayer2 && 
                                     <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
                                         {match.firstCountry.players.map((player,index)=>
-                                            <PlayerCardRadio  countryOrder= 'firstCountry' player={player} key={index} />
+                                            <PlayerCardRadio  
+                                            countryOrder= 'firstCountry'
+                                            player={player}
+                                            position = {playersState.player1_position}
+                                            key={index} />
                                             )}
                                     </div> 
                                 }
@@ -244,7 +264,12 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                         playersState.showPlayer3 &&
                                         <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
 
-                                            {match.secondCountry.players.map((player,index)=>  <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>
+                                            {match.secondCountry.players.map((player,index)=>  
+                                            <PlayerCardRadio 
+                                            countryOrder= 'secondCountry' 
+                                            key={index}
+                                            position = {playersState.player4_position} 
+                                            player = {player}/>
                                         
                                         )}
                                         </div>
@@ -253,7 +278,12 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                     {
                                         playersState.showPlayer4 &&
                                         <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
-                                            {match.secondCountry.players.map((player,index)=>  <PlayerCardRadio countryOrder= 'secondCountry' key={index} player = {player}/>) }
+                                            {match.secondCountry.players.map((player,index)=>  
+                                            <PlayerCardRadio 
+                                            countryOrder= 'secondCountry' 
+                                            key={index} 
+                                            position = {playersState.player3_position}
+                                            player = {player}/>) }
                                         </div>
                                         
                                     }

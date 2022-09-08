@@ -50,13 +50,13 @@ const MatchCardAdm = () => {
             <div className="matchCard dark admin">
                 <div className="matchcardHeader">
                     <div className="matchCardCountry"> {/* country1.*/ }
-                        <img src={MatchCenteral.match.firstCountry.logo} alt="" className="matchCardCountryImg" />
+                        <img src={MatchCenteral.match.firstCountry.logo} alt={MatchCenteral.match.firstCountry.countryName} className="matchCardCountryImg" />
                         <span className='countryLabel'>{MatchCenteral.match.firstCountry.countryName}</span>
                         <span className='countryLabel'>{MatchCenteral.match.firstCountry.result}</span>
                     </div>
                     VS 
                     <div className="matchCardCountry">      
-                        <img src={MatchCenteral.match.secondCountry.logo} alt="" className="matchCardCountryImg" />
+                        <img src={MatchCenteral.match.secondCountry.logo} alt={MatchCenteral.match.secondCountry.countryName} className="matchCardCountryImg" />
                         <span className='countryLabel'>{MatchCenteral.match.secondCountry.countryName}</span>
                         <span className='countryLabel'>{MatchCenteral.match.secondCountry.result}</span>
                     </div>

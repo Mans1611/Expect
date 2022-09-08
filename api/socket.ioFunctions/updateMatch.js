@@ -5,7 +5,7 @@ import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCoun
 
 const updateMatch = async(data)=>{
     
-    const fullTime = data.fullTime ? data.fullTime : false;
+    // const fullTime = data.fullTime ? data.fullTime : false;
     
     try{
 

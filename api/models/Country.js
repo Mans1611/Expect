@@ -17,7 +17,17 @@ const countrySchema = new Schema({
     eliminated : {
         type:Boolean,
         default:false
+    },
+    group : {
+        type : String,
+        required : true
+    },
+    points : {
+        type : Number,
+        default : 0
     }
+
+
 })
 const Country = model('Country',countrySchema);
 export default Country;

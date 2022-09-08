@@ -6,6 +6,7 @@ import TransferingPointsToCountry from './utilis/TransferingPointsToCountry.js';
 import SessionVerification from "../middleware/sessionVerify.js";
 import verifyAdmin from '../middleware/verifyAdmin.js';
 import FilterMatchesTimeLine from './utilis/FilterMatchesTimeLine.js';
+import Expects from '../models/Expects.js';
 
 
 const matches = express.Router();
@@ -26,6 +27,7 @@ matches.get('/getmatches',SessionVerification,async(req,res)=>{
 //     const roundMatches = await Matches.find({round});
 //     res.send(roundMatches);
 // })
+
 matches.get('/match/:id', async (req,res)=>{
     try{
         const match = await Matches.findOne({matchId:req.params.id});
@@ -59,14 +61,31 @@ matches.get('/match/:id', async (req,res)=>{
  })
 
 // for full time matches query 
-matches.get('/match/',SessionVerification,async(req,res)=>{
-    try{
-        
-        const dontMissMatches = await Matches.find({
-            fullTime : req.query.fullTime,
-            started : false
-        }).limit(2);
-        res.status(200).send(dontMissMatches);
+matches.get('/dontmissmatch',SessionVerification,async(req,res)=>{
+    
+    const {userName} = req.query;
+    const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
+    const regExp = new RegExp(date,'ig');
+    console.log(date);
+    try{    
+        const todayMatches = await Matches.find({
+            started : false,
+            matchTime : regExp
+        }).limit(4);
+        if(userName){
+            const {expects : userExpectes} = await Expects.findOne({userName});
+            const filteredMatches = todayMatches.filter((match)=>{
+                let wantedMatch = userExpectes.find((expect) => expect.matchId === match.matchId)
+
+                if(!wantedMatch)
+                    return match;
+            })
+            return res.status(200).json({msg:'dont miss',filteredMatches})
+
+        }
+
+        res.status(200).send(todayMatches);
+
     }catch(err){
         console.log(err);
 
@@ -160,7 +179,7 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
     
 })
 
-matches.put('/editmatch/:matchID',async (req,res)=>{
+matches.put('/editmatch/:matchID',verifyAdmin,async (req,res)=>{
     try{
       
         let match = await Matches.findOne({matchId:req.params.matchID});

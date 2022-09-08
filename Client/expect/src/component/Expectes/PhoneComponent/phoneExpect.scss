@@ -6,7 +6,8 @@
     padding: 10px 5px;
     border-radius:10px;
     background: #dddddd;
-
+    @include shadowMainStyle;
+    
     &.dark{
         background-color: #171717;
         
@@ -124,6 +125,9 @@
             font-size: 25px;
             .matchCardCounter{
                 font-size: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
             }
 
@@ -266,6 +270,7 @@
         font-size: 20px;
         .timeLeftLabel{
             font-size: 20px !important;
+            color: #FFD600;
 
         }
         .timeLeft{
@@ -285,7 +290,9 @@
            background-color: #d5d5d521;
        }
        .timeLeftLabel{
-        color: #FFD600;
+            font-size: 25px;
+            color: #FFD600;
+        
     }
         .middle{
             color: #fff;
@@ -345,7 +352,8 @@
             flex-direction: column;
         }
         .timeLeftLabel{
-            font-size: 20px;
+            font-size: 25px;
+            color: #FFD600;
 
         }
         .timeLeft{

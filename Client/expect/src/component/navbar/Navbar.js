@@ -94,9 +94,8 @@ const Navbar = () => {
                             <Link to={`myprofile/${store.userGlob}`}  className={`navbarLink ${isDark? 'dark': ""}`}><div className="dropdownItem"><span className="dropdownItem">My Profile</span></div></Link>
                             <div onClick={
                                 ()=>{
-                                localStorage.setItem('isDark',!isDark);
-                                
-                                setDark(!isDark);
+                                    setDark(!isDark);
+                                    localStorage.setItem('isDark', isDark ? 'false' : 'true');
                             }
                                 } className={`dropdownItem ${isDark? 'dark':''}` }>
                                 <span className="dropdownItem">Dark Mode</span>

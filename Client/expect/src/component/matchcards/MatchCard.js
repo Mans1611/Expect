@@ -16,7 +16,7 @@ const MathchCard = ({match}) => {
     const {isDark, auth} = globalUser(); 
     const navigate = useNavigate();
 
-
+   
     const checkAuth = ()=>{
         if(auth)
             return setPop(true);

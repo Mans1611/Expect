@@ -49,7 +49,7 @@
         }
         .divForm{
             height: fit-content;
-            width: 300px;
+            width: 50%;
             padding: 5px;
             background-color: #ffffff;
             border-radius: 20px;
@@ -58,9 +58,20 @@
         
         }
     }
-
+    
 }
 
+@media screen and (max-width:1160px) {
+    .register{
+
+        .formContainer{
+            .divForm{
+                width: 70%;   
+            }
+        
+        }
+    }
+}
 
 @media screen and (max-width:760px) {
 

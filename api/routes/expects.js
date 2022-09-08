@@ -6,6 +6,7 @@ import FilteringExpects from './utilis/FilteringExpects.js';
 //import Filter_User_Expects_4Team from './utilis/FilterUserExpectsForTeam'
 import User from '../models/User.js';
 import verifyJwt from '../middleware/verifyJWT.js';
+import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
 import SessionVerification from "../middleware/sessionVerify.js";
 import Teams from '../models/Teams.js';
 import { PushExpectToMember , DeleteExpectFromMember, UpdateExpectForMember } from './utilis/TeamExpectHandlers.js';
@@ -30,14 +31,13 @@ expects.get('/:userName',SessionVerification,verifyJwt,async(req,res)=>{
     }
 });
 
-expects.post('/addexpect/:userName',async(req,res)=>{
+expects.post('/addexpect/:userName',VerifyUserJWT,async(req,res)=>{
     try{
         const {userName} = req.params ; 
         const user = await Expects.findOne({userName});
         const {mutatePlayer1,mutatePlayer2} = req.body;
         const match = await Matches.findOne({matchId : req.body.matchId});
-        console.log(match);
-
+       
         // this to increse the number of votes for the se;cted player 
         match.firstCountry.players[mutatePlayer1.index].votes +=1 ; 
         match.secondCountry.players[mutatePlayer2.index].votes +=1 ;
@@ -64,7 +64,7 @@ expects.post('/addexpect/:userName',async(req,res)=>{
 })
 
 
-expects.put('/editexpect/:userName',async(req,res)=>{
+expects.put('/editexpect/:userName',VerifyUserJWT,async(req,res)=>{
     try{
         const {mutatePlayer1,mutatePlayer2,mutatePlayer3,mutatePlayer4,matchId} = req.body;
         const {userName} = req.params;

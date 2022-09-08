@@ -24,24 +24,31 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
 
     if(time > (new Date().getTime())){
         useEffect(()=>{
+            let subscribe = true;
+
             let current = new Date().getTime();
             left = time-current;
     
             if(left <= 0)
                 setTimeUp(true);
-               
-
             const interval = setInterval(()=>{
             current = new Date().getTime();
             left = time-current;
             Hours = Math.floor(left/(1000*60*60));
             Min = Math.floor((left%(1000*60*60))/(1000*60));
             Sec = Math.floor((left%(1000*60))/(1000));
-            setHours((h)=>Hours);setMin((m)=>Min);setSec((s)=>Sec);
+                if(subscribe){
+                    setHours((h)=>Hours);
+                    setMin((m)=>Min);
+                    setSec((s)=>Sec);
+                }
             
             },1000)
 
-            return ()=> clearInterval(interval);
+            return ()=> {
+                subscribe = false;
+                clearInterval(interval);
+            }
     
         },[sec])
 
@@ -53,7 +60,7 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
 
     return (
             <div className="matchCardCounter">
-                <span className="timeLeftLabel">Time Left :</span>
+                <span className="timeLeftLabel">Time Left </span>
                 <span className="timeLeft"> {(hours<10)? `0${hours}`: hours} : {(min<10)? `0${min}`: min} : {(sec<10)? `0${sec}`: sec}</span>
             </div>
         

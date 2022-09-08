@@ -10,12 +10,13 @@ import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import PopExpectCard from '../../popmatchcard/PopExpectCard';
 import { Link, useNavigate } from 'react-router-dom';
 
-const MatchCardPhone = ({match,timeUp,setTimeUp,userExpect}) => {
+const MatchCardPhone = ({match,userExpect}) => {
     document.body.style.overflow = 'visible';
     
     const [pop,setPop] = useState(false);
     const [statePop,setStatePop] = useState(false);
-    const [min,setMin] = useState(0)
+    const [min,setMin] = useState(0);
+    const [timeUp, setTimeUp] = useState(false); 
     const [popShowExpect,setpopShowExpect] = useState(false);
     const navigate = useNavigate();
     const {auth,isDark} = globalUser(); 

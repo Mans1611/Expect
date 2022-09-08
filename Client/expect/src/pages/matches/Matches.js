@@ -55,7 +55,7 @@ const Matches = () => {
                 setMatches(data.matches);
                 setUserExpections(data.userExpections);
             }
-            
+
             setLoading(false);     
         }catch(err){
             setLoading(false);  
@@ -74,8 +74,7 @@ const Matches = () => {
 })
 
     const [filterState,filterDispatch] = useReducer(ReduceFn,FilterState);
-        
-
+    
     useEffect(()=>{
         socket.on("updatingMatches",async(matches)=>{
             setLoading(true)
