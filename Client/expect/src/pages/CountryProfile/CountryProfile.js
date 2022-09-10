@@ -10,6 +10,7 @@ import NextMatches from '../../component/CountryProfile/NextMatches/NextMatches'
 import { globalUser } from '../../Context/HomeContext';
 import TopPlayers from '../../component/TopPlayers/TopPlayers';
 import TopPlayersCountry from '../../component/TopPlayersCountry.js/TopPlayersCountry';
+import CountryStanding from '../../component/CountryStanding/CountryStanding';
 
 const CountryProfile = () => {
     const {countryName} = useParams();
@@ -20,17 +21,22 @@ const CountryProfile = () => {
     const [previousMatches,setPreviousMatches] = useState([])
     const [nextMatches,setNextMatches] = useState([]);
     const [userEpections,setUSerExpections] = useState([]);
+    const [group,setGroup] = useState([])
     const [totalPoints,setTotalPoints] = useState(null)
     const {isDark, userGlob,token,expectedMatches} = globalUser();
    
     useEffect(()=>{
+        let isSubscribe = true;
         const fetchCountry = async()=>{
             const {data} = await Axios.get(`/country/${countryName}`);
             setCountry(data.country);
             const { data : matchesData} = await Axios.get(`/matches/country/${countryName}`);
-            setPreviousMatches(matchesData.pre);
-            setNextMatches(matchesData.next);
-            setTotalPoints(data.totalPoints);
+            if (isSubscribe) {
+                setPreviousMatches(matchesData.pre);
+                setNextMatches(matchesData.next);
+                setTotalPoints(data.totalPoints);
+                setGroup(data.table);
+            }
             setLoading(false);
         }
 
@@ -52,7 +58,7 @@ const CountryProfile = () => {
             <div className="countryDetails">
                 <div className="detail">
                     <span className="key">Group</span>
-                    <span className="value">H</span>
+                    <span className="value">{country.group}</span>
                 </div>
                 <div className="detail">
                 <span className="key">Total Players Points</span>
@@ -70,7 +76,15 @@ const CountryProfile = () => {
                 <NextMatches nextMatches = {nextMatches} />
             </div>
         </div>
-           <TopPlayersCountry countryName = {countryName} />
+            <div className="matches">
+                <TopPlayersCountry countryName = {countryName} />
+                <div className="countryStanding-container">
+                    <CountryStanding 
+                        groupName={country.group} 
+                        groupStanding = {group}
+                        />
+                </div>
+            </div>
         </div>
   )
 }

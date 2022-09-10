@@ -1,9 +1,13 @@
+@import '../../../.mainStyle.scss';
+
 .NextMatches{
     width: 95%;
     margin: auto;
     min-height: 100%;
     background-color: #cccccc;
     border-radius: 10px;
+    @include shadowMainStyle;
+    
     .header{
         >h1{
             color: #171717;

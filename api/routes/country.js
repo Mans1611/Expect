@@ -19,7 +19,6 @@ country.get('/players',async(req,res)=>{
 })
 country.get('/topPlayers/:countryName',async(req,res)=>{
     const {countryName} = req.params;
-    console.log(countryName);
     try{
         const topPlayers = await Country.aggregate([
             {$match : {countryName}},
@@ -51,8 +50,33 @@ country.get('/groupTable/',async(req,res)=>{
     }
     
 })
+country.get('/groupsTable',async(req,res)=>{
+    // const groups = await Country.aggregate([
+    //     {$match:{}},
+    //     {$group : {
+    //         _id : "$group",
+    //         countries : {
+    //             $group : "$"
+    //         }
+        
+    //     }}
+    // ])
+    const groupsLetter = 'ABCDEFGH';
+    let countries = []
+    for(let letter of groupsLetter){
 
+        const group = await Country.aggregate([
+            {$match : {"group" : letter}},
+            {$project : {players : 0 , _id : 0}}
+        ])
+        countries.push(group);
+    }
+
+    res.status(200).send(countries)
+
+})
 country.get('/:country_name',async(req,res)=>{
+
     const country = await Country.findOne({countryName:req.params.country_name})
     if(!country)
         return res.status(404).json({msg :`${req.params.country_name} is not found`});
@@ -60,12 +84,21 @@ country.get('/:country_name',async(req,res)=>{
     let totalPoints = 0;
     for(let player of country.players)
         totalPoints += player.totalPoints;
+
+    const table = await Country.aggregate([
+            {$match : {"group" : country.group}},
+            {$project : {players : 0,_id:0}},
+            {$sort : {points : -1}}
+        ])
     
     res.json({
         country,
         totalPoints,
+        table,
         msg : ` ${req.params.country_name} is Avaliable`
     })
+    
+
 })
 
 

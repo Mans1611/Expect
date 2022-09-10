@@ -4,6 +4,7 @@ import ResultExect from './Expects.component/ResultExect';
 import WinnerExpect from './Expects.component/WinnerExpect';
 import PlayerPointsPop from './Expects.component/PlayerPointsPop';
 import MatchesContainer from '../../component/MatchesContainer/MatchesContainer';
+import Groups from '../../component/Groups/Groups';
 const MainCom = () => {
   document.getElementsByTagName("body")[0].style.overflow = "visible";
 
@@ -22,6 +23,7 @@ const MainCom = () => {
                         <ResultExect/>
                         <PlayerExpects setPop={setPop}/>
                       </div>
+                      <Groups/>
                       {popup && <PlayerPointsPop setPop={setPop}/>}
                     </> 
                 :
@@ -32,6 +34,7 @@ const MainCom = () => {
                         <PlayerExpects setPop={setPop}/>
                       </div>
                       <MatchesContainer/>
+                      <Groups/>
                       {popup && <PlayerPointsPop setPop={setPop}/>}
                     </> 
                 

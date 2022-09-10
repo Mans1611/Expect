@@ -62,12 +62,19 @@
         }
     }
     .topPlayersContainer{
+        flex: 8;
         padding: 10px;
-       
+        margin: auto;
         .palyerCard {
-            width: 80%;
+            width: 90%;
             margin: auto;
         }
+    }
+    .countryStanding-container{
+        flex: 4;
+        padding: 10px;
+        display: flex;
+        align-items: center;
     }
 
 
@@ -91,6 +98,9 @@
             width: 60%;
             margin: 20px 0;
             margin: 20px auto;
+        }
+        .topPlayersContainer{
+            width:100%;
         }
     }
     .playersContainer{

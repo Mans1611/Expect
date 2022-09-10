@@ -58,6 +58,26 @@
     color: #fff;
     // since teams has 4 columns
     background-color: #373737;
+    
+    &.group-standing{
+        grid-template-columns: 5% 40% 15% 20% 20%;   
+        padding: 5px 0;
+        font-size: 20px;
+        text-align: center;
+        .countryholder{
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            span{
+                margin-left: 10px;
+            }
+        }
+        img{
+            width: 35px;
+            height: 25px;
+            object-fit: contain;
+        }
+    }
     &.teams{
         padding: 4px ;
         grid-template-columns: 10% 30% 30% 30% ;
@@ -71,7 +91,16 @@
         grid-template-columns: 20% 60% 20% ;  
         .field{
             font-size: 25px;
+
         }
+    }
+    .field{
+        &.country{
+            display: block;
+            
+            width: 100%;
+        }
+        
     }
     &.round{
         grid-template-columns: 20% 60% 20% ;  
@@ -97,5 +126,9 @@
     border-bottom: #171717  2px solid;
     color: #ffbf00;
     background-color: #333333de;
+    &.group-standing{
+        font-size: 25px;
+    }
+
    
 }

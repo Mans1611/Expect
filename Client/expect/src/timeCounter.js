@@ -12,14 +12,14 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
     let Hours = null,Min = null,Sec = null;
     
     const updatematch = async()=>{
-        try{
-            await Axios.put(`/matches/editmatch/${matchId}`,{
-                started : true,
-            })
-        }
-        catch(err){
-            console.log(err);
-        }
+        // try{
+        //     await Axios.put(`/matches/editmatch/${matchId}`,{
+        //         started : true,
+        //     })
+        // }
+        // catch(err){
+        //     console.log(err);
+        // }
     }
 
     if(time > (new Date().getTime())){
