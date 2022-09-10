@@ -1,3 +1,5 @@
+
+// player states
 export default  function addingPointsPlayer(player,countryName,match){
     let points = 0;
     switch (player.state) {

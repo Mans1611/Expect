@@ -1,5 +1,6 @@
 import React from 'react'
-import matchresult from '../../../images/matchresult.png';
+import Matchresult from '../../../images/result.gif';
+
 const ResultExect = () => {
   return (
     <div className="card-wrapper">
@@ -17,11 +18,11 @@ const ResultExect = () => {
                 </div>
             </div>
             <div className="card-face">
-                <div className="imgage-wrapper">
-                    <img className='matchcard' src={matchresult} alt="" />
-                </div>
+               <div className="image-wrapper">
+                  <img src = {Matchresult}/>
+               </div>
                 <h1>Try to Expect The Match Result</h1>
-                <div className="text">Show More</div>
+                <div className="text">Hover To Show More</div>
             
             </div>
         </div>

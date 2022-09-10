@@ -8,14 +8,16 @@ const updateMatch = async(data)=>{
     // const fullTime = data.fullTime ? data.fullTime : false;
     
     try{
-
     let match = await Matches.findOne({matchId:data.matchId});
         if(data.matchStatus){
             match = MatchHalfs(match,data.matchStatus);
+
         }
         
     if(match.fullTime){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
+        
+    
     }
     // so this code for uodating the time if the admin wants to
     
@@ -41,7 +43,7 @@ const updateMatch = async(data)=>{
         match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
         match.states.push(updatedPlayer_2);
     }
-     await Matches.updateOne({matchId:data.matchId},match) ;
+    await Matches.updateOne({matchId:data.matchId},match) ;
     
     
 }

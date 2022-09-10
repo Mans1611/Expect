@@ -20,16 +20,16 @@ $secondaryColor : #0000f4;
     box-sizing: border-box;
     font-family: $font1;
 }
+
 .topnavbar{ 
     height:fit-content;
     width: 100%;
     background-color: #212121c7;
     z-index: 999;
-    
     background-color: #000;
     h1{
         font-size: 56px;
-        color : #fff;
+        color : #ffffff;
     }
     .buttonscontainer{
         padding : 5px 15px;
@@ -73,7 +73,6 @@ $secondaryColor : #0000f4;
     height: fit-content;
     padding: 50px 20px 20px 10px;
     position: relative;
-    background-image: url('https://cdn.kibrispdr.org/data/151/football-hd-pics-4.jpg');
     background-size: cover;
     &::before{
         content: " ";
@@ -83,7 +82,7 @@ $secondaryColor : #0000f4;
         bottom: 0;
         left: 0;
         z-index: 97;
-        background-color: #272727d8;
+        background-color: #181818;
     }
     .firstTitle{
         color: #fff;
@@ -95,7 +94,6 @@ $secondaryColor : #0000f4;
             color: #FFD600;
         }
     }
-
     .cards-container{
         display: grid;
         padding: 50px 20px  10px;
@@ -121,7 +119,7 @@ $secondaryColor : #0000f4;
                 width: 80%;
                 margin: auto;
                 color: #fff;
-                background-color: #181818;
+                background-color: #272727;
                 border-radius: 10px;
                 cursor: pointer;
                 overflow-y: hidden;
@@ -133,7 +131,14 @@ $secondaryColor : #0000f4;
                         width: 100%;
                         height: 100%;
                         border-radius: inherit;
-                        background-color: #181818;
+                        background-color: #272727;
+                        .matchCard{
+                            background-color: #181818;
+                            margin-bottom: 10px;
+                            button{
+                            display: none;
+                            }
+                        }
                     }
                     &:hover{
                         .card-face{
@@ -208,7 +213,7 @@ $secondaryColor : #0000f4;
                     font-weight: 600;
                     text-align: center;
                 }
-                .imgage-wrapper{
+                .image-wrapper{
                     padding: 10px ;
                     display: flex;
                     img{
@@ -216,19 +221,12 @@ $secondaryColor : #0000f4;
                         opacity: 0.8;
                         border-radius: 10px;
                         width: 90%;
+                        border: 2px solid #ffffff ;
                     }
                 }
-
-                
-    
             }
         }
     }
-}
-
-
-
-svg{
 }
 #firstPoly,#secondPoly{
     width: 500px;
@@ -259,74 +257,60 @@ svg{
             align-items: center;
             .buttonsWrapper{
                 margin-right: 5px;
-                
                 .WelcomeNavbarButtons{
                     font-size: 30px;
-                    font-weight: 500;
-                    border: #f1003a solid 2px;
                     margin-left: 5px;
                     padding: 2px 8px;
-                    &.blueButton{
-                        border:  #FFD600 solid 2px;
-                        &:hover{
-                            color: #fff ;
-                        border: #fff solid 2px;
-                        }
-                    }    
-                }
-                .WelcomeNavbarButtons:hover{
-                    border: #fff solid 2px;
+                      
                 }
             }
         }
     }  
     .WelcomePageCover{
-        height: fit-content;
-        padding: 30px 20px 10px 10px;
-        background-size: cover;
-
+        .headline-matchContaine{
+            h1{
+                font-size:55px;
+            }
+        }
+        .matchCardGrid{
+            .squareStyle {
+                display: none;
+            }
+        }
         .firstTitle{
             font-size: 50px;
-           
         }
     
         .cards-container{
             padding: 20px 10px  10px;
             grid-template-columns: repeat(1,100%);
+            grid-row-gap: 30px;
             position: relative;
-            z-index: 9;
+            z-index: 99;
             margin-top: 20px;
             .card-wrapper{
                 &:hover{
                     animation:none;
                  }
                 .step{
-                   font-weight: 500;
                     font-size: 35px;
                     span{
-                        padding: 5px 10px;
-                        border-radius: 10px;
-                        border : 5px solid #FFD600;
+                        padding: 5px;
+                        border-radius: 5px;
+                        border : 3px solid #FFD600;
                         color: #fff;
                     }
     
                 }
                 .card{
                     width: 80%;
-                    margin: 20px auto;
-                    color: #fff;
-                    background-color: #181818;
-                    border-radius: 10px;
-                    
                     &.flipcard{
                         height: 320px;
+                        width: 100%;
                         position: relative;
                         .card-face,.card-back{
                             position: absolute;
-                            width: 100%;
-                            height: 100%;
-                            border-radius: inherit;
-                            background-color: #181818;
+                            width: 100%;   
                         }
                         &:hover{
                             .card-face{
@@ -379,11 +363,12 @@ svg{
                     .text{
                         margin-top: 10px;
                         width: 100%;
-                        background-color: #FFD600;
-                        padding: 5px ;
-                        font-size: 26px;
+                        background-color: #2680ff;
+                        padding: 5px 10px;
+                        font-size: 30px;
+                        color: #ffffff;
                     }
-                    .imgage-wrapper{
+                    .image-wrapper{
                         padding: 10px ;
                         display: flex;
                         img{

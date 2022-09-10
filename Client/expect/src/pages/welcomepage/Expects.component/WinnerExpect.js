@@ -1,5 +1,7 @@
 import React from 'react'
-import matchcard from '../../../images/matchcard.png';
+import MathchCard from '../../../component/matchcards/MatchCard';
+import {match} from '../fakeData';
+import Winner from '../../../images/winner.gif';
 const WinnerExpect = () => {
   return (
     <div className="card-wrapper">
@@ -15,11 +17,11 @@ const WinnerExpect = () => {
                 </div>
             </div>
             <div className="card-face">
-                <div className="imgage-wrapper">
-                    <img className='matchcard' src={matchcard} alt={matchcard} />
-                </div>
+            <div className="image-wrapper">
+                  <img src = {Winner}/>
+               </div>
                 <h1>Pick A Match & Expect Winner</h1>
-                <div className="text">Show More</div>
+                <div className="text">Hover To Show More</div>
             </div>
            
         </div>

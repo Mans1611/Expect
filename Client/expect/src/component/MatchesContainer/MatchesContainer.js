@@ -33,7 +33,7 @@ const MatchesContainer = () => {
   return (
     <div className="matchCard-container">
                         <div className="headline-matchContaine">
-                            <h1>TodayMatches</h1>
+                            <h1>Today Matches</h1>
                         </div>
                             {isLoading ? <SmallLaoding/> : 
                             matches.length === 0 ? 

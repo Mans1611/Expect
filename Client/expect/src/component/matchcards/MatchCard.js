@@ -1,5 +1,5 @@
 import './matchcard.scss';
-import {  createContext, useState } from 'react';
+import {  createContext, useEffect, useState } from 'react';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
 import { globalUser } from '../../Context/HomeContext';
 import TimeCounter from '../../TimeCounter';
@@ -7,6 +7,7 @@ import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchR
 import MatchState from '../MatchState/MatchState';
 import { MatchCardProvider } from '../../Context/MatchCardContext';
 import { useNavigate, Link } from 'react-router-dom';
+import Axios from '../../Axios/axios';
 
 
 const MathchCard = ({match}) => {
@@ -15,7 +16,7 @@ const MathchCard = ({match}) => {
     const [timeUp, setTimeUp] = useState(false); 
     const {isDark, auth} = globalUser(); 
     const navigate = useNavigate();
-
+    
    
     const checkAuth = ()=>{
         if(auth)

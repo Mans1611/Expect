@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
+import PlayerChoose from '../../../images/playerChoose.gif';
 
-import player1 from '../../../images/player1.png'
-import player2 from '../../../images/player2.png';
 import PlayerPointsPop from './PlayerPointsPop';
 
 const PlayerExpects = ({setPop}) => {
@@ -22,12 +21,11 @@ const PlayerExpects = ({setPop}) => {
             </div>
 
                 <div className="card-face">
-                    <div className="imgage-wrapper">
-                        <img className='matchcard' src={player1} alt="" />
-                        <img className='matchcard' src={player2} alt="" />
+                    <div className="image-wrapper">
+                      <img src={PlayerChoose} />
                     </div>
                     <h1>Select a Two Players From each caountry</h1>
-                    <div className="text">Show More</div>
+                    <div className="text">Hover To Show More</div>
                 </div>
 
             </div>
