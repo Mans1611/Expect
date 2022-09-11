@@ -1,7 +1,7 @@
+import './playerCardRow.scss';
 import React from 'react'
 import { globalUser } from '../../../Context/HomeContext';
 import SmallLaoding from '../../loading/small.loading/smallLoading';
-import './playerCardRow.scss';
 const PlayerRowCard = ({Players,isLoading,dark}) => {
 
   const {isDark} = globalUser();
@@ -33,7 +33,7 @@ const PlayerRow = ({Players})=>{
     return (
       Players.map((player,index)=>{
           return(
-            <div className="row">
+            <div key={index} className="row">
               <div className="item column">
                 <img src={player.playerImg} alt={player.playerImg} />
                 <span className="playerName">{player.playerName}</span>

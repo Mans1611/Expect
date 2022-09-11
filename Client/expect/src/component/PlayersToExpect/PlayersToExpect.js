@@ -1,3 +1,4 @@
+import './playerstoexpect.scss'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Axios from '../../Axios/axios'
@@ -6,7 +7,6 @@ import SmallLaoding from '../loading/small.loading/smallLoading'
 import PlayerCard from '../popmatchcard/playercard/PlayerCard'
 import PlayerCardGridContainer from './PlayerCard/PlayerCardGridContainer'
 import PlayerRowCard from './PlayerCard/PlayerRowCardContainer'
-import './playerstoexpect.scss'
 const PlayersToExpect = ({dark}) => {
 
     const {isDark} = globalUser();

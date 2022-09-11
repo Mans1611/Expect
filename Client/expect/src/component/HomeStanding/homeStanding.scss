@@ -60,11 +60,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #ccc;
-        border-bottom: 1px solid #999;
+        background-color: #cccccc;
+        border-bottom: 1px solid #999999;
+        cursor: pointer;
         &:last-child{
             border-bottom-right-radius: inherit;
             border-bottom-left-radius: inherit;
+            border: none;
             &:hover{
             border-bottom-right-radius: inherit;
             border-bottom-left-radius: inherit;
@@ -73,19 +75,19 @@
         &:hover{
             transform: scaleX(1.01);
             background-color: rgb(181, 0, 48) ;
+            color: #ffffff;
         }
         
         
         a{
-            color: #222;
+            color: inherit;
             font-size: 22px;
             text-decoration: none;
             &:hover{
-                color: #fff;
+                color: #ffffff;
                 text-decoration: underline;
             }
-        }
-        
+        } 
 
     }
 
@@ -96,7 +98,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #555;
+    background-color: #555555;
     padding: 5px 10px;
     font-weight: 700;
 }

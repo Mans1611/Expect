@@ -1,6 +1,6 @@
 .createTeamform{  
     .invitation{
-        color :#111; 
+        color :#111111; 
         margin: 10px 0;
     }
 }
@@ -14,7 +14,7 @@
 .code-Wrapper{
     display: flex;
     justify-content: space-between;
-    background-color: #222;
+    background-color: #222222;
     border-radius: 10px;
     height: 40px;
     width: fit-content;
@@ -36,12 +36,12 @@
         background-color: #444;
         &:hover{
             background-color: #fee504;
-            color: #111;
+            color: #111111;
             
         }
         &.copied{
             background-color: #fee504;
-            color: #111;
+            color: #111111;
         }
 
     }
@@ -54,7 +54,7 @@
         }
     }
     .code-Wrapper{
-        background-color: #222;
+        background-color: #222222;
         width: 90%;
         margin: 5px auto;
         overflow: hidden;

@@ -16,6 +16,8 @@ const socket = io.connect('http://localhost:8000');
 const States = ()=> {
    
     const {isDark} = globalUser();
+    document.title = "States";
+    localStorage.setItem("page","states"); 
     
   return (
     <div className={`states ${isDark ? 'dark' : ''}`}>

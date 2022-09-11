@@ -76,7 +76,7 @@ const CountryProfile = () => {
                 <NextMatches nextMatches = {nextMatches} />
             </div>
         </div>
-            <div className="matches">
+            <div className="countryDetails">
                 <TopPlayersCountry countryName = {countryName} />
                 <div className="countryStanding-container">
                     <CountryStanding 

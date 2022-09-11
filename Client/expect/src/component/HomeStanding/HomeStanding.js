@@ -41,8 +41,8 @@ const HomeStanding = () => {
                 <Link to='/expect/standing/'>Standing</Link>
             </div>
             <div className="tableHead">
-                <div className="order">order</div>
-                <div >UserName</div>
+                <div className="order">NO</div>
+                <div>UserName</div>
                 <p>points</p>
             </div>
             {

@@ -22,7 +22,7 @@ const PerviousMatches = ({previousMatches}) => {
                   return (
                     <>
                       <MathchCard  key={index} match = {match}/>
-                      <MatchCardPhone timeUp = {timeUp} setTimeUp = {setTimeUp} match={match}/>
+                      <MatchCardPhone key = {index} timeUp = {timeUp} setTimeUp = {setTimeUp} match={match}/>
                     </>
                   )
                 })

@@ -10,7 +10,7 @@ const WinnerExpect = () => {
             <div className="card-back">
                 <div className="rules expects">
                     Expect the Winner of your Choosing game, and take points from it. Since it is the easier than the next match expects, it has a fewer Points.
-                    <h2 className="points">Points : </h2>
+                    <h2 className="points">Points Calculations : </h2>
                     <p>If you expected the winner correctly <span className="green">(2PT)</span> </p>
                     <p>If you expected  a <span className="highlighted">
                     Draw</span> <span className="green">(3PT)</span> </p>

@@ -20,7 +20,6 @@ const DontMissList = () => {
         const fetchMatches =  async()=>{
             try{
                 const response = await Axios.get(`/matches/dontmissmatch?userName=${userGlob}`); // so the match will not be en 
-                console.log(response.data);
                 if(isSubscribe)
                     setData(response.data.filteredMatches);
                 

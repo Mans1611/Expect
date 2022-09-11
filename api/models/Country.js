@@ -25,8 +25,15 @@ const countrySchema = new Schema({
     points : {
         type : Number,
         default : 0
+    },
+    goalScored : {
+        type : Object , 
+        default : 0
+    },
+    goalRecieved : {
+        type : Object , 
+        default : 0
     }
-
 
 })
 const Country = model('Country',countrySchema);

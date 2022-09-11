@@ -26,7 +26,9 @@ const TeamProfile = () => {
                 }
                 
             });
-            setTeam(data.team);
+            if(subscribe)
+                setTeam(data.team);
+
             setLoading(false);
         }
         if(subscribe) fetchTeam();
@@ -40,11 +42,6 @@ const TeamProfile = () => {
     
     return (
         <div className='teamProfile-page'>
-            <div className="teamProfileHeader">
-                <h1 className="teamName">
-                    {team.teamName}
-                </h1>
-            </div>
             <OtherTeamDetails team = {team}/>
         </div>
     )

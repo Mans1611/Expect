@@ -7,6 +7,7 @@ import HomeStanding from '../../component/HomeStanding/HomeStanding';
 import PlayersToExpect from '../../component/PlayersToExpect/PlayersToExpect';
 
 const Home = () => {
+    document.title = "Home";
     localStorage.setItem("page","home");
     const {isDark,userGlob,token} = globalUser();
    return ( 

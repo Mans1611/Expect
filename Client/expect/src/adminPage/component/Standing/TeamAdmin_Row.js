@@ -13,8 +13,8 @@ const TeamAdmin_Row = ({team,order}) => {
             <div className={ `row teams ${ val ? 'highligetd':''}`}>
                 <span className="field">{order}</span>
                 <span className="field">{team.teamName}</span>
-                <span className="field">{team.noMembers}</span>
-                <span className="field">{team.points}</span>
+                <span className="field">{team.teamMembers.length}</span>
+                <span className="field">{team.teamPoints}</span>
             </div>
         </Link>
     </div>

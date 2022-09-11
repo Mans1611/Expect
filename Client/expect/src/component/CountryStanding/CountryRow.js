@@ -14,7 +14,7 @@ const CountryRow = ({standing,country,gd}) => {
               </span>
               </div>
           <span className="tableHead-item">{gd?gd:0}</span>
-          <span className="tableHead-item">{gd?gd:0}</span>
+          <span className="tableHead-item">{(country.goalScored.group - country.goalRecieved.group )}</span>
           <span className="tableHead-item">{country.points}</span>
       </div>
     </Link>

@@ -38,35 +38,6 @@ $secondaryColor : #0000f4;
         justify-content: space-between;
         align-items: center;
         overflow: hidden;
-        .buttonsWrapper{
-            background-color: transparent;
-            margin-right: 10px;
-            .WelcomeNavbarButtons{
-                text-decoration: none;
-                font-size: 48px;
-                font-weight: 600;
-                color: #fff;
-                background-color: #181818 ;
-                color: #f1003a;
-                border: #f1003a solid 5px;
-                margin-left: 10px;
-                padding: 2px 15px;
-                border-radius: 10px;
-                &.blueButton{
-                    color: #FFD600;
-                    border:  #FFD600 solid 5px;
-                    &:hover{
-                        color: #fff ;
-                    border: #fff solid 5px;
-                    }
-                }    
-            }
-            .WelcomeNavbarButtons:hover{
-                background-color: #272727;
-                color: #fff;
-                border: #fff solid 5px;
-            }
-        }
     }
 }
 .WelcomePageCover{
@@ -74,24 +45,54 @@ $secondaryColor : #0000f4;
     padding: 50px 20px 20px 10px;
     position: relative;
     background-size: cover;
-    &::before{
-        content: " ";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 97;
-        background-color: #181818;
-    }
+    background-color: #181818;
+   
+
     .firstTitle{
         color: #fff;
         font-size: 84px;
         position: relative;
         text-align: center;
+        margin-bottom: 5px;
         z-index: 999;
         span{
             color: #FFD600;
+        }
+    }
+    .buttonsWrapper{
+        
+        background-color: #272727;
+        color: #f1003a;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-right: 10px;
+        width: fit-content;
+        margin: 5px auto;
+        .WelcomeNavbarButtons{
+            text-decoration: none;
+            background-color: #272727;
+            font-size: 40px;
+            width: 250px;
+            text-align: center;
+            font-weight: 500;
+            color: #fff;
+            background-color: #f1003a ;
+            border: #0000 solid 3px;
+            margin-left: 10px;
+            padding: 2px 15px;
+            border-radius: 5px;
+            &.blueButton{
+                color: #fff;
+                background-color: #00adf1;
+                &:hover{
+                    color: #fff ;
+                    
+                }
+            }    
+        }
+        .WelcomeNavbarButtons:hover{
+            background-color: #373737;
+            color: #fff;
         }
     }
     .cards-container{
@@ -116,7 +117,7 @@ $secondaryColor : #0000f4;
 
             }
             .card{
-                width: 80%;
+                width: 90%;
                 margin: auto;
                 color: #fff;
                 background-color: #272727;
@@ -156,6 +157,10 @@ $secondaryColor : #0000f4;
                             position: absolute;
                             bottom: 0;
                         }
+                        h1{
+                            padding: 10px 5px;
+                            margin-top: 30px;
+                        }
     
                     }
                     .card-back{
@@ -170,7 +175,7 @@ $secondaryColor : #0000f4;
                             }
                             &.expects{
                                 padding: 5px;
-                                font-size: 24px;
+                                font-size: 20px;
                                 p{
                                     margin: 4px 0;
                                 }
@@ -179,11 +184,11 @@ $secondaryColor : #0000f4;
                                     font-weight: 500;
                                 }
                                 .highlighted{
-                                    color: #f1003a;
+                                    color: #00adf1;
                                     font-size: 26px;
                                 }
                                 &.players{
-                                    font-size: 30px;
+                                    font-size: 22px;
                                     button{
                                         margin : auto;
                                         background: linear-gradient(90deg, #ffd600 60%, rgba(0,175,210,1) 100%);margin-top: 15px;
@@ -228,49 +233,32 @@ $secondaryColor : #0000f4;
         }
     }
 }
-#firstPoly,#secondPoly{
-    width: 500px;
-    height: 100%;
-    position: absolute;
-}
-#firstPoly{
-    right: -80px;
-}
-#secondPoly{
-    left: -80px;
-    transform: rotate(180deg);
-}
+
 .left{
     position: absolute;
     left: -40px;
     border: #FFD600;
 }
 
-@media (min-width : 370px) and (max-width : 490px) {
+@media screen and (max-width : 650px) {
     .topnavbar{ 
         h1{
             font-size: 40px;
         }
         .buttonscontainer{
             padding : 2px 7px;
-            justify-content: space-between;
-            align-items: center;
-            .buttonsWrapper{
-                margin-right: 5px;
-                .WelcomeNavbarButtons{
-                    font-size: 30px;
-                    margin-left: 5px;
-                    padding: 2px 8px;
-                      
-                }
-            }
+            
         }
     }  
     .WelcomePageCover{
         .headline-matchContaine{
             h1{
-                font-size:55px;
+                font-size:45px;
             }
+        }
+        .buttonsWrapper{
+            font-size: 30px;
+            
         }
         .matchCardGrid{
             .squareStyle {
@@ -280,6 +268,19 @@ $secondaryColor : #0000f4;
         .firstTitle{
             font-size: 50px;
         }
+
+        .buttonsWrapper{
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            .WelcomeNavbarButtons{
+                width: 100%;
+                font-size: 30px;
+                margin: 2px auto;
+                padding: 2px 8px;    
+            }
+        }
+            
     
         .cards-container{
             padding: 20px 10px  10px;
@@ -305,7 +306,7 @@ $secondaryColor : #0000f4;
                 .card{
                     width: 80%;
                     &.flipcard{
-                        height: 320px;
+                        height: 360px;
                         width: 100%;
                         position: relative;
                         .card-face,.card-back{
@@ -320,11 +321,14 @@ $secondaryColor : #0000f4;
                             
                         }
                         .card-face{
-                            backface-visibility: hidden;
+                           
                             .text{
                                 padding:  5px;
                                 position: absolute;
                                 bottom: 0;
+                            }
+                            h1{
+                                margin-top: 0;
                             }
         
                         }
@@ -373,9 +377,7 @@ $secondaryColor : #0000f4;
                         display: flex;
                         img{
                             margin: auto;
-                            opacity: 0.8;
-                            border-radius: 10px;
-                            width: 90%;
+                            width: 80%;
                         }
                     }
     

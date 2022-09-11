@@ -22,7 +22,7 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
             let interval ; 
             if(left>0){
                 interval =  setInterval(()=>{
-                    const now = new Date().getTime();
+                const now = new Date().getTime();
                 left = time-now;
                 Hours = Math.floor(left/(1000*60*60));
                 Min = Math.floor((left%(1000*60*60))/(1000*60));
@@ -36,8 +36,10 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
             },1000); 
         }
         else{
-            setTimeUp(true)
+            setTimeUp(true);
+
         }
+       
 
             return ()=> {
                 clearInterval(interval)
@@ -46,6 +48,7 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
             }
     
         },[sec])
+        
 
     return (
             <div className="matchCardCounter">

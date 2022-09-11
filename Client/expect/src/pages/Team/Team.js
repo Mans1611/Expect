@@ -6,7 +6,8 @@ import TeamComponent from '../../component/TeamComponent/TeamComponent';
 
 const Team = () => {
     const {isDark} = globalUser();
-
+    document.title = "Team";
+    localStorage.setItem("page","team/myTeam"); 
   return (
     <div className={`teamPage ${isDark ?'dark' : '' } `}>
         <TeamComponent/>

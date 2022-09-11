@@ -60,22 +60,40 @@
         .nextMatches{
             flex: 4;
         }
+       
     }
-    .topPlayersContainer{
-        flex: 8;
-        padding: 10px;
-        margin: auto;
-        .palyerCard {
-            width: 90%;
+    .countryDetails{
+        display: flex ;
+        padding: 20px 10px;
+        .topPlayersContainer{
+            flex: 8 !important;
+            padding: 10px;
             margin: auto;
+            width: 120px;
+            .playersContainer{
+                .playersContainer{
+                    display: grid;
+                    grid-template-columns: repeat(5, 25%);
+                    .palyerCard {
+                        margin: 5px auto;
+                        width: 70%;
+                
+                    }
+                }
+            }
+           
+        }
+        .countryStanding-container{
+            flex: 4  !important;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            .CountryStanding{
+                width: 100%;
+            }
         }
     }
-    .countryStanding-container{
-        flex: 4;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-    }
+    
 
 
     // dark mode 

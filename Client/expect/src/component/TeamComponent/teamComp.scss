@@ -153,27 +153,30 @@
         }
         .standing-header{
             &.teams{
-                background-color: #eeeeee !important;
-                border-bottom: 4px solid #111;
+                background-color: #eeeeee ;
+                border-bottom: 4px solid #111111;
             }
         }
         .row{
             &.teams:not(.standing-header){
                 height : 40px;
-                background-color: #eeeeee !important;
+                background-color: #eeeeee ;
                 color: #171717;
                 font-size: 20px;
+                &:hover{
+                    background-color: #fee504 ;
+                }
             }
         }
         .standing-container{
             .user-row{
                 .row{
 
-                    &:last-child{
-                        border-bottom-left-radius: 10px;
-                        border-bottom-right-radius: 10px;
-                    }
                 }
+            }
+            &:last-child{
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
             }
             
         }
@@ -273,9 +276,12 @@
             }
             .row{
                 &.teams:not(.standing-header){
-                    background-color: #272727 !important;
+                    background-color: #272727 ;
                     color: #ffffff;
                     &.highligetd{
+                        background-color: #fee504b2;
+                    }
+                    &:hover{
                         background-color: #fee504b2;
                     }
                 }

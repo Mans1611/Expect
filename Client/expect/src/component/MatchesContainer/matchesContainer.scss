@@ -1,6 +1,6 @@
 .matchCard-container{
     margin-top: 50px;
-    background-color: #080808;
+    background-color: #272727;
     position: relative;
     border-radius: 10px;
     z-index: 999;
@@ -16,15 +16,18 @@
     .noContent{
         &.welcomepage{
             h1{
-                color: #fff;
+                color: #ffffff;
             }
         }
     }
     .matchCardGrid{
         padding: 5px;
         display: grid;
-        grid-template-columns: repeat(4,25%);
-        
+        grid-template-columns: repeat(3,33.3%);
+        .matchCard{
+            box-shadow: none;
+            background-color: #171717;
+        }
         @media screen and (max-width : 480px) {
             grid-template-columns: repeat(1,100%); 
     }

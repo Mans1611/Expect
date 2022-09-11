@@ -10,13 +10,13 @@ const SmallNews = (props) => {
         <div onClick={props.HandleMainNews}  id='restNews' className='restNewsContainer'>
             { props.news.map((item,index)=>{
             return (
-                <div  key={index} className={`restNews ${index}`} >
+                <div  key={index} className={`restNews ${isDark? 'dark' : ''} ${index} ${index === props.active -1 ? 'active' : '' }`} >
                     <div className={`imageWrapper ${index}`}>
                         <img src={item.img} alt="" className={`image ${index}`} />
                     </div>
                     <div className={`text ${index}`}>
-                        <h2 className={`title ${index}`}>{item.title}</h2>
-                        <p className={`paragraph ${index} ${isDark?'dark':null}`}>{item.paragraph}</p>
+                        <h2 className={`title ${index} `}>{item.title}</h2>
+                        <p className={`paragraph ${index} ${isDark?'dark':''}`}>{item.paragraph}</p>
                     </div>
                     
                 </div>

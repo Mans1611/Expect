@@ -137,7 +137,6 @@ team.get('/myteam/:userName',async(req,res)=>{
         const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
         
         await SortingTeams();
-        console.log(totalTeamPoints);
         res.status(200).send({team ,expects : member.expects,totalTeamPoints}); 
     }
     catch(err){
@@ -149,12 +148,16 @@ team.get('/myteam/:userName',async(req,res)=>{
 
 team.get('/teamstanding',async(req,res)=>{ 
     const {limit} = req.query;
-    let SortedTeams = await Teams.find().sort({teamsPoints :  -1}).limit(limit);
+    let SortedTeams = await Teams.aggregate([
+        {$match : {}},
+        {$sort : {teamPoints : -1}},
+        {$project : {_id : 0 , teamCode : 0 , leftPoints : 0}}
+    ]);
    
-    SortedTeams = SortedTeams.map(team =>  {
-        let filter = {teamName:team.teamName , points:team.teamPoints,noMembers:team.teamMembers.length}
-        return filter;
-    } )
+    // SortedTeams = SortedTeams.map(team =>  {
+    //     let filter = {teamName:team.teamName , points:team.teamPoints,noMembers:team.teamMembers.length}
+    //     return filter;
+    // } )
     res.send(SortedTeams)
 })
 

@@ -32,20 +32,7 @@ const Groups = () => {
 
     
 
-    // if(!loading && window.innerWidth < 490){
-    //     let i = 1;
-    //     setInterval(()=>{
-    //         if(i === 8)
-    //             i = 0
-
-    //         Slideshow(i++)
-           
-        
-        
-    //     },5000)
     
-    // }
-      
     
 
 

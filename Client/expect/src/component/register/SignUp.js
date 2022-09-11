@@ -11,6 +11,8 @@ import {moveToFirst,moveToSecond} from './utilites/Moving.js';
 import { globalUser, userContext } from '../../Context/HomeContext';
 const SignUp = () => {
     document.getElementsByTagName('body')[0].style.overflow = 'visible';
+    document.title = "Create An Account";
+
     const cookie = new Cookies();
     const [countriesOption, setCountries] = useState([]);
     const [userName,setUserName] = useState(null);

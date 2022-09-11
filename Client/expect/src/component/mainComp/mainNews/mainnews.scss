@@ -48,6 +48,22 @@
         .restNews{
             display: flex;
             height:120px;
+           &.active{
+            background-color: #bbb;
+            color: #111;
+           }
+           &.dark{
+            background-color: #272727;
+            &.active{
+                background-color: #d8b400;
+                .title{
+                    color: #111111;
+                }
+                color: #fff;
+
+            }
+        }
+
             .imageWrapper{
                 flex:3;
                 height: 100%;
@@ -61,15 +77,14 @@
             .text{
                 flex: 8;
                 color: #111;
-                background-color: transparent;
-                
                 padding-left:10px ;
                 padding-top:5px;
                 .title{
                     color: $gold;
-                    font-size: 40px;
+                    font-size: 35px;
                 }
                 .paragraph{
+                    
                     &.dark{
                         background-color: transparent;
                         color: #fff;

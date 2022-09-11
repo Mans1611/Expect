@@ -9,55 +9,61 @@ import {useContext} from 'react';
 import { ThemeContext } from '../../../App';
 import { globalUser } from '../../../Context/HomeContext';
 import { useNavigate } from 'react-router-dom';
+import Axios from '../../../Axios/axios';
+import FrontNews from './FrontNews';
 const MainNews = ()=> {
 
     const {isDark} = globalUser();
     const [news,setNews] = useState(null);
     const [isLoading,setLoading] = useState(true);
     const [mainNews,setMainNews] = useState(null);
-    
     const navigate = useNavigate();
     
 
     useEffect(()=>{
-        return async()=>{
+        let isSubscribe = true;
+        const fetchNews = async()=>{
             try{
-                const response = await axios.get('/news/getnews')   
-                setNews(response.data);
-                setMainNews(response.data[0]) //  to pick the first news in the leatest news 
+                const response = await Axios.get('/news/getnews')   
+                if(isSubscribe){
+                    setNews(response.data);
+                    setMainNews(response.data[0]) //  to pick the first news in the leatest news 
+                }
                 setLoading(false);
-            }catch(err){
+            }
+            catch(err){
                 navigate('/register/signin');
-                console.log(err);
-                
+                console.log(err);   
             }
         }
+        fetchNews();
+        
+        ()=> isSubscribe = false;
+
+
+      
     },[])
 
 
     const HandleMainNews = (event)=>{
-            const index = event.target.className.split(' ')[1];
-            setMainNews(news[index]);
-            
+        const index = event.target.className.split(' ')[1];
+        setMainNews(news[index]);
     }
+    
     return (
-            <div className={`mainNews ${isDark?'dark':null}`}>
+            <div className={`mainNews ${isDark?'dark':''}`}>
                 {
                 isLoading? 
                 <SmallLaoding/>:
                 <>
-                    <div className="imageWrapper">
-                        <img className= "mainImage" src={mainNews.img} alt={mainNews.title} />
-                    </div>
-                    <div className="newsText">
-                        <h1 className="newsTitle">{mainNews.title}</h1>
-                        <p className={` newsPara ${isDark?"dark":null} `}>{mainNews.paragraph}</p>
-                    </div>
-
-                    {
-                        isLoading? <SmallLaoding/>: <SmallNews HandleMainNews = {HandleMainNews} news = {news}/>
-                    }
-              </> 
+                    <FrontNews 
+                        mainNews={mainNews} 
+                        isDark = {isDark}
+                        news = {news}
+                        setMainNews = {setMainNews}
+                        HandleMainNews = {HandleMainNews}
+                        />  
+                </> 
         }
         </div>
     )

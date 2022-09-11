@@ -17,7 +17,10 @@ const CalculateTotalTeamPoints = async(team)=>{
         // return array
         const teamUserExpects = Filter_User_Expects_4Team(expects,member.joinedTime,totalTeamPoints);   
         // calculate the sharePoints forEach user. 
-        teamUserExpects.forEach(expect=> sharePoints += expect.userPoints);
+        teamUserExpects.forEach(expect=> {
+            sharePoints += expect.userPoints;
+
+        });
        
         totalExpects = [...teamUserExpects,...totalExpects];
 

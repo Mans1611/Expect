@@ -73,6 +73,7 @@ const MyTeam = () => {
               </div>
           </div>
           <TeamTable teamMembers = {user_team.teamMembers}/>
+          
           <div className="options">
             <div className="button-Wrapper">
                 <button  onClick={()=> setShowClipBoard(c=>!c)} className='button invite'>Invite Your Friends</button>

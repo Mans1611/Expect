@@ -8,9 +8,11 @@ import MatchesContainer from '../../component/MatchesContainer/MatchesContainer'
 
 const Welcome = () => {
     localStorage.setItem('visited', true);
+    document.title = "Welcome";
     return (
         <> 
             <TopNavbar/>
+           
             <MainCom />
         </>
      );

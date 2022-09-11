@@ -66,7 +66,7 @@ matches.get('/dontmissmatch',SessionVerification,async(req,res)=>{
     const {userName} = req.query;
     const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
     const regExp = new RegExp(date,'ig');
-    console.log(date);
+   
     try{    
         const todayMatches = await Matches.find({
             started : false,

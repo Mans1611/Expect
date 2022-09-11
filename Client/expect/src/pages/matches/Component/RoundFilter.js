@@ -30,7 +30,7 @@ const RoundFilter = ({setLoading,setData,filterDispatch,userExpections}) => {
             <label htmlFor="round-filter">
                 <h1>Round : </h1>
                 <select onChange={(e)=>handleChange(e.target.value)} type="text" name="round-filter" id ="round-filter" >
-                    <option value={null} selected disabled>Pick Round</option>
+                    <option  selected disabled>Pick Round</option>
                     <option>Group Stage Round-1</option>
                     <option>Group Stage Round-2</option>
                     <option>Group Stage Round-3</option>

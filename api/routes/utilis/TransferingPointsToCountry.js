@@ -18,16 +18,33 @@ export default async function TransferingPointsToCountry(firstCountryName,second
 
         })
         const checkGroupstage = match.round.match(/Group Stage/ig);
-        console.log(checkGroupstage);
+       if(checkGroupstage){
+            // for goals difference 
 
-        if(match.firstCountry.result > match.secondCountry.result && checkGroupstage)
-            firstCountry.points += 3;
-        else if(match.firstCountry.result < match.secondCountry.result && checkGroupstage)
-            secondCountry.points += 3;
-        else if(match.firstCountry.result === match.secondCountry.result && checkGroupstage){
-            firstCountry.points += 1;
-            secondCountry.points += 1
-        }
+            // first country
+            firstCountry.goalScored.group+=match.firstCountry.result;
+            firstCountry.goalRecieved.group+=match.secondCountry.result;
+            // secondCountry
+            secondCountry.goalScored.group+=match.firstCountry.result; // scored
+            secondCountry.goalRecieved.group+=match.secondCountry.result; // recieved 
+            
+           if(match.firstCountry.result > match.secondCountry.result  )
+               firstCountry.points += 3;
+           else if(match.firstCountry.result < match.secondCountry.result)
+               secondCountry.points += 3;
+           else if(match.firstCountry.result === match.secondCountry.result){
+               firstCountry.points += 1;
+               secondCountry.points += 1
+           }
+       }
+       // if the match was not a group stage match. 
+       else{
+        firstCountry.goalScored.knockout+=match.firstCountry.result;
+        firstCountry.goalRecieved.knockout+=match.secondCountry.result;
+
+        secondCountry.goalScored.knockout+=match.firstCountry.result;
+        secondCountry.goalRecieved.knockout+=match.secondCountry.result;
+       }
 
         await Country.updateOne({countryName:firstCountryName},firstCountry);
         await Country.updateOne({countryName:secondCountryName},secondCountry);

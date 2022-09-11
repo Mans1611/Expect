@@ -1,6 +1,6 @@
+import './roundStanding.scss'
 import React,{useState,useEffect} from 'react'
 import UserStanding from '../Standing/UserStanding';
-import './roundStanding.scss'
 import SmallLaoding from '../../../component/loading/small.loading/smallLoading';
 import Axios from '../../../Axios/axios';
 import { useContext } from 'react';

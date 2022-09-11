@@ -11,6 +11,7 @@ import Axios from '../../Axios/axios';
 
 
 const SignIn = () => {
+    document.title = "Sign in";
     const location = useLocation();
     const redirect = location.state?.path || '/expect/home';
     const [userName,setUserName] = useState(null);

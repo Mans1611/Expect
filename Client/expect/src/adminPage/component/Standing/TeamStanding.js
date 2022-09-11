@@ -8,12 +8,22 @@ const TeamStanding = () => {
   const [teams,setTeams] = useState([]);
 
   useEffect(()=>{
-    return async ()=>{
-        const {data} = await Axios.get('/team/teamStanding?limit=5'); // i specifiy the limit top 5 team.
-        setTeams(data);
+    let isSubscribe = true;
+
+    const fetchTeams = async ()=>{
+      const {data} = await Axios.get('/team/teamStanding?limit=5'); // i specifiy the limit top 5 team.
+      if(isSubscribe)
+            setTeams(data);
+
         setLoading(false); 
     }
-  })
+
+    fetchTeams();
+
+    return ()=>{
+        isSubscribe = false;
+    }
+  },[])
   
   return (
     <div className='teamStanding'>
