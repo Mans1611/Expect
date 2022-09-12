@@ -7,6 +7,7 @@ import AddNews from '../AddNews/Add';
 import './content.scss';
 import UsersStanding from '../UsersStanding/UsersStanding';
 import { useState } from 'react';
+import FeedbackAdmin from '../Feedback/FeedbackAdmin';
 
 const Content = () => {
     const [totalUsers,setTotalUsers] = useState([]);
@@ -20,6 +21,7 @@ const Content = () => {
                     <Route path='usersstanding' element={<UsersStanding setTotalUsers = {setTotalUsers} totalUsers = {totalUsers} />}/>
                     <Route path='statistics' element={<Statistics/>}/>
                     <Route path='news' element={<AddNews/>}/>
+                    <Route path='feedback' element={<FeedbackAdmin/>}/>
                 </Routes>
             </div>
      );

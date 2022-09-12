@@ -18,6 +18,7 @@ import admin from './routes/admin.js';
 import statistics from './routes/statistics.js';
 import team from './routes/team.js';
 import { SortingTeams, SortingUsers } from './routes/utilis/SortingTeams.js';
+import feedback from './routes/feedBack&support.js';
 
 dotenv.config();
 const MongoDBSession = MongoSessions(session);
@@ -65,6 +66,8 @@ app.use('/expects',expects);
 app.use('/admin',admin);
 app.use('/statistics',statistics);
 app.use('/team',team);
+app.use('/feedback',feedback)
+
 
 app.use(cors());
 

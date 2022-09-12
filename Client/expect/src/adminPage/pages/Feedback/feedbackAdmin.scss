@@ -1,0 +1,47 @@
+@import '../../../.mainStyle.scss';
+.feedbackAdmin-page{
+    background-color: #272727;
+    min-height: 100vh;
+    padding: 20px 10px;
+    .header{
+        @include headerPageStyle;
+        h1{
+            color: #ffdd00;
+            text-decoration: underline;
+        }
+
+    }
+    .feedbacks-container{
+        margin-top: 30px;
+        background-color: #373737;
+        padding: 10px;
+        border-radius: 10px;
+        max-height: 400px;
+        overflow-y: scroll;
+        @include scrollbar-style;
+        .select-container{
+            display: flex;
+            justify-content: center;
+            select{
+                @include selectStyle ; 
+                width: 30%;
+                margin: 5px auto;
+            }
+        }
+    }
+    .PageButtons{
+        display: flex;
+        margin: 20px auto;
+        justify-content: center;
+        button{
+            margin : 0 5px ;
+            color: #ff0044;
+            font-size: 30px;
+            &.selected , &:hover{
+                background-color: #ff0044;
+                color: #ffffff;
+                padding : 10px
+            }
+        }
+    }
+}

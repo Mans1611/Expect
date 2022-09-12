@@ -1,0 +1,133 @@
+@import '../../.mainStyle.scss';
+
+.feedback-page{
+    min-height: 100vh;
+    background-color: #555555;
+    padding: 20px 10px;
+
+    .header{
+        padding: 20px;
+        text-align: center;
+        background-color: #444444;
+        border-radius: 10px ;
+        width: 60%;
+        margin: auto;
+        h1{
+            font-size: 60px;
+            color: #ffffff;
+            &.helpTitle{
+                color: #ffdd00;                
+            }
+            span{
+                color: #ffdd00;
+            }
+        }
+    }
+    h1{
+        text-align: center;
+        margin-top: 10px;
+        color: #eeeeee;
+    }
+    .formContainer{
+        margin: 80px auto 10px;
+        width: 60%;
+        height: fit-content;
+        background-color: #333333;
+        border-radius: 10px;
+        padding: 10px;
+        .inputContainer{
+            display: flex;
+            flex-direction: column;
+            margin: 20px auto;
+            width: 70%;
+
+            label{
+                font-size: 30px;
+                margin-bottom: 5px;
+                color: #eeeeee;
+            }
+            input {
+                height: 40px;
+                border-radius: 5px;
+                padding: 5px;
+                outline: none;
+                border: none;
+                color: #ffffff;
+                background-color: #666666;
+                &#email{
+                    width: 60%;
+                    margin: auto;
+                }
+            }
+            input::placeholder{
+                color: #dddddd99;
+            }
+            input:focus{
+                border: 2px solid #ff0044;
+            }
+            textarea{
+                max-width: 100%;
+                min-width: 100%;
+                max-height: 200px;
+                font-size: 20px;
+                color: #ffffff;
+                background-color: #666666;
+                padding: 10px 20px;
+                border-radius: 5px;
+                outline: none;
+                border: none; 
+                text-align: center;
+            }
+            textarea::placeholder{
+                color: #dddddd99;
+                text-align: center;
+            }
+
+        #support-problem{
+            @include selectStyle ;
+            width: 60%;
+            color: #ffdd00;
+            font-size: 22px;
+            border-radius: 5px;
+            height: 40px;
+        }
+        }
+        .msgContaienr{
+            .msg{
+                color: #ffffff;
+                padding: 5px;
+                border-radius: 5px;
+                width: 60%;
+                text-align: center;
+                margin: 5px auto;
+                font-size: 25px;
+
+                &.red{
+                    border-left: 10px solid #ab0017;
+                    background-color: #fe4475;
+                }
+                &.green{
+                    border-left: 10px solid #007e00;
+                    background-color: #69b569;
+
+                }
+            }
+        }
+        .button-wrapper{
+            display: flex;
+            justify-content: center;
+            button{
+                background: #00ccff;
+                color : #ffffff;
+                font-size: 26px;
+                border-radius: 5px;
+                padding: 10px 5px;
+                font-weight: 500;
+            }
+            
+            button:hover{
+                background: #007b99;
+            }
+        }
+    }
+}

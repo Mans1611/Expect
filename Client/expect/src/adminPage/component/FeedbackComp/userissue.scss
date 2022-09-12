@@ -1,0 +1,42 @@
+.userFeedback{
+    width: 80%;
+    max-height: 140px;
+    margin: 5px auto;
+    background-color: #272727;
+    border-radius: 10px;
+    padding: 10px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .icon-wrapper{
+        svg{
+            width: 60px;
+            height: 60px;
+        }
+    }
+    .text-wrapper{
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+        .email {
+            color: #00ffd0e2 ;
+        }
+        p{
+            padding: 2px;
+        }
+        
+    }
+    .checkWrapper{
+        position: absolute;
+        right: 20px;
+        text-align: end;
+
+        button{
+            background-color: #090;
+            color: #ffffff;
+            padding: 10px 5px;
+            border-radius: 5px;
+        }
+    }
+}

@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
-
+import FeedbackIcon from '@mui/icons-material/Feedback';
 const cookie = new Cookies();
 
 const SideNavbar = () => {
@@ -65,6 +65,12 @@ const SideNavbar = () => {
                     <div id='news' className="sidenavbaritems">
                         <NewspaperIcon className='icons'/>
                         <span className="labels">News</span>
+                    </div>
+                </Link>
+                <Link to='feedback' className='sidenavBarLink'>
+                    <div id='feedback' className="sidenavbaritems">
+                        <FeedbackIcon className='icons'/>
+                        <span className="labels">Feedback</span>
                     </div>
                 </Link>
             

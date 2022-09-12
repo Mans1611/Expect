@@ -33,6 +33,9 @@ import UsersStanding from './adminPage/pages/UsersStanding/UsersStanding';
 import WhatIsExpect from './pages/WhatIsExpect/WhatIsExpect';
 import CountryProfile from './pages/CountryProfile/CountryProfile';
 import TeamProfile from './pages/TeamProfile/TeamProfile';
+import FeedBack from './pages/FeedBack/FeedBack';
+import Support from './pages/FeedBack/Support/Support';
+import FeedbackAdmin from './adminPage/pages/Feedback/FeedbackAdmin';
 export const ThemeContext = createContext(true);
 
 
@@ -55,8 +58,15 @@ const  App = ()=> {
             
             <Route path="states" element={<RequiredAuth childern={<States/>}></RequiredAuth> }/>
             <Route path="myprofile/:userName" element={<MyProfile/>}/>
+            
+            {/* feed back pges ans support */ }
           </Route>
+
+          <Route path='/expect/support' element={<RequiredAuth childern={ <Support/> }> </RequiredAuth>} ></Route>
+          
+          <Route path='/expect/feedback' element={<FeedBack/>} ></Route>
           <Route path="/teams/:teamName" element= {<RequiredAuth childern={<TeamProfile/>}></RequiredAuth>}></Route>
+      
       {/* Regestirng pages */}
         <Route path='/welcome' element={<Welcome/>}></Route>
         <Route path='/whatisexpect' element={<WhatIsExpect/>}></Route>
@@ -77,6 +87,8 @@ const  App = ()=> {
               <Route path='usersstanding' element = {<ProtectedAdminPage childern={<UsersStanding/>}> </ProtectedAdminPage>}/>
               <Route path='statistics' element = {<ProtectedAdminPage childern={<Statistics/>}></ProtectedAdminPage>}/>
               <Route path='news' element = {<ProtectedAdminPage childern={<AddNews/>}></ProtectedAdminPage>}/>
+              <Route path='feedback' element = {<ProtectedAdminPage childern={<FeedbackAdmin/>}></ProtectedAdminPage>}/>
+          
           </Route>
 
         <Route path='*' element = {<NotFound/>}/>

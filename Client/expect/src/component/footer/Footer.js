@@ -21,10 +21,10 @@ const Footer = () => {
                     <Link to = '/home'>Contact Us</Link>
                 </div>
                 <div className="feedBackContainer">
-                    <Link to = '/home'>FeedBack</Link>
+                    <Link to = '/expect/feedback'>FeedBack</Link>
                 </div>
             <div className = "feedBackContainer">
-                <Link to='/'>Help & Support</Link>
+                <Link to='/expect/support'>Help & Support</Link>
             </div>
             </div>
 
