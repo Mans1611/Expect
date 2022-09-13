@@ -8,10 +8,15 @@ import SmallLaoding from '../../../component/loading/small.loading/smallLoading'
 import { matchesStore } from '../../Context/matchesContext';
 import io from 'socket.io-client';
 import { AdminContext } from '../../Context/ProtectedAdmin';
-import { useNavigate } from 'react-router-dom';
 import { MatchCardProvider } from '../../../Context/MatchCardContext';
 
-const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
+const socket = io.connect('https://expect-app.herokuapp.com/',{
+    withCredentials: true,
+    extraHeaders: {
+    "my-custom-header": "abcd"
+  }
+}
+); // we connect it to the bakend server;
 
 const MathcesAdm = () => {
     document.getElementsByTagName('body')[0].style.overflow = 'visible';

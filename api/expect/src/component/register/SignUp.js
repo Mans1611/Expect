@@ -30,19 +30,23 @@ const SignUp = () => {
     const store = globalUser();
  
     useEffect(()=>{
+        let isSubscribe = true;
 
-       
-        return async()=>{
-            try{
-            const response = await Axios.get('/country/countries');
-            setCountries(response.data);
-            setLoading(false);
-        }
-        catch(err){
-            console.log(err);
-        }
-        
-    }},[])
+            const fetchCountries = async()=>{
+                try{
+                    const response = await Axios.get('/country/countriesName');
+                    if(isSubscribe)
+                        setCountries(response.data);
+
+                    setLoading(false);
+                }
+                catch(err){
+                    console.log(err);
+                }
+            }
+            fetchCountries()
+        return async()=> isSubscribe = false;
+    },[])
 
     const fields = document.getElementsByClassName('inputFeild');
     for(let i = 0 ; i<fields.length;i++){
@@ -133,7 +137,7 @@ const SignUp = () => {
                     store.setUserGlob(userName);
                     store.setAuth(true);
                     store.setToken(response.data.token);
-                    navigate('/expect/home');
+                    navigate('/home');
                     let token = ''
                     for(let letter of response.headers.token){
                         token += letter.indexOf()
@@ -208,9 +212,8 @@ const SignUp = () => {
                                 loading? <SmallLaoding/>:
                                 <select id='country'  onChange={(e)=>{setCountry(e.target.value)}} className='selectCountry inputFeild'>
                                     <option className='defaultSelection' defaultChecked  value=''>Select Your fan country</option>
-                                    {countriesOption.map((country,id)=>{
-                                        const countrylogo = { backgroundImage : `url(${country.logo})` }; 
-                                        return <option style= {countrylogo} value={country.countryName} key={id}>{country.countryName}</option> 
+                                    {countriesOption.map((country,id)=>{ 
+                                        return <option value={country.countryName} key={id}>{country.countryName}</option> 
                                     })}
                                 </select>
                             }

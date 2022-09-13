@@ -22,10 +22,9 @@ const Groups = () => {
         }
         
         fetchGroups();
-        ()=> {
-            isSubscribe = false;
+
+        ()=> isSubscribe = false;
             
-        }
     },[])
     
    

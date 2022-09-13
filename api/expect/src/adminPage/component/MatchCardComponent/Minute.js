@@ -2,12 +2,9 @@ import React from 'react'
 import { useEffect,useContext,useState } from 'react';
 import { MatchCardContext } from '../../../component/matchcards/MatchCard';
 import { MatchStateCentral } from '../../../Context/MatchCardContext';
-import axios from 'axios';
-import  io  from 'socket.io-client';
-import Axios from '../../../Axios/axios';
 
 const MINUTE = 1000*60 ; 
-const socket =  io.connect('http://localhost:8000');
+
 
 const Minute = ({matchTime,min,setMin,halfsTime})=> {
     

@@ -19,14 +19,20 @@ const BottomNavbar = () => {
 
     return ( 
         <div className={`bottomNavbar ${isDark? 'dark':'white'}`}>
-            <Link to='home'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"> <HomeOutlined/> <span className="dropdownItem">Home</span></div></Link>
-            <Link to='matches'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><SportsSoccerIcon/> <span className="dropdownItem">Matches</span></div></Link>
-            <Link to='myexpects'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><StadiumIcon/> <span className="dropdownItem">MyExpects</span></div></Link>   
-            <Link to='team/myteam'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><GroupsIcon/> <span className="dropdownItem">Team</span></div></Link>   
-            <Link to='states'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"> <AlignVerticalBottomIcon/> <span className="dropdownItem">States</span></div></Link>
+            <Link to='/home'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"> <HomeOutlined/> <span className="dropdownItem">Home</span></div></Link>
+            <Link to='/matches'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><SportsSoccerIcon/> <span className="dropdownItem">Matches</span></div></Link>
+            <Link to='/myexpects'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><StadiumIcon/> <span className="dropdownItem">MyExpects</span></div></Link>   
+            <Link to='/team/myteam'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"><GroupsIcon/> <span className="dropdownItem">Team</span></div></Link>   
+            <Link to='/states'  className={`bottomNavbarLink navbarLink ${isDark? 'dark': ""}`}><div className="bottomNavbarItem"> <AlignVerticalBottomIcon/> <span className="dropdownItem">States</span></div></Link>
             <div className="bottomNavbarItem dropUpBarWrapper"><AccountCircleIcon/> <span className="dropdownItem">{userGlob}</span>
                 <div className="dropUpBar">
-                    <Link to={`myprofile/${userGlob}`}>
+                    <Link to={`/myprofile/${userGlob}`}>
+                        <div  className={`dropdownItem ${isDark? 'dark':''}` }>
+                            <span className="dropdownItem">MyProfile</span>
+                            <AccountCircleIcon/>
+                        </div> 
+                    </Link>
+                    <Link to='/register/signup'>
                         <div  className={`dropdownItem ${isDark? 'dark':''}` }>
                             <span className="dropdownItem">MyProfile</span>
                             <AccountCircleIcon/>

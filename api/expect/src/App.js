@@ -47,7 +47,7 @@ const  App = ()=> {
       <MatchesProvider childern={(
         <ProtectedAdminProvider childern={
         <Routes>
-          <Route path='/expect' element={<RequiredAuth childern={<><Navbar/><Footer/></>}/>}> 
+          <Route path='/' element={<RequiredAuth childern={<><Navbar/><Footer/></>}/>}> 
             <Route path='matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<RequiredAuth childern={<MyExpects/>}></RequiredAuth> }/>
@@ -62,9 +62,9 @@ const  App = ()=> {
             {/* feed back pges ans support */ }
           </Route>
 
-          <Route path='/expect/support' element={<RequiredAuth childern={ <Support/> }> </RequiredAuth>} ></Route>
+          <Route path='/support' element={<RequiredAuth childern={ <Support/> }> </RequiredAuth>} ></Route>
           
-          <Route path='/expect/feedback' element={<FeedBack/>} ></Route>
+          <Route path='/feedback' element={<FeedBack/>} ></Route>
           <Route path="/teams/:teamName" element= {<RequiredAuth childern={<TeamProfile/>}></RequiredAuth>}></Route>
       
       {/* Regestirng pages */}

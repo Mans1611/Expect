@@ -13,7 +13,7 @@ const updateMatch = async(data)=>{
             match = MatchHalfs(match,data.matchStatus);
 
         }
-        
+    
     if(match.fullTime){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
         

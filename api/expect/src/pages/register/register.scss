@@ -74,11 +74,10 @@
 }
 
 @media screen and (max-width:760px) {
-
     .register{
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(1,60%);
+        grid-template-columns: repeat(1,75%);
     align-items: center;
         .registerImgContainer{
             display: none;

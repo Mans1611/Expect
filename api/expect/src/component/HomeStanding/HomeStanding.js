@@ -46,7 +46,7 @@ const HomeStanding = () => {
     return ( 
         <div className = {`homeStanding ${isDark? 'dark' :''}`} >
             <div className="headline">
-                <Link to='/expect/standing/'>Standing</Link>
+                <Link to='/standing'>Standing</Link>
             </div>
             <div className="tableHead">
                 <div className="order">NO</div>
@@ -74,7 +74,7 @@ const Player = ({name,order,points})=>{
     return (
         <div className="player">
             <div className="order">{order}</div>
-            <Link className='playerLink'  to={`/expect/myprofile/${name}`}>{name}</Link>
+            <Link className='playerLink'  to={`/myprofile/${name}`}>{name}</Link>
             <p>{points}</p>
         </div>
     )

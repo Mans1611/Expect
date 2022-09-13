@@ -8,7 +8,7 @@ export default function NotFound() {
     <div className='NotFound-Container'>
         <h1 className='NotFoundTitle'>404 NOT FOUND</h1>
         <img className='NotFoundImg' src="https://cdn-icons-png.flaticon.com/512/119/119571.png" alt="" srcset="" />
-        <Link to= '/expect/home'> Back To Home Page </Link>
+        <Link to= '/home'> Back To Home Page </Link>
     </div>
   )
 }

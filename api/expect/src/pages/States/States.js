@@ -10,7 +10,7 @@ import TopVotes from '../../component/TopVotes/TopVotes';
 import MatchCardPhone from '../../component/matchcards/MatchCardPhone/MatchCardPhone';
 import PlayersToExpect from '../../component/PlayersToExpect/PlayersToExpect';
 
-const socket = io.connect('http://localhost:8000');
+//const socket = io.connect('http://localhost:8000');
 
 
 const States = ()=> {

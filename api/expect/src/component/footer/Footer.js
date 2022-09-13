@@ -17,14 +17,14 @@ const Footer = () => {
             <div className="contentContainer">
                 <div className="contactUs">
                     <Link target="_blank" to = '/whatisexpect'>What Is The Expect</Link>
-                    <Link to = '/home'>About Us</Link>
-                    <Link to = '/home'>Contact Us</Link>
+                    <Link to = '/'>About Us</Link>
+                    <Link to = '/'>Contact Us</Link>
                 </div>
                 <div className="feedBackContainer">
-                    <Link to = '/expect/feedback'>FeedBack</Link>
+                    <Link to = '/feedback'>FeedBack</Link>
                 </div>
             <div className = "feedBackContainer">
-                <Link to='/expect/support'>Help & Support</Link>
+                <Link to='/support'>Help & Support</Link>
             </div>
             </div>
             

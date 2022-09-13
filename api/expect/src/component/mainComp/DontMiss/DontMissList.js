@@ -42,7 +42,7 @@ const DontMissList = () => {
             {isLoading?<SmallLaoding/> : 
             (data.length === 0) ? <div className="no-content">
                 <h1>No Matches</h1>
-                <Link to = '/expect/matches'> Nav to matches page to see all matches</Link>
+                <Link to = '/matches'> Nav to matches page to see all matches</Link>
                 </div> : 
             data.map((match,index)=><MatchCardPhone match={match} key={index}/>)}
         </div>

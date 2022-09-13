@@ -8,6 +8,15 @@ country.get('/countries',async(req,res)=>{
     res.status(200).send(countries);
 })
 
+country.get('/countriesName',async(req,res)=>{
+    
+    const countriesName = await Country.aggregate([
+        {$match : {}},
+        {$project : {countryName : 1 , logo : 1}}
+    ]) ;
+    res.status(200).json(countriesName);
+})
+
 
 country.get('/players',async(req,res)=>{
     const country = await Country.findOne({countryName : req.query.countryName});
@@ -117,11 +126,7 @@ country.post('/addcountry',async(req,res)=>{
             msg:"The Country is Already Exist"
         })
     
-    const newCountry = await new Country({
-        countryName,
-        logo,
-        players
-    })
+    const newCountry = await new Country(req.body)
     
     await newCountry.save(()=>{
         console.log("the country is added");

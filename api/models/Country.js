@@ -28,11 +28,17 @@ const countrySchema = new Schema({
     },
     goalScored : {
         type : Object , 
-        default : 0
+        default : {
+            group : 0 ,
+            knockout : 0
+        }
     },
     goalRecieved : {
         type : Object , 
-        default : 0
+        default : {
+            group : 0 ,
+            knockout : 0
+        }
     }
 
 })

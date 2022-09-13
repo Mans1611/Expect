@@ -36,38 +36,38 @@ const SideNavbar = () => {
     
     return ( 
         <div className="sidenavbar">
-            <Link to='account' className='sidenavBarLink'>
+            <Link to='/adminpage/account' className='sidenavBarLink'>
                 <div id='account'  className="account sidenavbaritems ">
                     <AccountBoxIcon className='icons'/>
                     <span className="labels">Mans</span>
                 </div>
             </Link>
             <div className="miditems">
-                <Link to='dashboard' className='sidenavBarLink'>
+                <Link to='/adminpage/dashboard' className='sidenavBarLink'>
                     <div id='dashboard' className="sidenavbaritems ">
                         <DashboardIcon className='icons'/>
                         <span className="labels">DashBoard</span>
                     </div>
                 </Link>
-                <Link to='matches' className='sidenavBarLink'>
+                <Link to='/adminpage/matches' className='sidenavBarLink'>
                     <div id='matches' className="sidenavbaritems">
                         <SportsSoccerIcon className='icons'/>
                         <span className="labels">Matches</span>
                     </div>
                 </Link>
-                <Link to='statistics' className='sidenavBarLink'>
+                <Link to='/adminpage/statistics' className='sidenavBarLink'>
                     <div id='statistics' className="sidenavbaritems">
                         <BarChartIcon className='icons'/>
                         <span className="labels">Statistics</span>
                     </div>
                 </Link>
-                <Link to='news' className='sidenavBarLink'>
+                <Link to='/adminpage/news' className='sidenavBarLink'>
                     <div id='news' className="sidenavbaritems">
                         <NewspaperIcon className='icons'/>
                         <span className="labels">News</span>
                     </div>
                 </Link>
-                <Link to='feedback' className='sidenavBarLink'>
+                <Link to='/adminpage/feedback' className='sidenavBarLink'>
                     <div id='feedback' className="sidenavbaritems">
                         <FeedbackIcon className='icons'/>
                         <span className="labels">Feedback</span>

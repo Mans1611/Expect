@@ -14,7 +14,7 @@ const TeamTable = ({teamMembers}) => {
             </div>
             {
               teamMembers.map((member,index)=>
-              <Link key={index} to = {`/expect/myprofile/${member.userName}`}>
+              <Link key={index} to = {`/myprofile/${member.userName}`}>
                 <UserRow key={index} standing={index+1} userName={member.userName} sharePoints={member.sharePoints}/>
               </Link>
               )

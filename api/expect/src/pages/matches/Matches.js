@@ -14,7 +14,12 @@ import { FilterState, ReduceFn } from './utilites/ReduceFn';
 import Axios from '../../Axios/axios';
 import { useNavigate } from 'react-router-dom';
 
-const socket = io.connect('http://localhost:8000'); // we connect it to the bakend server;
+const socket = io.connect('https://expect-app.herokuapp.com/',{
+    withCredentials: true,
+        extraHeaders: {
+            "my-custom-header": "abcd"
+  }
+}); // we connect it to the bakend server;
 
 const Matches = () => {
     document.body.style.overflow = "visible";

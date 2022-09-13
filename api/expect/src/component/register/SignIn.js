@@ -65,7 +65,7 @@ const SignIn = () => {
                 audio.autoplay = true;
                 audio.style.display = 'none';
                 document.getElementById('root').appendChild(audio);
-                navigate('/expect/home');
+                navigate('/home');
                 setTimeout(()=>{
                     document.getElementById('root').removeChild(audio);
                 },800)

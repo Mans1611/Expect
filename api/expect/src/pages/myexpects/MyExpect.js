@@ -13,7 +13,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Axios from "../../Axios/axios";
 
-const socket = io.connect('http://localhost:8000');
+const socket = io.connect('https://expect-app.herokuapp.com/' ,{
+    withCredentials: true,
+        extraHeaders: {
+    "my-custom-header": "abcd"
+  }
+});
 
 const MyExpects = () => {
     document.body.style.overflow = "visible";
@@ -114,7 +119,7 @@ const MyExpects = () => {
                                     expected.length === 0 ? 
                                     <div className="noContent">
                                         <h2>You have not expected any matches yet</h2>
-                                        <h4>Nav to <Link to='/expect/matches'>Matches Page</Link> to expect</h4>
+                                        <h4>Nav to <Link to='/matches'>Matches Page</Link> to expect</h4>
                                     </div> : 
                                     expected.map((val,index)=>{
                                         return <MatchCardProvider  match = {val} 

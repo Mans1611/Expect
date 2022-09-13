@@ -26,7 +26,7 @@ const RequiredAuth = ({childern})=>{
                     store.setAuth(true);
                     store.setUserGlob(data.user.userName);
                     let page = localStorage.getItem('page') || 'home';
-                    navigate(`/expect/${page}`);
+                    navigate(`/${page}`);
 
                 }
                 else if(data.user === null || !token) {

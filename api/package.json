@@ -8,6 +8,10 @@
     "start": "nodemon index.js",
     "heroku-postbuild": "cd expect && npm install && npm run build"
   },
+  "engines" : { 
+    "npm" : ">=7.0.0",
+    "node" : ">=16.0.0"
+  },
   "author": "Mansour Mohamed",
   "license": "ISC",
   "dependencies": {
