@@ -19,6 +19,11 @@ import statistics from './routes/statistics.js';
 import team from './routes/team.js';
 import { SortingTeams, SortingUsers } from './routes/utilis/SortingTeams.js';
 import feedback from './routes/feedBack&support.js';
+import { fileURLToPath } from 'url';
+import path ,{dirname} from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config();
 const MongoDBSession = MongoSessions(session);
@@ -72,7 +77,7 @@ app.use('/feedback',feedback)
 app.use(cors());
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file
-mongoose.connect('mongodb://localhost:27017/expect',{useNewUrlParser:true}); // we connect it to the database
+mongoose.connect(process.env.ATLAS_URI,{useNewUrlParser:true}); // we connect it to the database
 
 mongoose.connection.once('open',()=>{
     console.log("You are connected to the cloud database");
@@ -89,6 +94,13 @@ io.on('connection',(socket)=>{
     catch(err){
         console.log(err);
     }
+})
+
+//for production in heroku
+app.use(express.static(path.join(__dirname,'/expect/build')))
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'/expect/build','index.html'))
 })
 
 server.listen(port,()=>{

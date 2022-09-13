@@ -1,0 +1,38 @@
+.matchCard-container{
+    margin-top: 50px;
+    background-color: #272727;
+    position: relative;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+    z-index: 99;
+    
+    .headline-matchContaine{
+        background-color: #ffea00;
+        color: 171717;
+        font-size: 40px;
+        text-align: center;
+        padding: 5px;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+    }
+    .noContent{
+        &.welcomepage{
+            h1{
+                color: #ffffff;
+            }
+        }
+    }
+    .matchCardGrid{
+        padding: 5px;
+        display: grid;
+        grid-template-columns: repeat(2,50%);
+        .matchCard{
+            box-shadow: none;
+            background-color: #171717;
+        }
+        @media screen and (max-width : 480px) {
+            grid-template-columns: repeat(1,100%); 
+    }
+    }
+}

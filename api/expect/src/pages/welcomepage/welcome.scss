@@ -1,0 +1,406 @@
+$font1: 'Yanone Kaffeesatz', sans-serif;
+$primaryColor : #F1003A;
+$secondaryColor : #0000f4;
+
+@mixin darkBackground {
+    &::after{
+        content: "";
+        background-color:rgba(0, 0, 0, 0.4);
+        position: absolute;
+        top: 0;
+        bottom: -200vh;
+        right: 0;
+        left: 0;
+    }
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $font1;
+}
+
+.topnavbar{ 
+    height:fit-content;
+    width: 100%;
+    background-color: #212121c7;
+    z-index: 999;
+    background-color: #000;
+    h1{
+        font-size: 56px;
+        color : #ffffff;
+    }
+    .buttonscontainer{
+        padding : 5px 15px;
+        background-color: #b29600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+.WelcomePageCover{
+    height: fit-content;
+    padding: 50px 20px 20px 10px;
+    position: relative;
+    background-size: cover;
+    background-color: #181818;
+   
+
+    .firstTitle{
+        color: #fff;
+        font-size: 84px;
+        position: relative;
+        text-align: center;
+        margin-bottom: 5px;
+        z-index: 999;
+        span{
+            color: #FFD600;
+        }
+    }
+    .buttonsWrapper{
+        background-color: #dddddd47;
+        color: #f1003a;
+        border-radius: 10px;
+        padding:  20px;
+        width: 60%;
+        margin: 30px auto;
+        .WelcomeNavbarButtons{
+            text-decoration: none;
+            background-color: #272727;
+            font-size: 40px;
+            width: 250px;
+            text-align: center;
+            font-weight: 500;
+            color: #fff;
+            background-color: #f1003a ;
+            border: #0000 solid 3px;
+            margin-left: 10px;
+            padding: 2px 15px;
+            border-radius: 5px;
+            &.blueButton{
+                color: #fff;
+                background-color: #00adf1;
+                &:hover{
+                    color: #fff ;
+                    
+                }
+            }    
+        }
+        .WelcomeNavbarButtons:hover{
+            background-color: #373737;
+            color: #fff;
+        }
+    }
+    .cards-container{
+        display: grid;
+        padding: 50px 20px  10px;
+        grid-template-columns: repeat(3,33.3%);
+        position: relative;
+        z-index: 98;
+        .card-wrapper{
+            .step{
+                color: #fff;
+                font-weight: 700;
+                font-size: 50px;
+                text-align: center;
+                margin-bottom: 20px;
+                span{
+                    padding: 5px 10px;
+                    border-radius: 10px;
+                    border : 5px solid #FFD600;
+                    color: #fff;
+                }
+
+            }
+            .card{
+                width: 90%;
+                margin: auto;
+                color: #fff;
+                background-color: #272727;
+                border-radius: 10px;
+                cursor: pointer;
+                overflow-y: hidden;
+                &.flipcard{
+                    height: 420px;
+                    position: relative;
+                    .card-face,.card-back{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: inherit;
+                        background-color: #272727;
+                        .matchCard{
+                            background-color: #181818;
+                            margin-bottom: 10px;
+                            button{
+                            display: none;
+                            }
+                        }
+                    }
+                    &:hover{
+                        .card-face{
+                            transition: transform 800ms;
+                            transform:  translateY(-500px) ;
+                        }
+                        
+                    }
+                    .card-face{
+                       text-align: center;
+                       
+                        backface-visibility: hidden;
+                        .text{
+                            padding: 20px 5px;
+                            position: absolute;
+                            bottom: 0;
+                        }
+                        h1{
+                            padding: 10px 5px;
+                            margin-top: 30px;
+                        }
+    
+                    }
+                    .card-back{
+                        padding: 20px;   
+                        background-color: #1818185d ;
+                      
+                        
+                        .rules{
+                            .points{
+                                color : #FFD600;
+                                margin-top: 30px;
+                            }
+                            &.expects{
+                                padding: 5px;
+                                font-size: 20px;
+                                p{
+                                    margin: 4px 0;
+                                }
+                                .green{
+                                    color: #0f0;
+                                    font-weight: 500;
+                                }
+                                .highlighted{
+                                    color: #00adf1;
+                                    font-size: 26px;
+                                }
+                                &.players{
+                                    font-size: 22px;
+                                    button{
+                                        margin : auto;
+                                        background: linear-gradient(90deg, #ffd600 60%, rgba(0,175,210,1) 100%);margin-top: 15px;
+                                        font-weight: 600;
+                                        color: #181818;
+                                        &:hover{
+                                            background: linear-gradient(90deg, #ffd600 0%, rgba(0,175,210,1) 100%);margin-top: 15px;
+                                        }
+                                        font-size: 30px;
+                                        padding: 10px 15px;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                .text{
+                    margin-top: 20px;
+                    width: 100%;
+                    background-color: #FFD600;
+                    padding: 5px 10px;
+                    font-size: 36px;
+                    border-bottom-left-radius: inherit;
+                    border-bottom-right-radius: inherit;
+                    color: #222;
+                    font-weight: 600;
+                    text-align: center;
+                }
+                .image-wrapper{
+                    padding: 10px ;
+                    display: flex;
+                    img{
+                        margin: auto;
+                        opacity: 0.8;
+                        border-radius: 10px;
+                        width: 90%;
+                        border: 2px solid #ffffff ;
+                    }
+                }
+            }
+        }
+    }
+    .groupsandMatches{
+        margin : 80px 0;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}
+
+.left{
+    position: absolute;
+    left: -40px;
+    border: #FFD600;
+}
+
+@media screen and (max-width : 650px) {
+    .topnavbar{ 
+        h1{
+            font-size: 40px;
+        }
+        .buttonscontainer{
+            padding : 2px 7px;
+            
+        }
+    }  
+    .WelcomePageCover{
+        .headline-matchContaine{
+            h1{
+                font-size:45px;
+            }
+        }
+        .buttonsWrapper{
+            font-size: 30px;
+            
+        }
+        .matchCardGrid{
+            .squareStyle {
+                display: none;
+            }
+        }
+        .firstTitle{
+            font-size: 50px;
+        }
+
+        .buttonsWrapper{
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            .WelcomeNavbarButtons{
+                width: 100%;
+                font-size: 30px;
+                margin: 2px auto;
+                padding: 2px 8px;    
+            }
+        }
+            
+    
+        .cards-container{
+            padding: 20px 10px  10px;
+            grid-template-columns: repeat(1,100%);
+            grid-row-gap: 30px;
+            position: relative;
+            z-index: 99;
+            margin-top: 20px;
+            .card-wrapper{
+                &:hover{
+                    animation:none;
+                 }
+                .step{
+                    font-size: 35px;
+                    span{
+                        padding: 5px;
+                        border-radius: 5px;
+                        border : 3px solid #FFD600;
+                        color: #fff;
+                    }
+    
+                }
+                .card{
+                    width: 80%;
+                    &.flipcard{
+                        height: 360px;
+                        width: 100%;
+                        position: relative;
+                        .card-face,.card-back{
+                            position: absolute;
+                            width: 100%;   
+                        }
+                        &:hover{
+                            .card-face{
+                                transition: transform 800ms;
+                                transform:  translateY(-400px) ;
+                            }
+                            
+                        }
+                        .card-face{
+                           
+                            .text{
+                                padding:  5px;
+                                position: absolute;
+                                bottom: 0;
+                            }
+                            h1{
+                                margin-top: 0;
+                            }
+        
+                        }
+                        .card-back{
+                            padding: 5px;   
+                            .rules{
+                                .points{
+                                    
+                                }
+                                &.expects{
+                                    padding: 5px;
+                                    font-size: 24px;
+                                    p{
+                                        margin: 4px 0;
+                                    }
+                                    .green{
+                                        color: #0f0;
+                                        font-weight: 500;
+                                        font-size: 24px;
+                                    }
+                                    .highlighted{
+                                        color: #f1003a;
+                                        font-size: 24px;
+                                    }
+                                    &.players{
+                                        font-size: 18px;
+                                        button{
+                                            font-size: 28px;
+                                        }
+                                    }
+                                }
+    
+                            }
+                        }
+                    }
+                    .text{
+                        margin-top: 10px;
+                        width: 100%;
+                        background-color: #2680ff;
+                        padding: 5px 10px;
+                        font-size: 30px;
+                        color: #ffffff;
+                    }
+                    .image-wrapper{
+                        padding: 10px ;
+                        display: flex;
+                        img{
+                            margin: auto;
+                            width: 80%;
+                        }
+                    }
+    
+                    
+        
+                }
+            }
+        }
+    }
+//  .sliding{
+//     animation: sliding 200ms ease-in;
+//     position: relative;
+//  }   
+// }
+
+// @keyframes sliding {
+//     from {
+//     }to{
+//         transform: translateX(100%);
+        
+//     }
+// 
+}

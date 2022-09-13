@@ -1,0 +1,91 @@
+@import '../../.mainStyle.scss';
+.CountryStanding{
+    background-color: #cccccc;
+    width: 100%;
+    height: fit-content;
+    margin: auto;
+    border-radius:10px;
+    @include shadowMainStyle;
+    .header{
+        >h1{
+            color: #171717;
+            text-align: center; 
+            background-color: #ffe100;
+            padding: 5px;
+            border-top-left-radius: 10px;   
+            border-top-right-radius: 10px;
+            font-size: 45px; 
+        }
+       }
+       a{
+        text-decoration: none;
+       }
+    .countriesgroup-container{       
+        &>:nth-child(2),&>:nth-child(3){
+            .group-standing{
+                border-left: 10px solid #007700 ;
+
+            }
+        }
+        &>:nth-child(4),&>:nth-child(5){
+            .group-standing{
+                border-left: 10px solid #a0000b;
+            }
+        }
+        &>:nth-child(5){
+            .group-standing{
+                border-left: 10px solid #a0000b;
+                border-bottom: none;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+        }
+    }
+    .group-standing{
+        &:not(.standing-header){
+            border-bottom: 2px solid #ffe100;
+            text-decoration: none;
+            background-color: #bbbbbb;
+            color : #171717;
+            &:hover{
+                color : #171717;
+                background-color: #ffe100;
+
+            }
+        }
+        &.standing-header{
+            background-color: #888888; 
+        }
+        
+
+    
+    }
+    
+}
+
+// dark mode. 
+.dark{
+    .CountryStanding{
+        background-color: #212121;
+    }
+    .group-standing{
+        &:not(.standing-header){
+           
+            
+            background-color: #272727;
+            color : #ffe100;
+            &:hover{
+                color : #171717;
+                background-color: #ffe100;
+
+            }
+        }
+        &.standing-header{
+            background-color: #171717; 
+        }
+        
+
+    
+    }
+
+}

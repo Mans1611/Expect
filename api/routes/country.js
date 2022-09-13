@@ -67,7 +67,8 @@ country.get('/groupsTable',async(req,res)=>{
 
         const group = await Country.aggregate([
             {$match : {"group" : letter}},
-            {$project : {players : 0 , _id : 0}}
+            {$project : {players : 0 , _id : 0}},
+            {$sort : {"points" : -1}}
         ])
         countries.push(group);
     }

@@ -1,0 +1,399 @@
+@import '../../.mainStyle.scss';
+
+.matchcardHeader{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 30px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(90deg, #513333 0%, #9d0116 50%);
+        .matchCardCountry{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .countryLabel{
+                font-size: 40px;
+            }
+            
+        
+    }
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    padding: 10px;
+    
+    
+    .countryImgState{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border-top-left-radius: 0;
+        border-bottom-right-radius: 0;
+        object-fit: cover;
+        cursor: pointer;
+        border: 4px solid #ffae00;
+    }
+}
+.matchStateContainer{
+    text-align: center;
+    background-color: #eeeeee !important;
+
+.matchStateTitle{
+    font-size: 40px;
+    padding: 5px;
+    color: #ffb300;
+    font-weight: 500;
+}
+.matchState{
+    padding: 10px 5px;
+    .icon{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .stateContainer{
+        display: grid;
+        grid-template-columns: 45% 10% 45%;
+        .state{
+
+            position: relative;
+            font-size: 19px;
+            font-weight: 500;
+            text-align: center;
+            margin: 5px 0 ;
+            width: 100%;
+            margin: 10px 0 ;
+            display: flex;
+            align-items: center;
+            &.first{
+                text-align: end ;
+                padding-right: 10px;
+                margin-left: 5px;
+            }
+            &.second{
+                text-align: start ;
+                padding-left: 10px;
+                margin-right: 15px;
+                
+            }
+            .close{
+                cursor: pointer;
+               
+            }
+            p{
+                width: 80%;
+                text-align: center;
+            }
+        }
+        .expected,.secondExpect{
+            background-color: #459e00;
+            border-radius: 5px;
+            padding: 5px;
+            color: #fff;
+            font-size: 24px;
+            text-align: center;
+            .factor{
+                color : #272727;
+                font-size: 23px;
+            }
+            
+        }
+        .secondExpect{
+            background-color: #ffae00;
+
+        }
+        .circleWrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .circle{
+                border: 3px solid #090;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+                font-weight: 500;
+                
+            }
+        }
+    }
+    .middleState-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 2px solid #333;
+        .middleState{
+            display: flex;
+            align-items: center;
+            margin:  10px 0;
+            font-size: 30px;
+            font-weight: 500;
+            color: #008a00;
+            .icon{
+                margin-left: 5px;
+                transform: rotate(45deg);
+                
+            }
+        }
+    }
+    .points-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 0;
+        .points{
+            height: 90px;
+            border-radius: 10px;
+            color: #fff;
+            background-color: #e7e7e7;
+            border: 2px solid #414141;
+            .head{
+                padding:  6px;
+                background-color: #007be6 ;
+                border-top-left-radius: inherit;
+                border-top-right-radius: inherit;
+                font-size: 28px;
+            }
+            .point{
+                padding: 2px;
+                font-size: 42px;
+                font-weight:600;
+                color: #373737;
+            }
+
+        }
+    }
+   
+    
+}
+&.dark{
+    background-color: #272727 !important;
+}
+}
+.popMatchContainer{
+    width: 50% ;
+    position: relative;
+    background: linear-gradient(90deg, rgb(81, 51, 51) 0%, rgb(157, 1, 22) 50%);
+    .CloseIcon{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        cursor: pointer;
+        color: #fff;
+        font-size: 40px;
+        font-weight: 700;
+    }
+ 
+&.dark{
+    background-color: #373737;
+    .matchStateTitle{
+        color: $gold ;
+    }
+    
+    .points-container{
+        .points{
+            color: #ffffff;
+            background-color: #007be6;
+            
+            .point{
+                color: #ffae00;
+            }
+            .head{
+                color: #fff;
+            }
+            
+    }
+    }
+}
+.middleState-wrapper{
+    border-bottom: 2px solid #eee;
+    .middleState{
+        color: #00970d;
+        font-weight: 400;
+        
+    }
+}
+
+}
+
+@media (min-width : 370px) and (max-width : 490px) {
+ .popMatchContainer{
+    width: 90% !important;
+    max-height: 80vh !important;
+    .CloseIcon{
+        font-size: 30px;
+    }
+    .matchStateContainer{
+        
+    .matchStateTitle{
+        font-size: 35px;
+    }
+    .matchState{
+        padding: 5px 2px; 
+        .icon{
+            width: 30px;
+            height: 30px;
+        }
+        .stateContainer{
+            display: grid;
+            grid-template-columns: 45% 10% 45%;
+            
+            .state{
+                position: relative;
+                font-size: 16px;
+                margin: 5px 0 ;
+                &.first{
+                    text-align: end ;
+                    margin-left: 0;
+                    padding-right: 5px;
+                }
+                &.second{
+                    text-align: start ;
+                }
+                
+            }
+            .expected{
+                background-color: #459e00;
+                border-radius: 5px;
+                padding: 5px;
+                color: #fff;
+                font-size: 16px;
+                text-align: center;
+            }
+            .circleWrapper{
+                .circle{
+                    border: 3px solid #090;
+                    width: 30px;
+                    height: 30px;
+                    font-size: 18px;
+                }
+            }
+        }
+        .middleState-wrapper{
+           
+            border-bottom: 2px solid #333;
+            
+        }
+        .points-container{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 0;
+            .points{
+                .head{
+                    padding:  6px;
+                    font-size: 20px;
+                }
+                .point{
+                    padding: 2px;
+                    font-size: 36px;
+                }
+
+            }
+        }
+       
+        
+    }
+    
+}
+ }   
+}
+
+@media (min-width : 260px) and (max-width : 369px) {
+ .popMatchContainer{
+    width: 95% !important;
+    height: fit-content !important;
+    max-height: 80vh !important;
+    .CloseIcon{
+        font-size: 30px;
+    }
+    .matchStateContainer{
+        
+    .matchStateTitle{
+        font-size: 25px;
+    }
+    .matchState{
+        padding: 5px 2px; 
+        .icon{
+            width: 30px;
+            height: 30px;
+        }
+        .stateContainer{
+            
+            .state{
+                position: relative;
+                font-size: 12px;
+                margin: 5px 0 ;
+                &.first{
+                    text-align: end ;
+                    margin-left: 0;
+                    padding-right: 2px;
+                    margin: 0 auto;
+                    width: 95%;
+                }
+                &.second{
+                    text-align: start ;
+                    margin: 0 auto;
+                    width: 95%;
+                }
+                
+            }
+            .expected{
+                background-color: #459e00;
+                border-radius: 5px;
+                padding: 2px;
+                color: #fff;
+                font-size: 15px;
+            }
+            .circleWrapper{
+                .circle{
+                    border: 2px solid #090;
+                    width: 30px;
+                    height: 30px;
+                    font-size: 15px;
+                }
+            }
+        }
+        .middleState-wrapper{
+            border-bottom: 2px solid #333;
+            .middleState{
+               
+                margin:  10px 0;
+                font-size: 26px;
+               
+                .icon{
+                    margin-left: 5px;
+                    transform: rotate(45deg);
+                    
+                }
+            }
+        }
+        .points-container{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 0;
+            .points{
+                height: fit-content;
+                .head{
+                    padding:  6px;
+                    font-size: 16px;
+                }
+                .point{
+                    padding: 2px;
+                    font-size: 26px;
+                }
+
+            }
+        }
+       
+        
+    }
+    
+}
+ }   
+}

@@ -42,7 +42,6 @@ export default async function AddingPointsToUSers(matches,userExpections){
                         }
                         // for result points calculations 
                         if(match.fullTime){
-                            console.log("passed");
                             let difference = 0;
                             difference = Math.abs(match.firstCountry.result - userExpections[i].result1_value) + Math.abs(match.secondCountry.result - userExpections[i].result2_value);
                             

@@ -1,0 +1,157 @@
+@import '../../.mainStyle.scss';
+
+.expectComp{
+    .matchCard{
+        background-color: #eeeeee;
+        color : #171717;
+    }
+    .matchcardHeader{
+        padding: 10px;
+        justify-content: space-around;
+      
+        &.expectCard{
+            background: #0099ff;  
+            position: relative;
+            overflow: hidden;
+            .matchCardCountryImg{
+                border : 3px solid #ffffff; 
+            }
+           
+        }
+        .countryLabel{
+            font-size: 30px;
+        }
+        .result{
+            font-size: 33px;
+            font-weight: 600;
+        }
+        .clashHolder{
+            border-radius: 50%;
+            border: 2px solid #ffd600;
+            width: 40px;
+            height:40px ;
+            font-size: 23px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+    }
+    .yourExpect{
+        background-color: transparent;
+       .ExpectionsContent{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg{
+            font-weight: 700;
+            font-size: 30px;
+            color: #272727;
+        }
+       }
+        h3{
+            color: #171717 ;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+        .userExpect{
+            color: #FFD600
+        }
+        border-top: 2px solid $gold;
+        padding: 5px;
+        color: #171717;
+        text-align: center;
+        font-size: 30px;
+        
+        &.dark{
+            color: #dddddd;
+            .userExpect{
+                color: #ffffff;
+            }
+        }
+    }
+       
+        .matchCardStart{
+            .matchCardbutton{
+                font-size: 30px;
+                width: fit-content;
+                background:linear-gradient(90deg, #0282ce8a 0%, #003d86 100%);
+                color: #fff;
+                font-weight: 600;
+                border: #fff;
+                border-radius: 5px;
+                padding: 5px 10px;
+                margin: 0 5px;
+                &:hover{
+                    border: none;
+                    color: #d7d7d7;
+                }
+            }
+            .deleteExpect{
+                margin-right: 5px;
+                background-color: #c00;
+                padding: 5px;
+                &:hover{
+                    background-color: #a00;
+                }
+
+            }
+        }
+        .matchPoints{
+            font-size: 24px;
+            text-align: end;
+            padding: 10px 5px;
+            span{
+                font-size: 28px;
+                color: #008800;
+            }
+        }
+}
+
+
+@media screen and (max-width:960px) {
+    .expectComp{
+        .yourExpect{
+            font-size: 27px;
+        }
+    }
+}
+@media screen and (max-width:760px) {
+    .expectComp{
+        .yourExpect{
+            font-size: 24px;
+        }
+    }
+}
+
+.expectComp{
+    .matchCard{
+        &.dark{
+            .yourExpect {
+                &.dark{
+                    h3{
+                        color: #eeeeee;
+                        &.yourexpection{
+                            color: #0099ff;
+                        }
+                    }
+                    svg{
+                        color: #dddddd;
+                    }
+                    .ExpectionsContent{
+                        span{
+                            color: #ffd600;
+                        }
+                    }
+                }
+            }
+            .matchPoints{
+                color: #ffffff;
+                span{
+                    color: #00cc00;
+                }
+            }
+        }
+    }
+}
