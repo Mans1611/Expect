@@ -7,12 +7,11 @@ import TimeCounter from '../../TimeCounter';
 import Minute from '../../adminPage/component/MatchCardComponent/Minute';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
-import AddingPoints from '../../utilis/AddingPoints';
-import axios from 'axios';
 import MatchState from '../MatchState/MatchState';
 import Axios from '../../Axios/axios';
+
 const Expect = ({match,userExpect,setUserExpections})=> {
-    document.getElementsByTagName("body")[0].style.overflow = "visible";
+    document.body.style.overflow = "visible";
     
     if(!userExpect)
         return;

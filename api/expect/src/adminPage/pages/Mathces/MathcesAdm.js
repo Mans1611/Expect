@@ -10,16 +10,20 @@ import io from 'socket.io-client';
 import { AdminContext } from '../../Context/ProtectedAdmin';
 import { MatchCardProvider } from '../../../Context/MatchCardContext';
 
-const socket = io.connect('https://expect-app.herokuapp.com/',{
-    withCredentials: true,
-    extraHeaders: {
-    "my-custom-header": "abcd"
-  }
-}
+
+// api : http://localhost:8000
+ // https://expect-app.herokuapp.com/
+ 
+const socket = io.connect('http://localhost:8000',{
+    //     withCredentials: true,
+    //     extraHeaders: {
+    //     "my-custom-header": "abcd"
+    // }
+    }
 ); // we connect it to the bakend server;
 
 const MathcesAdm = () => {
-    document.getElementsByTagName('body')[0].style.overflow = 'visible';
+    document.body.style.overflow = 'visible';
     const [showPop,setShowPop] = useState(false) ;
     const store = matchesStore();
 
@@ -27,20 +31,25 @@ const MathcesAdm = () => {
     
 
     useEffect(()=>{
-        return async()=>{
-            
+        let isSubscribe = true;
+        const fetchMatches = async()=>{
             try{
                 const {data} = await axios.get('/matches/getmatches')
-                store.setMatches(data);
+                if(isSubscribe)
+                    store.setMatches(data);
                 store.setLoading(false);
             }
             catch(err){
                 console.log(err);
             }
-        } 
+        }
+        fetchMatches()
+        return ()=> isSubscribe = false;
+
     },[])
 
     useEffect(()=>{
+        console.log("socket in front");
             socket.on("updatingMatches",(matches)=>{
                 store.setMatches(matches);
             })

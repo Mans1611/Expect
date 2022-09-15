@@ -1,10 +1,10 @@
+import './phoneExpect.scss';
+import '../../popupmatchcard.scss';
 import React, {useState} from 'react'
 import Minute from '../../../adminPage/component/MatchCardComponent/Minute';
 import { globalUser } from '../../../Context/HomeContext';
-import './phoneExpect.scss';
 import TimeCounter from '../../../TimeCounter';
 import PopMatchCard from '../../popmatchcard/PopMatchCard';
-import '../../popupmatchcard.scss';
 import MatchState from '../../MatchState/MatchState';
 import Axios from '../../../Axios/axios';
 
@@ -20,7 +20,7 @@ const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
     const [popDelete,setPopDelete] = useState(false);
 
     return (
-    <div className='expectPhone'>
+    <div className={`expectPhone ${isDark ? 'dark' : ''}`}>
         <div className="upperExpectWrapper">
             <div className="countryWrapper">
                 <img className='countryFlages' src={match.firstCountry.logo} alt="" />

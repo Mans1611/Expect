@@ -8,11 +8,14 @@ import MatchState from '../MatchState/MatchState';
 import { MatchCardProvider } from '../../Context/MatchCardContext';
 import { useNavigate, Link } from 'react-router-dom';
 import Axios from '../../Axios/axios';
+import PVP_pop from '../PVP_pop/PVP_pop';
 
 
 const MathchCard = ({match}) => {
     document.body.style.overflow = 'visible';
     const [pop,setPop] = useState(false);
+    const [pvpPop,set_PVP_Pop] = useState(false);
+
     const [timeUp, setTimeUp] = useState(false); 
     const {isDark, auth} = globalUser(); 
     const navigate = useNavigate();
@@ -41,7 +44,7 @@ const MathchCard = ({match}) => {
                         <h2>VS</h2>
                         <Link  to={`/country/${match.secondCountry.countryName}`}>
                             <div className="matchCardCountry">
-                                <img src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="matchCardCountryImg" />
+                                <img src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="matchCardCountryImg secondImg" />
                                 <span className='countryLabel'>{match.secondCountry.countryName}</span>
                             </div>
                         </Link>
@@ -54,10 +57,13 @@ const MathchCard = ({match}) => {
                 {/* if the time is up the timer will display and you cant press the Expect button  */}
                 {!timeUp && 
                     <div className="matchCardStart">
-                        { <button onClick={checkAuth} className='matchCardbutton'>Expect</button>}
+                        <button onClick={()=>set_PVP_Pop(true)} className='matchCardbutton pvp'>PVP</button>
+                        <button onClick={checkAuth} className='matchCardbutton'>Expect</button>
                     </div>
                 } 
-                    {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
+                
+                {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
+                {!timeUp && pvpPop && <PVP_pop  pvpPop={pvpPop} set_PVP_Pop={set_PVP_Pop} match={match}/>}
                 
                 {timeUp && <MatchResultComp  time = {match.matchTime} 
                             FT={match.fullTime} 
@@ -71,7 +77,6 @@ const MathchCard = ({match}) => {
             {timeUp &&
                     <div className="matchCardStart">
                         <button onClick={()=> setPop(true)} className='matchCardbutton'>Match State</button>
-                        
                     </div>
             }
             </div>

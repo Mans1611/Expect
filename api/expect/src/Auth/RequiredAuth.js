@@ -9,13 +9,16 @@ const RequiredAuth = ({childern})=>{
     const cookie = new Cookies();
     const navigate = useNavigate();
 
-    
     useEffect(()=>{
         const session_id = cookie.get("connect.sid");
         const token = cookie.get("token");
+
         const verifySession = async ()=>{
             try{
                 const {data} = await Axios.post('/register/verifySession',{session_id});
+                
+                
+                console.log(data);
                 if(data.user && token){
                     store.setToken(token)
                     cookie.set("token",token,{
@@ -33,6 +36,7 @@ const RequiredAuth = ({childern})=>{
                     navigate('/register/signin')
                     store.setUserGlob(null);
                     store.setAuth(false);
+                    console.log("passed inside here");
                 }
                 }
 
@@ -40,11 +44,12 @@ const RequiredAuth = ({childern})=>{
                 console.log(err);
             }
         }
-        if(session_id){
-            verifySession();
-        }else{
-            navigate('/register/signin')
-        }
+        
+        // if(session_id ||token){
+        //     verifySession();
+        // }else{
+        //     navigate('/register/signin')
+        // }
         
     },[])
 

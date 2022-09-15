@@ -12,7 +12,9 @@ const UserSchema = new Schema ({
     isVerified : {type:Boolean,default:false},
     team : {type : Object, default : null},
     userStanding : {type:Number,required:true},
-    token : {type : String, required : true}
+    token : {type : String, required : true},
+    invitations : {type : Array},
+    sendInvitations:{type : Array}
 })
 
 const User = model('User' , UserSchema );

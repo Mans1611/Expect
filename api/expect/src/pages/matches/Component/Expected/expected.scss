@@ -1,3 +1,4 @@
+@import '../../../../.mainStyle.scss';
 .expectedContainer{
     .matchcardHeader-wrapper{
         background: linear-gradient(90deg, rgba(0,121,193,1) 0%, rgba(0,61,134,1) 100%);    
@@ -5,6 +6,7 @@
         .matchcardHeader{
             background: linear-gradient(90deg, rgba(0,121,193,1) 0%, rgba(0,61,134,1) 100%);    
             justify-content: space-around;
+
             .matchCardStart{
             .matchCardbutton{
                 font-size: 24px;
@@ -18,6 +20,9 @@
         
                 }
             }
+        }
+        .secondImg{
+            @include secondCountryImg;
         }
     }
     .matchCardStart{

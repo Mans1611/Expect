@@ -1,11 +1,8 @@
 import './signin.scss';
-import PersonIcon from '@mui/icons-material/Person';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
-import Loading from '../loading/big.loading/Loading';
-import FetchingToken from '../../utilis/FetchingToken';
 import Axios from '../../Axios/axios';
 
 
@@ -27,13 +24,7 @@ const SignIn = () => {
         })
     }
 
-    useEffect(()=>{
-        document.title = "Sign in";
-           
-       
-        
-    },[])
-
+   
 
 
     const handleLogin = async(e)=>{
@@ -55,6 +46,7 @@ const SignIn = () => {
                 cookie.set('token',response.data.token,{
                     maxAge : 60 * 60 * 3
                 });
+                console.log(userName);
                 store.setUserGlob(userName)
                 store.setAuth(true);
                 store.setToken(response.data.token);
@@ -66,6 +58,7 @@ const SignIn = () => {
                 audio.style.display = 'none';
                 document.getElementById('root').appendChild(audio);
                 navigate('/home');
+
                 setTimeout(()=>{
                     document.getElementById('root').removeChild(audio);
                 },800)
@@ -98,7 +91,7 @@ const SignIn = () => {
                 </div>
                 {errMsg && <div id="backendmsglogin"></div>}
                 <div className="feild">
-                    <input className='submit' onClick={handleLogin} type="submit" />
+                    <input className='submit' placeholder='Login' onClick={handleLogin} type="submit" />
                 </div>
             </form>
                 <div className="options">

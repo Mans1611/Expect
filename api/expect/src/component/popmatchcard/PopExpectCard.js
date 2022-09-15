@@ -56,7 +56,7 @@ const PopExpectCard = ({match,setPop,userExpect}) => {
 
                         <label htmlFor={match.firstCountry.countryName}>
                             <div className="matchCardCountry">
-                                <img src={match.firstCountry.logo} alt={match.firstCountry.countryName} className="popMatchCardCountryImg" />
+                                <img src={match.firstCountry.logo} alt={match.firstCountry.countryName} className="countryImgState" />
                                 <span className='countryLabel'>{match.firstCountry.countryName}</span>
                                 <input readOnly type="radio" name="countryWinner" id={match.firstCountry.countryName} />
                             </div>
@@ -71,7 +71,7 @@ const PopExpectCard = ({match,setPop,userExpect}) => {
                         </label>
                         <label htmlFor={match.secondCountry.countryName}>
                             <div className="matchCardCountry">
-                                <img  src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="popMatchCardCountryImg" />
+                                <img  src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="countryImgState secondImg" />
                                 <span className='countryLabel'>{match.secondCountry.countryName}</span>
                                 <input readOnly type="radio" name="countryWinner" id={match.secondCountry.countryName} />
                             </div>

@@ -3,7 +3,7 @@
 .phoneContainer{
     display: grid;
     grid-template-columns: 100%;
-    padding: 10px 5px;
+    padding: 10px 0;
     border-radius:10px;
     background: #dddddd;
     @include shadowMainStyle;
@@ -26,11 +26,11 @@
     height: fit-content;
     border-radius: 10px;
     .circle{
-        border: 3px solid #FFD600;
+        border: 2px solid #FFD600;
         font-size: 18px;
         font-weight: 600;
         border-radius: 50%;
-        padding: 10px;
+        padding: 5px;
         color: #272727;
     }
     .wingesContainer{
@@ -94,7 +94,7 @@
                 }
                 .dimondContent{
                     transform: rotate(-45deg);
-                    color: #111;
+                    color: #111111;
                     font-size: 28px;
                     font-weight: 600 ;
                 }
@@ -104,13 +104,14 @@
                 right: -25px;
                 border-bottom: 4px solid #FFD600;
                 border-left: 4px solid #FFD600;
+                border-radius: 12px;
             }
             .secondDimond{
+                border-radius: 12px;
                 border-top: 4px solid #FFD600;
                 border-right: 4px solid #FFD600;
                 left: -25px;
             }
-
         }
         .middle{
             position: relative;
@@ -190,10 +191,9 @@
         }
     }
     &.dark{
-      
             position: relative;
             border: none;
-            background-color: #272727;
+            background-color: #272727 ;
             .circle{
                 border-radius: 50%;
                 color: #e1e1e1;
@@ -224,6 +224,16 @@
                     color: #fff;
                     font-size: 20px;
                 }
+            }
+             .points-wrapper{ 
+                background-color: #0f171b;
+                border-bottom: 1px solid #FFD600;
+                color: #dddddd;
+                font-weight: 600;
+                text-align: center;
+                padding: 5px 0;
+                font-size: 24px;
+        
             }
             .countryNameWrapper{
                 background-color: #373737;
@@ -336,15 +346,17 @@
     }
 }
 
-@media (min-width : 250px ) and (max-width : 375px ) {
-    .countryWrapper{
-        .secondDimond{
-            left : -30px !important;
+@media screen and (max-width : 375px ) {
+    .expectPhone{
+        width: 100%;
+        .countryWrapper{
+            .secondDimond{
+                left : -30px !important;
+            }
+            .firstDimond{
+                right : -30px !important;
         }
-        .firstDimond{
-            right : -30px !important;
-        }
-
+        
     }
     .middle{
         .matchCardCounter{
@@ -354,10 +366,31 @@
         .timeLeftLabel{
             font-size: 25px;
             color: #FFD600;
-
+            
         }
         .timeLeft{
             font-size: 16px;
         }
     }
+    .countryNameWrapper{
+        .countryName{
+            font-size: 22px;
+        }
+    }
+    .ExpectPhoneWrap{
+        
+        button{
+            padding: 2px 5px ;
+            color: #ffffff ;
+            margin: auto;
+            font-weight: 600;
+            font-size:25px;
+            &.danger{
+                background-color: rgb(194, 0, 39);
+                
+            }
+            
+        }
+    }
+}
 }

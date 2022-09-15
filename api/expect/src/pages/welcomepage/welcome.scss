@@ -27,6 +27,7 @@ $secondaryColor : #0000f4;
     background-color: #212121c7;
     z-index: 999;
     background-color: #000;
+    text-align: center;
     h1{
         font-size: 56px;
         color : #ffffff;
@@ -35,7 +36,7 @@ $secondaryColor : #0000f4;
         padding : 5px 15px;
         background-color: #b29600;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         overflow: hidden;
     }
@@ -389,7 +390,13 @@ $secondaryColor : #0000f4;
                 }
             }
         }
+        .groupsandMatches{
+            margin : 80px 0;
+            display: flex;
+            flex-direction: column;
+        }
     }
+    
 //  .sliding{
 //     animation: sliding 200ms ease-in;
 //     position: relative;
@@ -403,4 +410,26 @@ $secondaryColor : #0000f4;
         
 //     }
 // 
+}
+
+@media screen and (max-width : 300px) {
+    .CountryStanding{
+        width: 95%;
+        .countriesgroup-container{
+            .group-standing{
+                grid-template-columns: 10% 35% 15% 20% 20%;
+                align-items: center;
+                .countryholder{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 5px;
+                    span{
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
 }

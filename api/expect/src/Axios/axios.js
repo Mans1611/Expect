@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+
+// https://expect-app.herokuapp.com/
+
 const Axios = axios.create({
-    baseURL : "https://expect-app.herokuapp.com/",
+   baseURL : "http://localhost:8000",
     timeout : 1000 * 30,
     validateStatus : (status)=>{
         return status >= 200 && status < 500 ; 

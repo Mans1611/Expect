@@ -1,0 +1,71 @@
+
+.pvp{
+    height: fit-content;
+    padding: 10px;
+    background: #eeeeee;
+    .invetation-container{
+        padding: 10px;
+        text-align: center;
+        h1{
+            color: #ffdd01;
+            font-size: 46px;
+            margin-bottom: 10px;
+        }
+        #userName{
+            width: 60%;
+            height: 40px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            background-color: #171717;
+            font-size: 22px;
+            padding: 5px;
+            color: #eeeeee;
+            &::placeholder{
+                color: #eeeeee90 ;
+            }
+
+            &:focus{
+                border: 2px solid #ffdd01;
+            }
+        }
+        .invite{
+            background-color: #009700db;
+            color: #ffffff;
+            margin: 10px auto;
+            padding: 5px 10px; 
+            font-size: 28px;
+            &:hover{
+                background-color: #ffffff ;
+                color: #272727;
+            }
+        }
+        .msg{
+            margin: 5px auto;
+            border-radius: 5px;
+            padding: 5px 15px;
+            color: #eeeeee;
+            font-size: 26px;
+            width: fit-content;
+            &.green{
+                border-left: 10px solid #00ff22;
+                background-color:#007600 ;
+            }
+            &.red{
+                border-left: 10px solid #ff0022;
+                background-color:#ff5454db ;                
+            }
+        }
+    }
+    &.dark{
+        background: #252525;
+        .invetation-container{
+
+            #userName{
+                background-color: #171717;
+               
+        }
+    }
+    }
+
+}

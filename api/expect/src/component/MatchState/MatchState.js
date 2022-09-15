@@ -30,7 +30,7 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
                 </div>
                 <h1>VS</h1>
                 <div className="matchCardCountry">
-                    <img src={match.secondCountry.logo} alt="" className="countryImgState" />
+                    <img src={match.secondCountry.logo} alt="" className="countryImgState secondImg" />
                     <span className='countryLabel'>{match.secondCountry.countryName}</span>
                     <span className='countryLabel'>{match.secondCountry.result}</span>
                     

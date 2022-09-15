@@ -1,5 +1,7 @@
 import '../../../component/matchcards/matchcard.scss' ;
 import './matchCardAdm.scss';
+
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { createContext, useState } from 'react';
@@ -55,7 +57,7 @@ const MatchCardAdm = () => {
                     </div>
                     VS 
                     <div className="matchCardCountry">      
-                        <img src={MatchCenteral.match.secondCountry.logo} alt={MatchCenteral.match.secondCountry.countryName} className="matchCardCountryImg" />
+                        <img src={MatchCenteral.match.secondCountry.logo} alt={MatchCenteral.match.secondCountry.countryName} className="matchCardCountryImg secondImg" />
                         <span className='countryLabel'>{MatchCenteral.match.secondCountry.countryName}</span>
                         <span className='countryLabel'>{MatchCenteral.match.secondCountry.result}</span>
                     </div>

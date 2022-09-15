@@ -146,7 +146,6 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                         userGlob
                     }
                 });
-    
                 if(response.status === 201){
                     dispatch({type:"success",payload:response.data.msg});
                     setExpected(response.data.expects);
@@ -179,7 +178,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
 
                         <label htmlFor={match.firstCountry.countryName}>
                             <div className="matchCardCountry">
-                                <img src={match.firstCountry.logo} alt={match.firstCountry.countryName}   className="popMatchCardCountryImg" />
+                                <img src={match.firstCountry.logo} alt={match.firstCountry.countryName}   className="countryImgState" />
                                 <span className='countryLabel'>{match.firstCountry.countryName}</span>
                                 <input type="radio" name="countryWinner" id={match.firstCountry.countryName} />
                             </div>
@@ -194,7 +193,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                         </label>
                         <label htmlFor={match.secondCountry.countryName}>
                             <div className="matchCardCountry">
-                                <img  src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="popMatchCardCountryImg" />
+                                <img  src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="countryImgState secondImg" />
                                 <span className='countryLabel'>{match.secondCountry.countryName}</span>
                                 <input type="radio" name="countryWinner" id={match.secondCountry.countryName} />
                             </div>

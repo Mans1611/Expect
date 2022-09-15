@@ -45,7 +45,7 @@ const SignUp = () => {
                 }
             }
             fetchCountries()
-        return async()=> isSubscribe = false;
+        return ()=> isSubscribe = false;
     },[])
 
     const fields = document.getElementsByClassName('inputFeild');

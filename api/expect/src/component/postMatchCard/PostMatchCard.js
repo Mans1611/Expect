@@ -26,7 +26,7 @@ const PostMatchCard = ({match,userExpect,userName}) => {
                     <span>{match.firstCountry.result} - {match.secondCountry.result}</span>
                 </div>
                 <div className="country">
-                    <img className='countryImage' src={match.secondCountry.logo} alt="" />
+                    <img className='countryImage secondImg' src={match.secondCountry.logo} alt="" />
                     <label  className='countryLable'>{match.secondCountry.countryName}</label>
                 </div>
             </div>

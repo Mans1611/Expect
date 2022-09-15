@@ -21,6 +21,7 @@ import { SortingTeams, SortingUsers } from './routes/utilis/SortingTeams.js';
 import feedback from './routes/feedBack&support.js';
 import { fileURLToPath } from 'url';
 import path ,{dirname} from 'path';
+import pvp from './routes/pvp.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,24 +31,27 @@ const MongoDBSession = MongoSessions(session);
 
 const app = express();
 
-// creating a collections for sessions. 
+// creating a collections for sessions.
 const storeSession = new MongoDBSession({
     uri : process.env.ATLAS_URI,
     collection : "Users_Sessions",
-})
+}) 
 
 
 const server = http.createServer(app);
 const port = process.env.PORT|| 8000;
 
+app.use(cors());
 
 const io = new Server(server,{
     cors:{
-        origin : "https://expect-app.herokuapp.com/",
-        methods : ["GET","POST","PUT","DELETE"],
-        allowedHeaders: ["my-custom-header"],
-        credentials : true
-    }
+        // origin : "https://expect-app.herokuapp.com/",
+        origin : "http://localhost:5000" ,
+
+    // methods : ["GET","POST","PUT","DELETE"],
+    //     allowedHeaders: ["my-custom-header"],
+    //     credentials : true
+     }
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -61,7 +65,7 @@ app.use(session({
         maxAge : 1000 * 60 * 60 ,
         httpOnly : false
     },
-    store : storeSession        
+    store : storeSession
 }))
 
 // middleware
@@ -74,10 +78,8 @@ app.use('/expects',expects);
 app.use('/admin',admin);
 app.use('/statistics',statistics);
 app.use('/team',team);
-app.use('/feedback',feedback)
-
-
-app.use(cors());
+app.use('/feedback',feedback);
+app.use('/pvp',pvp);
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file
 mongoose.connect(process.env.ATLAS_URI,{useNewUrlParser:true}); // we connect it to the database
@@ -91,8 +93,8 @@ io.on('connection',(socket)=>{
         socket.on('updatingMatch',async (data)=>{
             await updateMatch(data);
             const matches = await Matches.find();
-            socket.broadcast.emit("updatingMatches",matches);  
-        })   
+            socket.broadcast.emit("updatingMatches",matches);
+        })
     }
     catch(err){
         console.log(err);
@@ -100,11 +102,11 @@ io.on('connection',(socket)=>{
 })
 
 //for production in heroku
-app.use(express.static(path.join(__dirname,'/expect/build')))
+// app.use(express.static(path.join(__dirname,'/expect/build')))
 
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/expect/build','index.html'))
-})
+// app.get('*',(req,res)=>{
+//     res.sendFile(path.join(__dirname,'/expect/build','index.html'))
+// })
 
 server.listen(port,()=>{
     console.log("http://localhost:" + port);

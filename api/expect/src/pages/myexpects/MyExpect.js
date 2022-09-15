@@ -13,11 +13,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Axios from "../../Axios/axios";
 
-const socket = io.connect('https://expect-app.herokuapp.com/' ,{
-    withCredentials: true,
-        extraHeaders: {
-    "my-custom-header": "abcd"
-  }
+
+// https://expect-app.herokuapp.com/
+const socket = io.connect('http://localhost:8000' ,{
+//     withCredentials: true,
+//         extraHeaders: {
+//     "my-custom-header": "abcd"
+//   }
 });
 
 const MyExpects = () => {
@@ -34,12 +36,13 @@ const MyExpects = () => {
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
     })
+    document.title = "My Expects" ;
+    localStorage.setItem("page","myexpects");
 
     useEffect(()=>{
-        document.title = "My Expects" ;
-        localStorage.setItem("page","myexpects");
         let  isSubscribe = true;
         const userToken = token || cookie.get("token");
+
         if(!userToken)
             navigate("/register/signin");
 

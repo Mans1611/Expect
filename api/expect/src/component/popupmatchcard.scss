@@ -39,7 +39,7 @@
         border-top-right-radius: inherit;
         padding: 5px;
         border: none;
-        background:linear-gradient(90deg, #513333 0%, #9d0116 50%);
+        background:transparent;
         .winnerTitle{
             color: #eeeeee;
             font-size: 42px;
@@ -54,7 +54,9 @@
             height:80px;
             border-radius: 50%;
             border : 2px solid $gold !important;
-            
+            &.secondImg{
+                @include secondCountryImg;
+            }
             &.flex{
                 width: fit-content;
                 height: fit-content;

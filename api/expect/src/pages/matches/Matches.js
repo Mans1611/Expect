@@ -14,11 +14,19 @@ import { FilterState, ReduceFn } from './utilites/ReduceFn';
 import Axios from '../../Axios/axios';
 import { useNavigate } from 'react-router-dom';
 
-const socket = io.connect('https://expect-app.herokuapp.com/',{
-    withCredentials: true,
-        extraHeaders: {
-            "my-custom-header": "abcd"
-  }
+// const socket = io.connect('https://expect-app.herokuapp.com/',{
+//     withCredentials: true,
+//         extraHeaders: {
+//             "my-custom-header": "abcd"
+//   }
+// }); // we connect it to the bakend server;
+
+
+const socket = io.connect('http://localhost:8000',{
+//     withCredentials: true,
+//         extraHeaders: {
+//             "my-custom-header": "abcd"
+//   }
 }); // we connect it to the bakend server;
 
 const Matches = () => {
@@ -44,6 +52,7 @@ const Matches = () => {
         
         
         let isSubscribe = true;
+
         const fetchData = async() =>{
         try{
             const {data,status} = await Axios.get(`/expects/${userGlob}`,{
@@ -60,8 +69,8 @@ const Matches = () => {
                 setMatches(data.matches);
                 setUserExpections(data.userExpections);
             }
+            setLoading(false); 
 
-            setLoading(false);     
         }catch(err){
             setLoading(false);  
         } 
@@ -74,6 +83,7 @@ const Matches = () => {
 
     },[userGlob,expectedMatches]);
     
+
     window.addEventListener('resize',()=>{
         setWidth(window.innerWidth)
 })
@@ -82,7 +92,7 @@ const Matches = () => {
     
     useEffect(()=>{
         socket.on("updatingMatches",async(matches)=>{
-            setLoading(true)
+            
             if(expandButton === "Just Todays' Matches"){
                     const MatchesWithFlag = filteringExpects(matches,userExpections);
                     setData(MatchesWithFlag);
@@ -134,6 +144,8 @@ const Matches = () => {
         setLoading(false);    
     }
 
+   
+
     return ( 
            
             <div className= {`match  ${isDark?'dark':''}` } >
@@ -145,7 +157,9 @@ const Matches = () => {
                         <div className="dateContainer">
                             <label htmlFor="NavigateToThisDate">
                                 <h1>Pick a Date : </h1>
-                                <input onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
+                                  
+                                    <input onClick={()=>console.log("clicke")}  onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
+
                             </label>
                         </div>
                     </div>

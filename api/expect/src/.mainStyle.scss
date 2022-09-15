@@ -128,3 +128,9 @@ $betiured : #ec0323;
       }
   }
 }
+
+@mixin secondCountryImg {
+  border-radius: 50%;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+}

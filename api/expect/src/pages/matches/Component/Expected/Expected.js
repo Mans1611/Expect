@@ -38,7 +38,7 @@ const Expected = ({match,userExpect})=> {
             <h2>VS</h2>
             <Link to={`/country/${match.secondCountry.countryName}`}>
               <div className="matchCardCountry">
-                  <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
+                  <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg secondImg" />
                   <span className='countryLabel'>{match.secondCountry.countryName}</span>
               </div>
             </Link>

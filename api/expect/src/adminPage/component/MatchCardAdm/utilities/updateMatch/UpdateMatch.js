@@ -13,12 +13,14 @@ import State from '../../../../../component/MatchState/State';
 import NextMatchStep from './NextMatchStep';
 
 
+//https://expect-app.herokuapp.com/
+ 
 
-const socket = io.connect('https://expect-app.herokuapp.com/',{
-  withCredentials: true,
-  extraHeaders: {
-    "my-custom-header": "abcd"
-  }
+const socket = io.connect('http://localhost:8000',{
+  // withCredentials: true,
+  // extraHeaders: {
+  //   "my-custom-header": "abcd"
+  //}
 }); // we connect it to the bakend server;
 
 const UpdateMatch = ({match,min})=> {
