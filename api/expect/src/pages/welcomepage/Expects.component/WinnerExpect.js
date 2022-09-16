@@ -2,6 +2,7 @@ import React from 'react'
 import MathchCard from '../../../component/matchcards/MatchCard';
 import {match} from '../fakeData';
 import Winner from '../../../images/winner.gif';
+import { handleHover } from '../handleHover';
 const WinnerExpect = () => {
   return (
     <div className="card-wrapper">
@@ -21,7 +22,7 @@ const WinnerExpect = () => {
                   <img src = {Winner}/>
                </div>
                 <h1>Pick A Match & Expect Winner</h1>
-                <div className="text">Hover To Show More</div>
+                <div onClick={()=>handleHover(0)}  className="text">Hover To Show More</div>
             </div>
            
         </div>

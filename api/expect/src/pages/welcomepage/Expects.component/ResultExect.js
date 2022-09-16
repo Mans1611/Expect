@@ -1,11 +1,15 @@
 import React from 'react'
 import Matchresult from '../../../images/result.gif';
+import { handleHover } from '../handleHover';
 
 const ResultExect = () => {
+  
+  
+
   return (
     <div className="card-wrapper">
         <div className="step"> <span> 2 </span> </div>
-        <div className="card flipcard">
+        <div  className="card flipcard">
             <div className="card-back">
                 <div className="rules expects">
                   Try to expect the result of the game, you will get even if you are close to the result points of you 
@@ -22,7 +26,7 @@ const ResultExect = () => {
                   <img src = {Matchresult}/>
                </div>
                 <h1>Try to Expect The Match Result</h1>
-                <div className="text">Hover To Show More</div>
+                <div onClick={()=>handleHover(1)} className="text">Hover To Show More</div>
             
             </div>
         </div>

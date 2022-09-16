@@ -1,6 +1,4 @@
 import './myexpect.scss';
-
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { globalUser } from "../../Context/HomeContext";
 import filteringExpects from "../matches/utilites/filteringExpects";
@@ -9,6 +7,8 @@ import ExpectPhone from "../../component/Expectes/PhoneComponent/ExpectPhone";
 import io from 'socket.io-client';
 import { MatchCardProvider } from "../../Context/MatchCardContext";
 import SmallLaoding from "../../component/loading/small.loading/smallLoading";
+import Loading from '../../component/loading/big.loading/Loading';
+
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Axios from "../../Axios/axios";
@@ -111,10 +111,10 @@ const MyExpects = () => {
                     <div className="text">Total Points</div>
                     <div className="totalPoints">{totalPoints} PT</div>
                 </div>
-
-           
                 { 
                 loading ? <SmallLaoding/> : 
+
+           
                     width > 480 ?
                     (   // if condition 
                     <div className={` ${(expected.length === 0) ? 'nogrid' : 'expectsContainer'}` }> 

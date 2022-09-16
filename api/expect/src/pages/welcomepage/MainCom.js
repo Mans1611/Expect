@@ -20,9 +20,9 @@ const MainCom = () => {
                 <Link to='/register/signin' className="WelcomeNavbarButtons">Sign In</Link>
             </div>
             <div className="cards-container">
-              <WinnerExpect/>
-              <ResultExect/>
-              <PlayerExpects setPop={setPop}/>
+              <WinnerExpect index = {0}/>
+              <ResultExect index = {1}/>
+              <PlayerExpects index = {2} setPop={setPop}/>
             </div>
             <div className="groupsandMatches">
               <MatchesContainer/>

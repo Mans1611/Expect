@@ -8,6 +8,12 @@
     margin: 20px auto ;
     @include shadowMainNews;
     // for the dark theme.
+    .expectPhone{
+        .matchTime{
+            font-size: 30px;
+            color: #e6c100
+        }
+    }
     &.dark{
         @include dark2;
         .titleWrapper{
@@ -36,6 +42,9 @@
         .matchCardCounter{
             padding: 5px;
         }
+        
+        
+       
        
     }
     border-radius: $borderRaduis;

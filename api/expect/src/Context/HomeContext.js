@@ -12,14 +12,17 @@ export const Provider = ({children})=>{
     const [auth,setAuth] = useState(false);
     const [expectedMatches,setExpected] = useState([]);
     const [token,setToken] = useState(null);
-
+    const [invitions,setInvitations] = useState([]);
+    const [number,setNumber] = useState(0); // for number of notifications.
     return(
         <userContext.Provider value={{
             isDark,setDark,
             userGlob,setUserGlob,
             auth,setAuth,
             expectedMatches,setExpected,
-            token,setToken
+            token,setToken,
+            invitions,setInvitations,
+            number,setNumber
             }}>
             {children}
         </userContext.Provider>

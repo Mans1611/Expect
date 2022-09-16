@@ -1,8 +1,8 @@
 @import '../../.mainStyle.scss';
 
 .myexpects{
-    height: fit-content;
-    background:#eee;
+    min-height : 80vh;
+    background:#eeeeee;
     padding: 10px;
     .headlineWrapper{
         padding: 20px 0 ;
@@ -63,7 +63,7 @@
             background-color: #ccccff;
             padding: 10px;
             height: 100%;
-            width: 80%;
+            width: 95%;
             margin: auto;
             border-radius: 10px;
             
@@ -93,8 +93,6 @@
 @media screen and (max-width:960px) {
 
     .myexpects{
-        
-       
         .expectsContainer{
             padding: 10px;
             background: linear-gradient(180deg, #a1a1a1 0%, #ffffff 100%);

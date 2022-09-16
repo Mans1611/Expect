@@ -10,7 +10,7 @@ import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import PopExpectCard from '../../popmatchcard/PopExpectCard';
 import { Link, useNavigate } from 'react-router-dom';
 
-const MatchCardPhone = ({match,userExpect}) => {
+const MatchCardPhone = ({match,userExpect,noExpect}) => {
     document.body.style.overflow = 'visible';
     
     const [pop,setPop] = useState(false);
@@ -20,7 +20,6 @@ const MatchCardPhone = ({match,userExpect}) => {
     const [popShowExpect,setpopShowExpect] = useState(false);
     const navigate = useNavigate();
     const {auth,isDark} = globalUser(); 
-    
     const checkAuth = ()=>{
         if(auth)
             return setPop(true);
@@ -49,9 +48,12 @@ const MatchCardPhone = ({match,userExpect}) => {
                     </Link>
                 </div>
                 <div className="middle">
+                    {noExpect && <div className='matchTime'>
+                        {new Date(match.matchTime).toLocaleTimeString().slice(0,5)} </div>}
 
                     {timeUp ? match.fullTime ? "FT" : <Minute halfsTime={match.time} min = {min}  setMin = {setMin} matchTime={match.matchTime}/> 
-                    : 
+                    :
+                    !noExpect && 
                     <TimeCounter setTimeUp = {setTimeUp} matchTime={match.matchTime}/> }
 
                 </div>
@@ -81,7 +83,7 @@ const MatchCardPhone = ({match,userExpect}) => {
                     </>
                     :
                     match.expected ? <button onClick={()=>setpopShowExpect(true)}> My Expect </button> :
-                    <button onClick={checkAuth}>Expect</button>
+                    !noExpect && <button onClick={checkAuth}>Expect</button>
                     
                 
                 } 

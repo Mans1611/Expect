@@ -22,6 +22,7 @@ import feedback from './routes/feedBack&support.js';
 import { fileURLToPath } from 'url';
 import path ,{dirname} from 'path';
 import pvp from './routes/pvp.js';
+import player from './routes/player.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -79,6 +80,7 @@ app.use('/admin',admin);
 app.use('/statistics',statistics);
 app.use('/team',team);
 app.use('/feedback',feedback);
+app.use('/player',player);
 app.use('/pvp',pvp);
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file
@@ -94,7 +96,18 @@ io.on('connection',(socket)=>{
             await updateMatch(data);
             const matches = await Matches.find();
             socket.broadcast.emit("updatingMatches",matches);
+        })  
+        
+        socket.on('join_room',(data)=>{
+            socket.join(data.roomId);
+            socket.to(data.roomId).emit("OpponentISReady", data)
+            
         })
+        socket.on("ShowRockCaser",(data)=>{
+            socket.to(data.roomId).emit("showCaser", data)
+        })
+        socket.to()
+
     }
     catch(err){
         console.log(err);

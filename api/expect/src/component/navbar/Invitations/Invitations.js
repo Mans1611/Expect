@@ -9,10 +9,9 @@ import { globalUser } from '../../../Context/HomeContext';
 const Invitations = () => {
 
     const [shownotifications,setShowNotifications] = useState(false);
-    const [invitions,setInvitations] = useState([]);
-    const [number,setNumber] = useState(0);
+   
     
-    const {userGlob} = globalUser();
+    const {userGlob,invitions,setInvitations,number,setNumber} = globalUser();
 
     useEffect(()=>{
         let isSubscribe = true;
@@ -26,14 +25,18 @@ const Invitations = () => {
         }
 
         fetchInvitations();
-
         ()=> isSubscribe = false;
     },[])
+
+
 
   return (
     <div  className="notification-container">
         <NotificationsIcon onClick={()=> setShowNotifications(!shownotifications)} />
-        <div className="red-circle">{number}</div>
+        {
+            number === 0 ? null :
+            <div className="red-circle">{number}</div>
+        }
     {shownotifications &&
     <div className="notifcations-Content">
         {invitions.map((invition,index)=> <Invitation invition={invition} key = {index}/>

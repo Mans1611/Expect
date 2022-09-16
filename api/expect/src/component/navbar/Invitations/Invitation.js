@@ -1,20 +1,22 @@
 import Person from '@mui/icons-material/Person'
 import React from 'react'
 import Axios from '../../../Axios/axios';
+import { globalUser } from '../../../Context/HomeContext';
 
 const Invitation = ({invition}) => {
+    const {invitions ,setInvitions} = globalUser();
+
     const handleSend = async (type)=>{
         if(type === "Accept"){
-            const response = await Axios.put('/pvp/acceptinvitation',{
-                sender : invition.sender,
-                reciever : invition.reciever,
-                roomId : invition.roomId 
-            });
-            console.log(response.data);
+            const response = await Axios.put('/pvp/acceptinvitation',invition);
         }
         else{
 
         }
+
+        let newInvitions = invitions.filter((invite)=>invite.roomId !== invition.roomId);
+        setInvitions(newInvitions);
+
     }
 
   return (

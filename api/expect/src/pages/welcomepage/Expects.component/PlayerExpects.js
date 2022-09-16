@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PlayerChoose from '../../../images/playerChoose.gif';
-
+import { handleHover } from '../handleHover';
 import PlayerPointsPop from './PlayerPointsPop';
 
 const PlayerExpects = ({setPop}) => {
@@ -25,7 +25,7 @@ const PlayerExpects = ({setPop}) => {
                       <img src={PlayerChoose} />
                     </div>
                     <h1>Select a Two Players From each caountry</h1>
-                    <div className="text">Hover To Show More</div>
+                    <div onClick={()=>handleHover(2)} className="text">Hover To Show More</div>
                 </div>
 
             </div>

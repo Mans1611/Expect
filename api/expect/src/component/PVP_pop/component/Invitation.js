@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import Axios from '../../../Axios/axios';
 import { InviteState, reduceInviteFn } from '../Reducer/invitationReducer';
 import SmallLoading from '../../loading/small.loading/smallLoading';
@@ -8,19 +8,15 @@ import { MatchCardProvider } from '../../../Context/MatchCardContext';
 
 
 const Invitation = ({matchId}) => {
-    const {userGlob} = globalUser();
+    const {userGlob,invitions,setInvitations} = globalUser();
 
     const [inviteState,dispatch] = useReducer(reduceInviteFn,InviteState);
     const [isFetching,setFetching] = useState(false);
 
     const handleInvite = async (e)=>{
-
-        e.preventDefault();
-      
-
+        e.preventDefault(); 
         
-        
-        let userName =document.getElementById('userName').value.trim() ; 
+        let userName = document.getElementById('userName').value.trim() ; 
 
         if(userName === '' || !userName)
             return dispatch({type : 'empty'})
@@ -38,8 +34,10 @@ const Invitation = ({matchId}) => {
             });
 
             if(data.found){
-                dispatch({type : 'done'})
-                setFetching(false)
+                dispatch({type : 'done'});
+                setFetching(false);
+                let newInvitions = invitions;
+                setInvitations(newInvitions.push(data.invitation_obj));
             }
             else{
                 dispatch({type : 'NotFound'});
@@ -50,8 +48,12 @@ const Invitation = ({matchId}) => {
         }
     }
 
+  
+   
+
   return (
     <div className="invetation-container">
+
         <h1>Enter your friend Username</h1>
         <input onFocus={()=>dispatch({type : 'hide'})} placeholder='UserName ' type="text" id='userName' />
         {inviteState.showMsg && 

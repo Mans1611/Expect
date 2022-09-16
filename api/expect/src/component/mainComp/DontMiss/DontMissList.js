@@ -44,7 +44,7 @@ const DontMissList = () => {
                 <h1>No Matches</h1>
                 <Link to = '/matches'> Nav to matches page to see all matches</Link>
                 </div> : 
-            data.map((match,index)=><MatchCardPhone match={match} key={index}/>)}
+            data.map((match,index)=><MatchCardPhone noExpect = {true} match={match} key={index}/>)}
         </div>
      );
 }
