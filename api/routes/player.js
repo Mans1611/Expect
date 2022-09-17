@@ -6,6 +6,7 @@ const player = express.Router();
 
 
 
+// tihs route to return all player details. 
 player.get('/:countryName/:playerName',async(req,res)=>{
     const {countryName,playerName} = req.params;
     try{

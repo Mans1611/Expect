@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {useContext,createContext } from "react";
+import Axios from "../Axios/axios";
 
 
 export const userContext = createContext(null);
@@ -14,6 +15,7 @@ export const Provider = ({children})=>{
     const [token,setToken] = useState(null);
     const [invitions,setInvitations] = useState([]);
     const [number,setNumber] = useState(0); // for number of notifications.
+    const [user,setUser] = useState({});
     return(
         <userContext.Provider value={{
             isDark,setDark,
@@ -22,7 +24,8 @@ export const Provider = ({children})=>{
             expectedMatches,setExpected,
             token,setToken,
             invitions,setInvitations,
-            number,setNumber
+            number,setNumber,
+            user,setUser
             }}>
             {children}
         </userContext.Provider>

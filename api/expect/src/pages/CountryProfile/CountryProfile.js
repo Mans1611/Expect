@@ -11,6 +11,7 @@ import { globalUser } from '../../Context/HomeContext';
 import TopPlayers from '../../component/TopPlayers/TopPlayers';
 import TopPlayersCountry from '../../component/TopPlayersCountry.js/TopPlayersCountry';
 import CountryStanding from '../../component/CountryStanding/CountryStanding';
+import NewsContainer from '../../component/NewsContainer/NewsContainer';
 
 const CountryProfile = () => {
     const {countryName} = useParams();
@@ -76,15 +77,16 @@ const CountryProfile = () => {
                 <NextMatches nextMatches = {nextMatches} />
             </div>
         </div>
-            <div className="countryDetails">
-                <TopPlayersCountry countryName = {countryName} />
-                <div className="countryStanding-container">
-                    <CountryStanding 
-                        groupName={country.group} 
-                        groupStanding = {group}
-                        />
-                </div>
+        <div className="countryDetails">
+            <TopPlayersCountry countryName = {countryName} />
+            <div className="countryStanding-container">
+                <CountryStanding 
+                    groupName={country.group} 
+                    groupStanding = {group}
+                    />
             </div>
+        </div>
+        <NewsContainer countryName = {countryName}/>
         </div>
   )
 }

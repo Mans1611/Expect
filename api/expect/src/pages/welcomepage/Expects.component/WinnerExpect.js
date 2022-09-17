@@ -22,7 +22,7 @@ const WinnerExpect = () => {
                   <img src = {Winner}/>
                </div>
                 <h1>Pick A Match & Expect Winner</h1>
-                <div onClick={()=>handleHover(0)}  className="text">Hover To Show More</div>
+                <div onClick={()=>handleHover(0)}  className="text">Click To Show More</div>
             </div>
            
         </div>

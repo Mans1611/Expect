@@ -16,14 +16,32 @@ news.get('/getnews',SessionVerification,async(req,res)=>{
     }
 })
 
+news.get('/getCountryNews/:countryName',async(req,res)=>{
+    let pushNews = [];
+    const {countryName} = req.params;
+    const regExp = new RegExp(`${countryName}`,'ig');
+    const New = await News.find({tags : regExp});
+    pushNews.push(...New);
+
+    if(pushNews.length<=2){
+        const all_news = await News.find();
+        for(let news of all_news){
+            if(!news.tags.includes(countryName))
+                pushNews.push(news);
+            
+            if(pushNews.length >= 3)
+            break
+        }
+    }
+    res.status(200).json(pushNews);
+
+
+})
 
 news.post('/addnews',async(req,res)=>{
-    const {title,img,paragraph} = req.body;
     try{
         const news = await News({
-            title,
-            img,
-            paragraph
+            ...req.body
         });
         await news.save()
         res.status(201).send("news is saved")

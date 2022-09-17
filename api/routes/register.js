@@ -56,6 +56,7 @@ router.post('/signup',async(req,res)=>{
         res.status(201).json({
             msg:"User is created succussfully",
             token,
+            user : {userName,goldenPlayer:null}
         });
     })
     
@@ -92,7 +93,12 @@ router.post('/login',async(req,res)=>{
             });  
             // creating a session to that user
             CreateUserSession(req);
-            return res.status(200).json({msg:"login successfully",token});
+            return res.status(200).json({
+                msg:"login successfully",
+                token,
+                user : {userName:userDB.userName, goldenPlayer : userDB.goldenPlayer}
+
+        });
         }
         res.status(203).json({msg:"Check your Username and password"}); 
     }catch(err){

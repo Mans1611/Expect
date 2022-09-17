@@ -1,0 +1,119 @@
+@import '../../.mainStyle.scss';
+
+.popMatchFullPage{
+    cursor: default;
+    .popMatchContainer{
+        position: relative;
+        max-height: 90vh;
+        overflow-y: scroll;
+        svg{
+            &.info,&.Popicon{
+                color: #eeeeee;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+        .player-header{
+            display: flex;
+            align-items: center;
+            padding: 20px 20px;
+            color: #eeeeee;
+
+            .playerImg{
+                img{
+                    width: 110px;
+                    height: 110px;
+                    border-radius: 50%;
+                    background-color: #27272764;
+                    border:2px solid #eeeeee;
+                    padding: 1px;
+            }
+        }
+        .player-personl-details{
+            margin-left: 20px;
+            color: #ffffff;
+            text-align: left;
+            .playerName{
+                color: $gold;
+            }
+            h2{
+                color: #ffffff;
+                margin: 0;
+            }
+        }
+        .player-country{
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            
+            img{
+                width: 80px;
+                height: 60px;
+                border: 2px solid #eeeeee;
+            }
+            h2{
+                color: #eeeeee;
+                margin-top: 5px;
+
+            }
+        }
+    }
+    .player-content-body{
+        background-color: #e5e5e5;
+        padding: 10px;
+        h1{
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 40px;
+        }
+        .statistics-container{
+            width: 80%;
+            border-radius: 10px;
+            background-color: #c1c1c1;
+            padding: 10px 0;
+            margin: auto;
+
+            .flex{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+              
+                .detail{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    h3{
+                        margin: 5px 0 0;
+                    }
+                    h1{
+                        color: #180740 ;
+                    }
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        object-fit: contain;
+                    }
+                }
+                }
+        }
+        
+    }
+    &.dark{
+       
+        .player-content-body{
+            background-color: #373737;
+            .statistics-container{
+                width: 80%;
+                border-radius: 10px;
+                background-color: #27272791;
+               
+                margin: auto;
+                
+            }
+        }
+    }
+}
+
+}

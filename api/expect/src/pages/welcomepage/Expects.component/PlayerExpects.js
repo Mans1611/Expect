@@ -25,7 +25,7 @@ const PlayerExpects = ({setPop}) => {
                       <img src={PlayerChoose} />
                     </div>
                     <h1>Select a Two Players From each caountry</h1>
-                    <div onClick={()=>handleHover(2)} className="text">Hover To Show More</div>
+                    <div onClick={()=>handleHover(2)} className="text">Click To Show More</div>
                 </div>
 
             </div>

@@ -6,6 +6,7 @@ import WinnerExpect from './Expects.component/WinnerExpect';
 import PlayerPointsPop from './Expects.component/PlayerPointsPop';
 import MatchesContainer from '../../component/MatchesContainer/MatchesContainer';
 import Groups from '../../component/Groups/Groups';
+import NewsContainer from '../../component/NewsContainer/NewsContainer';
 const MainCom = () => {
   document.body.style.overflow = "visible";
 
@@ -28,6 +29,7 @@ const MainCom = () => {
               <MatchesContainer/>
               <Groups/>
             </div>
+            <NewsContainer countryName={"worldcup"}/>
             {popup && <PlayerPointsPop setPop={setPop}/>}
           
               

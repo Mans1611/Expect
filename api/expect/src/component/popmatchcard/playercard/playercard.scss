@@ -11,6 +11,7 @@
     -moz-box-shadow: 2px 3px 87px -6px rgba(0,0,0,0.43);
     background: linear-gradient(90deg, #513333 50%, #9d0116 50%);
     border: 3px solid #272727;
+    position: relative;
     &.dark{
         border: 3px solid #d7d7d7;
     }
@@ -18,7 +19,17 @@
         background: linear-gradient(90deg, #191919 50%, #303030 50%);
 
     }
-
+    a{
+        text-decoration: none;
+    }
+    .info{
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+    }
     .playerCardInfo{
         
         border-top-right-radius: inherit;

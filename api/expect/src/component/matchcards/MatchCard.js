@@ -24,6 +24,7 @@ const MathchCard = ({match}) => {
     const checkAuth = ()=>{
         if(auth)
             return setPop(true);
+            
         navigate('/register/signin')
     }
 

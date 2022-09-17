@@ -18,7 +18,7 @@ const RequiredAuth = ({childern})=>{
                 const {data} = await Axios.post('/register/verifySession',{session_id});
                 
                 
-                console.log(data);
+              
                 if(data.user && token){
                     store.setToken(token)
                     cookie.set("token",token,{
@@ -36,7 +36,7 @@ const RequiredAuth = ({childern})=>{
                     navigate('/register/signin')
                     store.setUserGlob(null);
                     store.setAuth(false);
-                    console.log("passed inside here");
+                   
                 }
                 }
 

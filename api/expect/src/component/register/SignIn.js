@@ -50,7 +50,7 @@ const SignIn = () => {
                 store.setUserGlob(userName)
                 store.setAuth(true);
                 store.setToken(response.data.token);
-
+                store.setUser(response.data.user)
                 const audio = new Audio()
                 audio.controls = true;
                 audio.src = 'http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a';

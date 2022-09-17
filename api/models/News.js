@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const {Schema,model} = mongoose;
+
 const newsSchema = new Schema({
     img:{
         type:String,
@@ -12,6 +13,10 @@ const newsSchema = new Schema({
     paragraph:{
         type:String,
         required:true
+    },
+    tags : {
+        type: String,
+        required : true,
     }
 })
 const News = new model('News',newsSchema);

@@ -14,7 +14,11 @@ const UserSchema = new Schema ({
     userStanding : {type:Number,required:true},
     token : {type : String, required : true},
     invitations : {type : Array},
-    sendInvitations:{type : Array}
+    sendInvitations:{type : Array},
+    goldenPlayer : {type:Object,default:{
+        player:null,
+        updateCounter : 1
+    }}
 })
 
 const User = model('User' , UserSchema );

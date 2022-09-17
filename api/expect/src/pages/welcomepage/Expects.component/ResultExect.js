@@ -26,7 +26,7 @@ const ResultExect = () => {
                   <img src = {Matchresult}/>
                </div>
                 <h1>Try to Expect The Match Result</h1>
-                <div onClick={()=>handleHover(1)} className="text">Hover To Show More</div>
+                <div onClick={()=>handleHover(1)} className="text">Click To Show More</div>
             
             </div>
         </div>

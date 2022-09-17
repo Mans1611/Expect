@@ -36,6 +36,7 @@ import TeamProfile from './pages/TeamProfile/TeamProfile';
 import FeedBack from './pages/FeedBack/FeedBack';
 import Support from './pages/FeedBack/Support/Support';
 import FeedbackAdmin from './adminPage/pages/Feedback/FeedbackAdmin';
+import PlayerProfile from './pages/PlayerProfile/PlayerProfile';
 export const ThemeContext = createContext(true);
 
 
@@ -75,6 +76,7 @@ const  App = ()=> {
           <Route path='signup' element = {<SignUp/>}/> 
         </Route>
         <Route path='/country/:countryName' element={<CountryProfile/>} />
+        <Route path='/expect/player/:countryName/:playerName' element={<PlayerProfile/>}/>
       {/* Admin pages */}
 
           <Route path='/adminpage/login' element={<AdminLogin/>}/>

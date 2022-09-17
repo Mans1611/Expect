@@ -11,13 +11,14 @@ import SelectPlayerCard from './playercard/SelectPlayerCard';
 import { ReducePlayerFn, statePlayers } from './ReducerPlayer';
 import { CreatePlayerObject } from '../PlayerCardRadio/CreatePlayerObject';
 import PlayerCard from './playercard/PlayerCard';
+import PickGoldenPlayer from '../PickGoldenPlayer/PickGoldenPlayer';
 
 const PopMatchCard = ({match,setPop,type,userExpect}) => {
     document.body.style.overflow = 'hidden';
-    const {isDark,userGlob,token,expectedMatches,setExpected} = globalUser();
+    const {isDark,userGlob,token,user,setExpected} = globalUser();
     
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
-    
+    const [skip,setSkip] = useState(false);
     useEffect(()=>{
         return async()=>{
             if(userExpect){
@@ -168,8 +169,12 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
         <div  onClick={hidePop}  className="popMatchFullPage">
             <div className={`popMatchContainer ${isDark && 'dark'}`}>
                 <CloseIcon onClick={()=> setPop(false)} className='Popicon'/>
-                <form>
-                <div className="headerPopUp">
+                    {!user.goldenPlayer && ! skip ? 
+                        <PickGoldenPlayer setSkip = {setSkip} />
+
+                         :
+                     <form>
+                        <div className="headerPopUp">
                     <div className="popMatchWinner">
                         <span className="winnerTitle">Select Winner</span>    
                     </div>
@@ -310,6 +315,8 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
 
                 </form>
 
+                    }
+                
                 
                 
                 

@@ -121,5 +121,24 @@ users.put('/edituser/:userName',VerifyUserJWT, async(req,res)=>{
 })
 
 
+users.post('/postGoldenPlayer/:userName',VerifyUserJWT,async(req,res)=>{
+    const {userName} = req.params;
+    let userDB = await User.findOne({userName});
+
+    // i check if there was a player before.
+    if(userDB.goldenPlayer?.player)
+        return res.status(203).json({msg : "You have selected a player before"});
+
+    userDB.goldenPlayer = {
+        player : {...req.body},
+        updateCounter : 1
+    };
+
+    await User.updateOne({userName},userDB);
+
+    res.status(200).json({msg:"Player is added successfully"})
+    
+})
+
 
 export default users;

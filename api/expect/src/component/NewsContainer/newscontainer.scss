@@ -1,0 +1,206 @@
+@import '../../.mainStyle.scss';
+.news_container{
+    padding: 30px 10px;
+    display: grid;
+    grid-template-columns: repeat(3,33.3%);
+    width: 100%;
+    margin: auto;
+    background-color: #d1d1d1;
+
+    .newsCard{
+        background-color: #ffffff;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        height: 400px;
+        overflow-y: hidden;
+        margin: 20px auto;
+        .img-wrapper{
+            overflow: hidden;
+            min-height: 200px;
+            max-height: 200px;
+           
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+            
+            img{
+                width: 100%;
+                border-top-left-radius: inherit;
+                border-top-right-radius: inherit;
+                height: 100%;
+                object-fit: cover;
+                &:hover{
+                    transition: all 250ms;
+                    transform: scale(1.1) ;
+                }
+            }
+
+        }
+        .body{
+            padding: 10px 15px;
+            
+            h2{
+                font-size: 26px;
+                color : #ff0044;
+                margin-bottom: 10px;
+                font-weight: 500;
+            }
+            p{
+                color: #200342;
+                font-size: 20px;
+                
+            }
+        }
+    }
+    &.dark{
+        background-color: #272727;
+        .newsCard{
+            background-color: #171717;
+            p{
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:930px) {
+    .news_container{
+        padding: 30px 0px;
+        .newsCard{
+          
+            width: 95%;
+            height: 400px;
+            margin: 10px auto;
+            .body{
+                padding: 10px;
+                
+                h2{
+                    font-size: 24px;
+                }
+                p{
+                    font-size: 18px;  
+                }
+            }
+        }
+       
+        &.dark{
+            background-color: #272727;
+            .newsCard{
+                background-color: #171717;
+                p{
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width : 600px) {
+    .news_container{
+        padding: 30px 10px;
+        display: flex;
+        flex-direction: column;
+       
+    
+        .newsCard{
+            background-color: #ffffff;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: fit-content;
+            margin: 5px auto;
+            .img-wrapper{
+                max-height: 100%;
+                min-height: 100%;
+                border-top-right-radius: 0;
+                flex: 4;
+                img{
+                    object-fit: cover;
+                    height: 100%;
+                    &:hover{
+                        transition: all 250ms;
+                        transform: scale(1.1) ;
+                    }
+                }
+            }
+            .body{
+                padding: 10px 5px;
+                flex: 8;
+                h2{
+                    font-size: 20px;
+                }
+                p{
+                    color: #200342;
+                    font-size: 14px;
+                    
+                }
+            }
+        }
+        &.dark{
+               background-color: #272727;
+               .newsCard{
+                   background-color: #171717;
+                   p{
+                       color: #ffffff;
+                   }
+               }
+           }
+       
+    }
+    
+}
+
+@media screen and (max-width : 450px ) {
+    .news_container{
+        padding: 30px 10px;
+       
+        .newsCard{
+            background-color: #ffffff;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+           
+            .img-wrapper{
+                max-height: 100%;
+                min-height: 100%;
+                border-top-right-radius: 0;
+                flex: 4;
+                img{
+                   
+                    object-fit: cover;
+                    height: 100%;
+                    &:hover{
+                        transition: all 250ms;
+                        transform: scale(1.1) ;
+                    }
+                }
+    
+            }
+            .body{
+                padding: 10px 5px;
+                flex: 8;
+                h2{
+                    font-size: 18px;
+                }
+                p{
+                    color: #200342;
+                    font-size: 12px;
+                    
+                }
+            }
+        }
+        &.dark{
+            background-color: #272727;
+            .newsCard{
+                background-color: #171717;
+                p{
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+    
+}

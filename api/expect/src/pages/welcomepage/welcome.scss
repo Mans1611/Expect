@@ -132,21 +132,8 @@ $secondaryColor : #0000f4;
                         height: 100%;
                         border-radius: inherit;
                         background-color: #272727;
-                        .matchCard{
-                            background-color: #181818;
-                            margin-bottom: 10px;
-                            button{
-                            display: none;
-                            }
-                        }
-                    }
-                    // &:hover{
-                    //     .card-face{
-                    //         transition: transform 800ms;
-                    //         transform:  translateY(-500px) ;
-                    //     }
                         
-                    // }
+                    }
                     .card-face{
                        text-align: center;
                        
@@ -238,6 +225,10 @@ $secondaryColor : #0000f4;
         grid-template-columns: 50% 50%;
         .matchCard-container{
             width: 95%;
+            .matchCard{
+                background-color: #181818 !important;
+                margin-bottom: 10px;
+            }
         }
     }
 }
