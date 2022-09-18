@@ -10,6 +10,9 @@
         display: flex;
         justify-content: space-between;
         padding: 5px;
+        &.buttons-end{
+            justify-content:end;
+        }
         button{
             
             height: 40px;
@@ -171,7 +174,19 @@
     }
 
 }
+.myProfile{
+    .updateGoldenPop{
 
+        .chooseCountry-container{
+            
+            display: block;
+            transition: all 300ms;
+            transform: translateX(0%);
+            opacity: 1;
+        }
+    }
+
+}
 @media screen and (max-width : 460px) {
     .goldenPlayer-container{
         min-height: 449px;

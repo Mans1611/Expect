@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Axios from '../../Axios/axios';
 import { handleNext,handleBack } from './utilis/handleNext';
 
-const PickCountry = ({fetchCountry,setFetchCountry}) => {
+const PickCountry = ({fetchCountry,setFetchCountry,profileSet}) => {
     const [countries,setCountries] = useState([]);
     const [selected,setSelected] = useState(null);
 
@@ -28,7 +28,6 @@ const PickCountry = ({fetchCountry,setFetchCountry}) => {
 
         }
         fetchCountries();
-        console.log(countries);
       return () => isSubscribe = false;
     }, [])
    
@@ -47,8 +46,11 @@ const PickCountry = ({fetchCountry,setFetchCountry}) => {
                     )
             })}
         </div>
-        <div className="button-wrapper">
-            <button onClick={()=>handleBack('instructions','chooseCountry-container')} className="back">Back</button>
+        <div className={`button-wrapper ${profileSet?'buttons-end':''}`}>
+            {
+                !profileSet&&
+                <button onClick={()=>handleBack('instructions','chooseCountry-container')} className="back">Back</button>
+            }
             {
                 selected ? 
                 <button onClick={sendCountry} className="next">Next</button> 

@@ -4,7 +4,7 @@ import { globalUser } from '../../Context/HomeContext';
 import { initPick_Player, ReduceFn } from './Reducer/Reducer';
 import { handleBack } from './utilis/handleNext';
 
-const PickPlayers = ({fetchCountry,user,setSkip}) => {
+const PickPlayers = ({fetchCountry,user,setSkip,setUser,profileSet,updateGoldenPlayer}) => {
     const [players,setPlayers] = useState([]) ;
     const [selectedPlayer,setSelectedPlayer] = useState(null);
     const [submitStatue,dispatchStatue] = useReducer(ReduceFn,initPick_Player);
@@ -13,39 +13,72 @@ const PickPlayers = ({fetchCountry,user,setSkip}) => {
 
     
     useEffect(()=>{
+        let isSubscribe = true;
+
         const fetchPlayers = async()=>{
             try{
                 const {data} = await Axios.get(`/country/players?countryName=${fetchCountry.countryName}`);
-                setPlayers(data);
-               
+                if(isSubscribe)
+                    setPlayers(data);
+              
             }catch(err){
                 console.log(err);
 
             }
         }
         fetchPlayers();
+        return ()=> isSubscribe = false;
     },[fetchCountry])
 
     const handlePostPlayer = async ()=>{
+        
         if(!selectedPlayer)
             return dispatchStatue({type:'invalid', payload : "Select a Player"})
         
         else {
-            const {data,status} = await Axios.post(`/users/postGoldenPlayer/${userGlob}`,selectedPlayer,{
-                headers : {
-                    token ,
-                    userGlob
-                }
-            })
-            if(status === 203)
-                return dispatchStatue({type:'invalid', payload : data.msg});
-                
-            else if(status === 200){
-                dispatchStatue({type:'success', payload :data.msg})
-                setTimeout(()=> setSkip(true),2000)
-           }
-
+            if(!updateGoldenPlayer){
+                const {data,status} = await Axios.post(`/users/postGoldenPlayer/${userGlob}`,selectedPlayer,{
+                    headers : {
+                        token ,
+                        userGlob
+                    }
+                })
+                if(status === 203)
+                    return dispatchStatue({type:'invalid', payload : data.msg});
+                    
+                else if(status === 200){
+                    dispatchStatue({type:'success', payload :data.msg})
+                    setUser(data.user);
+                    setTimeout(()=> setSkip(true),2000)
+               }
+            }
+            if(updateGoldenPlayer){
+                const {data,status} = await Axios.put(`/users/updateGoldenPlayer/${userGlob}`,selectedPlayer,{
+                    headers : {
+                        token ,
+                        userGlob
+                    }
+                })
+                if(status === 203)
+                    return dispatchStatue({type:'invalid', payload : data.msg});
+                    
+                else if(status === 200){
+                    dispatchStatue({type:'success', payload :data.msg})
+                    setUser(data.user);
+                    setTimeout(()=> setSkip(true),2000)
+               }
+            }
         }
+    }
+
+    const handleSelectPlayer = (player,index)=>{
+        return setSelectedPlayer({
+            ...player,
+            index,
+            countryName : fetchCountry.countryName,
+            logo:fetchCountry.logo,
+            pickedTime: new Date()
+        })
     }
 
 
@@ -57,7 +90,7 @@ const PickPlayers = ({fetchCountry,user,setSkip}) => {
             :
             players.map((player,index)=>{
                 return (
-                    <div onClick={()=>setSelectedPlayer({...player,index})} key={index} className={`country-holder ${selectedPlayer?.index === index ? 'selected-country':''}`}>
+                    <div onClick={()=>handleSelectPlayer(player,index)} key={index} className={`country-holder ${selectedPlayer?.index === index ? 'selected-country':''}`}>
                         <img className='playerImg' src={player.playerImg} alt={player.playerName}/>
                         <h2>{player.playerName}</h2>
                         <h4>{player.position}</h4>

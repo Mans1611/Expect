@@ -33,7 +33,7 @@ const PersonalComp = ({user}) => {
             <div className="userInformation">
                 <h3 className="feild"><AccountCircleIcon className='icons'/>UserName : <span className="value">{user[0].userName}</span></h3>
                 <h3 className="feild"> <EmailIcon className='icons'/>email : <span id='email' className="value">{user[0].email}</span></h3>
-                {(userGlob === userName ) && <h3 className="feild"><LocalPhoneIcon className='icons'/> PhoneNumber <span className="value">{user[0].phoneNumber}</span></h3>}
+                {(userGlob === userName ) && <h3 className="feild"><LocalPhoneIcon className='icons'/> PhoneNumber : <span className="value">{user[0].phoneNumber === null? 'Not-Provided' : user[0].phoneNumber}</span></h3>}
                 {(userGlob === userName ) && <h3 className="feild"><VerifiedUserIcon className = 'icons' /> Verification <span className="value" id='verifiy' > Verified</span></h3>}
                 {showUpdateInformation && <UpdatePersonalInformation setShow={setUPI} PI = {user[0]} />}
             </div>

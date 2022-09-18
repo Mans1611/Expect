@@ -16,7 +16,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
     if(!userExpect)
         return;
     else{
-        const {isDark,userGlob} = globalUser();
+        const {isDark,userGlob,token} = globalUser();
         const [timeUp, setTimeUp] = useState(false);
         const [pop,setPop] = useState(false);
         const [min,setMin] = useState(1);
@@ -27,7 +27,11 @@ const Expect = ({match,userExpect,setUserExpections})=> {
         const handldeDeleteExpect = async(e) =>{
             e.preventDefault();
             try{
-                const response = await Axios.delete(`/expects/deleteExpect/${userGlob}/${match.matchId}`)
+                const response = await Axios.delete(`/expects/deleteExpect/${userGlob}/${match.matchId}`,{
+                    headers : {
+                        token
+                    }
+                })
                 setUserExpections(response.data);
             }catch(err){
                 console.log(err);

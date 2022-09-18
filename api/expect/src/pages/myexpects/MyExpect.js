@@ -7,11 +7,10 @@ import ExpectPhone from "../../component/Expectes/PhoneComponent/ExpectPhone";
 import io from 'socket.io-client';
 import { MatchCardProvider } from "../../Context/MatchCardContext";
 import SmallLaoding from "../../component/loading/small.loading/smallLoading";
-import Loading from '../../component/loading/big.loading/Loading';
-
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Axios from "../../Axios/axios";
+import GoldenPlayerCard from '../../component/GoldenPlayerCard/GoldenPlayerCard';
 
 
 // https://expect-app.herokuapp.com/
@@ -58,6 +57,7 @@ const MyExpects = () => {
 
                 const matchesWithFlage = filteringExpects(data.matches,data.userExpections); // where we assign a flag to each expected match to be filtered again
                 const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                
                 if(isSubscribe){
                     setUserExpections(data.userExpections);
                     setExpected(filterdExpectedMatches); // matches 
@@ -77,28 +77,34 @@ const MyExpects = () => {
 
 
 
-    // useEffect(()=>{
-    //     return async()=>{
-    //         try{
-    //             socket.on("updatingMatches",async(matches)=>{
-    //                 console.log("repated task in soket");
-    //                 try{
-    //                     const response = await Axios.get(`/expects/${userGlob}`);
-    //                     const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
-    //                     const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
-    //                     setUserExpections(response.data.userExpections);
-    //                     setExpected(filterdExpectedMatches); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
-    //                     setTotalPoints(response.data.totalPoints);
-    //                 }catch(err){
-    //                     console.log(err);
-    //                 }
-    //             })
+    useEffect(()=>{
+        let isSubscribe = true;
+         const fetchSocket =  async()=>{
+            try{
+                socket.on("updatingMatches",async(matches)=>{
+                    try{
+                        const response = await Axios.get(`/expects/${userGlob}`);
+                        const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
+                        const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                        if(isSubscribe){
+                            setUserExpections(response.data.userExpections);
+                            setExpected(filterdExpectedMatches); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
+                            setTotalPoints(response.data.totalPoints);
+                        }
 
-    //         }catch(err){
-    //             console.log(err);
-    //         }
-    //     }
-    // },[socket])
+                    }catch(err){
+                        console.log(err);
+                    }
+                })
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+        fetchSocket();
+        return ()=> isSubscribe = false;
+
+    },[socket])
 
     return ( 
         <div className={`myexpects ${isDark? 'dark':''}`}> 
@@ -117,13 +123,16 @@ const MyExpects = () => {
            
                     width > 480 ?
                     (   // if condition 
-                    <div className={` ${(expected.length === 0) ? 'nogrid' : 'expectsContainer'}` }> 
+                    <div className="flex-wrapper">
+
+                        <div className={` ${(expected.length === 0) ? 'nogrid' : 'expectsContainer'}` }> 
                                 {
                                     expected.length === 0 ? 
                                     <div className="noContent">
                                         <h2>You have not expected any matches yet</h2>
                                         <h4>Nav to <Link to='/matches'>Matches Page</Link> to expect</h4>
-                                    </div> : 
+                                    </div> 
+                                    : 
                                     expected.map((val,index)=>{
                                         return <MatchCardProvider  match = {val} 
                                         key = {index}
@@ -132,14 +141,18 @@ const MyExpects = () => {
                                             key= {index}
                                             setUserExpections = {setUserExpections} 
                                             userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
-                                                />}></MatchCardProvider>
-                                                
-                                            })}
-                            </div> )
+                                            />}></MatchCardProvider>
+                                            
+                                        })}
+                            </div>
+                            <GoldenPlayerCard />
+                    </div> )
 
 
                                 : // else condition
                             (
+                                <div className="flex-wrapper">
+
                                 <div className="fakeContainer">
                                     
                                     <div className={`phoneContainer ${isDark ? 'dark' : ''}`}>
@@ -152,6 +165,9 @@ const MyExpects = () => {
                                         })
                                     }
                                     </div>
+                                    <GoldenPlayerCard />
+                                    </div>
+                                    
                                 </div>
                             )
                             

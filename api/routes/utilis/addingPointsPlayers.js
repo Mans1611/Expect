@@ -40,25 +40,49 @@ export default  function addingPointsPlayer(player,countryName,match){
         default:
             break;
     }
+
+    
     
     // this to add for both countries by else statment 
     // it will iterate over each player(NOT USERS) and add his points
 
     if(match.firstCountry.countryName === countryName){
-        match.firstCountry.players.forEach((val)=>{
-            if(val.playerName === player.playerName){
-                val.playerPoints+=points;
-            }   
-        })
+        match.firstCountry.players[player.index].playerPoints+=points;
+
+        // the below state it just for player profile statistics.
+        if(player.state.includes('Score'))
+            match.firstCountry.players[player.index].goals++;
+        else if(player.state.includes('ASSIST'))
+            match.firstCountry.players[player.index].assist++;
+        else if(player.state.includes('Red'))
+            match.firstCountry.players[player.index].redCard++;
+        else if(player.state.includes('Yellow'))
+            match.firstCountry.players[player.index].yellowCard++;
+        else if(player.state.includes('Saves Penalty'))
+            match.firstCountry.players[player.index].penaltySaved++;
+        else if(player.state.includes('Of The Match'))
+            match.firstCountry.players[player.index].manOfTheMatch++;
     }
+    
     else if(match.secondCountry.countryName === countryName){
-    match.secondCountry.players.forEach((val)=>{
-        if(val.playerName === player.playerName){
-            val.playerPoints+=points;
-        }   
-    })
+        match.secondCountry.players[player.index].playerPoints+=points;
+        if(player.state.includes('Score'))
+            match.secondCountry.players[player.index].goals++;
+        else if(player.state.includes('ASSIST'))
+            match.secondCountry.players[player.index].assist++;
+        else if(player.state.includes('Red'))
+            match.secondCountry.players[player.index].redCard++;
+        else if(player.state.includes('Yellow'))
+            match.secondCountry.players[player.index].yellowCard++;
+        else if(player.state.includes('Saves Penalty'))
+            match.secondCountry.players[player.index].penaltySaved++;
+        else if(player.state.includes('Of The Match'))
+            match.secondCountry.players[player.index].manOfTheMatch++;
+
+
 
 }
+console.log(match.firstCountry.players[player.index].playerPoints);
 
    return match;
 

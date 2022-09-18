@@ -4,7 +4,7 @@ import Instructions from './Instructions';
 import PickCountry from './PickCountry';
 import './pickgoldenplayer.scss';
 import PickPlayers from './PickPlayers';
-const PickGoldenPlayer = ({setSkip}) => {
+const PickGoldenPlayer = ({setSkip,profileSet,setUser}) => {
     const {user,isDark} = globalUser();
     const [fetchCountry,setFetchCountry] = useState(null);
   
@@ -13,7 +13,12 @@ const PickGoldenPlayer = ({setSkip}) => {
 
         <Instructions setSkip = {setSkip}/>
         <PickCountry setFetchCountry = {setFetchCountry}/>
-         <PickPlayers setSkip= {setSkip} user={user} fetchCountry={fetchCountry} />
+        <PickPlayers 
+            profileSet = {profileSet} 
+            setUser={setUser} 
+            setSkip= {setSkip} 
+            user={user} 
+            fetchCountry={fetchCountry} />
 
     </div>
   )

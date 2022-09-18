@@ -4,7 +4,7 @@
 .mainNews{
     width:90% ;
     height: fit-content;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: $borderRaduis;
     margin: 20px auto 0;
    @include shadowMainNews;
@@ -28,26 +28,30 @@
         border-bottom: 5px solid #888;
         .newsTitle{
             color: $gold;
-            font-size: 64px;
+            font-size: 40px;
             font-weight: 600; 
             margin-bottom: 10px;  
         }
         .newsPara{
             color: #111;
+            font-size: 22px;
             &.dark{
                 color: #fff;
                 background-color: transparent;
             }
-            font-size: 24px;
         }
     }
     .restNewsContainer{
         height:fit-content ;
-        
-    
         .restNews{
-            display: flex;
-            height:120px;
+            display: grid;
+            grid-template-columns: 30% 70%;
+            height:fit-content;
+            overflow: hidden;
+            border-bottom: 2px solid #ffbf00;
+            &:last-child{
+                border: none;
+            }
            &.active{
             background-color: #bbb;
             color: #111;
@@ -65,7 +69,7 @@
         }
 
             .imageWrapper{
-                flex:3;
+                
                 height: 100%;
                 width: 100%;
                 img{
@@ -76,15 +80,15 @@
             }
             .text{
                 flex: 8;
-                color: #111;
+                color: #111111;
                 padding-left:10px ;
                 padding-top:5px;
                 .title{
                     color: $gold;
-                    font-size: 35px;
+                    font-size: 30px;
                 }
                 .paragraph{
-                    
+                    font-size: 19px;
                     &.dark{
                         background-color: transparent;
                         color: #fff;
@@ -92,7 +96,7 @@
                 }
             }
             &:hover{
-                background-color: #777;
+                background-color: #777777;
                 position: relative;
                 transform: translateX(10px);
                 z-index: 8;
@@ -136,17 +140,20 @@
         .restNewsContainer{
             border-top: 10px solid #fff;
         .restNews{
-                display: flex;
-                height: 120px;
+            display: flex;
+            flex-direction: column;
+            &:first-child{
+                display: none;
+            }
+               
                 .imageWrapper{
-                    flex:3;
                     img{
                         height: 100%;
                         width: 100%; 
                     }   
                 }
                 .text{
-                    flex: 8;
+                    
                     .title{
                         font-size: 30px;
                     }
@@ -184,15 +191,17 @@
                 height: fit-content;
                 .imageWrapper{
                     flex:3;
+                    max-height: 100%;
+                    min-height: 100%;
                     img{
+                        object-fit: cover;
                         height: 100%;
-                        width: 100%; 
                     }   
                 }
                 .text{
                     flex: 8;
                     .title{
-                        font-size: 25px;
+                        font-size: 20px;
                     }
                     p{
                         font-size: 14px;

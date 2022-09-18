@@ -7,7 +7,7 @@ import BottomNavbar from './bottomnavbar/BottomNavbar';
 import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
 import Axios from '../../Axios/axios';
-import Invitations from './Invitations/Invitations';
+
 const Navbar = () => {
     
     const [width , setWidth] = useState(window.innerWidth);
@@ -15,7 +15,8 @@ const Navbar = () => {
    
     
     const navbarItems = ["Home", "Matches", "MyExpects", "Team/myteam" , "States"];
-    const {isDark,setDark} = globalUser();
+    
+    const {isDark,setDark,user} = globalUser();
     const cookie = new Cookies();
     
     let items = document.getElementsByClassName('navbarLink');
@@ -106,7 +107,7 @@ const Navbar = () => {
                             <Link to='/register/signup' onClick={handleLogOut}  className={`navbarLink ${isDark? 'dark': ""}`}> <div className="dropdownItem"> <span className="dropdownItem">Log out</span></div></Link>
                        </div>
                     </div>
-                    <Invitations/>
+                   
                 </div>
             </div>
         </div>

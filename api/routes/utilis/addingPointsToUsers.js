@@ -4,10 +4,11 @@
 
 
 
-export default async function AddingPointsToUSers(matches,userExpections){
+export default async function AddingPointsToUSers(matches,userExpections,goldenPlayer){
     let totalPoints = 0;
 
     for(let i = 0; i < userExpections.length;i++){
+
             matches.find((match)=>{
                 // so if the matchId matches it will transfer the points of selected from the two countries to the user.  
                 // userPoints variable is for the points in this expect not for all expects
@@ -69,8 +70,12 @@ export default async function AddingPointsToUSers(matches,userExpections){
                     userExpections[i].result_Points = result_Points;
                     userExpections[i].userPoints = matchPoints;
                     totalPoints += matchPoints;
-                }  
+                }
+                // this if condition for golden Player
+                
+                
             })
+
         }
     return  {userExpections,totalPoints};
     }

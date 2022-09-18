@@ -3,7 +3,7 @@
 .myexpects{
     min-height : 80vh;
     background:#eeeeee;
-    padding: 10px;
+    padding: 10px 10px 80px;
     .headlineWrapper{
         padding: 20px 0 ;
         .headline{
@@ -41,7 +41,6 @@
         }
     }
 
-
     &.dark{
         background: linear-gradient(180deg, #171717 52%,#fff 100%);
         .headline{
@@ -59,20 +58,78 @@
     
         }
     }
+    
+    .flex-wrapper{
+        display: flex;
+
         .nogrid,.expectsContainer{
             background-color: #ccccff;
             padding: 10px;
             height: 100%;
-            width: 95%;
-            margin: auto;
-            border-radius: 10px;
-            
+            width: 75%;
+            margin: 10px ;
+            border-radius: 10px;  
         }
         .expectsContainer{
-            width: 95%;
             display: grid;
-            grid-template-columns: repeat(4,25%);
+            grid-template-columns: repeat(3,33.3%);
         
+    }
+       .goldenPlayercard {
+        text-align: center;
+        background-color: #cccccc;
+        width: 25%;
+        .playerCard-container{
+            .palyerCard{
+                width: 65%;
+                .imgBackground{
+                    .playerCardImg{
+                        width: 80px;
+                        height: 80px;
+                    }
+                }
+            }
+
+        }
+        .changeGoldenbutton{
+                display: none;
+        }
+        .show-points{
+            background-color: #009900;
+            &:hover{
+                color: #171717;
+            }
+           
+        }
+        .informationHeader-Wrapper{
+            background: rgb(214,20,29);
+            background: -moz-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
+            background: -webkit-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
+            background: linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 10px 0;
+            h2{
+                color: #eeeeee;
+                font-size: 36px;
+            }
+            .editWrapper{
+                text-align: end;
+                margin-left: 20px;
+                .editIcon{
+                    cursor: pointer;
+                    color: #eeeeee;
+                    font-size: 25px;
+                }
+
+            }
+            
+        }
+       } 
+
     }
 
     /* for the parent if it dark mode*/
@@ -85,6 +142,20 @@
         .expectsContainer{
             background-color: #181818;
         }
+        .flex-wrapper{
+            .goldenPlayercard{
+                background-color: #181818;
+                border-radius: 20px;
+               
+                .information{
+                    border-radius: 20px;
+                    background-color: #181818;
+
+
+               }
+               
+            }
+        }
     
         
 }
@@ -93,12 +164,16 @@
 @media screen and (max-width:960px) {
 
     .myexpects{
-        .expectsContainer{
-            padding: 10px;
-            background: linear-gradient(180deg, #a1a1a1 0%, #ffffff 100%);
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(3,33%);   
+        .flex-wrapper{
+            flex-direction: column;
+            .expectsContainer{
+                padding: 10px;
+                 height: 100%;
+                 width: 100%;
+                 margin: 10px auto;
+                display: grid;
+                grid-template-columns: repeat(3,33%);   
+            }
         }
     }
 }
@@ -108,8 +183,7 @@
         .headlineWrapper{
             background-color: #1a1a1a;
             padding : 10px ;
-            border-bottom-left-radius:40% ;
-            border-bottom-right-radius:40% ;
+            
             border-bottom: 2px solid $gold;
             margin-bottom: 20px;
             .headline{
@@ -120,12 +194,34 @@
         .fakeContainer{
             padding: 0 10px 10px 10px;
         }
-        .expectsContainer{
-            padding: 10px;
-            background: linear-gradient(180deg, #a1a1a1 0%, #ffffff 100%);
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(2,50%);   
+        .flex-wrapper{
+            .expectsContainer{
+                padding: 10px;
+                height: 100%;
+                width: 95%;
+                display: grid;
+                grid-template-columns: repeat(2,50%);   
+            }
+            .goldenPlayercard {
+                width: 80%;
+                margin: 10px auto 10px;
+                .palyerCard{
+                    .imgBackground{
+                    .country-flag{
+                        width: 50px;
+                        height: 35px;
+                    }   
+                    }
+                }
+                .buttons-wrapper{
+                    width: 60%;
+                    .show-points{
+                        width: 100%;
+                        font-size: 36px;
+                        padding: 5px 10px;
+                    }
+                }
+            }
         }
         
     }
@@ -148,7 +244,43 @@
             }
         }
     }
+    }   
+}
 
+@media screen and (max-width : 480px) {
+    .flex-wrapper{
+        .expectsContainer{
+            padding: 10px;
+            height: 100%;
+            width: 95%;
+            display: grid;
+            grid-template-columns: repeat(2,50%);   
+            .phoneContainer{
+                margin-bottom: 20px;
+
+            }
+        }
+        .goldenPlayercard {
+            width: 90%;
+            margin: 10px auto 10px;
+            .palyerCard{
+                width: 90% !important;
+                .imgBackground{
+                .country-flag{
+                    width: 50px;
+                    height: 35px;
+                }   
+                }
+            }
+            .buttons-wrapper{
+                width: 80% !important;
+                .show-points{
+                    width: 100% ;
+                    font-size: 30px !important;
+                    padding: 5px 10px;
+                }
+            }
+        }
     }
     
     

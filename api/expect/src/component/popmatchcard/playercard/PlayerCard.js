@@ -1,18 +1,14 @@
 import './playercard.scss';
 import { useState,useContext } from 'react';
 import { userContext } from '../../../Context/HomeContext';
-import { matchesStore } from '../../../adminPage/Context/matchesContext';
-import { Link } from 'react-router-dom';
 import PlayerProfilePop from '../../PlayerProfilePopUp/PlayerProfilePop';
 import InfoIcon from '@mui/icons-material/Info';
 const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock }) => {
-    console.log(player);
+   
     const {isDark} = useContext(userContext);
     const [state,setState] = useState(null);
     const [playerPop,setPlayerPop] = useState(false);
 
-
-   
     return ( 
         <div className={`palyerCard ${isDark? 'dark':''} ${lock ? 'lock' : ''}`}>
                 <InfoIcon onClick={()=>setPlayerPop(true)} className='info'/>

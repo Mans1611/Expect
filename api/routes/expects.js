@@ -10,6 +10,7 @@ import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
 import SessionVerification from "../middleware/sessionVerify.js";
 import Teams from '../models/Teams.js';
 import { PushExpectToMember , DeleteExpectFromMember, UpdateExpectForMember } from './utilis/TeamExpectHandlers.js';
+import { calculateGoldenPlayerPoints } from './utilis/calculateGoldenPlayerPoints.js';
 
 const expects = express.Router();
 
@@ -18,14 +19,25 @@ expects.get('/:userName',SessionVerification,verifyJwt,async(req,res)=>{
     try{
         const {userName} = req.params;
         const user = await Expects.findOne({userName});
-        const matches = await Matches.find();
+        const matches = await Matches.find(); // find all matches 
         if(!user.expects)
             return res.send({matches,userExpections:[],totalPoints:0})
 
-        const {userExpections,totalPoints} = await AddingPointsToUsers(matches,user.expects);
+        const {goldenPlayer} = await User.findOne({userName});
+
+        let {userExpections,totalPoints} = await AddingPointsToUsers(matches,user.expects,goldenPlayer);
+        let goldenPlayerPoints = 0;
+        if(goldenPlayer.player){
+            goldenPlayerPoints = calculateGoldenPlayerPoints(goldenPlayer,matches);
+            totalPoints+= goldenPlayerPoints
+        }
+
         await User.findOneAndUpdate({userName},{userPoints:totalPoints});
+        
         await Expects.updateOne({userName},{expects : userExpections});
-        res.status(200).json({matches,userExpections,totalPoints});
+        
+        res.status(200).json({matches,userExpections,totalPoints}); 
+        
     }catch(err){
         console.log(err);
     }

@@ -7,6 +7,7 @@ import { globalUser } from '../../Context/HomeContext';
 import { useParams } from 'react-router-dom';
 import Axios from '../../Axios/axios';
 import Loading from '../../component/loading/big.loading/Loading';
+import GoldenPlayerCard from '../../component/GoldenPlayerCard/GoldenPlayerCard';
 
 const MyProfile = () => {
     document.body.style.overflow = "visible"; // to disable scrollbar
@@ -44,8 +45,9 @@ const MyProfile = () => {
               <div className={`myProfile ${isDark?'dark':null}`}>
                     <h1 className="profileTitle"><span> {userName === userGlob ? 'Your' : `${userName}'s` }</span> Profile</h1>
                     <div className="informationContainer">
-                    <PersonalComp user = {user}/>
-                    <ExpectsInfo user = {user} />
+                        <PersonalComp user = {user}/>
+                        <ExpectsInfo user = {user} />
+                        <GoldenPlayerCard/>
                     </div>
                     <ProfileExpects  userName = {userName}/>
                 </div>

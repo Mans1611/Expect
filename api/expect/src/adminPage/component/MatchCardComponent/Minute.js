@@ -16,7 +16,7 @@ const Minute = ({matchTime,min,setMin,halfsTime})=> {
     const interval = setInterval(()=>{
         setRefresh((r)=>r+1);
     },MINUTE)
-
+    clearInterval(interval)
     
     useEffect( ()=>{ 
 

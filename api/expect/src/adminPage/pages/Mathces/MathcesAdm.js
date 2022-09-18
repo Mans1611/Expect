@@ -49,10 +49,13 @@ const MathcesAdm = () => {
     },[])
 
     useEffect(()=>{
-        console.log("socket in front");
+       let isSubscribe = true; 
             socket.on("updatingMatches",(matches)=>{
-                store.setMatches(matches);
+                if(isSubscribe)
+                    setMatches(matches);
             })
+
+            return ()=> isSubscribe = false;
     },[socket])
 
     

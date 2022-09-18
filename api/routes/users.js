@@ -123,20 +123,56 @@ users.put('/edituser/:userName',VerifyUserJWT, async(req,res)=>{
 
 users.post('/postGoldenPlayer/:userName',VerifyUserJWT,async(req,res)=>{
     const {userName} = req.params;
-    let userDB = await User.findOne({userName});
+    try{
 
-    // i check if there was a player before.
-    if(userDB.goldenPlayer?.player)
+        let userDB = await User.findOne({userName});
+        
+        // i check if there was a player before.
+        if(userDB.goldenPlayer?.player)
         return res.status(203).json({msg : "You have selected a player before"});
-
-    userDB.goldenPlayer = {
+        
+        userDB.goldenPlayer = {
         player : {...req.body},
         updateCounter : 1
     };
 
     await User.updateOne({userName},userDB);
 
-    res.status(200).json({msg:"Player is added successfully"})
+    res.status(200).json(
+        {
+            msg:"Player is added successfully",
+            user:userDB
+        })
+    }catch(err){
+        console.log(err);
+    }
+    
+})
+users.put('/updateGoldenPlayer/:userName',VerifyUserJWT,async(req,res)=>{
+    const {userName} = req.params;
+
+    try{
+        let userDB = await User.findOne({userName});
+        
+        // i check if there was a player before.
+        if(userDB.goldenPlayer.updateCounter <= 0)
+            return res.status(203).json({msg : "You have limits the number of changes"});
+        
+        userDB.goldenPlayer = {
+        player : {...req.body},
+        updateCounter : 0
+    };
+
+    await User.updateOne({userName},userDB);
+
+    res.status(200).json(
+        {
+            msg:"Player is changed successfully",
+            user:userDB
+        })
+    }catch(err){
+        console.log(err);
+    }
     
 })
 

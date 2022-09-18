@@ -19,23 +19,32 @@
     display: flex;
     height: fit-content;
     margin-top: 20px;
+
     .informationWrapper {
-        width: 50%;
+        width: 33.3%;
         height: 100%;
     }
     .information{
-        background-color: #fff;
+        background-color: #ffffff;
         position: relative;
+        border-radius: 20px;
         .informationHeader-Wrapper{
-            background-color: #93002c ;
+            background: rgb(214,20,29);
+            background: -moz-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
+            background: -webkit-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
+            background: linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 10px 0;
             .editWrapper{
                 text-align: end;
+                margin-left: 20px;
                 .editIcon{
                     cursor: pointer;
-                    color: #eee;
+                    color: #eeeeee;
                     font-size: 25px;
                 }
             }
@@ -84,17 +93,19 @@
         
         width: 90%;
         height: fit-content;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
         @include shadowMainStyle ;
 
         margin: auto;
         .InformationHeader{
-            color: $gold;
+            color: #ffffff;
             text-align: center;
-            font-size: 35px;
+            font-size: 40px;
             font-weight: 600;
             padding: 5px 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             
 
         }
@@ -201,7 +212,7 @@
     .information{
         background-color: #373737;
         .InformationHeader{
-            border-bottom: 4px solid #fff;
+          
         }
         .feild{
             border-bottom: 4px solid #fff;

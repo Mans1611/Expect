@@ -16,8 +16,6 @@ const updateMatch = async(data)=>{
     
     if(match.fullTime){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
-        
-    
     }
     // so this code for uodating the time if the admin wants to
     
@@ -26,7 +24,7 @@ const updateMatch = async(data)=>{
     if(data.matchTime){
         match.matchTime = data.matchTime;
         match.matchStatue = "UpComing" // so if we edit the the time we make sure to update the statue
-        match.stoppingTime = 0
+       
     }
     const {updatedPlayer_1,updatedPlayer_2} = data;
     match.firstCountry.result = data.result1 ? data.result1 : match.firstCountry.result ;

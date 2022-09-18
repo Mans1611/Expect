@@ -1,0 +1,215 @@
+
+.goldenPlayercard{
+    
+    border-radius: 10px;
+    width:33.3%;
+    background-color: transparent;
+    padding-bottom: 20px;
+    .InformationHeader{
+        width: 100%;
+    }
+    .playerCard-container{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        button{
+            margin-top: 5px;
+            font-size: 26px;
+            background-color: #de2727;
+            &:hover{
+                background-color: #373737;
+                color: #ffffff;
+            }
+        }
+        .palyerCard{
+            cursor: default;
+            background: linear-gradient(90deg, #90901d 50%, #ffc400 50%);
+            width: 50%;
+            svg{
+                color: #ffffff;
+            }
+            .playerDetails{
+                
+                .details{
+                    color: #ffffff;
+                    font-size: 22px;
+                    &.name{
+                        color: #111111;
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+    }
+    .content{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        
+
+        .addicon{
+            width: 170px ;
+            height: 200px;
+            padding:5px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: #dddddd;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            cursor: pointer;
+            svg{
+                font-size: 65px;
+                margin-bottom: 10px;
+            }
+            h2{
+                font-size: 30px;
+            }
+            &:hover{
+                background-color: #bbbbbb;
+                color: #272727;
+
+            }
+
+        }
+    }
+
+    &.dark{
+        .addicon{
+            background-color: #272727;
+            color: #ffffff;
+            border: 3px solid #ffc400;
+           
+            &:hover{
+                background-color: #ffc400;
+                color: #171717;
+            }
+
+        }
+        .playerCard-container{
+
+            button{
+                margin-top: 5px;
+                font-size: 26px;
+                background-color: #de2727;
+                &:hover{
+                    background-color: #eeeeee;
+                    color: #de2727;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:570px) {
+    .goldenPlayercard{
+    
+        
+        .playerCard-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            .palyerCard{
+                cursor: default;
+                background: linear-gradient(90deg, #90901d 50%, #ffc400 50%);
+                width: 70%;
+                svg{
+                    color: #ffffff;
+                }
+                .imgBackground{
+                    img{
+                        width: 85px;
+                        height: 85px;
+                    }
+                }
+                .playerDetails{
+                    
+                    .details{
+                        color: #ffffff;
+                        font-size: 24px;
+                        &.name{
+                            color: #111111;
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+            button{
+                margin-top: 5px;
+                font-size: 26px; 
+            }
+        }
+
+        .content{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            
+    
+            .addicon{
+                width: 170px ;
+                height: 200px;
+                padding:5px;
+                text-align: center;
+                border-radius: 5px;
+                background-color: #dddddd;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+                cursor: pointer;
+                svg{
+                    font-size: 65px;
+                    margin-bottom: 10px;
+                }
+                h2{
+                    font-size: 30px;
+                }
+                &:hover{
+                    background-color: #bbbbbb;
+                    color: #272727;
+    
+                }
+    
+            }
+        }
+    
+        &.dark{
+            .addicon{
+                background-color: #272727;
+                color: #ffffff;
+                border: 3px solid #ffc400;
+               
+                &:hover{
+                    background-color: #ffc400;
+                    color: #171717;
+                }
+    
+            }
+            .palyerCard{
+                button{
+                    margin-top: 5px;
+                    font-size: 26px;
+                    background-color: #991818;
+                    &:hover{
+                        background-color: #171717;
+                        color: #991818;
+                    }
+                }
+            }
+        }
+    }
+    
+}

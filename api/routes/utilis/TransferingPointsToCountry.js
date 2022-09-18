@@ -10,13 +10,27 @@ export default async function TransferingPointsToCountry(firstCountryName,second
         firstCountry.players.forEach((val,index)=>{
             val.totalPoints += match.firstCountry.players[index].playerPoints;
             val.totalVotes += match.firstCountry.players[index].votes;
+            val.goals +=  match.firstCountry.players[index].goals;
+            val.assist +=  match.firstCountry.players[index].assist;
+            val.redCard +=  match.firstCountry.players[index].redCard;
+            val.yellowCard +=  match.firstCountry.players[index].yellowCard; 
+            val.manOfTheMatch +=  match.firstCountry.players[index].manOfTheMatch; 
+            val.blockChances +=  match.firstCountry.players[index].blockChances; 
+
         })
 
         secondCountry.players.forEach((val,index)=>{
             val.totalPoints += match.secondCountry.players[index].playerPoints;
             val.totalVotes += match.secondCountry.players[index].votes;
-
+            val.goals +=  match.secondCountry.players[index].goals;
+            val.assist +=  match.secondCountry.players[index].assist;
+            val.redCard +=  match.secondCountry.players[index].redCard;
+            val.yellowCard +=  match.secondCountry.players[index].yellowCard; 
+            val.manOfTheMatch +=  match.secondCountry.players[index].manOfTheMatch; 
+            val.blockChances +=  match.secondCountry.players[index].blockChances; 
         })
+
+
         const checkGroupstage = match.round.match(/Group Stage/ig);
        if(checkGroupstage){
             // for goals difference 

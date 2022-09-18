@@ -91,11 +91,13 @@ const Matches = () => {
     const [filterState,filterDispatch] = useReducer(ReduceFn,FilterState);
     
     useEffect(()=>{
+        let isSubscribe = true;
         socket.on("updatingMatches",async(matches)=>{
             
             if(expandButton === "Just Todays' Matches"){
                     const MatchesWithFlag = filteringExpects(matches,userExpections);
-                    setData(MatchesWithFlag);
+                    if(isSubscribe)
+                        setData(MatchesWithFlag);
                 }
 
             else if(expandButton === "See All Matches") {
@@ -103,12 +105,15 @@ const Matches = () => {
 
                     const matchesRes = await Axios.get(`/matches/?date=${date}`); // array of todays' matches
                     const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
-                    setData(MatchesWithFlag);
+                    if(isSubscribe)
+                        setData(MatchesWithFlag);
                 }catch(err){
                     console.log(err);
                 }
                 }
                 setLoading(false);
+
+                return ()=> isSubscribe = false;
         })
     },[socket])
 
