@@ -17,6 +17,7 @@ const NextMatchStep = () => {
                 <option>End First Extra Time</option>
                 <option>Start Second Extra Time</option>
                 <option>End Second Extra Time</option>
+                <option>Match Is Done</option>
             </select>
         </div>
   )

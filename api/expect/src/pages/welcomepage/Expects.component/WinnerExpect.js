@@ -5,7 +5,7 @@ import Winner from '../../../images/winner.gif';
 import { handleHover } from '../handleHover';
 const WinnerExpect = () => {
   return (
-    <div className="card-wrapper">
+    <div className="card-wrapper winnerExpect">
         <div className="step"> <span>1</span> </div>
         <div className="card flipcard">
             <div className="card-back">

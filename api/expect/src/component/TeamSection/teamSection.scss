@@ -1,0 +1,12 @@
+.teamSection{
+    height: 100vh;
+    background-color: #202020;
+    .team_img_wrapper{
+        display: flex;
+        justify-content: center;
+        img{
+            width: 50%;
+            height: 50%;
+        }
+    }
+}

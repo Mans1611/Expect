@@ -31,6 +31,8 @@ const TopPlayers = () => {
         return ()=> isSubscribe = false;
     },[])
 
+    
+
 
   return (
         <div className={`TopPlayers ${isDark? 'dark' : ''}`}>

@@ -9,12 +9,10 @@ const CountryRow = ({standing,country,gd}) => {
           <span className="tableHead-item">{standing}</span>
           <div className="countryholder">
               <img src={country.logo} />
-              <span>
-                  {country.countryName}
-              </span>
+              <span>{country.countryName}</span>
               </div>
           <span className="tableHead-item">{gd?gd:0}</span>
-          <span className="tableHead-item">{(country.goalScored.group - country.goalRecieved.group )}</span>
+          <span className="tableHead-item">{country.goalScored.group - country.goalRecieved.group}</span>
           <span className="tableHead-item">{country.points}</span>
       </div>
     </Link>

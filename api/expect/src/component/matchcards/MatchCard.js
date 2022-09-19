@@ -30,7 +30,7 @@ const MathchCard = ({match}) => {
     <MatchCardProvider match={match} childeren={
         ( 
             <>
-            <div className={`matchCard ${isDark?'dark':null}`}>
+            <div className={`matchCard ${isDark?'dark':''}`}>
                 <div className="matchcardHeader-wrapper">
                     <div className="matchcardHeader">
                         <Link to={`/country/${match.firstCountry.countryName}`}>

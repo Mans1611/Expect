@@ -4,6 +4,7 @@ import './matchState.scss'
 import State from './State';
 import CloseIcon from '@mui/icons-material/Close';
 import { MatchStateCentral } from '../../Context/MatchCardContext';
+import ReactDom from 'react-dom';
 
 const MatchState = ({match,setPop,userExpect,expected}) => {
     
@@ -17,7 +18,7 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
     }
  
     
-  return (
+  return ReactDom.createPortal(
     <div id='popup' onClick={hidePop} className='popMatchFullPage'>
         <div className={`popMatchContainer ${isDark? 'dark':''}`}>
                 <CloseIcon onClick = {()=>setPop(false)} className='CloseIcon'/>
@@ -67,7 +68,7 @@ const MatchState = ({match,setPop,userExpect,expected}) => {
                 </div>
         </div>
     </div>
-  )
+  ,document.getElementById('portal'))
 }
 
 export default MatchState

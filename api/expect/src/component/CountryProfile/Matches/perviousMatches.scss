@@ -4,6 +4,7 @@
     margin: auto;
     height: fit-content;
     @include shadowMainStyle;
+    border-bottom-right-radius: 10px;
    .header{
     >h1{
         color: #171717;
@@ -14,6 +15,11 @@
         border-top-right-radius: 10px;
         font-size: 45px; 
     }
+   }
+   .noContent{
+    background-color: #292929;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
    }
    .PerMatches-Contaier{
     height: fit-content;

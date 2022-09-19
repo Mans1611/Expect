@@ -30,6 +30,25 @@ const TopPlayersCountry = ({countryName}) => {
 
     },[countryName])
 
+    useEffect(()=>{
+        const playerCards = document.querySelectorAll('.palyerCard');
+        const observer = new IntersectionObserver(([entry])=>{
+           if(entry.isIntersecting)
+                entry.target.classList.add('showplayerCard');
+        },{
+            threshold : 0.5
+        })
+
+
+        if(window.innerWidth ){
+           playerCards.forEach((player,index,arr)=>{
+                observer.observe(arr[index]);
+                
+           })
+        }
+
+    },[topPlayers,countryName])
+
   return (
     <div className="topPlayersContainer">
         <div className={`TopPlayers ${isDark? 'dark' : ''}`}>

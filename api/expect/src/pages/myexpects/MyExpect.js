@@ -31,7 +31,8 @@ const MyExpects = () => {
     const [width,setWidth] = useState(window.innerWidth);
     const [totalPoints,setTotalPoints] = useState(0);
     const [loading,setLoading] = useState(true);
-    
+    const [goldenTotalPoints,setGoldenTotalPoints] = useState(0);
+
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
     })
@@ -57,11 +58,13 @@ const MyExpects = () => {
 
                 const matchesWithFlage = filteringExpects(data.matches,data.userExpections); // where we assign a flag to each expected match to be filtered again
                 const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
-                
+              
                 if(isSubscribe){
                     setUserExpections(data.userExpections);
-                    setExpected(filterdExpectedMatches); // matches 
+                    setExpected(filterdExpectedMatches.reverse()); // matches 
                     setTotalPoints(data.totalPoints);
+                    setGoldenTotalPoints(data.goldenPlayerPoints);
+                    
                 }
                 setLoading(false);
             }catch(err){
@@ -88,8 +91,9 @@ const MyExpects = () => {
                         const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
                         if(isSubscribe){
                             setUserExpections(response.data.userExpections);
-                            setExpected(filterdExpectedMatches); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
+                            setExpected(filterdExpectedMatches.reverse()); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
                             setTotalPoints(response.data.totalPoints);
+                            setGoldenTotalPoints(response.data.goldenPlayerPoints)
                         }
 
                     }catch(err){
@@ -145,7 +149,7 @@ const MyExpects = () => {
                                             
                                         })}
                             </div>
-                            <GoldenPlayerCard />
+                            <GoldenPlayerCard goldenTotalPoints = {goldenTotalPoints} />
                     </div> )
 
 

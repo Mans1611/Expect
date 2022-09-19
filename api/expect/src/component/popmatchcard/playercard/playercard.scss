@@ -17,18 +17,34 @@
     }
     &.lock{
         background: linear-gradient(90deg, #191919 50%, #303030 50%);
-
     }
+    &.goldenPlayer{
+        background: linear-gradient(90deg, #94940f8c 50%, #ffe100cf  50%) !important;
+        .playerCardInfo{
+
+            .playerDetails{
+                .details{
+                    color: #ffffff;
+                }
+                .name{
+                    color: #111111;
+                    font-size: 25px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    
     a{
         text-decoration: none;
     }
     .info{
         position: absolute;
-        top: 2px;
-        left: 2px;
+        top: 5px;
+        right: 5px;
         cursor: pointer;
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
     .playerCardInfo{
         

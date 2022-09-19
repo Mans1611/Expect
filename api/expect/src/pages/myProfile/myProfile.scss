@@ -24,6 +24,14 @@
         width: 33.3%;
         height: 100%;
     }
+    .goldenPlayercard{
+        .playerCard-container{
+            padding-bottom:20px ;
+        }
+        .goldenPlayerPoints-container,.show-points,.totalgoldenPoints{
+            display: none;
+        }
+    }
     .information{
         background-color: #ffffff;
         position: relative;

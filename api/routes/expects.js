@@ -8,7 +8,6 @@ import User from '../models/User.js';
 import verifyJwt from '../middleware/verifyJWT.js';
 import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
 import SessionVerification from "../middleware/sessionVerify.js";
-import Teams from '../models/Teams.js';
 import { PushExpectToMember , DeleteExpectFromMember, UpdateExpectForMember } from './utilis/TeamExpectHandlers.js';
 import { calculateGoldenPlayerPoints } from './utilis/calculateGoldenPlayerPoints.js';
 
@@ -26,7 +25,9 @@ expects.get('/:userName',SessionVerification,verifyJwt,async(req,res)=>{
         const {goldenPlayer} = await User.findOne({userName});
 
         let {userExpections,totalPoints} = await AddingPointsToUsers(matches,user.expects,goldenPlayer);
+       
         let goldenPlayerPoints = 0;
+        
         if(goldenPlayer.player){
             goldenPlayerPoints = calculateGoldenPlayerPoints(goldenPlayer,matches);
             totalPoints+= goldenPlayerPoints
@@ -36,7 +37,7 @@ expects.get('/:userName',SessionVerification,verifyJwt,async(req,res)=>{
         
         await Expects.updateOne({userName},{expects : userExpections});
         
-        res.status(200).json({matches,userExpections,totalPoints}); 
+        res.status(200).json({matches,userExpections,totalPoints,goldenPlayerPoints}); 
         
     }catch(err){
         console.log(err);

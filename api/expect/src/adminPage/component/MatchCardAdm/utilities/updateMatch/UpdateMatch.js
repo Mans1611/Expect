@@ -5,7 +5,7 @@ import React , {useState} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { matchesStore } from '../../../../Context/matchesContext';
 import PlayerCardRadio from '../../../../../component/PlayerCardRadio/PlayerCardRadio';
-import SportsIcon from '@mui/icons-material/Sports';
+
 import { PlayerStateToObject } from '../../../../../utilis/PlayerStateToObject';
 import io from 'socket.io-client';
 import { MatchStateCentral } from '../../../../../Context/MatchCardContext';
@@ -63,7 +63,6 @@ const handleUpdate = async(e)=>{
         updateMatchTime = `${editDate[1]},${editDate[2]},${editDate[0]},${editTime}`;
     }
     let updatedPlayer_1 = null , updatedPlayer_2 = null;
-    
 
     if(updatePlayerState){
       const selcted_player_1 = document.querySelector('input[name="firstCountry"]:checked')?.id;
@@ -134,6 +133,7 @@ const handleUpdate = async(e)=>{
                     <input maxLength='1' onChange={(e)=>setResult1(e.target.value)} type="number" name="result" id="country_1_result" />
                     <input maxLength='1' onChange={(e)=>setResult2(e.target.value)} type="number" name="result" id="country_2_result" />
                   </div>
+
                   <div className="showPlayersbutton-wrapper">
                     <button onClick={(e)=>{e.preventDefault();setShowMatchState(true)}}>Show Match State</button>
                     <button  onClick={(e)=>{e.preventDefault();setUpdatePlayerState(!updatePlayerState)}}>
@@ -164,15 +164,7 @@ const handleUpdate = async(e)=>{
                   </div>
                       }
                       
-                      {
-                        showPauseState && 
-                          <div className="changeResult stoppingTime">
-                            Stopping State : 
-                            <input placeholder='HT'  onChange={(e)=>setPauseState(e.target.value)} type="text" name="pause" id="matchState" />
-                          </div>
-                      }
-
-                  {!match.fullTime && <NextMatchStep/>}
+                   <NextMatchStep/>
                 <div className="buttonWrapper">
                   <button  onClick={handleUpdate}>Update</button>
                 </div>

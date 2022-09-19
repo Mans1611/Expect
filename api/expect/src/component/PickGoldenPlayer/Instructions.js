@@ -14,7 +14,7 @@ const Instructions = ({setSkip}) => {
                     <p>You can change your golden Player jsut <span>
                     once </span>  then you can not change him again, do pick him carefully.</p>   
             </div>
-            <div className="button-wrapper">
+            <div className="button-wrapper-golden">
                 <button onClick={()=>setSkip(true)} className="back">Skip</button>
                 <button onClick={()=>handleNext('instructions','chooseCountry-container')} className="next">Next</button>
             </div>

@@ -3,9 +3,9 @@ $qatar:#93002C;
 $pinck:#FF005C;
 $betiured : #ec0323;
 @mixin shadowMainStyle {
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.39);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.39);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.39);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.39);
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.39);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(41, 40, 40, 0.263);
 }
 
 @mixin dark1{

@@ -1,10 +1,11 @@
 import React, { useEffect, useReducer, useState } from 'react'
+import ReactDom from 'react-dom';
 import { globalUser } from '../../Context/HomeContext'
 import { ReducePlayerFn, statePlayers } from './ReducerPlayer';
 import CloseIcon from '@mui/icons-material/Close';
 import BalanceIcon from '@mui/icons-material/Balance';
 import PlayerCard from './playercard/PlayerCard';
-import SmallLaoding from '../loading/small.loading/smallLoading';
+
 // this component is for show    the user expections not for update or post just to show his expections info.
 
 const PopExpectCard = ({match,setPop,userExpect}) => {
@@ -39,7 +40,7 @@ const PopExpectCard = ({match,setPop,userExpect}) => {
         }
     },[])
 
-  return (
+  return ReactDom.createPortal(
     <>
         
             <div  className="popMatchFullPage">
@@ -109,7 +110,7 @@ const PopExpectCard = ({match,setPop,userExpect}) => {
    
         
     
-  )
+  ,document.getElementById('portal'))
 }
 
 export default PopExpectCard

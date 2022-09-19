@@ -36,11 +36,11 @@ export default async function TransferingPointsToCountry(firstCountryName,second
             // for goals difference 
 
             // first country
-            firstCountry.goalScored.group+=match.firstCountry.result;
-            firstCountry.goalRecieved.group+=match.secondCountry.result;
+            firstCountry.goalScored.group+= parseInt(match.firstCountry.result);
+            firstCountry.goalRecieved.group+= parseInt(match.secondCountry.result);
             // secondCountry
-            secondCountry.goalScored.group+=match.firstCountry.result; // scored
-            secondCountry.goalRecieved.group+=match.secondCountry.result; // recieved 
+            secondCountry.goalScored.group+=parseInt(match.secondCountry.result); // scored
+            secondCountry.goalRecieved.group+=parseInt(match.firstCountry.result); // recieved 
             
            if(match.firstCountry.result > match.secondCountry.result  )
                firstCountry.points += 3;
@@ -53,11 +53,11 @@ export default async function TransferingPointsToCountry(firstCountryName,second
        }
        // if the match was not a group stage match. 
        else{
-        firstCountry.goalScored.knockout+=match.firstCountry.result;
-        firstCountry.goalRecieved.knockout+=match.secondCountry.result;
+        firstCountry.goalScored.knockout+=parseInt(match.firstCountry.result);
+        firstCountry.goalRecieved.knockout+=parseInt(match.secondCountry.result);
 
-        secondCountry.goalScored.knockout+=match.firstCountry.result;
-        secondCountry.goalRecieved.knockout+=match.secondCountry.result;
+        secondCountry.goalScored.knockout+=match.secondCountry.result;
+        secondCountry.goalRecieved.knockout+=match.firstCountry.result;
        }
 
         await Country.updateOne({countryName:firstCountryName},firstCountry);

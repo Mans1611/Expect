@@ -7,7 +7,7 @@ const PlayerExpects = ({setPop}) => {
 
 
   return (
-    <div className="card-wrapper">
+    <div className="card-wrapper playersExpect">
             <div className="step"> <span>3</span></div>
             
             <div className="card flipcard">

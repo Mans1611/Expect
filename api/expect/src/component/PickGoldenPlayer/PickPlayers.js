@@ -92,7 +92,7 @@ const PickPlayers = ({fetchCountry,user,setSkip,setUser,profileSet,updateGoldenP
                 return (
                     <div onClick={()=>handleSelectPlayer(player,index)} key={index} className={`country-holder ${selectedPlayer?.index === index ? 'selected-country':''}`}>
                         <img className='playerImg' src={player.playerImg} alt={player.playerName}/>
-                        <h2>{player.playerName}</h2>
+                        <h2 >{player.playerName}</h2>
                         <h4>{player.position}</h4>
                     </div>                
                     )
@@ -100,7 +100,7 @@ const PickPlayers = ({fetchCountry,user,setSkip,setUser,profileSet,updateGoldenP
         </div>
 
         {submitStatue.showMsg && <div className={`msg ${submitStatue.color}`}>{submitStatue.msg}</div>}
-        <div className="button-wrapper">
+        <div className="button-wrapper-golden">
             <button onClick={()=>handleBack('chooseCountry-container','choosePlayer-container')} className="back">Back</button>
             <button onClick={handlePostPlayer}  className="next">Submit</button>
         </div>

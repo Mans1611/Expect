@@ -1,12 +1,12 @@
+import './playerprofile.scss';
 import React, { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { globalUser } from '../../Context/HomeContext';
-import './playerprofile.scss';
 import PlayerStatistics from './PlayerStatistics';
 import Axios from '../../Axios/axios';
 import SmallLaoding from '../loading/small.loading/smallLoading';
 import PlayerEachMatchPoints from '../PlayerMatchPoints/PlayerEachMatchPoints';
-
+import ReactDom from 'react-dom'
 const PlayerProfilePop = ({player,setPop}) => {
 
     const {isDark} = globalUser();
@@ -14,9 +14,11 @@ const PlayerProfilePop = ({player,setPop}) => {
     // const [Player,setPlayer] = useState({});
     // const [isLoading, setLoading] = useState(false);
     const hidePop = (e)=>{
-       
-        if(e.target.tagName === "svg")
+
+       console.log(e.target.tagName);
+        if(e.target.tagName === "svg" || e.target.tagName === "path")
             return setPop(false)
+
         if(e.target.className.includes('playerProfile')){
             setPop(false);
         }
@@ -51,7 +53,7 @@ const PlayerProfilePop = ({player,setPop}) => {
     //     fetchPlayer();
     // },[])
 
-  return (
+  return ReactDom.createPortal(
     <div  onClick={hidePop}  className="popMatchFullPage playerProfile">
         <div className={`popMatchContainer ${isDark && 'dark'}`}>
             <CloseIcon onClick={()=> setPop(false)} className='Popicon'/>
@@ -88,7 +90,7 @@ const PlayerProfilePop = ({player,setPop}) => {
               
         </div>
     </div>
-  )
+  ,document.getElementById('portal'))
 }
 
 export default PlayerProfilePop

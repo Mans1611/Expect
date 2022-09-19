@@ -20,7 +20,9 @@ $secondaryColor : #0000f4;
     box-sizing: border-box;
     font-family: $font1;
 }
-
+body{
+    overflow: hidden;
+}
 .topnavbar{ 
     height:fit-content;
     width: 100%;
@@ -43,7 +45,7 @@ $secondaryColor : #0000f4;
 }
 .WelcomePageCover{
     height: fit-content;
-    padding: 50px 20px 20px 10px;
+    padding: 50px 0px 20px 0px;
     position: relative;
     background-size: cover;
     background-color: #181818;
@@ -61,12 +63,13 @@ $secondaryColor : #0000f4;
         }
     }
     .buttonsWrapper{
-        background-color: #dddddd47;
+        background-color: #7e7e7e47;
         color: #f1003a;
         border-radius: 10px;
         padding:  20px;
         width: 60%;
         margin: 30px auto;
+
         .WelcomeNavbarButtons{
             text-decoration: none;
             background-color: #272727;
@@ -96,11 +99,29 @@ $secondaryColor : #0000f4;
     }
     .cards-container{
         display: grid;
-        padding: 50px 20px  10px;
+        padding: 50px 20px 80px;
         grid-template-columns: repeat(3,33.3%);
         position: relative;
         z-index: 98;
+        overflow: hidden;
         .card-wrapper{
+            &.winnerExpect{
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            &.resultExpect{
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            &.playersExpect{
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            &.origin{
+                transform: translate(0);
+                opacity: 1;
+                transition: all 600ms;
+            }
             .step{
                 color: #fff;
                 font-weight: 700;
@@ -225,6 +246,7 @@ $secondaryColor : #0000f4;
         grid-template-columns: 50% 50%;
         .matchCard-container{
             width: 95%;
+            height: fit-content;
             .matchCard{
                 background-color: #181818 !important;
                 margin-bottom: 10px;

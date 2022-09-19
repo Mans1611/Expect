@@ -60,3 +60,29 @@
    
 
 }
+@media screen and (max-width : 480px) {
+    .country-Page{
+        .topPlayersContainer{
+            overflow-x: hidden ;
+            .palyerCard{
+                opacity: 0;
+                
+                &.showplayerCard{
+                    animation: showPlayer 400ms forwards;
+                }
+            }
+        }
+    }  
+}
+
+@keyframes showPlayer {
+    from{
+       
+        transform: translateX(150%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0%);
+
+    }
+}

@@ -25,6 +25,13 @@
     background-color: #eeeeee;
     height: fit-content;
     border-radius: 10px;
+    &.expectComponent{
+        opacity: 0;
+        transform: scale(0);
+    }
+    &.showMatchCard{
+        animation : showmatchCard 500ms forwards ;
+    }
     .circle{
         border: 2px solid #FFD600;
         font-size: 18px;
@@ -83,7 +90,7 @@
                 height: 50px;
                 background-color: #e1e1e1;
                 transform: rotate(45deg);
-                z-index: 99;
+                z-index: 20;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -116,7 +123,7 @@
         .middle{
             position: relative;
 
-            z-index: 100;
+            z-index: 25;
             color: #171717;
             font-size: 20px;
             display: flex;
@@ -393,4 +400,15 @@
         }
     }
 }
+}
+
+@keyframes showmatchCard {
+    from{
+        transform: scale(0);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
 }

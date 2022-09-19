@@ -110,6 +110,17 @@
     }
     
 }
+@media screen and (max-width : 1200px) {
+.country-Page{
+    .countryDetails{
+        .topPlayersContainer{
+            .playersContainer{
+                grid-template-columns: repeat(3,33.3%) !important;
+            }
+        } 
+    }
+ }    
+}
 @media screen and (max-width : 790px) {
     .matches{
         display: flex;
@@ -121,6 +132,21 @@
         }
         .topPlayersContainer{
             width:100%;
+        }
+    }
+    .country-Page{
+
+        .countryDetails{
+            display: flex;
+            flex-direction: column;
+            .topPlayersContainer{
+                width: 90% !important;
+                
+                .playersContainer{
+                    grid-template-columns: repeat(4,25%)!important;
+                }
+            }
+            
         }
     }
     .playersContainer{
@@ -209,13 +235,14 @@
     .playersContainer{
         display: flex !important;
         flex-direction: column;
-
         .palyerCard{
             background: #9d0116; 
             border: 4px solid #272727;
             border-radius: 12px;
-             width: 90% !important;
+             width: 95% !important;
              margin: 0px auto;
+             
+
              .playerCardInfo{
                  display: flex;
                  flex-direction: row;

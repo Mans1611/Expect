@@ -53,7 +53,12 @@ const matchSchema = new Schema({
     round : {
         type : String,
         required : true
+    },
+    deadMatch : {
+        default : false,
+        type : Boolean 
     }
+
     
 })
 const Matches = model("Matches",matchSchema);

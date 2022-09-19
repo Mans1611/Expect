@@ -28,6 +28,7 @@ const CountryProfile = () => {
    
     useEffect(()=>{
         let isSubscribe = true;
+        setLoading(true);
         const fetchCountry = async()=>{
             const {data} = await Axios.get(`/country/${countryName}`);
             setCountry(data.country);

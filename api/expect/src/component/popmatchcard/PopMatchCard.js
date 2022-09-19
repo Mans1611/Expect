@@ -12,6 +12,7 @@ import { ReducePlayerFn, statePlayers } from './ReducerPlayer';
 import { CreatePlayerObject } from '../PlayerCardRadio/CreatePlayerObject';
 import PlayerCard from './playercard/PlayerCard';
 import PickGoldenPlayer from '../PickGoldenPlayer/PickGoldenPlayer';
+import ReactDom from 'react-dom'
 
 const PopMatchCard = ({match,setPop,type,userExpect}) => {
     document.body.style.overflow = 'hidden';
@@ -165,7 +166,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
     
 
 
-    return (
+    return ReactDom.createPortal(
         <div  onClick={hidePop}  className="popMatchFullPage">
             <div className={`popMatchContainer ${isDark && 'dark'}`}>
                 <CloseIcon onClick={()=> setPop(false)} className='Popicon'/>
@@ -326,7 +327,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
    
         
         
-     );
+     ,document.getElementById('portal'));
 }
  
 export default PopMatchCard;

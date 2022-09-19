@@ -7,7 +7,7 @@ const ResultExect = () => {
   
 
   return (
-    <div className="card-wrapper">
+    <div className="card-wrapper resultExpect">
         <div className="step"> <span> 2 </span> </div>
         <div  className="card flipcard">
             <div className="card-back">

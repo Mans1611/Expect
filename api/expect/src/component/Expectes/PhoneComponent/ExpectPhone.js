@@ -1,6 +1,6 @@
 import './phoneExpect.scss';
 import '../../popupmatchcard.scss';
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Minute from '../../../adminPage/component/MatchCardComponent/Minute';
 import { globalUser } from '../../../Context/HomeContext';
 import TimeCounter from '../../../TimeCounter';
@@ -12,15 +12,40 @@ const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
     document.body.style.overflow = 'visible'; 
     if(!userExpect)
         return null;
+
     const {isDark} = globalUser();
     const [timeUp, setTimeUp] = useState(false);
     const [pop,setPop] = useState(false);
     const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
     const [popDelete,setPopDelete] = useState(false);
+        
+
+    useEffect(()=>{
+        const expectComps = document.querySelectorAll('.expectComponent');
+        console.log(typeof(expectComps));
+
+        const observer = new IntersectionObserver(([entry])=>{
+            if(entry.isIntersecting)
+                entry.target.classList.add('showMatchCard')
+        })
+
+
+       
+            expectComps.forEach((comp,index,arr) => {
+                if(comp)
+                    observer.observe(arr[index]);   
+            });
+
+        // return ()=> {
+        //     if(expectComps)
+        //         observer.unobserve(expectComps)
+        // };
+    },[])
+
 
     return (
-    <div className={`expectPhone ${isDark ? 'dark' : ''}`}>
+    <div  className={`expectPhone expectComponent ${isDark ? 'dark' : ''}`}>
         <div className="upperExpectWrapper">
             <div className="countryWrapper">
                 <img className='countryFlages' src={match.firstCountry.logo} alt="" />

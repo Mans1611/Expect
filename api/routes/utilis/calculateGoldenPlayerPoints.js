@@ -5,14 +5,13 @@ export const calculateGoldenPlayerPoints = (goldenPlayer,matches)=>{
     let playerPoints = 0;
 
     matches.forEach((match)=> {
-        console.log(match.matchTime)
-        let condition = (new Date(match.matchTime).getTime() - new Date(goldenPlayer.player.pickedTime).getTime()) && (match.firstCountry.countryName === countryName || match.secondCountry.countryName === countryName)
+        let condition = ( (new Date(match.matchTime).getTime() - new Date(goldenPlayer.player.pickedTime).getTime()) > 0 )  && (match.firstCountry.countryName === countryName || match.secondCountry.countryName === countryName)
         if( condition){
             playerPoints += match.firstCountry.players[goldenPlayer.player.index].playerPoints * 2  ;
             playerPoints +=  match.secondCountry.players[goldenPlayer.player.index].playerPoints * 2  ;
         }
     })
-    console.log("golden player points is " + playerPoints);
+   
     return playerPoints
 
 

@@ -9,10 +9,11 @@
         svg{
             &.info,&.Popicon{
                 color: #eeeeee;
-                position: absolute;
+                position: sticky;
                 top: 0;
                 left: 0;
             }
+            
         }
         .player-header{
             display: flex;
@@ -66,18 +67,24 @@
     }
     .player-content-body{
         background-color: #e5e5e5;
-        padding: 10px 5px;
-        h1{
+        padding: 0px 0px 10px;
+        >h1{
             margin-bottom: 10px;
             text-align: center;
             font-size: 40px;
+            background:linear-gradient(90deg, #513333 0%, #9d0116 50%) ;
+            padding-bottom: 60px;
+            height: 120px;
         }
         .statistics-container{
-            width: 90%;
+            width: 70% !important ;
             border-radius: 10px;
             background-color: #c1c1c1;
             padding: 10px 0;
             margin: auto;
+            position: relative;
+            z-index: 4;
+            top: -80px;
 
             .flex{
                 display: flex;
@@ -139,7 +146,7 @@
             .statistics-container{
                 width: 80%;
                 border-radius: 10px;
-                background-color: #27272791;
+                background-color: #272727;
                .detail{
                    h1{
                    color: #ffbf00;
@@ -160,7 +167,72 @@
                 }
             }
         }
+        .button-wrapper{
+            background-color: #373737;
+        }
     }
 }
+}
+@media screen and (max-width : 450px) {
 
+.popMatchFullPage{
+    .popMatchContainer{
+       
+        
+       
+        .player-header{
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: #eeeeee;
+
+            .playerImg{
+                img{
+                    width: 100px;
+                    height: 100px;
+            }
+        }
+        .player-personl-details{
+            margin-left: 15px;
+           
+            .playerName{
+                color: $gold;
+                font-size: 25px;
+            }
+            h2{
+                font-size: 22px;
+            }
+        }
+        .player-country{
+            img{
+                width: 70px;
+                height: 70px;
+            }
+           
+        }
+    }
+    .player-content-body{
+        .statistics-container{
+            width: 85% !important;
+
+            .flex{
+                 .detail{
+                    img{
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+               
+                }
+        }
+        
+    }
+    
+    .fakeackground{
+        background-color: #e5e5e5;
+        padding: 10px;
+    }
+    
+}
+}
 }

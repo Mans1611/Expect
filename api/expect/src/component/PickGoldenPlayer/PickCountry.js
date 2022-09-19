@@ -46,7 +46,7 @@ const PickCountry = ({fetchCountry,setFetchCountry,profileSet}) => {
                     )
             })}
         </div>
-        <div className={`button-wrapper ${profileSet?'buttons-end':''}`}>
+        <div className={`button-wrapper-golden ${profileSet?'buttons-end':''}`}>
             {
                 !profileSet&&
                 <button onClick={()=>handleBack('instructions','chooseCountry-container')} className="back">Back</button>

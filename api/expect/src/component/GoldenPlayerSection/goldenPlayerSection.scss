@@ -1,0 +1,111 @@
+.GoldenPlayerSection{
+    background-color: #373737;
+    height: 100vh;
+    text-align: center;
+    padding: 0px 0 20px;
+    h1{
+        color : #ffdf00;
+        font-size: 84px;
+    }
+    .imgs-container{
+        background-color: #373737;
+        padding: 30px 0 90px;
+        overflow: hidden;
+        &.newBackground{
+            transition: all 900ms;
+            background: rgb(255,180,0);
+            background: -moz-linear-gradient(90deg, rgba(255,180,0,1) 0%, rgba(211,60,53,1) 100%);
+            background: -webkit-linear-gradient(90deg, rgba(255,180,0,1) 0%, rgba(211,60,53,1) 100%);
+            background: linear-gradient(90deg, rgba(255,180,0,1) 0%, rgba(211,60,53,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffb400",endColorstr="#d33c35",GradientType=1);
+    
+        }
+        .players-image-container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            
+           img{
+            &.playerImg-golden{
+                position: relative;
+                bottom: 20px;
+
+            }
+               &.left-img{
+                   width: 170px ;
+                   height: 220px;
+                   right: -50px;
+                   z-index: 1;
+                   transform: translateX(-400%);
+                   opacity: 0;
+                   
+                }
+                &.right-img{
+                    width: 170px ;
+                    opacity: 0;
+                    height: 220px;
+                    left: -65px;
+                    z-index: 1;
+                    transform: translateX(400%);
+                }
+                &.middle-img{
+                    width: 220px ;
+                    opacity: 0;
+                   height: 270px;
+                   z-index: 2;
+                   transform: translateY(150%);
+                }
+                &.title{
+                    width: 400px ;
+                    height: 130px;
+                    position:absolute;
+                    z-index: 3;
+                    bottom: -30px;
+                    transform: translateY(150%);
+                    opacity: 0;  
+                }
+                &.origin{
+                    opacity: 1;
+                    transform: translate(0%);
+                    transition: all 900ms;   
+                }
+            }
+        }        
+        
+
+        
+    }
+    .body-container{
+        position: relative;
+        z-index: 3;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #272727;
+        height: 200px;
+        width: 55%;
+        margin: auto;
+        top: -60px;
+        h1{
+            color : #ffdf00;
+            font-size: 48px;
+        }
+        p{
+            font-size: 22px;
+            color: #ffffff;
+            line-height: 23px;
+            span{
+                color : #ffdf00;
+                font-size: 23px;
+            }
+        }
+    }
+}
+
+
+@keyframes slide {
+    to{
+        transform: translateX(0%);
+        visibility: visible;
+    }
+}

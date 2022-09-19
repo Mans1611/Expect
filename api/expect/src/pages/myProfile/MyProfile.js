@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import Axios from '../../Axios/axios';
 import Loading from '../../component/loading/big.loading/Loading';
 import GoldenPlayerCard from '../../component/GoldenPlayerCard/GoldenPlayerCard';
+import UserGoldenPlayer from '../../component/GoldenPlayerCard/UserGoldenPlayer';
 
 const MyProfile = () => {
     document.body.style.overflow = "visible"; // to disable scrollbar
@@ -47,7 +48,12 @@ const MyProfile = () => {
                     <div className="informationContainer">
                         <PersonalComp user = {user}/>
                         <ExpectsInfo user = {user} />
-                        <GoldenPlayerCard/>
+                        {
+                            userGlob === userName ? 
+                                <GoldenPlayerCard/>
+                                :
+                                <UserGoldenPlayer goldenPlayer={user[0].goldenPlayer} userName = {user[0].userName}/>
+                        }
                     </div>
                     <ProfileExpects  userName = {userName}/>
                 </div>

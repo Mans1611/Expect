@@ -4,7 +4,7 @@ import { globalUser } from '../../Context/HomeContext';
 import SmallLaoding from '../loading/small.loading/smallLoading';
 import './playerEachMatchPoints.scss';
 
-const PlayerEachMatchPoints = ({player}) => {
+const PlayerEachMatchPoints = ({player,setTotalPoints}) => {
     const {isDark,token} = globalUser();
     const [isLoading,setLoading] = useState(true);
     const [details,setDetails] = useState([]);

@@ -52,7 +52,7 @@ const MathcesAdm = () => {
        let isSubscribe = true; 
             socket.on("updatingMatches",(matches)=>{
                 if(isSubscribe)
-                    setMatches(matches);
+                    store.setMatches(matches);
             })
 
             return ()=> isSubscribe = false;

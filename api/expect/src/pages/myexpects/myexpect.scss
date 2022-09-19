@@ -1,9 +1,11 @@
 @import '../../.mainStyle.scss';
 
+
 .myexpects{
     min-height : 80vh;
     background:#eeeeee;
-    padding: 10px 10px 80px;
+    padding: 10px 20px 80px 20px;
+    
     .headlineWrapper{
         padding: 20px 0 ;
         .headline{
@@ -40,7 +42,10 @@
             font-weight: 600;
         }
     }
-
+    .noContent{
+        background-color: #cccccc;
+        border-radius: 10px;
+    }
     &.dark{
         background: linear-gradient(180deg, #171717 52%,#fff 100%);
         .headline{
@@ -57,19 +62,32 @@
             }
     
         }
+        .noContent{
+            background-color: #1717178a;
+            color: #dddddd;
+            border-radius: 10px;
+            
+            h2{
+                color: #ffffff;
+            }
+            a{
+                color: #ffbf00;
+
+            }
+        }
     }
     
     .flex-wrapper{
         display: flex;
 
         .nogrid,.expectsContainer{
-            background-color: #ccccff;
             padding: 10px;
             height: 100%;
             width: 75%;
             margin: 10px ;
             border-radius: 10px;  
         }
+        
         .expectsContainer{
             display: grid;
             grid-template-columns: repeat(3,33.3%);
@@ -80,6 +98,7 @@
         background-color: #cccccc;
         width: 25%;
         .playerCard-container{
+
             .palyerCard{
                 width: 65%;
                 .imgBackground{
@@ -89,7 +108,19 @@
                     }
                 }
             }
-
+            
+        }
+        .content{
+            background-color: #cccccc;
+            .addicon{
+                border: 2px solid #272727;
+                background-color: #aaaaaa;
+                @include shadowMainStyle;
+                &:hover{
+                    background-color: #ffbf00 ;
+                    color: #171717;
+                }
+            }
         }
         .changeGoldenbutton{
                 display: none;
@@ -156,6 +187,19 @@
                
             }
         }
+        .goldenPlayercard{
+
+            .content{
+                background-color: #171717;
+                .addicon{
+                    background-color: #282828;
+                    &:hover{
+                        transform: scale(1.05);
+                        transition: all 300ms;
+                    }
+                }
+            }
+        }
     
         
 }
@@ -165,14 +209,15 @@
 
     .myexpects{
         .flex-wrapper{
-            flex-direction: column;
             .expectsContainer{
                 padding: 10px;
                  height: 100%;
-                 width: 100%;
+                 width: 70%;
                  margin: 10px auto;
-                display: grid;
-                grid-template-columns: repeat(3,33%);   
+                grid-template-columns: repeat(2,50%);   
+            }
+            .goldenPlayercard{
+                height: fit-content;
             }
         }
     }
@@ -195,6 +240,7 @@
             padding: 0 10px 10px 10px;
         }
         .flex-wrapper{
+            flex-direction: column;
             .expectsContainer{
                 padding: 10px;
                 height: 100%;
@@ -290,7 +336,6 @@
     .myexpects{
         .expectsContainer{
             padding: 10px;
-            background: linear-gradient(180deg, #a1a1a1 0%, #ffffff 100%);
             height: 100%;
             display: grid;
             grid-template-columns: repeat(2,50%);   

@@ -3,14 +3,14 @@ import { useState,useContext } from 'react';
 import { userContext } from '../../../Context/HomeContext';
 import PlayerProfilePop from '../../PlayerProfilePopUp/PlayerProfilePop';
 import InfoIcon from '@mui/icons-material/Info';
-const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock }) => {
+const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock,goldenPlayer }) => {
    
     const {isDark} = useContext(userContext);
     const [state,setState] = useState(null);
     const [playerPop,setPlayerPop] = useState(false);
 
     return ( 
-        <div className={`palyerCard ${isDark? 'dark':''} ${lock ? 'lock' : ''}`}>
+        <div className={`palyerCard  ${isDark? 'dark':''} ${lock ? 'lock' : ''} ${goldenPlayer ? 'goldenPlayer' : ''}`}>
                 <InfoIcon onClick={()=>setPlayerPop(true)} className='info'/>
                 <div  className="playerCardInfo">
                     <div className="imgBackground">

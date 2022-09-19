@@ -9,9 +9,9 @@ const updateMatch = async(data)=>{
     
     try{
     let match = await Matches.findOne({matchId:data.matchId});
+
         if(data.matchStatus){
             match = MatchHalfs(match,data.matchStatus);
-
         }
     
     if(match.fullTime){
@@ -41,7 +41,10 @@ const updateMatch = async(data)=>{
         match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
         match.states.push(updatedPlayer_2);
     }
-    await Matches.updateOne({matchId:data.matchId},match) ;
+    if(data.matchStatus === 'Match Is Done')
+         match.deadMatch = true // here sleep match  is a flage that the match has ended with all state like man of the match, so we dont need to calculate the state all over again.
+    
+        await Matches.updateOne({matchId:data.matchId},match) ;
     
     
 }

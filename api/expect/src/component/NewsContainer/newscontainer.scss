@@ -6,6 +6,7 @@
     width: 100%;
     margin: auto;
     background-color: #d1d1d1;
+    overflow-y: hidden;
 
     .newsCard{
         background-color: #ffffff;
@@ -16,6 +17,13 @@
         height: 400px;
         overflow-y: hidden;
         margin: 20px auto;
+        transform: translateY(40%);
+        opacity: 0; 
+        &.show{
+            transform: translateY(0%);
+            opacity: 1;
+            transition: all 400ms;
+        }
         .img-wrapper{
             overflow: hidden;
             min-height: 200px;
@@ -112,6 +120,13 @@
             width: 100%;
             height: fit-content;
             margin: 5px auto;
+            transform: translateX(100%);
+            opacity: 0; 
+            &.show{
+            transform: translateX(0%);
+            opacity: 1;
+            transition: all 800ms;
+        }
             .img-wrapper{
                 max-height: 100%;
                 min-height: 100%;
@@ -162,7 +177,7 @@
             border-radius: 10px;
             display: flex;
             flex-direction: row;
-           
+            
             .img-wrapper{
                 max-height: 100%;
                 min-height: 100%;
@@ -201,6 +216,19 @@
                 }
             }
         }
+    }
+    
+}
+
+@keyframes showcard {
+    from{
+        transform: translateY(100%);
+        opacity: 0;
+
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 1;
     }
     
 }

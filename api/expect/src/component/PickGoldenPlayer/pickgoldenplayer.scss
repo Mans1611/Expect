@@ -6,7 +6,7 @@
     text-align: center;
     min-height: 449px;
     display: flex;
-    .button-wrapper{
+    .button-wrapper-golden{
         display: flex;
         justify-content: space-between;
         padding: 5px;
@@ -141,6 +141,7 @@
                     font-size: 24px;
                     margin: 2px;
                     color : #272727;
+                    
                 }
                 
                 &.selected-country{
@@ -167,6 +168,7 @@
                 background-color:#171717;
                 h2{
                     color : #eeeeee;
+                    
                 }
             }
 
