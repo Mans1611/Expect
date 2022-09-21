@@ -4,13 +4,14 @@
 
 
 
-export default async function AddingPointsToUSers(matches,userExpections){
+export default  function AddingPointsToUSers(matches,userExpections){
     let totalPoints = 0;
-    const start = new Date().getTime();
+    let matchCarrier = null;
+    let filterMatches = [];
 
     for(let i = 0; i < userExpections.length;i++){
 
-            matches.find((match)=>{
+            let filterdMatch = matches.find((match)=>{
                 // so if the matchId matches it will transfer the points of selected from the two countries to the user.  
                 // userPoints variable is for the points in this expect not for all expects
                 if(match.matchId === userExpections[i].matchId){
@@ -18,33 +19,36 @@ export default async function AddingPointsToUSers(matches,userExpections){
                     if(!userExpections[i].finalPoints){
                         let matchPoints = 0;
 
-                        matchPoints += Math.floor(match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints * 1.5 ) ;
-                        matchPoints += match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints;  
-                        matchPoints += Math.floor(match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints * 1.5);
-                        matchPoints += match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints;
-                            // so this for the winner points it will be calculated just if the match ends (fullTime)
-
+                        matchPoints += userExpections[i].mutatePlayer1.subs ? Math.floor((match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints - userExpections[i].mutatePlayer1.HT_Points)* 1.5 ) : 
+                        Math.floor(match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints * 1.5);
+                        matchPoints += userExpections[i].mutatePlayer2.subs ? (match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints - userExpections[i].mutatePlayer2.HT_Points) : match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints ;
+                        matchPoints += userExpections[i].mutatePlayer3.subs ? (match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints - userExpections[i].mutatePlayer3.HT_Points) : match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints ;
+                        matchPoints += userExpections[i].mutatePlayer4.subs ? (match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints - userExpections[i].mutatePlayer4.HT_Points) : match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints ;
+                        
+                        // so this for the winner points it will be calculated just if the match ends (fullTime)
+                        
                         let result_Points = 0 ;
                         let WinnerPoints = 0;  
                         let WINNER = null;
                         const winnerMath = match.firstCountry.result - match.secondCountry.result;
-                        
-                        if(winnerMath > 0 ){
-                            WINNER = match.firstCountry.countryName; 
-                            WinnerPoints = (WINNER === userExpections[i].winnerValue) ? 2 : 0;
-                            matchPoints += WinnerPoints;
-                        }
-                        else if(winnerMath < 0 ){
-                            WINNER = match.secondCountry.countryName; 
-                            WinnerPoints = (WINNER === userExpections[i].winnerValue) ? 2 : 0;
-                            matchPoints += WinnerPoints;
-                        }
-                        else if(winnerMath == 0 ){
-                            WINNER = "draw"; 
-                            WinnerPoints = (WINNER === userExpections[i].winnerValue) ? 3 : 0;
-                            matchPoints += WinnerPoints;
-                        }
+
                         if(match.fullTime){
+                            
+                            if(winnerMath > 0 ){
+                                WINNER = match.firstCountry.countryName; 
+                                WinnerPoints = (WINNER === userExpections[i].winnerValue) ? 2 : 0;
+                                matchPoints += WinnerPoints;
+                            }
+                            else if(winnerMath < 0 ){
+                                WINNER = match.secondCountry.countryName; 
+                                WinnerPoints = (WINNER === userExpections[i].winnerValue) ? 2 : 0;
+                                matchPoints += WinnerPoints;
+                            }
+                            else if(winnerMath == 0 ){
+                                WINNER = "draw"; 
+                                WinnerPoints = (WINNER === userExpections[i].winnerValue) ? 3 : 0;
+                                matchPoints += WinnerPoints;
+                            }
                             let difference = 0;
                             difference = Math.abs(match.firstCountry.result - userExpections[i].result1_value) + Math.abs(match.secondCountry.result - userExpections[i].result2_value);
                             
@@ -75,25 +79,30 @@ export default async function AddingPointsToUSers(matches,userExpections){
                         userExpections[i].userPoints = matchPoints;
                         totalPoints += matchPoints;
 
-                        if(match.deadMatch)
-                            userExpections[i].finalPoints = matchPoints;
+                            if(match.deadMatch)
+                                userExpections[i].finalPoints = matchPoints;
 
                         }
                         
                         else{
                             totalPoints+= userExpections[i].finalPoints;
                         }
+
+                       
+                        matchCarrier = {...match,expected : true};
+                        return match;
                     }
                
                 // this if condition for golden Player
-                
-                
+               
             })
 
+            filterMatches.push(matchCarrier);
+
         }
-        const end = new Date().getTime()
+     
       
-    return  {userExpections,totalPoints};
+    return  {userExpections,totalPoints,filterMatches};
     }
 
 

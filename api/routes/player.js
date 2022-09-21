@@ -11,6 +11,7 @@ const player = express.Router();
 player.get('/:countryName/:playerName',async(req,res)=>{
    try{
     const {countryName,playerName} = req.params;
+    console.log(countryName,playerName);
 
     const player = await Country.aggregate([
         {$match : {countryName}},

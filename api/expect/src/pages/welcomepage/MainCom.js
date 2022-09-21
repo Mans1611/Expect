@@ -28,7 +28,7 @@ const MainCom = () => {
             }
         })
     },{
-        threshold:0.5
+        threshold:(window.innerWidth>650 ? 0.5 : 0.15 )
     });
     if(cards_container)
         observer.observe(cards_container)

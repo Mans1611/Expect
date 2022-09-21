@@ -36,7 +36,7 @@ export default async function TransferingPointsToCountry(firstCountryName,second
             // for goals difference 
 
             // first country
-            firstCountry.goalScored.group+= parseInt(match.firstCountry.result);
+            firstCountry.goalScored.group+= parseInt(match.firstCountry.result); // to convert it from string to number.
             firstCountry.goalRecieved.group+= parseInt(match.secondCountry.result);
             // secondCountry
             secondCountry.goalScored.group+=parseInt(match.secondCountry.result); // scored

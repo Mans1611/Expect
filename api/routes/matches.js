@@ -225,6 +225,31 @@ matches.put('/editmatch/:matchID',verifyAdmin,async (req,res)=>{
         console.log(err);
     }
 })
+
+matches.put('/updatelinup/:matchId',async(req,res)=>{
+    const {matchId} = req.params ;
+    const {firstCountryLinup,secondCountryLinup} = req.body;
+    let match = await Matches.findOne({matchId});
+    
+    firstCountryLinup.forEach((player,index)=>{
+        let temp = match.firstCountry.players[index];
+        match.firstCountry.players[index] = match.firstCountry.players[firstCountryLinup[index].index];
+        match.firstCountry.players[firstCountryLinup[index].index] = temp;
+    })
+
+
+    secondCountryLinup.forEach((player,index)=>{
+        let temp = match.secondCountry.players[index];
+        match.secondCountry.players[index] = match.secondCountry.players[secondCountryLinup[index].index];
+        match.secondCountry.players[secondCountryLinup[index].index] = temp;
+
+    })
+
+
+    res.send("done");
+    await Matches.updateOne({matchId},match)
+
+})
 matches.put('/updatestate/:matchId/:stateIndex',async(req,res)=>{
     const {matchId,stateIndex} = req.params;
     try{

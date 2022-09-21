@@ -63,7 +63,7 @@ app.use(session({
     secret : "mansour is an idiot man",
     saveUninitialized : false,
     cookie : {
-        maxAge : 1000 * 60 * 60 ,
+        maxAge : 1000 * 660 * 60 ,
         httpOnly : false
     },
     store : storeSession

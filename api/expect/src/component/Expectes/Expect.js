@@ -9,6 +9,7 @@ import PopMatchCard from '../popmatchcard/PopMatchCard';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import MatchState from '../MatchState/MatchState';
 import Axios from '../../Axios/axios';
+import PopSubsHT from '../popmatchcard/PopSubsHT';
 
 const Expect = ({match,userExpect,setUserExpections})=> {
     document.body.style.overflow = "visible";
@@ -19,10 +20,11 @@ const Expect = ({match,userExpect,setUserExpections})=> {
         const {isDark,userGlob,token} = globalUser();
         const [timeUp, setTimeUp] = useState(false);
         const [pop,setPop] = useState(false);
+
         const [min,setMin] = useState(1);
         const [showDelete,setShowDelete] = useState(false);
         const [showState,setShowState] = useState(false);
-
+        const [showSubPop,setShowSubPop] = useState(false);
         
         const handldeDeleteExpect = async(e) =>{
             e.preventDefault();
@@ -55,7 +57,7 @@ const Expect = ({match,userExpect,setUserExpections})=> {
                 
                 {timeUp &&<span className="result">{match.secondCountry.result}</span>}
                 <div className="matchCardCountry">
-                    <img src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="matchCardCountryImg" />
+                    <img src={match.secondCountry.logo} alt={match.secondCountry.countryName} className="matchCardCountryImg secondimg" />
                     <span className='countryLabel'>{match.secondCountry.countryName}</span>
                 </div>
             </div>
@@ -73,7 +75,10 @@ const Expect = ({match,userExpect,setUserExpections})=> {
             {
                 <div className="matchCardStart">
                     {timeUp ?
-                        <button onClick={()=> setShowState(true)}  className='matchCardbutton'>Expect Points</button> 
+                        <>
+                            <button onClick={()=> setShowState(true)}  className='matchCardbutton'>Expect Points</button> 
+                            {match.matchStatue === "HT" && <button className='matchCardbutton' onClick={()=> setShowSubPop(true)}>Substitue Player</button>}
+                        </>
                         : 
                         <>
                         { showDelete ? 
@@ -103,6 +108,8 @@ const Expect = ({match,userExpect,setUserExpections})=> {
        
         
         {showState && <MatchState expected = {true} userExpect={userExpect} match = {match} setPop = {setShowState}/>}
+        {pop && <PopMatchCard userExpect={userExpect} match={match}  setPop = {setPop} />}
+        {showSubPop && <PopSubsHT match={match} setPop = {setShowSubPop} userExpect = {userExpect}/>}
         </div>
   )
 }

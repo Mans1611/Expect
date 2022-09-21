@@ -37,6 +37,7 @@ import FeedBack from './pages/FeedBack/FeedBack';
 import Support from './pages/FeedBack/Support/Support';
 import FeedbackAdmin from './adminPage/pages/Feedback/FeedbackAdmin';
 import PlayerProfile from './pages/PlayerProfile/PlayerProfile';
+import PlayerPointsPage from './pages/PlayersPointsPage/PlayerPointsPage';
 export const ThemeContext = createContext(true);
 
 
@@ -70,6 +71,8 @@ const  App = ()=> {
       
       {/* Regestirng pages */}
         <Route path='/welcome' element={<Welcome/>}></Route>
+        <Route path='/playersPointscalculation' element={<PlayerPointsPage/>}></Route>
+        
         <Route path='/whatisexpect' element={<WhatIsExpect/>}></Route>
         <Route path="/register" element = {<Register/>}>
           <Route path='signin' element = {<SignIn/>}/>

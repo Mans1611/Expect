@@ -6,7 +6,7 @@ import PlayerCard from '../popmatchcard/playercard/PlayerCard'
 const UserGoldenPlayer = ({goldenPlayer, userName}) => {
     const {isDark} = globalUser()
     const [showPlayerPoints,setShowPlayerPoints] = useState(false);
-    console.log(goldenPlayer);
+   
   return (
     <>
         <div className ={`informationWrapper goldenPlayercard ${isDark ? 'dark':''}`}>
@@ -16,12 +16,19 @@ const UserGoldenPlayer = ({goldenPlayer, userName}) => {
                 </div>
                 <div>   
                 <div className="playerCard-container">
-                    <PlayerCard player={goldenPlayer.player}/>
+                    {
+                        goldenPlayer.player ? 
+                            <PlayerCard player={goldenPlayer.player}/>
+                            : 
+                            <div className="noContent">No Golden Player is picked </div>
+
+                    }
                 </div>
                        
                 
                 </div>
-                {showPlayerPoints && <PlayerEachMatchPoints  player={goldenPlayer.player}/>}
+
+                {showPlayerPoints && goldenPlayer.player && <PlayerEachMatchPoints  player={goldenPlayer.player}/>}
                     {/* <div className="goldenPlayerPoints-container">
                         <div className="points">
                             <h3>Points</h3>

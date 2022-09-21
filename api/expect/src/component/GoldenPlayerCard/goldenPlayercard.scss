@@ -8,12 +8,12 @@
         width: 100%;
     }
     .playerCard-container{
-        padding: 10px;
+        padding: 10px 10px 40px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
+        position: relative;
         button{
             margin-top: 5px;
             font-size: 26px;
@@ -41,6 +41,132 @@
                     }
                 }
             }
+        }
+        .previousGoldenPlayer{
+            border-radius: 10px;
+            margin: 50px auto 0;
+            width: 100%;
+            padding:10px 5px;
+            background-color: #b7b7b7;
+            .header{
+                h1{
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    padding: 5px;
+                    background-color: #f4cb00;
+                    font-size: 40px;
+                }
+            }
+            .player{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 5px 20px 0;
+                .player-personal{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    h3{
+                        color: #272727;
+                        width: 70px;
+                        text-align: center;
+                        margin-top: 5px;
+                    }
+                    img{
+                        width: 70px;
+                        height: 70px;
+                        border: 2px solid #f4c700;
+                        border-radius: 50%;
+                        background-color: #17171769;
+                        &.country{
+                            width: 50px;
+                            height: 35px;
+                            border-radius: 0;
+                            border: 2px solid #272727;
+                        }
+                    }
+                }
+                .detail{
+                    background-color: #373737;
+                    border-radius: 20%;
+                    padding: 10px;
+                    font-size: 23px;
+                    color: #ffffff;
+                    .points{
+                        font-size: 48px;
+                        color: #ffc400;
+                    }
+
+                }
+            }
+            .background{
+                background-color: #99999996;
+                transition: all 600ms;
+                height: 0;
+                overflow: hidden;
+                &.expand{
+                    padding: 30px 0 30px;
+                    height: fit-content;
+                    overflow: visible;
+                }
+                .playerMatchPoints-container{
+                    border: 2px solid #171717;
+                    padding: 0;
+                    border-radius: 0;
+                    width: 100%;
+                    .table-header-wrapper,.detail-player{
+                        border-radius: 0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .detail-player{
+                        padding: 5px ;
+                        .flex-img{
+                            margin: 2px 0;
+                        }
+                    }
+                    
+
+                }
+            }
+            .previousPlayerbutton-wrapper{
+                position: relative;
+            }
+            .previousPlayerButton{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 30px;
+                border-radius: 50%;
+                font-weight: 600;
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                left: 50%;
+                top: -10px;
+                z-index: 20;
+                margin-left: -25px;
+
+                background-color: #555555;
+                color: #ffc400;
+                font-weight: 600;
+                .arrow-playerdetails{
+                    transform: rotate(180deg);
+                    transition: all 400ms;
+                    &.rotate{
+                        transform: rotate(0deg);
+                        
+                    }
+                }
+                &:hover{
+                    background-color: #272727;
+                    color: #ffc400;
+                }
+            }
+
+
         }
         
     }
@@ -143,13 +269,54 @@
                 }
             }
         }
+        .previousGoldenPlayer{
+            background-color: #252525;
+            .header{
+
+                h1{
+                    text-align: center;
+                    color: #111111;
+                    background-color: #f4cb00;
+                }
+            }
+            .player{
+                .player-personal{
+                    h3{
+                        color: #eeeeee;
+                    }
+                    img{
+                        background-color: #17171769;
+                    }
+                }
+                
+            }
+            .background{
+                background-color: #1b1b1b98;
+               
+                
+               
+            }
+            
+            .previousPlayerButton{
+              
+                background-color: #444444;
+                color: #ffc400;
+                font-size: 30px;
+               
+                font-weight: 600;
+                &:hover{
+                    background-color: #ffc400;
+                    color: #171717;
+                }
+            }
+
+
+        }
     }
 }
 
 @media screen and (max-width:570px) {
     .goldenPlayercard{
-    
-        
         .playerCard-container{
             display: flex;
             flex-direction: column;
@@ -250,4 +417,248 @@
         }
     }
     
+}
+@media screen and (max-width : 360px ) {
+    .goldenPlayercard{
+        width: 95% !important;
+        .playerCard-container{
+            width: 100%;
+            .palyerCard{
+                width: 70% !important ;
+
+                .imgBackground{
+                    img{
+                        width: 65px;
+                        height: 65px;
+                    }
+                }
+                .playerDetails{
+                    .details{
+                        color: #ffffff;
+                        font-size: 24px;
+                        &.name{
+                            color: #111111;
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+            button{
+                margin-top: 5px;
+                font-size: 26px; 
+            }
+            .previousGoldenPlayer{
+                border-radius: 10px;
+                margin: 50px auto 0;
+                width: 100%;
+                
+                background-color: #b7b7b7;
+                .header{
+    
+                    h1{
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                        padding: 5px;
+                        background-color: #f4cb00;
+                        font-size: 40px;
+                    }
+                }
+                .player{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    
+                    .player-personal{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        h3{
+                            color: #272727;
+                            width: 70px;
+                            text-align: center;
+                            margin-top: 5px;
+                            font-size: 18px;
+                          
+                        }
+                        img{
+                            width: 60px;
+                            height: 60px;
+                           
+                            &.country{
+                                width: 45px;
+                                height: 30px;
+                                
+                            }
+                        }
+                    }
+                    .detail{
+                        background-color: #373737;
+                        border-radius: 20%;
+                        padding: 5px;
+                        font-size: 20px;
+                        color: #ffffff;
+                        .points{
+                            font-size: 40px;
+                            color: #ffc400;
+                        }
+    
+                    }
+                }
+                .background{
+                    background-color: #99999996;
+                    
+                    
+                    .playerMatchPoints-container{
+                        border: 2px solid #171717;
+                        padding: 0;
+                        border-radius: 0;
+                        width: 100%;
+                        .table-header-wrapper,.detail-player{
+                            border-radius: 0;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .detail-player{
+                            padding: 5px ;
+                            .flex-img{
+                                margin: 2px 0;
+                            }
+                        }
+                        
+    
+                    }
+                }
+                .previousPlayerButton{
+                    background-color: #555555;
+                    font-size: 30px;
+                    border-radius: 50%;
+                    font-weight: 600;
+                    svg{
+                        width: 50px;
+                        height: 50px;
+                    }
+                    &:hover{
+                        background-color: #272727;
+                        color: #ffc400;
+                    }
+                }
+    
+            }
+            
+        }
+
+        .content{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            
+    
+            .addicon{
+                width: 170px ;
+                height: 200px;
+                padding:5px;
+                text-align: center;
+                border-radius: 5px;
+                background-color: #dddddd;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+                cursor: pointer;
+                svg{
+                    font-size: 65px;
+                    margin-bottom: 10px;
+                }
+                h2{
+                    font-size: 30px;
+                }
+                &:hover{
+                    background-color: #bbbbbb;
+                    color: #272727;
+    
+                }
+    
+            }
+        }
+        
+    
+        &.dark{
+            .addicon{
+                background-color: #272727;
+                color: #ffffff;
+                border: 3px solid #ffc400;
+               
+                &:hover{
+                    background-color: #ffc400;
+                    color: #171717;
+                }
+    
+            }
+            .playerCard-container{
+    
+                button{
+                    margin-top: 5px;
+                    font-size: 26px;
+                    background-color: #de2727;
+                    &:hover{
+                        background-color: #eeeeee;
+                        color: #de2727;
+                    }
+                }
+            }
+            .previousGoldenPlayer{
+                background-color: #252525;
+                .header{
+    
+                    h1{
+                        text-align: center;
+                        color: #111111;
+                        background-color: #f4cb00;
+                    }
+                }
+                .player{
+                    
+                    .player-personal{
+                        h3{
+                            color: #eeeeee;
+                        }
+                        img{
+                            background-color: #17171769;
+                        }
+                    }
+                    
+                }
+                .background{
+                    background-color: #1b1b1b98;
+                    
+                   
+                }
+                
+                .previousPlayerButton{
+                   
+                    font-size: 30px;
+                   
+                    font-weight: 600;
+                    &:hover{
+                        background-color: #ffc400;
+                        color: #171717;
+                    }
+                }
+    
+    
+            }
+        }
+    }
+}
+@keyframes slideDown {
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
 }

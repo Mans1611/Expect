@@ -28,7 +28,7 @@ const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock,goldenPlaye
                         {auth && showPlayerState && <SelectionComp countryOrder={countryOrder}  setState={setState}  name={countryOrder}/> }
                     </div>
                 </div>
-                {playerPop && <PlayerProfilePop setPop = {setPlayerPop} player = {player}/>}
+                {playerPop && <PlayerProfilePop toFetch={true} setPop = {setPlayerPop} player = {player}/>}
         </div>
      );
 }

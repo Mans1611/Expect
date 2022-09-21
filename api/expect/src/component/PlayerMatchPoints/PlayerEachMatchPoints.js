@@ -1,10 +1,10 @@
+import './playerEachMatchPoints.scss';
 import React, { useEffect, useState } from 'react'
 import Axios from '../../Axios/axios';
 import { globalUser } from '../../Context/HomeContext';
 import SmallLaoding from '../loading/small.loading/smallLoading';
-import './playerEachMatchPoints.scss';
 
-const PlayerEachMatchPoints = ({player,setTotalPoints}) => {
+const PlayerEachMatchPoints = ({player}) => {
     const {isDark,token} = globalUser();
     const [isLoading,setLoading] = useState(true);
     const [details,setDetails] = useState([]);
@@ -32,6 +32,7 @@ const PlayerEachMatchPoints = ({player,setTotalPoints}) => {
 
     return (
         <div className= {`playerMatchPoints-container ${isDark ? 'dark' : ''}`} >
+            
             <div className="table-header-wrapper row">
                 <div className="item">Opponent</div>
                 <div className="item">Match Points</div>

@@ -11,6 +11,8 @@ import io from 'socket.io-client';
 import { MatchStateCentral } from '../../../../../Context/MatchCardContext';
 import State from '../../../../../component/MatchState/State';
 import NextMatchStep from './NextMatchStep';
+import PlayerCardLinup from '../../../../../component/PlayerCardRadio/PlayerCardLinup';
+import Axios from '../../../../../Axios/axios';
 
 
 //https://expect-app.herokuapp.com/
@@ -31,8 +33,9 @@ const UpdateMatch = ({match,min})=> {
   const [StoppingTime,setStoppingTime] = useState(match.stoppingTime);
   const [country_1_result,setResult1] = useState(match.firstCountry.result);
   const [country_2_result,setResult2] = useState(match.secondCountry.result);
-  const [pauseState,setPauseState] = useState('');
-  const [showPauseState,setShowPauseState] = useState(false);
+  
+  const [showLinup,setShowLinup] = useState(false);
+
   const [showMatchState,setShowMatchState] = useState(false);  
 
   // this code down below is to cahnge the background color when you select a player 
@@ -100,6 +103,35 @@ const handleUpdate = async(e)=>{
     } 
   }
 
+  const confirmLinup = async(e)=>{
+    e.preventDefault();
+    let firstCountryLinup = [] , secondCountryLinup = [];
+
+    const firstCountryPlayers = document.querySelectorAll('input[name="firstCountry"]:checked');
+    const secondCountryPlayers = document.querySelectorAll('input[name="secondCountry"]:checked');
+    
+    for(let player of firstCountryPlayers)
+      firstCountryLinup.push({playerName : player.id, index : player.value}) 
+
+    for(let player of secondCountryPlayers)
+      secondCountryLinup.push({playerName : player.id, index : player.value}) 
+  
+    
+      try{
+
+        const response = await Axios.put(`/matches/updatelinup/${match.matchId}`,{
+          firstCountryLinup,
+          secondCountryLinup
+        });
+        
+        console.log(response.data);
+      }catch(err){
+        console.log(err);
+      }
+    
+
+     
+    }
   return (
     <div className='UpdateMatchContainer' onClick={hidePop}>
         <div className="updatePop">
@@ -135,13 +167,23 @@ const handleUpdate = async(e)=>{
                   </div>
 
                   <div className="showPlayersbutton-wrapper">
-                    <button onClick={(e)=>{e.preventDefault();setShowMatchState(true)}}>Show Match State</button>
+                    {
+                      match.matchStatue !== "UpComing" && 
+                      <button onClick={(e)=>{e.preventDefault();setShowMatchState(true)}}>Show Match State</button>
+                    }
+                    {
+                       match.matchStatue === "UpComing" && 
+                      <button onClick={(e)=>{e.preventDefault();setShowLinup(true)}}>Pick Line-Ups</button>
+                    }
                     <button  onClick={(e)=>{e.preventDefault();setUpdatePlayerState(!updatePlayerState)}}>
                       {
                         updatePlayerState ? "Hide Players" : "Show Players"
                       }
                     </button>
                   </div>
+
+
+
                 {showMatchState && 
                   <div className="matchStateContainer">
                     <h1 className="matchStateTitle">Match Satate</h1>
@@ -156,6 +198,7 @@ const handleUpdate = async(e)=>{
                       <span className="countryLabel">Select Player from {match.firstCountry.countryName}</span>
                       <div className="playersContainer">
                         {match.firstCountry.players.map((player,index)=> <PlayerCardRadio key={index} index={index} auth={true} countryOrder= 'firstCountry' player={player} />)}
+
                       </div>
                       <span className="countryLabel"> Select Player from {match.secondCountry.countryName}</span>
                       <div className="playersContainer">
@@ -163,9 +206,24 @@ const handleUpdate = async(e)=>{
                       </div>
                   </div>
                       }
+                      {showLinup && 
+                          <div className="matchCardPlayers">
+                            <span className="countryLabel">Select {match.firstCountry.countryName} Line-up </span>
+                            <div className="playersContainer">
+                              {match.firstCountry.players.map((player,index)=> <PlayerCardLinup key={index} index={index} auth={true} countryOrder= 'firstCountry' player={player} />)}
+      
+                            </div>
+                            <span className="countryLabel"> Select  {match.secondCountry.countryName} Player </span>
+                            <div className="playersContainer">
+                                {match.secondCountry.players.map((player,index)=><PlayerCardLinup key={index} index={index} auth={true} countryOrder= 'secondCountry' player={player} />)}
+                            </div>
+                      </div>
+                      }
                       
                    <NextMatchStep/>
                 <div className="buttonWrapper">
+
+                  <button  onClick={confirmLinup}>Confirm Linup</button>
                   <button  onClick={handleUpdate}>Update</button>
                 </div>
 

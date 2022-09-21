@@ -40,7 +40,9 @@ export const statePlayers = {
     player1_position : null,
     player2_position : null,
     player3_position : null,
-    player4_position : null
+    player4_position : null,
+    subsOff: false,
+    subOut : null
 }
 
 
@@ -89,6 +91,37 @@ export const ReducePlayerFn = (state,action)=>{
                 player4 : action.payload,
                 player4_position : detectPosition(action.payload.position) 
              }
+             
+            case 'SubsPlayer1' : 
+            return {
+                ...state,
+                subOut : action.payload.subOut,
+                player1 : action.payload.subIn,
+                subsOff : true
+            }
+            case 'SubsPlayer2' : 
+            return {
+                ...state,
+                subOut : action.payload.subOut,
+                player2 : action.payload.subIn,
+                subsOff : true
+            }
+            case 'SubsPlayer3' : 
+            return {
+                ...state,
+                subOut : action.payload.subOut,
+                player3 : action.payload.subIn,
+                subsOff : true
+            }
+            case 'SubsPlayer4' : 
+            return {
+                ...state,
+                subOut : action.payload.subOut,
+                player4 : action.payload.subIn,
+                subsOff : true
+            }
+
+
              
             }
 

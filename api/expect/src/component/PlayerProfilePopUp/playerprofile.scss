@@ -75,6 +75,7 @@
             background:linear-gradient(90deg, #513333 0%, #9d0116 50%) ;
             padding-bottom: 60px;
             height: 120px;
+            color: #ffffff;
         }
         .statistics-container{
             width: 70% !important ;
@@ -91,7 +92,7 @@
                 justify-content: space-around;
                 align-items: center;
                 margin: 10px auto;
-                border-bottom: 4px solid #171717;
+                border-bottom: 4px solid #151515;
                 .detail{
                     display: flex;
                     flex-direction: column;
@@ -101,12 +102,12 @@
                         margin: 5px 0 ;
                         font-size: 22px;
                         width: 90px;
-                        height: 30px;
+                        height: fit-content;
                         text-align: center;
                     }
                     h1{
                         color: #1a525b ;
-                        margin-top: 10px;
+                        margin-top: 5px;
                     }
                     img{
                         width: 40px;

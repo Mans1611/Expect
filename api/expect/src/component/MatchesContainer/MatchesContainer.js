@@ -35,7 +35,7 @@ const MatchesContainer = () => {
         fetchMatches();
 
         return () => isSubscribe = false;
-    })
+    },[])
     
     useEffect(()=>{
         setWidth(window.innerWidth);

@@ -5,6 +5,7 @@
     margin: auto;
     background-color: #eeeeee;
     border-radius: 10px;
+   
     @include shadowMainStyle;
     .table-header-wrapper{
             border-top-left-radius: 10px;
@@ -80,4 +81,13 @@
 }
 
     
+}
+
+@keyframes show {
+    from{
+        height: 0;
+    }
+    to{
+        height: fit-content;
+    }
 }

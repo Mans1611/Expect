@@ -9,6 +9,8 @@ import PlayersToExpect from '../../component/PlayersToExpect/PlayersToExpect';
 const Home = () => {
     document.title = "Home";
     localStorage.setItem("page","home");
+    document.body.style.overflow = 'visible';
+    
     const {isDark,userGlob,token} = globalUser();
    return ( 
             <div className={`home ${isDark?'dark':''}`}>

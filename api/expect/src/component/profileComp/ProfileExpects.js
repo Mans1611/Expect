@@ -21,19 +21,20 @@ const ProfileExpects = ({userName}) => {
 
         const fetchUserExpects = async()=>{
             try{
-                const response = await Axios.get(`/expects/${userName}`,{
+                const {data} = await Axios.get(`/expects/${userName}`,{
                     headers : {
                         token
                     }
                 });
-                const matchesWithFlage = filteringExpects(response.data.matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
-                const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                // const matchesWithFlage = filteringExpects(data.matches,data.userExpections); // where we assign a flag to each expected match to be filtered again
+                // const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
                 
-                if(filterdExpectedMatches){
-                    const top3 = response.data.userExpections.filter(expect =>(expect.userPoints)).sort((a,b) => b.userPoints - a.userPoints ).slice(0,3);
+                if(data.filterMatches){
+                    const top3 = data.userExpections.filter(expect =>(expect.userPoints)).sort((a,b) => b.userPoints - a.userPoints ).slice(0,3);
                     if(isSubscribe){
                         setUserExpections(top3);
-                        setExpected(filterdExpectedMatches); // matches 
+                        setExpected(data.filterMatches); // matches 
+                        console.log(expected);
                     }
                     
                 }

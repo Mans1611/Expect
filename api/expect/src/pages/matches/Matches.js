@@ -63,10 +63,11 @@ const Matches = () => {
                 navigate('/register/signin');
 
             const matchesRes = await Axios.get(`/matches/?date=${date}`); //array of todays' matches
+            const {data:AllMatches} = await Axios.get('/matches/getmatches');
             const MatchesWithFlag = filteringExpects(matchesRes.data,data.userExpections);
             if(isSubscribe){
                 setData(MatchesWithFlag);
-                setMatches(data.matches);
+                setMatches(AllMatches);
                 setUserExpections(data.userExpections);
             }
             setLoading(false); 
@@ -90,32 +91,32 @@ const Matches = () => {
 
     const [filterState,filterDispatch] = useReducer(ReduceFn,FilterState);
     
-    useEffect(()=>{
-        let isSubscribe = true;
-        socket.on("updatingMatches",async(matches)=>{
+    // useEffect(()=>{
+    //     let isSubscribe = true;
+    //     socket.on("updatingMatches",async(matches)=>{
             
-            if(expandButton === "Just Todays' Matches"){
-                    const MatchesWithFlag = filteringExpects(matches,userExpections);
-                    if(isSubscribe)
-                        setData(MatchesWithFlag);
-                }
+    //         if(expandButton === "Just Todays' Matches"){
+    //                 const MatchesWithFlag = filteringExpects(matches,userExpections);
+    //                 if(isSubscribe)
+    //                     setData(MatchesWithFlag);
+    //             }
 
-            else if(expandButton === "See All Matches") {
-                try{
+    //         else if(expandButton === "See All Matches") {
+    //             try{
 
-                    const matchesRes = await Axios.get(`/matches/?date=${date}`); // array of todays' matches
-                    const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
-                    if(isSubscribe)
-                        setData(MatchesWithFlag);
-                }catch(err){
-                    console.log(err);
-                }
-                }
-                setLoading(false);
+    //                 const matchesRes = await Axios.get(`/matches/?date=${date}`); // array of todays' matches
+    //                 const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
+    //                 if(isSubscribe)
+    //                     setData(MatchesWithFlag);
+    //             }catch(err){
+    //                 console.log(err);
+    //             }
+    //             }
+    //             setLoading(false);
 
-                return ()=> isSubscribe = false;
-        })
-    },[socket])
+    //             return ()=> isSubscribe = false;
+    //     })
+    // },[socket])
 
     const getMatchesDate = async(date)=>{
         const Date = date.split('-'); //year - month - day 
@@ -141,7 +142,7 @@ const Matches = () => {
             setExpandButton("Just Today's");
         }
         else if(expandButton === `Just Today's`){
-            const matchesRes = await axios.get(`/matches/?date=${date}`); // array of todays' matches
+            const matchesRes = await Axios.get(`/matches/?date=${date}`); // array of todays' matches
             const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
             setData(MatchesWithFlag);
             setExpandButton("See All Matches");  

@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Axios from "../../Axios/axios";
 import GoldenPlayerCard from '../../component/GoldenPlayerCard/GoldenPlayerCard';
+import PostMatchCard from '../../component/postMatchCard/PostMatchCard';
 
 
 // https://expect-app.herokuapp.com/
@@ -25,13 +26,15 @@ const MyExpects = () => {
     document.body.style.overflow = "visible";
     const cookie = new Cookies();
     const navigate = useNavigate();
-    const {userGlob,isDark,token,setToken,expectedMatches,setExpected : setGlobalExpections} = globalUser();
+    const {userGlob,isDark,token,user,setToken,expectedMatches} = globalUser();
+    
     const [expected,setExpected] = useState([]) // this hold the full infornmtion about the game
     const [userExpections,setUserExpections] = useState([]); // this for the details about each expections like weinner and result 
     const [width,setWidth] = useState(window.innerWidth);
-    const [totalPoints,setTotalPoints] = useState(0);
     const [loading,setLoading] = useState(true);
     const [goldenTotalPoints,setGoldenTotalPoints] = useState(0);
+    
+    const [totalPoints,setTotalPoints] = useState(goldenTotalPoints);
 
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
@@ -53,17 +56,22 @@ const MyExpects = () => {
                         token : userToken
                     }
                 });
+
+                
                 if(status > 400)
                     return navigate('/register/signin');
 
-                const matchesWithFlage = filteringExpects(data.matches,data.userExpections); // where we assign a flag to each expected match to be filtered again
-                const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                // const matchesWithFlage = filteringExpects(data.matches,data.userExpections); // where we assign a flag to each expected match to be filtered again
+                // const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
               
                 if(isSubscribe){
                     setUserExpections(data.userExpections);
-                    setExpected(filterdExpectedMatches.reverse()); // matches 
-                    setTotalPoints(data.totalPoints);
-                    setGoldenTotalPoints(data.goldenPlayerPoints);
+                    let reverseorder = data.filterMatches.reverse();
+                    setExpected(reverseorder); 
+                  
+                    setTotalPoints(points=> points + data.totalPoints);
+                    
+                  
                     
                 }
                 setLoading(false);
@@ -72,44 +80,48 @@ const MyExpects = () => {
             }
         }
        
-        if (isSubscribe && userGlob) fetchData();
+        fetchData();
 
         return ()=> {isSubscribe = false};
-    },[userGlob,expectedMatches])
-
-
-
+    },[userGlob,expectedMatches]);
 
     useEffect(()=>{
-        let isSubscribe = true;
-         const fetchSocket =  async()=>{
-            try{
-                socket.on("updatingMatches",async(matches)=>{
-                    try{
-                        const response = await Axios.get(`/expects/${userGlob}`);
-                        const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
-                        const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
-                        if(isSubscribe){
-                            setUserExpections(response.data.userExpections);
-                            setExpected(filterdExpectedMatches.reverse()); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
-                            setTotalPoints(response.data.totalPoints);
-                            setGoldenTotalPoints(response.data.goldenPlayerPoints)
-                        }
+        setTotalPoints( goldenTotalPoints )
+    },[goldenTotalPoints])
 
-                    }catch(err){
-                        console.log(err);
-                    }
-                })
 
-            }catch(err){
-                console.log(err);
-            }
-        }
-        fetchSocket();
-        return ()=> isSubscribe = false;
 
-    },[socket])
 
+    // useEffect(()=>{
+    //     let isSubscribe = true;
+    //      const fetchSocket =  async()=>{
+    //         try{
+    //             socket.on("updatingMatches",async(matches)=>{
+    //                 try{
+    //                     const response = await Axios.get(`/expects/${userGlob}`);
+    //                     const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
+    //                     const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+    //                     if(isSubscribe){
+    //                         setUserExpections(response.data.userExpections);
+    //                         setExpected(filterdExpectedMatches.reverse()); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
+    //                         setTotalPoints(response.data.totalPoints);
+    //                         setGoldenTotalPoints(response.data.goldenPlayerPoints)
+    //                     }
+
+    //                 }catch(err){
+    //                     console.log(err);
+    //                 }
+    //             })
+
+    //         }catch(err){
+    //             console.log(err);
+    //         }
+    //     }
+    //     fetchSocket();
+    //     return ()=> isSubscribe = false;
+
+    // },[socket])
+    
     return ( 
         <div className={`myexpects ${isDark? 'dark':''}`}> 
                   
@@ -121,16 +133,16 @@ const MyExpects = () => {
                     <div className="text">Total Points</div>
                     <div className="totalPoints">{totalPoints} PT</div>
                 </div>
-                { 
-                loading ? <SmallLaoding/> : 
 
            
-                    width > 480 ?
+                    {
+                        width > 480 ?
                     (   // if condition 
                     <div className="flex-wrapper">
 
                         <div className={` ${(expected.length === 0) ? 'nogrid' : 'expectsContainer'}` }> 
-                                {
+                            { loading ? <SmallLaoding/> : 
+                                
                                     expected.length === 0 ? 
                                     <div className="noContent">
                                         <h2>You have not expected any matches yet</h2>
@@ -138,19 +150,18 @@ const MyExpects = () => {
                                     </div> 
                                     : 
                                     expected.map((val,index)=>{
-                                        return <MatchCardProvider  match = {val} 
-                                        key = {index}
-                                        childeren = {<Expect 
-                                            match= {val} 
+                                        return <PostMatchCard 
+                                            match = {val} 
                                             key= {index}
                                             setUserExpections = {setUserExpections} 
                                             userExpect = {userExpections.find(expect=>expect.matchId === val.matchId)} 
-                                            />}></MatchCardProvider>
-                                            
-                                        })}
-                            </div>
-                            <GoldenPlayerCard goldenTotalPoints = {goldenTotalPoints} />
-                    </div> )
+                                            />}
+                                        )
+                                        }
+                                    </div>
+                            <GoldenPlayerCard setGoldenPlayerPoints={setGoldenTotalPoints}  />
+                    </div> 
+                    )
 
 
                                 : // else condition
@@ -161,6 +172,7 @@ const MyExpects = () => {
                                     
                                     <div className={`phoneContainer ${isDark ? 'dark' : ''}`}>
                                     {
+                                        loading ? <SmallLaoding/> : 
                                         expected.map((val,index)=>{    
                                             return <MatchCardProvider match = {val} childeren = {<ExpectPhone key = {index} setUserExpections = {setUserExpections}  
                                             setLoading = {setLoading}
@@ -169,7 +181,7 @@ const MyExpects = () => {
                                         })
                                     }
                                     </div>
-                                    <GoldenPlayerCard />
+                                    <GoldenPlayerCard setGoldenPlayerPoints = {setGoldenTotalPoints} />
                                     </div>
                                     
                                 </div>

@@ -1,5 +1,5 @@
 import './goldenPlayercard.scss';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { globalUser } from '../../Context/HomeContext';
 import PlayerCard from '../popmatchcard/playercard/PlayerCard';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,13 +8,42 @@ import CloseIcon from '@mui/icons-material/Close';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import UpdateGoldenPlayer from './UpdateGoldenPlayer';
 import PlayerEachMatchPoints from '../PlayerMatchPoints/PlayerEachMatchPoints';
+import PreviousGoldenPlayer from './PreviousGoldenPlayer';
+import Axios from '../../Axios/axios';
+import SmallLaoding from '../loading/small.loading/smallLoading';
 
-const GoldenPlayerCard = ({goldenTotalPoints}) => {
-    const {isDark,token, user,setUser} = globalUser();
+const GoldenPlayerCard = ({setGoldenPlayerPoints}) => {
+    const {isDark,token,userGlob, user,setUser} = globalUser();
     const [showPickGoldenPlayer,setShowPickGoldenPlayer] = useState(false);
     const [showUpdategolden,setShowUpdateGolden] = useState(false);
     const [showPlayerPoints,setShowPlayerPoints] = useState(false);
-    
+    const [goldenPlayer,setGoldenPlayer] = useState({});
+    const [loading,setLoading] = useState(true);
+
+    useEffect(()=>{
+        let subscribe = true;
+        
+        const fetchGoldenPlayerPoints = async ()=>{
+            try{
+                const {data} = await Axios.get(`/expects/calculategoldenPlayer/${userGlob}`,{
+                    headers : {
+                        token
+                    }
+                });
+             
+                if(subscribe){
+                    setGoldenPlayer(data.goldenPlayer)
+                    setGoldenPlayerPoints(data.goldenPlayer.totalPoints)
+                }
+                setLoading(false);
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+        fetchGoldenPlayerPoints();
+        ()=> subscribe = false;
+    },[])
   
 
     const hidePop = (e)=>{
@@ -32,13 +61,22 @@ const GoldenPlayerCard = ({goldenTotalPoints}) => {
                 </div>
                 <div>
                 {
-                    user.goldenPlayer.player?
+                    loading ?
+                        <SmallLaoding/>
+                        :
+                    goldenPlayer.player?
                     
                         <div className="playerCard-container">
-                            <PlayerCard player={user.goldenPlayer.player}/>
+                            <PlayerCard player={goldenPlayer.player}/>
                             
                             {
-                                user.goldenPlayer.updateCounter === 1 &&
+                                 goldenPlayer.old_Player 
+                                 &&
+                                 <PreviousGoldenPlayer player={goldenPlayer.old_Player}/>  
+
+                            }
+                            {
+                                goldenPlayer.updateCounter === 1 &&
                                 <div className="buttons-wrapper">
 
                                     <button className='changeGoldenbutton' onClick={()=>setShowUpdateGolden(true)}>
@@ -65,17 +103,26 @@ const GoldenPlayerCard = ({goldenTotalPoints}) => {
                         </div>
                 } 
                 </div>
-                {showPlayerPoints && <PlayerEachMatchPoints  player={user.goldenPlayer.player}/>}
-                    <div className="goldenPlayerPoints-container">
-                        <div className="points">
-                            <h3>Points</h3>
-                            <h1>{(goldenTotalPoints?goldenTotalPoints:0)/2}</h1>
-                        </div>
-                        <h1 className="factor">X2</h1>
-                    </div>
+                {showPlayerPoints && <PlayerEachMatchPoints  player={goldenPlayer.player}/>}
+                
 
-                    <div className="totalgoldenPoints">Total Points : {goldenTotalPoints?goldenTotalPoints:0}</div>
-            </div>
+                    {
+                     goldenPlayer.player &&
+                        <>
+                            {/* <div className="goldenPlayerPoints-container">
+                                <div className="points">
+                                    <h3>Points</h3>
+                                    <h1>{(goldenTotalPoints?goldenTotalPoints:0)/2}</h1>
+                                </div>
+                                <h1 className="factor">X2</h1>
+                            </div> */}
+                            <div className="totalgoldenPoints">Total Points :{ loading ? ' ...' : goldenPlayer.totalPoints}</div>
+                        </>
+                    }
+                
+                </div>
+                
+                
             
             {showPickGoldenPlayer && 
              <div  onClick={hidePop}  className="popMatchFullPage">

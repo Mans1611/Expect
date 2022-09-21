@@ -129,12 +129,13 @@ users.post('/postGoldenPlayer/:userName',VerifyUserJWT,async(req,res)=>{
         
         // i check if there was a player before.
         if(userDB.goldenPlayer?.player)
-        return res.status(203).json({msg : "You have selected a player before"});
+            return res.status(203).json({msg : "You have selected a player before"});
+        const {playerName, index,position,countryName,logo,pickedTime,playerImg} = req.body;
         
         userDB.goldenPlayer = {
-        player : {...req.body},
-        updateCounter : 1
-    };
+            player : {playerName, index,position,countryName,logo,pickedTime,playerImg},
+            updateCounter : 1
+            };
 
     await User.updateOne({userName},userDB);
 
@@ -159,6 +160,7 @@ users.put('/updateGoldenPlayer/:userName',VerifyUserJWT,async(req,res)=>{
             return res.status(203).json({msg : "You have limits the number of changes"});
         
         userDB.goldenPlayer = {
+        old_Player : {...userDB.goldenPlayer.player},
         player : {...req.body},
         updateCounter : 0
     };

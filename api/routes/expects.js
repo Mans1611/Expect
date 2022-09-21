@@ -17,32 +17,67 @@ const expects = express.Router();
 expects.get('/:userName',SessionVerification,verifyJwt,async(req,res)=>{
     try{
         const {userName} = req.params;
-        const user = await Expects.findOne({userName});
-        const matches = await Matches.find(); // find all matches 
-        if(!user.expects)
+         const user = await Expects.findOne({userName});
+         const matches = await Matches.aggregate([
+            {$match:{}},
+            {$project : {_id : 0}}
+        ]); // find all matches 
+        
+         if(!user.expects)
             return res.send({matches,userExpections:[],totalPoints:0})
 
-        const {goldenPlayer} = await User.findOne({userName});
-
-        let {userExpections,totalPoints} = await AddingPointsToUsers(matches,user.expects,goldenPlayer);
-       
-        let goldenPlayerPoints = 0;
-        
-        if(goldenPlayer.player){
-            goldenPlayerPoints = calculateGoldenPlayerPoints(goldenPlayer,matches);
-            totalPoints+= goldenPlayerPoints
-        }
-
-        await User.findOneAndUpdate({userName},{userPoints:totalPoints});
+        let {userExpections,totalPoints,filterMatches} = await AddingPointsToUsers(matches,user.expects);
         
         await Expects.updateOne({userName},{expects : userExpections});
-        
-        res.status(200).json({matches,userExpections,totalPoints,goldenPlayerPoints}); 
-        
+
+
+    
+        res.status(200).json( {
+            filterMatches,
+            userExpections,
+            totalPoints,
+    
+        }); 
+
     }catch(err){
         console.log(err);
     }
 });
+
+expects.get('/calculategoldenPlayer/:userName',SessionVerification,verifyJwt,async(req,res)=>{
+    const {userName} = req.params;
+    let userDB = await User.findOne({userName});
+    
+    
+    
+    if(userDB.goldenPlayer.player){
+
+        const countryShort =  userDB.goldenPlayer.player.countryName.slice(0,3).toUpperCase();
+        const RegEx = new RegExp(`${countryShort}`,'ig');
+
+        const matches = await Matches.find({matchId : RegEx}); // ;
+
+        const {playerPoints,matchDetails} = calculateGoldenPlayerPoints(userDB.goldenPlayer,matches);
+        playerPoints;
+
+        userDB.goldenPlayer = {
+            ...userDB.goldenPlayer,
+            player : {
+                ...userDB.goldenPlayer.player,
+                matchDetails
+            },
+            totalPoints : playerPoints
+        };
+    }
+    
+    res.status(200).json( {
+        goldenPlayer : userDB.goldenPlayer
+    }); 
+    
+    await User.updateOne({userName},userDB);
+
+})
+
 
 expects.post('/addexpect/:userName',VerifyUserJWT,async(req,res)=>{
     try{
@@ -105,6 +140,7 @@ expects.put('/editexpect/:userName',VerifyUserJWT,async(req,res)=>{
         user.expects[matchindex] = { ...user.expects[matchindex] ,...req.body}; // so we just replacce it where it found.
 
         await Expects.updateOne({userName} , user);
+        
         const userTeam = await User.findOne({userName});
         if(userTeam.team)
             await UpdateExpectForMember(userTeam,matchId,req.body);
@@ -119,6 +155,73 @@ expects.put('/editexpect/:userName',VerifyUserJWT,async(req,res)=>{
 
     }
 })
+
+
+expects.put('/substitute/:userName',VerifyUserJWT,async(req,res)=>{
+    let {mutatePlayer1,mutatePlayer2,mutatePlayer3,mutatePlayer4,matchId} = req.body;
+    
+    const {userName} = req.params;
+    let userExpects = await Expects.findOne({userName});
+    let Match = await Matches.findOne({matchId}) // we just fetch the to update the votes as well 
+   
+
+    if(Match.matchStatue !== "HT")
+        return res.status(400).json({msg : "You can not make this subs"})
+
+    const wantedMatch = userExpects.expects.find(((expect,index)=>{
+        if(expect.matchId === matchId){
+
+            // here if the new mutate player is not equal with the old one it means that the player is being substituted.
+            if(mutatePlayer1.playerName !== expect.mutatePlayer1.playerName){
+                userExpects.expects[index].mutatePlayer1 = {
+                    ...mutatePlayer1,
+                    subs : true,
+                    HT_Points : Match.firstCountry.players[mutatePlayer1.index].playerPoints
+                }
+               
+            }
+            else if(mutatePlayer2.playerName !== expect.mutatePlayer2.playerName){
+                userExpects.expects[index].mutatePlayer2 = {
+                    ...mutatePlayer2,
+                    subs : true,
+                    HT_Points : Match.firstCountry.players[mutatePlayer2.index].playerPoints
+                }
+            }
+            else if(mutatePlayer3.playerName !== expect.mutatePlayer3.playerName){
+                userExpects.expects[index].mutatePlayer3 = {
+                    ...mutatePlayer3,
+                    subs : true,
+                    HT_Points : Match.secondCountry.players[mutatePlayer3.index].playerPoints
+                }
+            }
+            else if(mutatePlayer4.playerName !== expect.mutatePlayer4.playerName){
+                userExpects.expects[index].mutatePlayer4 = {
+                    ...mutatePlayer4,
+                    subs : true,
+                    HT_Points : Match.secondCountry.players[mutatePlayer4.index].playerPoints
+                }
+            }
+          
+            return expect;
+        } 
+    }))
+
+    await Expects.updateOne({userName},userExpects);
+    
+    res.status(200).json({
+        msg:"Successfully Updated",
+        expects : userExpects
+    });
+    
+    const user = await User.findOne({userName});
+    if(user.team)
+        await UpdateExpectForMember(user,matchId,userExpects);
+
+
+})
+
+
+
 
 
 // this to delet expect before the match starts 

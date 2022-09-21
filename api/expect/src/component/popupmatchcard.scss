@@ -18,13 +18,13 @@
     max-height: 90vh;
     overflow-y: scroll;
     @include scrollbar-style;
-    background-color: #ddd ;
+    background-color: #cccccc ;
     border-radius: 10px;
     position: fixed;
     border-bottom: 2px solid #000;
     z-index: 1001;
-    animation: popup 150ms  linear;
-    
+
+
     .popMatchWinner{
         text-align: center;
         .winnerTitle{
@@ -149,21 +149,56 @@ form{
 .formContainerPopup{
     text-align: center;
     padding: 10px;
-    background-color: #eeeeee;
-    
+    background-color: #eeeeee !important;
+    .substituteHeader{
+        padding: 20px 5px;
+        font-size: 26px;
+        color: #272727;
+        span{
+            color: #2e5fffe3;
+            text-decoration: underline;
+            
+        }
+    }
+    .palyerCard{
+        svg{
+            &.info{
+
+                position:absolute !important;
+                top: 5px !important;
+                right: 5px !important;
+            }
+        }
+    }
 }
     &.dark{
         
-        color: #eeeeee;
         .formContainerPopup{
-            background-color: #262626;
-            .countryLabel{
-               color: #eeeeee;
-                
+            color: #eeeeee;
+        
+            background-color: #272727 !important;
+            .substituteHeader{
+                padding: 20px 5px;
+                font-size: 26px;
+                color: #fff;
+                span{
+                    color: #ffd900e3;
+                    text-decoration: underline;
+                    
+                }
             }
+            .matchCardPlayers{
+                    background-color: #262626 !important;
+                    .countryLabel{
+                        color: #eeeeee;
+                    }
+                }
+                
+            
             .playersContainer{
                 background-color: #222;
                 border-radius: 5px;
+                
             }
         }
         .msg-wrapper{
@@ -203,6 +238,7 @@ form{
         }
         .playersContainer{
             .palyerCard{
+               
                 &.lock{
                     background: linear-gradient(90deg, #191919 50%, #303030 50%);
             
@@ -292,14 +328,35 @@ form{
             &.save{
                 background-color: rgb(193, 0, 58);
                 color: #eee;
+                margin: auto;
+               
                 &:hover{
                     background-color: rgb(255, 204, 0);
                     color: #fff ; 
                 }
-                
-            }
-            
+            }   
         } 
+
+        .disabledButton{
+            background: #bbbbbb !important;
+            color: #373833 !important;
+            width: 120px;
+            height: 45px;
+            border-radius: 5px;
+            padding: 5px;
+            font-weight: 600;
+            border: none;
+            margin-left: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            font-size: 30px;
+            opacity: 1;
+            cursor: default;
+            
+            &:hover{
+                transform: scale(1) !important;
+            }
+        }
     }
     
    
@@ -375,6 +432,7 @@ form{
         
     }
     .playersContainer{
+       
         display: flex;
         position: relative;
         flex-direction: column;
@@ -394,6 +452,7 @@ form{
                     height: fit-content;
                     width: 100% !important;
                     background: linear-gradient(90deg, #513333 30%, #9d0116 30%);
+                    
                     &.lock{
                         background: linear-gradient(90deg, #191919 30%, #303030 30%);
                 
@@ -415,6 +474,11 @@ form{
 
         
         
+    }
+    .playersubsContainer{
+        button{
+            font-size: 22px;
+        }
     }
     }
     
@@ -467,4 +531,48 @@ form{
             } 
         }
     
+}
+
+
+.playersubsContainer{
+    button{
+        margin: 5px  auto;
+        background-color: #00319b;
+        color: #ffffff;
+        font-size: 28px;
+        padding: 5px;
+        &.disableButton{
+            background-color: #4b7ce5;
+            color: #cccccc;
+            cursor: default;
+            &:hover{
+                background-color: #4b7ce5;
+                svg{
+                    transform: rotate(0deg);
+                }
+            }
+        }
+        svg{
+                cursor: default;
+                width: 30px;
+                height: 30px;
+                transition: all 200ms;
+            }
+            transition: all 200ms;
+        &:hover{
+            background-color: #666666;
+            svg{
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}
+
+@keyframes slide {
+    from{
+        height: 0;
+    }
+    to{
+        height: fit-content;
+    }
 }

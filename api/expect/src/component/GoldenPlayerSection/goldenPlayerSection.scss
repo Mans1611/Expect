@@ -1,6 +1,6 @@
 .GoldenPlayerSection{
     background-color: #373737;
-    height: 100vh;
+    height: fit-content;
     text-align: center;
     padding: 0px 0 20px;
     h1{
@@ -82,7 +82,7 @@
         border-radius: 10px;
         padding: 10px;
         background-color: #272727;
-        height: 200px;
+        height: fit-content;
         width: 55%;
         margin: auto;
         top: -60px;
@@ -99,6 +99,66 @@
                 font-size: 23px;
             }
         }
+    }
+}
+@media screen and (max-width : 1000px) {
+    .GoldenPlayerSection{
+        .body-container{
+            width: 80%;
+        }
+    }
+}
+@media screen and (max-width : 460px) {
+    .GoldenPlayerSection{
+        .body-container{
+            width: 90%;
+        }
+        .imgs-container{
+
+            .players-image-container{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                
+                img{
+                    &.playerImg-golden{
+                        position: relative;
+                        bottom: 20px;
+                        
+                    }
+                    &.left-img{
+                        width: 110px ;
+                        height: 180px;
+                        right: -50px;
+                      
+                }
+                &.right-img{
+                    width: 110px ;
+                    height: 180px;
+                    left: -65px;
+                    
+                }
+                &.middle-img{
+                    width: 180px ;
+                    opacity: 0;
+                    height: 200px;
+                  
+                }
+                &.title{
+                    width: 350px ;
+                    height: 110px;
+                    bottom: -40px;
+                   
+                }
+                &.origin{
+                    opacity: 1;
+                    transform: translate(0%);
+                    transition: all 900ms;   
+                }
+            }
+        }
+        } 
     }
 }
 

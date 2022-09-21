@@ -13,13 +13,16 @@ const PushExpectToMember = async(user,expect,matchTime,round)=>{
     })
 }
 
+
 const UpdateExpectForMember = async(user,matchId,updatedExpect)=>{
     let team = await Teams.findOne({teamName : user.team.teamName});
+
     for(let i = 0; i < team.teamMembers.length ; i++){
+        
         if(team.teamMembers[i].userName === user.userName){
             team.teamMembers[i].expects = team.teamMembers[i].expects.map(expect=>{
                 if(expect.matchId === matchId)
-                    expect = updatedExpect;
+                    expect = {...expect,...updatedExpect};
                 return expect;
             })
             await Teams.updateOne({teamName : user.team.teamName},team)

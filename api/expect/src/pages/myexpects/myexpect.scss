@@ -3,7 +3,7 @@
 
 .myexpects{
     min-height : 80vh;
-    background:#eeeeee;
+    background:#d7d7d7;
     padding: 10px 20px 80px 20px;
     
     .headlineWrapper{
@@ -85,18 +85,20 @@
             height: 100%;
             width: 75%;
             margin: 10px ;
-            border-radius: 10px;  
+            border-radius: 10px; 
+            background-color: #cccccc;
+
         }
         
         .expectsContainer{
             display: grid;
             grid-template-columns: repeat(3,33.3%);
-        
     }
        .goldenPlayercard {
         text-align: center;
         background-color: #cccccc;
         width: 25%;
+        height: fit-content;
         .playerCard-container{
 
             .palyerCard{
@@ -170,7 +172,8 @@
         .headlineWrapper{
             padding: 20px 0 ;  
         }
-        .expectsContainer{
+        
+        .expectsContainer,.nogrid{
             background-color: #181818;
         }
         .flex-wrapper{

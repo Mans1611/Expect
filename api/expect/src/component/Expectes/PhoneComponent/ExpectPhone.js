@@ -7,6 +7,7 @@ import TimeCounter from '../../../TimeCounter';
 import PopMatchCard from '../../popmatchcard/PopMatchCard';
 import MatchState from '../../MatchState/MatchState';
 import Axios from '../../../Axios/axios';
+import PopSubsHT from '../../popmatchcard/PopSubsHT';
 
 const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
     document.body.style.overflow = 'visible'; 
@@ -19,7 +20,8 @@ const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
     const [statePop,setStatePop] = useState(false);
     const [min,setMin] = useState(0)
     const [popDelete,setPopDelete] = useState(false);
-        
+    const [showSubPop,setShowSubPop] = useState(false);
+
 
     useEffect(()=>{
         const expectComps = document.querySelectorAll('.expectComponent');
@@ -78,21 +80,35 @@ const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
         }
         <div className="ExpectPhoneWrap">
            {timeUp ?
-                <button onClick={()=>setStatePop(true)}>Expect Points</button> 
-                : // else condition. 
-                <div className='button-wrapper'>
+                <>
+                    <button onClick={()=>setStatePop(true)}>Expect Points</button> 
+                    {match.matchStatue === "HT" && <button className='matchCardbutton' onClick={()=> setShowSubPop(true)}>Substitue Player</button>}
+
+                </>
+
+                : // else condition.
+                <>
+                
+                    <div className='button-wrapper'>
                     <button onClick={()=>setPopDelete(true)} className='danger'> Delete Expect </button>
                     <button onClick={()=>setPop(true)}> Edit Expect </button>
-                </div>
+                    </div>
+                </>
+                
             }
         </div>
         {pop && <PopMatchCard userExpect={userExpect} match={match}  setPop = {setPop} />}
+        
         {popDelete && <PopDelete match={match} setUserExpections={setUserExpections} setLoading ={setLoading} setPopDelete={setPopDelete}/> }
-        { statePop && timeUp && <MatchState expected = {true} userExpect={userExpect}  setPop = {setStatePop} match={match}/>} 
-          
+        {statePop && timeUp && <MatchState expected = {true} userExpect={userExpect}  setPop = {setStatePop} match={match}/>} 
+        {showSubPop && <PopSubsHT match={match} setPop = {setShowSubPop} userExpect = {userExpect} />} 
     </div>
   )
 }
+
+
+
+
 
 const PopDelete = ({setPopDelete,match,setLoading,setUserExpections})=>{
     const {userGlob,isDark} = globalUser();

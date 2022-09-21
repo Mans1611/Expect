@@ -1,0 +1,27 @@
+.PlayerPointsPage{
+
+    .rule-container{
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        z-index: 8;
+
+        .cover{
+            opacity: 1;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-bottom: 10px solid #ffcf00 ;
+            
+        }
+        .background{
+            position: absolute;
+            top: 0;
+            width: 100%;
+
+            background-color: #20b42d09;
+            z-index: 11;
+        }
+
+    }
+}
