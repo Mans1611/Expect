@@ -53,10 +53,11 @@ const FeedBack = () => {
 
 
         <div className="formContainer">
+            <h1 className="formtitle">Your Feedback is <span> appreciable </span> to us</h1>
             <form>
                 <div className="inputContainer">
                     <label htmlFor="email">Email</label>
-                    <input onFocus={()=>dispatch({type : 'remove msg'})} required placeholder='Enter Your Email' type="email"  id="email" />
+                    <input onFocus={()=>dispatch({type : 'remove msg'})}  placeholder='Enter Your Name (Optional)' type="email"  id="email" />
                 </div>
                 
                 <div className="inputContainer">

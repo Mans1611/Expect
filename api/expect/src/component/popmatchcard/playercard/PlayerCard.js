@@ -1,16 +1,20 @@
 import './playercard.scss';
+
 import { useState,useContext } from 'react';
 import { userContext } from '../../../Context/HomeContext';
 import PlayerProfilePop from '../../PlayerProfilePopUp/PlayerProfilePop';
 import InfoIcon from '@mui/icons-material/Info';
-const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock,goldenPlayer }) => {
+import DoneIcon from '@mui/icons-material/Done';
+
+
+const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock,goldenPlayer,confirmedLinup }) => {
    
     const {isDark} = useContext(userContext);
     const [state,setState] = useState(null);
     const [playerPop,setPlayerPop] = useState(false);
 
     return ( 
-        <div className={`palyerCard  ${isDark? 'dark':''} ${lock ? 'lock' : ''} ${goldenPlayer ? 'goldenPlayer' : ''}`}>
+        <div className={`palyerCard  ${isDark? 'dark':''} ${lock ? 'lock' : ''} ${goldenPlayer ? 'goldenPlayer' : ''} ${confirmedLinup? 'confirmedLinup' : ''}`}>
                 <InfoIcon onClick={()=>setPlayerPop(true)} className='info'/>
                 <div  className="playerCardInfo">
                     <div className="imgBackground">
@@ -18,6 +22,12 @@ const PlayerCard = ({showPlayerState,player,countryOrder,auth , lock,goldenPlaye
                         {player.logo && <img src={player.logo} className="country-flag" />}
                         {player.country&&  <img src={player.country.logo} className="country-flag" />}
                         {player.country && <h6 className='details country'>{player.country.countryName}</h6>}
+                        <div className="lineupPlayer">
+                            {player.linup && <div className="circleLinup"><DoneIcon/></div>}
+                            {player.linup && <div className="">In The Line-up</div>}
+                            
+                        </div>
+
                     </div>
                     <div className="playerDetails">
                         <h6 className='details name'>{player.players?  player.players.playerName : player.playerName }</h6>

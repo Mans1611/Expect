@@ -63,7 +63,6 @@ export const ReducePlayerFn = (state,action)=>{
             return {...state, showPlayer4 : true,selected : 4};
     
         case 'PlayerSelect1' :
-            console.log(action.payload.position); 
             return {
                     ...state, 
                     player1 : action.payload , 

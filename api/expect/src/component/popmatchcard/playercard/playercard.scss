@@ -15,9 +15,12 @@
     &.dark{
         border: 3px solid #d7d7d7;
     }
+   
+
     &.lock{
         background: linear-gradient(90deg, #191919 50%, #303030 50%);
     }
+
     &.goldenPlayer{
         background: linear-gradient(90deg, #94940f8c 50%, #ffe100cf  50%) !important;
         .playerCardInfo{
@@ -34,6 +37,7 @@
             }
         }
     }
+    
     
     a{
         text-decoration: none;
@@ -76,6 +80,34 @@
                 height: 20px;
                 margin: 5px 0;
                 border: 2px solid #111;
+            }
+            .lineupPlayer{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                font-size: 18px;
+            }
+            .circleLinup{
+                margin : 5px ; 
+                background-color: #006c00;
+                color: #ffffff;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                border-radius:10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg{
+                    width: 25px;
+                    height:25px;
+                    font-size: 20px;
+                    color: #ffffff;
+                    font-weight: 600;
+                    font-size: 18px !important;
+                }
+
             }
         }
         .details{

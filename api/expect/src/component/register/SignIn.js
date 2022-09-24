@@ -5,7 +5,6 @@ import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
 import Axios from '../../Axios/axios';
 
-
 const SignIn = () => {
     document.title = "Sign in";
     const location = useLocation();
@@ -17,7 +16,8 @@ const SignIn = () => {
     const store = globalUser();
     const cookie = new Cookies();
     const inputs = document.getElementsByClassName('inputFeild');
-    
+
+
     for(let input of inputs){
         input.addEventListener('focus',()=>{
             setErrorMSg(false)
@@ -46,7 +46,11 @@ const SignIn = () => {
                 cookie.set('token',response.data.token,{
                     maxAge : 60 * 60 * 3
                 });
-                console.log(userName);
+                cookie.set('expect_id',response.data.session_id,{
+                    maxAge : 60 * 60 * 3
+                });
+               
+
                 store.setUserGlob(userName)
                 store.setAuth(true);
                 store.setToken(response.data.token);
@@ -57,7 +61,9 @@ const SignIn = () => {
                 audio.autoplay = true;
                 audio.style.display = 'none';
                 document.getElementById('root').appendChild(audio);
-                navigate('/home');
+                const page = localStorage.getItem("page") || 'home'  ;
+
+                navigate(`/${page}`);
 
                 setTimeout(()=>{
                     document.getElementById('root').removeChild(audio);

@@ -10,6 +10,11 @@ import bcrypt from 'bcrypt';
 import Expects from '../models/Expects.js';
 import CreateUserSession from '../middleware/createUSerSession.js';
 import mongoose from 'mongoose';
+import session from '../models/users_session.js';
+import MakeCode from './utilis/RandomChar.js';
+import crypto from 'crypto';
+
+
 dotenv.config();
 
 const router = express.Router();
@@ -67,17 +72,7 @@ router.post('/signup',async(req,res)=>{
 
 })
 
-router.post('/verifysession',async(req,res)=>{
-    let  {session_id} = req.body;
-    session_id = session_id.slice(2,34);
-    if(req.sessionID === session_id){
-        return res.status(200).json({user : req.session.user});
-    }else{
-        return res.status(200).json({user : null });
 
-    }
-   
-})
 
 router.post('/login',async(req,res)=>{
     const {userName,password} = req.body;
@@ -92,20 +87,46 @@ router.post('/login',async(req,res)=>{
                 expiresIn : 60 * 60 * 1000 // one hour
             });  
             // creating a session to that user
-            CreateUserSession(req);
+            
+          
+            // req.session.user = {
+            //     isAdmin : false,
+            //     userName: req.body.userName,     
+            // };
+            const session_id = crypto.randomBytes(30).toString('hex');
+            
+            const user_session = new session({
+                user : userName,
+                session_id
+            });
+            await user_session.save();
+
             return res.status(200).json({
                 msg:"login successfully",
                 token,
+                session_id,
                 user : {userName:userDB.userName, goldenPlayer : userDB.goldenPlayer}
 
         });
         }
         res.status(203).json({msg:"Check your Username and password"}); 
     }catch(err){
+        console.log(err)
         res.status(402).json({msg:err}); 
     }
 })
 
+router.post('/verifysession',async(req,res)=>{
+    let  {session_id} = req.body;
+    const Session = await session.findOne({session_id});
+    if(!Session)
+        return res.status(404).json({msg : "session had endded"});
+
+    return res.status(200).json({userName : Session.user,session_id})
+
+    
+    
+})
 
 
 router.get('/verifySession/:token',async(req,res)=>{
@@ -115,9 +136,10 @@ router.get('/verifySession/:token',async(req,res)=>{
     res.status(200).json({payload:verifyToken});
 })
 
-router.get('/logout',async(req,res)=>{
-    req.session.destroy();
-    res.status(200).send("done")
+router.delete('/logout',async(req,res)=>{
+    const {userName} = req.body;
+    await session.findOneAndDelete({userName});
+    return res.status(200).json({msg:'done'})
 })
 
 

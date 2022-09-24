@@ -91,20 +91,29 @@
         }
         .expected,.secondExpect{
             background-color: #459e00;
+            font-size: 24px;
+            text-align: center;
             border-radius: 5px;
             padding: 5px;
             color: #fff;
+        }
+        .factor{
+            color : #272727;
             font-size: 24px;
+        }
+        
+        .goldenPlayer{
+            border-radius: 5px;
+            padding: 2px;
+            color: #fff;
+            font-size: 24px;
+            background-color: #ffd000;
             text-align: center;
-            .factor{
-                color : #272727;
-                font-size: 23px;
-            }
             
         }
+        
         .secondExpect{
-            background-color: #ffae00;
-
+            background-color: #00a2ff;
         }
         .circleWrapper{
             display: flex;

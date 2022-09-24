@@ -47,59 +47,8 @@
             }
     }
     }
-    .filter-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 5px 0;
-        .round-filter-container{
-            margin: 0 10px ;
-            select{
-                width: 200px;
-                height:40px;
-                font-size: 22px;
-                text-align: center;
-                background-color: #555;
-                color: #fff;
-                border-radius: 5px;
-                margin: 0 5px ;
-            }
-        }
-        label{
-            display: flex;
-            align-items: center;
-
-    }
-        .dateContainer{
-            display: flex;
-            align-items: center;
-            justify-content:end;
-        svg{
-            width: 50px;
-            height: 40px;
-        }
-        
-        input[type="date"]{
-            background-color: #222;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            background-color: #555;
-            border: none;
-            outline: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin: 5px ;
-            color: #eee;
-            font-size: 24px;
-            text-align: center;
-            z-index: 88;
-            
-        }
-    }
-       
-    }
+    
+    
     /* for dark mode */
     &.dark{
         background-color: #333;
@@ -290,4 +239,59 @@
         font-weight: 600;
     }
     
+}
+
+.filter-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+
+.round-filter-container{
+    margin: 0 10px ;
+    select{
+        width: 200px;
+        height:40px;
+        font-size: 22px;
+        text-align: center;
+        background-color: #555;
+        color: #fff;
+        border-radius: 5px;
+        margin: 0 5px ;
+    }
+}
+label{
+    display: flex;
+    align-items: center;
+
+}
+.dateContainer{
+    display: flex;
+    align-items: center;
+    justify-content:end;
+svg{
+    width: 50px;
+    height: 40px;
+}
+
+input[type="date"]{
+    background-color: #222;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: #555;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px ;
+    color: #eee;
+    font-size: 24px;
+    text-align: center;
+    z-index: 88;
+    
+}
+}
+
 }

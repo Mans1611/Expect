@@ -1,5 +1,8 @@
 import './myexpect.scss';
-import { useEffect, useState } from "react";
+import '../matches/match.scss';
+
+
+import { useEffect, useMemo, useReducer, useState } from "react";
 import { globalUser } from "../../Context/HomeContext";
 import filteringExpects from "../matches/utilites/filteringExpects";
 import Expect from '../../component/Expectes/Expect';
@@ -12,6 +15,9 @@ import Cookies from "universal-cookie";
 import Axios from "../../Axios/axios";
 import GoldenPlayerCard from '../../component/GoldenPlayerCard/GoldenPlayerCard';
 import PostMatchCard from '../../component/postMatchCard/PostMatchCard';
+import { FilterState, ReduceFn } from '../matches/utilites/ReduceFn';
+import RoundExpectFilter from './RoundExpectFilter';
+
 
 
 // https://expect-app.herokuapp.com/
@@ -26,15 +32,17 @@ const MyExpects = () => {
     document.body.style.overflow = "visible";
     const cookie = new Cookies();
     const navigate = useNavigate();
-    const {userGlob,isDark,token,user,setToken,expectedMatches} = globalUser();
+    const {userGlob,isDark,token,user,goldenPlayer,expectedMatches} = globalUser();
     
     const [expected,setExpected] = useState([]) // this hold the full infornmtion about the game
     const [userExpections,setUserExpections] = useState([]); // this for the details about each expections like weinner and result 
     const [width,setWidth] = useState(window.innerWidth);
     const [loading,setLoading] = useState(true);
     const [goldenTotalPoints,setGoldenTotalPoints] = useState(0);
-    
-    const [totalPoints,setTotalPoints] = useState(goldenTotalPoints);
+    const [expectationPoints,setExpectationsPoints] = useState(0);
+    const [totalPoints,setTotalPoints] = useState(0);
+
+
 
     window.addEventListener('resize',()=>{
              setWidth(window.innerWidth)
@@ -56,8 +64,6 @@ const MyExpects = () => {
                         token : userToken
                     }
                 });
-
-                
                 if(status > 400)
                     return navigate('/register/signin');
 
@@ -68,10 +74,7 @@ const MyExpects = () => {
                     setUserExpections(data.userExpections);
                     let reverseorder = data.filterMatches.reverse();
                     setExpected(reverseorder); 
-                  
-                    setTotalPoints(points=> points + data.totalPoints);
-                    
-                  
+                    setExpectationsPoints(data.totalPoints);  
                     
                 }
                 setLoading(false);
@@ -79,15 +82,18 @@ const MyExpects = () => {
                 console.log(err);
             }
         }
-       
-        fetchData();
+       if(userGlob)
+            fetchData();
 
         return ()=> {isSubscribe = false};
     },[userGlob,expectedMatches]);
 
-    useEffect(()=>{
-        setTotalPoints( goldenTotalPoints )
-    },[goldenTotalPoints])
+
+   
+
+     useMemo(()=>{
+        return setTotalPoints( goldenPlayer.totalPoints + expectationPoints  )
+    },[expectationPoints,goldenTotalPoints])
 
 
 
@@ -121,7 +127,8 @@ const MyExpects = () => {
     //     return ()=> isSubscribe = false;
 
     // },[socket])
-    
+   
+    const [filterState,filterDispatch] = useReducer(ReduceFn,FilterState);
     return ( 
         <div className={`myexpects ${isDark? 'dark':''}`}> 
                   
@@ -133,6 +140,19 @@ const MyExpects = () => {
                     <div className="text">Total Points</div>
                     <div className="totalPoints">{totalPoints} PT</div>
                 </div>
+
+
+                {/* <div className="filter-container">
+                       <RoundExpectFilter  filterDispatch={filterDispatch} setUserExpections = {setUserExpections} setTotalPoints = {setTotalPoints}   setExpected={setExpected} setLoading={setLoading}/>
+                        <div className="dateContainer">
+                            <label htmlFor="NavigateToThisDate">
+                                <h1>Pick a Date : </h1>
+                                    <input  onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
+                            </label>
+                        </div>
+                </div> */}
+
+
 
            
                     {

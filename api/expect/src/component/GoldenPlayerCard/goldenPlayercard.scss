@@ -3,9 +3,15 @@
     border-radius: 10px;
     width:33.3%;
     background-color: transparent;
+    margin: 10px 0;
+    .informationHeader-Wrapper{
+        background:linear-gradient(90deg, #ffd600 20%, #373737 74%);
+        
+    }
     
     .InformationHeader{
         width: 100%;
+        color : #eeeeee !important;
     }
     .playerCard-container{
         padding: 10px 10px 40px;
@@ -46,8 +52,9 @@
             border-radius: 10px;
             margin: 50px auto 0;
             width: 100%;
-            padding:10px 5px;
+            padding-bottom: 10px;
             background-color: #b7b7b7;
+           
             .header{
                 h1{
                     border-top-left-radius: 10px;
@@ -61,7 +68,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 5px 5px 20px 0;
+                padding: 5px  10px 0;
                 .player-personal{
                     display: flex;
                     flex-direction: column;
@@ -148,11 +155,12 @@
                 top: -10px;
                 z-index: 20;
                 margin-left: -25px;
-
+                cursor: pointer;
                 background-color: #555555;
                 color: #ffc400;
                 font-weight: 600;
                 .arrow-playerdetails{
+                    font-size: 60px;
                     transform: rotate(180deg);
                     transition: all 400ms;
                     &.rotate{
@@ -166,7 +174,74 @@
                 }
             }
 
+            &.current{
+                background-color: #f4c400;
+                .header{
 
+                    h1{
+                        background-color: #2a2a2a;
+                        color: #f4c400;
+                        border-radius:10px ;
+                    }
+                }
+
+                .player{
+                    .player-personal{
+                        h3{
+                            color: #272727;
+                        }
+                        img{
+                            border: 2px solid #f4c700;
+                            background-color: #e7e7e7aa;
+                            border: 2px solid #272727;
+                            &.country{
+                                border: 2px solid #272727;
+                            }
+                        }
+                    }
+                    .detail{
+                        background-color: #373737;
+                        color: #ffffff;
+                        .points{
+                            font-size: 48px;
+                            color: #ffc400;
+                        }
+    
+                    }
+
+                }
+                .background{
+                    background-color: #ccccccc9;
+                    transition: all 600ms;
+                    height: 0;
+                    overflow: hidden;
+                    &.expand{
+                        padding: 30px 0 30px;
+                        height: fit-content;
+                        overflow: visible;
+                    }
+                    .playerMatchPoints-container{
+                        border: 2px solid #171717;
+                        padding: 0;
+                        border-radius: 0;
+                        width: 100%;
+                        .table-header-wrapper,.detail-player{
+                            border-radius: 0;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .detail-player{
+                            padding: 5px ;
+                            .flex-img{
+                                margin: 2px 0;
+                            }
+                        }
+                        
+    
+                    }
+                }
+            }
         }
         
     }

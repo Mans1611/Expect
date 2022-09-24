@@ -1,7 +1,6 @@
 import './postMatchCard.scss';
 
-import ScoreboardIcon from '@mui/icons-material/Scoreboard';
-import PublicIcon from '@mui/icons-material/Public';
+
 import { globalUser } from '../../Context/HomeContext';
 import PopMatchCard from '../popmatchcard/PopMatchCard';
 import { useState } from 'react';
@@ -10,6 +9,11 @@ import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchR
 import TimeCounter from '../../TimeCounter';
 import { MatchCardProvider } from '../../Context/MatchCardContext';
 import PopSubsHT from '../popmatchcard/PopSubsHT';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import { Link } from 'react-router-dom';
+
+
+
 const PostMatchCard = ({match,userExpect,userName}) => {
     const {userGlob,token} = globalUser();
     document.body.style.overflow = 'visible';
@@ -46,8 +50,11 @@ const PostMatchCard = ({match,userExpect,userName}) => {
             <div className="postMatchCard">
                 <div className="matchHeader">
                     <div className="country">
-                        <img className='countryImage' src={match.firstCountry.logo} alt="" />
-                        <label  className='countryLable'>{match.firstCountry.countryName}</label>
+                        <Link to={`/country/${match.firstCountry.countryName}`} > 
+                        
+                            <img className='countryImage' src={match.firstCountry.logo} alt="" />
+                            <label  className='countryLable'>{match.firstCountry.countryName}</label>
+                        </Link>
                     </div>
                     <div className="result">
                         {
@@ -65,8 +72,10 @@ const PostMatchCard = ({match,userExpect,userName}) => {
                             }
                     </div>
                     <div className="country">
-                        <img className='countryImage secondImg' src={match.secondCountry.logo} alt="" />
-                        <label  className='countryLable'>{match.secondCountry.countryName}</label>
+                        <Link to = {`/country/${match.secondCountry.countryName}`}>
+                            <img className='countryImage secondImg' src={match.secondCountry.logo} alt="" />
+                            <label  className='countryLable'>{match.secondCountry.countryName}</label>
+                        </Link>
                     </div>
                 </div>
             <div className="userExpect">
@@ -78,20 +87,20 @@ const PostMatchCard = ({match,userExpect,userName}) => {
             <div className="showFullWrapper">
             {timeUp ?
                         <>
-                            <button onClick={()=> setMatchStatePop(true)}  className='matchCardbutton'>Expect Points</button> 
-                            {match.matchStatue === "HT" && <button className='matchCardbutton' onClick={()=> setShowSubPop(true)}>Substitue Player</button>}
+                            <button onClick={()=> setMatchStatePop(true)}  className='matchCardbutton'>Points</button> 
+                            {match.matchStatue === "HT" && <button className='matchCardbutton substitute' onClick={()=> setShowSubPop(true)}>Substitue Player <ChangeCircleIcon/></button>}
                         </>
                         : 
                         <>
                         { showDelete ? 
                         <>
                             <button onClick={()=>setShowDelete(false)} className='matchCardbutton'>Cancel </button>
-                            <button onClick={handldeDeleteExpect} className='deleteExpect'>Confirm Delete</button>
+                            <button onClick={handldeDeleteExpect} className='matchCardbutton deleteExpect'>Confirm Delete</button>
                          </>
                          :
                             <>
-                            <button onClick={()=>setShowDelete(true)} className=" deleteExpect">Delete Expect</button>
-                            <button onClick={()=> {setPop(true)}}  className='matchCardbutton'>Edit Expect</button>
+                            <button onClick={()=>setShowDelete(true)} className="matchCardbutton deleteExpect">Delete Expect</button>
+                            <button onClick={()=> {setPopUpdateExpect(true)}}  className='matchCardbutton'>Edit</button>
                             </>
                         }
                         </>

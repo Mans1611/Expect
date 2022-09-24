@@ -9,13 +9,18 @@ import Groups from '../../component/Groups/Groups';
 import NewsContainer from '../../component/NewsContainer/NewsContainer';
 import GoldenPlayerSection from '../../component/GoldenPlayerSection/GoldenPlayerSection';
 import TeamSection from '../../component/TeamSection/TeamSection';
+import { globalUser } from '../../Context/HomeContext';
+import SubstittePlayerSection from '../../component/SubstitutePlayerSection.js/SubstittePlayerSection';
 
 
 const MainCom = () => {
   document.body.style.overflow = "visible";
 
   const [popup,setPop] = useState(false);
-  
+  const {userGlob,auth} = globalUser()
+
+  console.log(auth);
+
   useEffect(()=>{
     let cards_container = document.getElementsByClassName('cards-container')[0];
 
@@ -28,7 +33,7 @@ const MainCom = () => {
             }
         })
     },{
-        threshold:(window.innerWidth>650 ? 0.5 : 0.15 )
+        threshold:(window.innerWidth>650 ? 0.3 : 0.15 )
     });
     if(cards_container)
         observer.observe(cards_container)
@@ -39,16 +44,23 @@ const MainCom = () => {
         <h1 className="firstTitle">GET POINTS FROM <span>World Cup </span> Matches</h1>
         <h2 className="firstTitle"> <span> Expect </span> &  Take Part in <span>World Cup </span></h2>
         <div className="buttonsWrapper">
-                <Link to='/register/signup' className="WelcomeNavbarButtons blueButton">Create Account</Link>
-                <Link to='/register/signin' className="WelcomeNavbarButtons">Sign In</Link>
-            </div>
+          { auth ? 
+              <Link to='/register/signup' className="WelcomeNavbarButtons blueButton">Create Account</Link>
+            :
+            <>
+              <Link to='/register/signup' className="WelcomeNavbarButtons blueButton">Create Account</Link>
+              <Link to='/register/signin' className="WelcomeNavbarButtons">Sign In</Link>
+            </>
+          }
+          </div>
             <div className="cards-container">
               <WinnerExpect index = {0}/>
               <ResultExect index = {1}/>
               <PlayerExpects index = {2} setPop={setPop}/>
             </div>
             <GoldenPlayerSection/>
-            <TeamSection/>
+            <SubstittePlayerSection/>
+            {/* <TeamSection/> */}
             <div className="groupsandMatches">
               <MatchesContainer/>
               <Groups/>

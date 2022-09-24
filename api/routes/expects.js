@@ -10,41 +10,70 @@ import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
 import SessionVerification from "../middleware/sessionVerify.js";
 import { PushExpectToMember , DeleteExpectFromMember, UpdateExpectForMember } from './utilis/TeamExpectHandlers.js';
 import { calculateGoldenPlayerPoints } from './utilis/calculateGoldenPlayerPoints.js';
+import { client } from '../index.js';
 
 const expects = express.Router();
 
 
-expects.get('/:userName',SessionVerification,verifyJwt,async(req,res)=>{
+
+expects.get('/:userName',verifyJwt,async(req,res)=>{
     try{
         const {userName} = req.params;
-         const user = await Expects.findOne({userName});
-         const matches = await Matches.aggregate([
-            {$match:{}},
-            {$project : {_id : 0}}
-        ]); // find all matches 
+
+        let cachedExpects =  await client.get(`${userName}GetExpects`);
         
-         if(!user.expects)
-            return res.send({matches,userExpections:[],totalPoints:0})
-
-        let {userExpections,totalPoints,filterMatches} = await AddingPointsToUsers(matches,user.expects);
+       
         
-        await Expects.updateOne({userName},{expects : userExpections});
+        
+            
+            const user = await Expects.findOne({userName});
+            let cachedMatches = await client.get('allMatches');
+            let matches = [];
 
-
-    
-        res.status(200).json( {
-            filterMatches,
-            userExpections,
-            totalPoints,
-    
-        }); 
-
+            if(cachedMatches){
+                matches = JSON.parse(cachedMatches);
+            }
+            else{
+                    matches = await Matches.aggregate([
+                    {$match:{}},
+                    {$project : {_id : 0}}
+                ]); // find all matches 
+            }
+            
+            if(!user.expects){
+                return res.send({matches,userExpections:[],totalPoints:0})
+            }
+            
+            let {userExpections,totalPoints,filterMatches} =  AddingPointsToUsers(matches,user.expects,false);
+           
+            await Expects.updateOne({userName},{expects : userExpections});
+            
+            // await client.setEx(`${userName}GetExpects`,3600,
+            // JSON.stringify({
+            //     filterMatches,
+            //     userExpections,
+            //     totalPoints
+            // }))
+            
+            
+            
+            res.status(200).json( {
+                filterMatches,
+                userExpections,
+                totalPoints,
+                
+            }); 
+            await User.updateOne({userName},{userPoints : totalPoints});
+        
     }catch(err){
         console.log(err);
     }
 });
 
-expects.get('/calculategoldenPlayer/:userName',SessionVerification,verifyJwt,async(req,res)=>{
+
+
+
+expects.get('/calculategoldenPlayer/:userName',verifyJwt,async(req,res)=>{
     const {userName} = req.params;
     let userDB = await User.findOne({userName});
     
@@ -77,6 +106,37 @@ expects.get('/calculategoldenPlayer/:userName',SessionVerification,verifyJwt,asy
     await User.updateOne({userName},userDB);
 
 })
+// expects.get('/getExpect/:userName',async(req,res)=>{
+//     const {userName} = req.params;
+
+//     const {round,date} = req.query;
+//         let userExpectwithFilter = await Expects.aggregate([
+//             {$match : {userName}},
+//             {$unwind : "$expects"},
+//             {$match : {"expects.round":round}},
+//             {$project : {"expects" : 1,"_id" : 0}}     
+//         ])
+//         let newUserExpectwithFilter = [];
+
+//         for(let expect of userExpectwithFilter){
+//             newUserExpectwithFilter.push({...expect.expects});
+//         }
+//         if(round){
+//             const roundMatches = await Matches.find({round});
+//             console.log(roundMatches);
+//             let {userExpections,totalPoints,filterMatches} =  AddingPointsToUsers(roundMatches,newUserExpectwithFilter,true);
+//             return res.send({userExpections,totalPoints,filterMatches});
+//         }
+//         else if(!round && date){
+//             const regEX = new RegExp(`${req.query.date}`,'ig'); // use regular expression to just find all matches with this date no matter the time
+            
+//             const match = await Matches.find({matchTime: regEX });
+//             return res.status(200).send(match);
+//         }
+    
+// })
+
+
 
 
 expects.post('/addexpect/:userName',VerifyUserJWT,async(req,res)=>{
@@ -149,6 +209,10 @@ expects.put('/editexpect/:userName',VerifyUserJWT,async(req,res)=>{
             msg:"Successfully Updated",
             expects : user.expects
         });
+
+
+        await client.del(`${usreName}etExpects`) ; // `${userName}G`
+
     }
     catch(err){
         console.log(err);
@@ -169,8 +233,8 @@ expects.put('/substitute/:userName',VerifyUserJWT,async(req,res)=>{
         return res.status(400).json({msg : "You can not make this subs"})
 
     const wantedMatch = userExpects.expects.find(((expect,index)=>{
-        if(expect.matchId === matchId){
 
+        if(expect.matchId === matchId){
             // here if the new mutate player is not equal with the old one it means that the player is being substituted.
             if(mutatePlayer1.playerName !== expect.mutatePlayer1.playerName){
                 userExpects.expects[index].mutatePlayer1 = {
@@ -201,7 +265,6 @@ expects.put('/substitute/:userName',VerifyUserJWT,async(req,res)=>{
                     HT_Points : Match.secondCountry.players[mutatePlayer4.index].playerPoints
                 }
             }
-          
             return expect;
         } 
     }))
@@ -216,7 +279,8 @@ expects.put('/substitute/:userName',VerifyUserJWT,async(req,res)=>{
     const user = await User.findOne({userName});
     if(user.team)
         await UpdateExpectForMember(user,matchId,userExpects);
-
+    
+    await client.del(`${userName}GetExpects`) ; 
 
 })
 

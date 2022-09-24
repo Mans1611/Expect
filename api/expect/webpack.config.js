@@ -1,6 +1,16 @@
 import Dotenv from 'dotenv-webpack'
+import crypto from 'crypto-browserify';
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
+
 export default {
-    plugins:[
-        new Dotenv()
-    ]
+    
+    target : "node",
+    resolve:{
+        fallback:{
+            crypto: false 
+        }
+    }
+    
+    
+
 }

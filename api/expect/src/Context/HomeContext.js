@@ -13,9 +13,10 @@ export const Provider = ({children})=>{
     const [auth,setAuth] = useState(false);
     const [expectedMatches,setExpected] = useState([]);
     const [token,setToken] = useState(null);
-    const [invitions,setInvitations] = useState([]);
     const [number,setNumber] = useState(0); // for number of notifications.
     const [user,setUser] = useState({});
+    const [goldenPlayer,setGoldenPlayer] = useState(null);
+    
     return(
         <userContext.Provider value={{
             isDark,setDark,
@@ -23,9 +24,9 @@ export const Provider = ({children})=>{
             auth,setAuth,
             expectedMatches,setExpected,
             token,setToken,
-            invitions,setInvitations,
             number,setNumber,
-            user,setUser
+            user,setUser,
+            goldenPlayer,setGoldenPlayer
             }}>
             {children}
         </userContext.Provider>

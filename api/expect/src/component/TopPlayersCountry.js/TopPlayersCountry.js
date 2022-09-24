@@ -27,7 +27,7 @@ const TopPlayersCountry = ({countryName}) => {
         }
 
         fetchTopPlayers();
-
+        ()=> isSubscribe = false;
     },[countryName])
 
     useEffect(()=>{

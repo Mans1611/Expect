@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
-import filteringExpects from '../utilites/filteringExpects';
-import Axios from '../../../Axios/axios';
-import { globalUser } from '../../../Context/HomeContext';
+import filteringExpects from '../matches/utilites/filteringExpects';
+import Axios from '../../Axios/axios';
+import { globalUser } from '../../Context/HomeContext';
 
 
 
-const RoundFilter = ({setLoading,setData,filterDispatch,userExpections,expectsPage}) => {
+const RoundExpectFilter = ({setLoading,filterDispatch,setTotalPoints,setExpected,setUserExpections}) => {
 
   const {userGlob,token} = globalUser();
   
@@ -13,23 +13,21 @@ const RoundFilter = ({setLoading,setData,filterDispatch,userExpections,expectsPa
   const handleChange = async(selected)=>{
     
     setLoading(true);
+
     filterDispatch({type : "changeRound",payload : selected});
-     try{
-      if(!expectsPage){
-        const matchesRes = await Axios.get(`/matches/?${selected?`&round=${selected}` : '' }`); // array of todays' matches
-        const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
-        setData(MatchesWithFlag);
-      }
-
-      else {
-        const matchesRes = await Axios.get(`/expects/getExpect/${userGlob}?round=${selected}`);
-        
-          
-  
-      }
-
-
-      setLoading(false);
+    
+    try{
+        const {userExpections,totalPoints,filterMatches} = await Axios.get(`/expects/getExpect/${userGlob}?round=${selected}`,{
+            headers:{
+                token  
+            }
+        });
+       
+        setExpected(filterMatches);
+        setTotalPoints(totalPoints);
+        setUserExpections(userExpections);
+      
+        setLoading(false);
      }catch(err){
       console.log(err);
      }
@@ -58,4 +56,4 @@ const RoundFilter = ({setLoading,setData,filterDispatch,userExpections,expectsPa
   )
 }
 
-export default RoundFilter
+export default RoundExpectFilter

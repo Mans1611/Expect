@@ -2,6 +2,8 @@ import Matches from "../models/Matches.js";
 import addingPointsPlayer from "../routes/utilis/addingPointsPlayers.js";
 import { MatchHalfs } from "../routes/utilis/MatchHalfs.js";
 import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCountry.js";
+import { client } from "../index.js";
+
 
 const updateMatch = async(data)=>{
     
@@ -45,7 +47,11 @@ const updateMatch = async(data)=>{
          match.deadMatch = true // here sleep match  is a flage that the match has ended with all state like man of the match, so we dont need to calculate the state all over again.
     
         await Matches.updateOne({matchId:data.matchId},match) ;
-    
+        
+        const matches = await Matches.find();
+
+        await client.set("allMatches",JSON.stringify(matches));
+        
     
 }
 catch(err){

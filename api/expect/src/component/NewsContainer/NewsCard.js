@@ -1,6 +1,10 @@
-import React from 'react'
+  import React from 'react'
+import { globalUser } from '../../Context/HomeContext'
 
 const NewsCard = ({body,title,img}) => {
+  const {userGlob,auth} = globalUser();
+
+  console.log(auth);
   return (
     <div className='newsCard'>
         <div className="img-wrapper">

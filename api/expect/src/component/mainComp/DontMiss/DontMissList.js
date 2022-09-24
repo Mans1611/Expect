@@ -8,10 +8,11 @@ import MatchCardPhone from '../../matchcards/MatchCardPhone/MatchCardPhone';
 
 const DontMissList = () => {
 
-    const {isDark,userGlob} = globalUser();
+    const {isDark,userGlob,auth} = globalUser();
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
 
+    console.log(auth);
     useEffect(()=>{
         let isSubscribe = true;
 
@@ -32,7 +33,7 @@ const DontMissList = () => {
 
 
 
-    },[])
+    },[userGlob])
 
     return ( 
         <div className={`dontMissList ${isDark? "dark":null}`}>

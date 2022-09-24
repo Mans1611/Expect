@@ -20,6 +20,8 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
     
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
     const [skip,setSkip] = useState(false);
+
+    console.log(user);
     useEffect(()=>{
         return async()=>{
             if(userExpect){
@@ -229,30 +231,61 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                             <SelectPlayerCard order = {2} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="FirstCountry"  playerOrder="Player2"/>}</div>
                                     </div>
                             
-                            
+                                {(playersState.showPlayer1 || playersState.showPlayer2) &&  match.confirmedLineup && <h1>confirmed Lineup for {match.firstCountry.countryName}</h1>}
                                 {
-                                playersState.showPlayer1&&
+                                    playersState.showPlayer1&& 
                                 <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
-                                    { match.firstCountry.players.map((player,index)=>
-                                            <PlayerCardRadio  
-                                            countryOrder= 'firstCountry' 
-                                            player={player}
-                                            position = {playersState.player2_position} 
-                                            key={index} />
-                                            ) 
-                                    }
+                                    
+                                    {match.firstCountry.players.map((player,index)=>{
+                                            if(player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={true}
+                                                countryOrder= 'firstCountry'
+                                                player={player}
+                                                position = {playersState.player2_position}
+                                                key={index+11} />
+                                            }
+                                        }
+                                    )}
+                                    {match.firstCountry.players.map((player,index)=>{
+                                            if(!player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={false}
+                                                countryOrder= 'firstCountry'
+                                                player={player}
+                                                position = {playersState.player2_position}
+                                                key={index+11} />
+                                            }
+                                        }
+                                    )}
                                 </div>
                                 }
                                 {
                                     playersState.showPlayer2 && 
                                     <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
-                                        {match.firstCountry.players.map((player,index)=>
-                                            <PlayerCardRadio  
-                                            countryOrder= 'firstCountry'
-                                            player={player}
-                                            position = {playersState.player1_position}
-                                            key={index} />
-                                            )}
+                                        {match.firstCountry.players.map((player,index)=>{
+                                            if(player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={true}
+                                                countryOrder= 'firstCountry'
+                                                player={player}
+                                                position = {playersState.player1_position}
+                                                key={index} />
+                                            }
+                                        }
+                                    )}
+                                    {match.firstCountry.players.map((player,index)=>{
+                                            if(!player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={false}
+                                                countryOrder= 'firstCountry'
+                                                player={player}
+                                                position = {playersState.player1_position}
+                                                key={index} />
+                                            }
+                                        }
+                                    )}
+                                            
                                     </div> 
                                 }
                                 
@@ -266,29 +299,63 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                     </div> 
                                 </div>
                                     {
+                                       (playersState.showPlayer3 || playersState.showPlayer4) && match.confirmedLineup && <h1>confirmed Lineup for {match.secondCountry.countryName}</h1>
+                                    }
+                                    {
                                         playersState.showPlayer3 &&
                                         <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
-
-                                            {match.secondCountry.players.map((player,index)=>  
-                                            <PlayerCardRadio 
-                                            countryOrder= 'secondCountry' 
-                                            key={index}
-                                            position = {playersState.player4_position} 
-                                            player = {player}/>
-                                        
-                                        )}
+                                        {match.secondCountry.players.map((player,index)=>{
+                                            if(player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={true}
+                                                countryOrder= 'secondCountry'
+                                                player={player}
+                                                position = {playersState.player4_position}
+                                                key={index} />
+                                            }
+                                        }
+                                    )}
+                                    {match.secondCountry.players.map((player,index)=>{
+                                            if(!player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={false}
+                                                countryOrder= 'secondCountry'
+                                                player={player}
+                                                position = {playersState.player4_position}
+                                                key={index+11} />
+                                            }
+                                        }
+                                    )}
+                                            
                                         </div>
                                         
                                     }
                                     {
                                         playersState.showPlayer4 &&
                                         <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
-                                            {match.secondCountry.players.map((player,index)=>  
-                                            <PlayerCardRadio 
-                                            countryOrder= 'secondCountry' 
-                                            key={index} 
-                                            position = {playersState.player3_position}
-                                            player = {player}/>) }
+                                           {match.secondCountry.players.map((player,index)=>{
+                                            if(player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={true}
+                                                countryOrder= 'secondCountry'
+                                                player={player}
+                                                position = {playersState.player3_position}
+                                                key={index+11} />
+                                            }
+                                        }
+                                    )}
+                                    {match.secondCountry.players.map((player,index)=>{
+                                            if(!player.linup){
+                                                return  <PlayerCardRadio 
+                                                confirmedLinup={false}
+                                                countryOrder= 'secondCountry'
+                                                player={player}
+                                                position = {playersState.player3_position}
+                                                key={index+11} />
+                                            }
+                                        }
+                                    )}
+                                            
                                         </div>
                                         
                                     }

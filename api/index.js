@@ -23,6 +23,10 @@ import { fileURLToPath } from 'url';
 import path ,{dirname} from 'path';
 import pvp from './routes/pvp.js';
 import player from './routes/player.js';
+import Redis from 'redis';
+// import Redis from redis;
+// const RedisClient = Redis.createClient();
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,7 +34,14 @@ const __dirname = dirname(__filename);
 dotenv.config();
 const MongoDBSession = MongoSessions(session);
 
+
+export const client = Redis.createClient();  // in production to heroku you need to provide url of the server {} 
+await client.connect();
+
 const app = express();
+
+
+
 
 // creating a collections for sessions.
 const storeSession = new MongoDBSession({
@@ -39,36 +50,11 @@ const storeSession = new MongoDBSession({
 }) 
 
 
-const server = http.createServer(app);
-const port = process.env.PORT|| 8000;
 
 app.use(cors());
 
-const io = new Server(server,{
-    cors:{
-        // origin : "https://expect-app.herokuapp.com/",
-        origin : "http://localhost:5000" ,
-
-    // methods : ["GET","POST","PUT","DELETE"],
-    //     allowedHeaders: ["my-custom-header"],
-    //     credentials : true
-     }
-});
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.use(session({
-    resave : false,
-    secret : "mansour is an idiot man",
-    saveUninitialized : false,
-    cookie : {
-        maxAge : 1000 * 660 * 60 ,
-        httpOnly : false
-    },
-    store : storeSession
-}))
-
 // middleware
 app.use('/matches',matchesRoute);
 app.use('/country',countryRoute);
@@ -82,6 +68,39 @@ app.use('/team',team);
 app.use('/feedback',feedback);
 app.use('/player',player);
 app.use('/pvp',pvp);
+
+// app.use(session({
+//     resave : false,
+//     secret : "mansour is an idiot man",
+//     saveUninitialized : false,
+//     cookie : {
+//         maxAge : 1000 * 60 * 60 ,
+//         httpOnly : false
+//     },
+//     store : storeSession
+// }))
+
+
+
+const server = http.createServer(app);
+const port = process.env.PORT|| 8000;
+
+
+const io = new Server(server,{
+    cors:{
+        // origin : "https://expect-app.herokuapp.com/",
+        origin : "http://localhost:5000" ,
+
+    // methods : ["GET","POST","PUT","DELETE"],
+    //     allowedHeaders: ["my-custom-header"],
+    //     credentials : true
+     }
+});
+
+
+
+
+
 
 //const uri = process.env.ATLAS_URI ; // the variable name in .env file
 mongoose.connect(process.env.ATLAS_URI,{useNewUrlParser:true}); // we connect it to the database

@@ -8,71 +8,81 @@ import CloseIcon from '@mui/icons-material/Close';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import UpdateGoldenPlayer from './UpdateGoldenPlayer';
 import PlayerEachMatchPoints from '../PlayerMatchPoints/PlayerEachMatchPoints';
-import PreviousGoldenPlayer from './PreviousGoldenPlayer';
+import GoldenPlayer from './GoldenPlayer';
 import Axios from '../../Axios/axios';
 import SmallLaoding from '../loading/small.loading/smallLoading';
+import fetchGoldenPlayerHook from '../../customHooks/FetchGoldenPlayer';
 
 const GoldenPlayerCard = ({setGoldenPlayerPoints}) => {
-    const {isDark,token,userGlob, user,setUser} = globalUser();
+    const {isDark,token,userGlob, user,setUser,goldenPlayer,setGoldenPlayer} = globalUser();
+
+    const [loadingGoldenPlayer] = fetchGoldenPlayerHook();
+   
+    
+
     const [showPickGoldenPlayer,setShowPickGoldenPlayer] = useState(false);
     const [showUpdategolden,setShowUpdateGolden] = useState(false);
     const [showPlayerPoints,setShowPlayerPoints] = useState(false);
-    const [goldenPlayer,setGoldenPlayer] = useState({});
-    const [loading,setLoading] = useState(true);
 
-    useEffect(()=>{
-        let subscribe = true;
+
+    
+
+    // useEffect(()=>{
+    //     let subscribe = true;
         
-        const fetchGoldenPlayerPoints = async ()=>{
-            try{
-                const {data} = await Axios.get(`/expects/calculategoldenPlayer/${userGlob}`,{
-                    headers : {
-                        token
-                    }
-                });
+    //     const fetchGoldenPlayerPoints = async ()=>{
+    //         try{
+    //             const {data} = await Axios.get(`/expects/calculategoldenPlayer/${userGlob}`,{
+    //                 headers : {
+    //                     token
+    //                 }
+    //             });
              
-                if(subscribe){
-                    setGoldenPlayer(data.goldenPlayer)
-                    setGoldenPlayerPoints(data.goldenPlayer.totalPoints)
-                }
-                setLoading(false);
+    //             if(subscribe){
+    //                 setGoldenPlayer(data.goldenPlayer)
+    //                 setGoldenPlayerPoints(data.goldenPlayer.totalPoints);
+    //                 setLoading(false);
+    //             }
 
-            }catch(err){
-                console.log(err);
-            }
-        }
-        fetchGoldenPlayerPoints();
-        ()=> subscribe = false;
-    },[])
+    //         }catch(err){
+    //             console.log(err);
+    //         }
+    //     }
+    //     fetchGoldenPlayerPoints();
+    //     ()=> subscribe = false;
+    // },[])
   
-
+    //}
     const hidePop = (e)=>{
         if(e.target.className === 'popMatchFullPage'){
             setShowPickGoldenPlayer(false);
         }
     }
+    if(loadingGoldenPlayer)
+        return <SmallLaoding/>
 
   return (
     <>
         <div className ={`informationWrapper goldenPlayercard ${isDark ? 'dark':''}`}>
-            <div className={`information ${isDark? 'dark':null}`}>
+            <div className={`information ${isDark? 'dark':''}`}>
                 <div className="informationHeader-Wrapper">
                     <h2 className='InformationHeader'>Your Golden Player</h2>
                 </div>
                 <div>
                 {
-                    loading ?
+                    loadingGoldenPlayer ?
                         <SmallLaoding/>
                         :
                     goldenPlayer.player?
                     
                         <div className="playerCard-container">
-                            <PlayerCard player={goldenPlayer.player}/>
+                            
+                            <GoldenPlayer player={goldenPlayer.player} current = {true}/> 
                             
                             {
-                                 goldenPlayer.old_Player 
-                                 &&
-                                 <PreviousGoldenPlayer player={goldenPlayer.old_Player}/>  
+                                goldenPlayer.old_Player 
+                                &&
+                                <GoldenPlayer player={goldenPlayer.old_Player} current = {false}/>  
 
                             }
                             {
@@ -116,7 +126,7 @@ const GoldenPlayerCard = ({setGoldenPlayerPoints}) => {
                                 </div>
                                 <h1 className="factor">X2</h1>
                             </div> */}
-                            <div className="totalgoldenPoints">Total Points :{ loading ? ' ...' : goldenPlayer.totalPoints}</div>
+                            <div className="totalgoldenPoints">Total Points :{ loadingGoldenPlayer ? ' ...' : goldenPlayer.totalPoints}</div>
                         </>
                     }
                 

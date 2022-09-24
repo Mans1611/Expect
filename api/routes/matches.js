@@ -7,17 +7,28 @@ import SessionVerification from "../middleware/sessionVerify.js";
 import verifyAdmin from '../middleware/verifyAdmin.js';
 import FilterMatchesTimeLine from './utilis/FilterMatchesTimeLine.js';
 import Expects from '../models/Expects.js';
+import Redis from 'redis';
+import { client } from '../index.js';
+
+
 
 
 const matches = express.Router();
 
-matches.get('/getmatches',SessionVerification,async(req,res)=>{
+matches.get('/getmatches',async(req,res)=>{
     try{
-        
-        const matches = await Matches.find().sort({matchTime : 1}); // so we sort it asc
-        res.status(200).send(matches);
-       
-    }catch(err){
+        const allMatches = await client.get("allMatches")
+
+        if(allMatches == null ){
+            const matches = await Matches.find().sort({matchTime : 1}); // so we sort it asc
+            client.setEx("allMatches",3600, JSON.stringify(matches));
+            return res.status(200).send(matches);
+        }
+        else{   
+            return res.status(200).send(JSON.parse(allMatches)); 
+        }   
+    }
+    catch(err){
         console.log(err);
     }
 
@@ -42,17 +53,17 @@ matches.get('/match/:id', async (req,res)=>{
  // in this route we can get the information by just the date of this day 
  matches.get('/', async (req,res)=>{
     try{
-        const {round,date} = req.query;
-        if(round){
-            const roundMatches = await Matches.find({round});
-            return res.status(200).send(roundMatches);
-        }
-        else if(!round && date){
-            const regEX = new RegExp(`${req.query.date}`,'ig'); // use regular expression to just find all matches with this date no matter the time
-            
-            const match = await Matches.find({matchTime: regEX });
-            return res.status(200).send(match);
-        }
+            const {round,date} = req.query;
+            if(round){
+                const roundMatches = await Matches.find({round});
+                return res.status(200).send(roundMatches);
+            }
+            else if(!round && date){
+                const regEX = new RegExp(`${req.query.date}`,'ig'); // use regular expression to just find all matches with this date no matter the time
+                
+                const match = await Matches.find({matchTime: regEX });
+                return res.status(200).send(match);
+            }
     }
     catch(err){
         console.log(err);
@@ -61,7 +72,7 @@ matches.get('/match/:id', async (req,res)=>{
  })
 
 // for full time matches query 
-matches.get('/dontmissmatch',SessionVerification,async(req,res)=>{
+matches.get('/dontmissmatch',async(req,res)=>{
     
     const {userName} = req.query;
     const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
@@ -135,6 +146,7 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
         
     // the two arrays may vary in length, hence i implement id condition in each loop 
     for(let i = 0; i<length; i++){
+        let statesObject = {goals : 0, assist:0,manOfTheMatch : 0,blockChances:0,yellowCard:0,redCard:0}
         if(players_1[i]){
             
             const newObj = {
@@ -143,6 +155,8 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
                 logo: firstCountry.logo,  
                 votes : 0,
                 playerPoints: 0,
+                ...statesObject
+                
             };
             newPlayers_1.push(newObj);
         }
@@ -153,7 +167,8 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
                 countryName : secondCountry.countryName,
                 logo: secondCountry.logo,
                 votes : 0,
-                playerPoints: 0
+                playerPoints: 0,
+                ...statesObject
             };
            
             newPlayers_2.push(newObj)
@@ -179,6 +194,28 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
             console.log("match is added");
         })
         res.status(201).json({msg:"Match is added"});
+
+        // the code down below is to cahche the matches 
+        const matches = await client.get('allMatches');
+        if(matches == null) // this means that it is the first match
+            {
+                await client.set('allMatches',[{
+                firstCountry,
+                secondCountry,
+                matchId,
+                ...req.body
+            }])
+            }else{
+                let temp = JSON.parse(matches); // as it is an array.
+                temp.push({ 
+                    firstCountry,
+                    secondCountry,
+                    matchId,
+                    ...req.body
+                })
+                await client.set('allMatches',JSON.stringify(temp));
+            }
+        
 
     }catch(err){
         console.log(err);
@@ -226,30 +263,41 @@ matches.put('/editmatch/:matchID',verifyAdmin,async (req,res)=>{
     }
 })
 
+
 matches.put('/updatelinup/:matchId',async(req,res)=>{
     const {matchId} = req.params ;
     const {firstCountryLinup,secondCountryLinup} = req.body;
     let match = await Matches.findOne({matchId});
-    
+    let official_FirstCountry_Lineup = [], official_SecondCountry_Lineup = [];
+
+    // there nust be eleven picke player .
+
+    if(firstCountryLinup.length !== 11 || secondCountryLinup.length !== 11)
+        return res.status(400).json({msg:"The Two Lin up is incomplete"});
+
     firstCountryLinup.forEach((player,index)=>{
-        let temp = match.firstCountry.players[index];
-        match.firstCountry.players[index] = match.firstCountry.players[firstCountryLinup[index].index];
-        match.firstCountry.players[firstCountryLinup[index].index] = temp;
+        // let temp = match.firstCountry.players[index];
+        // match.firstCountry.players[index] = match.firstCountry.players[firstCountryLinup[index].index];
+        // match.firstCountry.players[firstCountryLinup[index].index] = temp;
+        match.firstCountry.players[firstCountryLinup[index].index].linup = true;
     })
 
 
     secondCountryLinup.forEach((player,index)=>{
-        let temp = match.secondCountry.players[index];
-        match.secondCountry.players[index] = match.secondCountry.players[secondCountryLinup[index].index];
-        match.secondCountry.players[secondCountryLinup[index].index] = temp;
+        //let temp = match.secondCountry.players[index];
+        match.secondCountry.players[secondCountryLinup[index].index].linup = true;
+
+        // match.secondCountry.players[secondCountryLinup[index].index] = temp;
+        // official_FirstCountry_Lineup.push(match.secondCountry.players[index]);
 
     })
-
-
-    res.send("done");
+    match.confirmedLineup = true
+    res.status(200).json({msg : "Linup is Updated"});
     await Matches.updateOne({matchId},match)
 
 })
+
+
 matches.put('/updatestate/:matchId/:stateIndex',async(req,res)=>{
     const {matchId,stateIndex} = req.params;
     try{
@@ -295,10 +343,13 @@ matches.delete('/deletematch/:matchID',verifyAdmin,async (req,res)=>{
         const match = await Matches.findOne({matchId:req.params.matchID});
         if(!match)
             return res.status(203).json({msg:`This Match_id ${req.params.matchID} is not exist to delete`})     
+        
         await Matches.deleteOne({matchId : req.params.matchID});
         const matches = await Matches.find();
+
+        await client.set('allMatches',JSON.stringify(matches));
         res.status(200).json({msg:"this match is deleted successfuly",newMatches:matches});
-   
+
     }
    catch(err){
     console.log(err);

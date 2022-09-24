@@ -8,9 +8,9 @@
     "start": "nodemon index.js",
     "heroku-postbuild": "cd expect && npm install && npm run build"
   },
-  "engines" : { 
-    "npm" : ">=7.0.0",
-    "node" : ">=16.0.0"
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
   },
   "author": "Mansour Mohamed",
   "license": "ISC",
@@ -20,16 +20,24 @@
     "connect-mongodb-session": "^3.1.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
     "dotenv": "^16.0.0",
     "encrypt-password": "^1.0.1",
     "express": "^4.17.3",
     "express-session": "^1.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "nodemailer": "^6.7.3",
-    "nodemon": "^2.0.15",
+    "redis": "^4.3.1",
     "socket.io": "^4.5.1"
   },
   "type": "module",
-  "module": "ES6"
+  "module": "ES6",
+  "browser": {
+    "crypto": false
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }

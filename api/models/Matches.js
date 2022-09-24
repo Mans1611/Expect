@@ -57,8 +57,11 @@ const matchSchema = new Schema({
     deadMatch : {
         default : false,
         type : Boolean 
+    },
+    confirmedLineup : {
+        default : false,
+        type : Boolean
     }
-
     
 })
 const Matches = model("Matches",matchSchema);

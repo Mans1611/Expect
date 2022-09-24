@@ -10,7 +10,7 @@ import { goalKeeper_postion ,
         detectPosition
       } from '../popmatchcard/ReducerPlayer.js';
 
-export default function PlayerCardRadio({player,countryOrder,auth,index,position}) {
+export default function PlayerCardRadio({player,countryOrder,auth,index,position,confirmedLinup}) {
   const [showPlayerState,setShowState] = useState(false);
   const [lock,setLock] = useState(false);
   const [goldenPlayer,setGoldenPlayer] = useState(false);
@@ -40,11 +40,11 @@ export default function PlayerCardRadio({player,countryOrder,auth,index,position
             (goldenPlayer && lock) ?
 
             <label  htmlFor={player.playerName}>
-                <PlayerCard lock={true} goldenPlayer = {true} countryOrder={countryOrder} showPlayerState={showPlayerState}  player = {player} auth={auth} />
+                <PlayerCard confirmedLinup = {confirmedLinup} lock={true} goldenPlayer = {true} countryOrder={countryOrder} showPlayerState={showPlayerState}  player = {player} auth={auth} />
             </label>
             :
             <label  htmlFor={player.playerName}>
-                <PlayerCard lock = {lock} countryOrder={countryOrder} showPlayerState={showPlayerState}  player = {player} auth={auth} />
+                <PlayerCard confirmedLinup = {confirmedLinup} lock = {lock} countryOrder={countryOrder} showPlayerState={showPlayerState}  player = {player} auth={auth} />
             </label>
           }
       </div>

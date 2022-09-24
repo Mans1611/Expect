@@ -174,7 +174,72 @@
     }
 }
 }
-@media screen and (max-width : 450px) {
+
+
+@media screen and (max-width : 750px) {
+
+    .popMatchFullPage{
+        .popMatchContainer{
+           
+            .player-header{
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                color: #eeeeee;
+    
+                .playerImg{
+                    img{
+                        width: 100px;
+                        height: 100px;
+                }
+            }
+            .player-personl-details{
+                margin-left: 15px;
+               
+                .playerName{
+                    color: $gold;
+                    font-size: 25px;
+                }
+                h2{
+                    font-size: 22px;
+                }
+            }
+            .player-country{
+                img{
+                    width: 70px;
+                    height: 70px;
+                }
+               
+            }
+        }
+        .player-content-body{
+            .statistics-container{
+                width: 80% !important;
+                
+                .flex{
+                     .detail{
+                        img{
+                            width: 35px;
+                            height: 35px;
+                        }
+                    }
+                   
+                    }
+            }
+            
+        }
+        
+        .fakeackground{
+            background-color: #e5e5e5;
+            padding: 10px;
+        }
+        
+    }
+    }
+    }
+
+
+@media screen and (max-width : 500px) {
 
 .popMatchFullPage{
     .popMatchContainer{

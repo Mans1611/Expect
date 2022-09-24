@@ -169,6 +169,11 @@ form{
                 right: 5px !important;
             }
         }
+        &.confirmedLinup{
+            .country-flag{
+                display: none !important;
+            }
+        }
     }
 }
     &.dark{
@@ -253,6 +258,12 @@ form{
             justify-content: center;
             align-items: center;
             margin: 5px auto;
+
+            .palyerCard{
+                .lineupPlayer{
+                    display: none;
+                }
+            }
 
         }
         
@@ -465,9 +476,11 @@ form{
                             border: none;
                             .playerCardImg{
                                 margin-left: 8px;
+                                
                             }
                         }
                     }
+
                 }
             }
         }

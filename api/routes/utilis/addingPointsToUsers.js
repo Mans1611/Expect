@@ -4,25 +4,30 @@
 
 
 
-export default  function AddingPointsToUSers(matches,userExpections){
+export default  function AddingPointsToUSers(matches,userExpections,filter){
     let totalPoints = 0;
-    let matchCarrier = null;
     let filterMatches = [];
 
     for(let i = 0; i < userExpections.length;i++){
+        
+        let matchCarrier = null;
 
             let filterdMatch = matches.find((match)=>{
                 // so if the matchId matches it will transfer the points of selected from the two countries to the user.  
                 // userPoints variable is for the points in this expect not for all expects
-                if(match.matchId === userExpections[i].matchId){
+                // const matchId_Truthy = filter ? match.matchId === userExpections[i].expects.matchId : match.matchId === userExpections[i].matchId
+               
+                if( match.matchId === userExpections[i].matchId){
                     
+                    
+                 
                     if(!userExpections[i].finalPoints){
                         let matchPoints = 0;
 
                         matchPoints += userExpections[i].mutatePlayer1.subs ? Math.floor((match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints - userExpections[i].mutatePlayer1.HT_Points)* 1.5 ) : 
                         Math.floor(match.firstCountry.players[userExpections[i].mutatePlayer1.index].playerPoints * 1.5);
                         matchPoints += userExpections[i].mutatePlayer2.subs ? (match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints - userExpections[i].mutatePlayer2.HT_Points) : match.firstCountry.players[userExpections[i].mutatePlayer2.index].playerPoints ;
-                        matchPoints += userExpections[i].mutatePlayer3.subs ? (match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints - userExpections[i].mutatePlayer3.HT_Points) : match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints ;
+                        matchPoints += userExpections[i].mutatePlayer3.subs ? (match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints - userExpections[i].mutatePlayer3.HT_Points) : Math.floor(match.secondCountry.players[userExpections[i].mutatePlayer3.index].playerPoints*1.5) ;
                         matchPoints += userExpections[i].mutatePlayer4.subs ? (match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints - userExpections[i].mutatePlayer4.HT_Points) : match.secondCountry.players[userExpections[i].mutatePlayer4.index].playerPoints ;
                         
                         // so this for the winner points it will be calculated just if the match ends (fullTime)
@@ -79,25 +84,22 @@ export default  function AddingPointsToUSers(matches,userExpections){
                         userExpections[i].userPoints = matchPoints;
                         totalPoints += matchPoints;
 
-                            if(match.deadMatch)
-                                userExpections[i].finalPoints = matchPoints;
+                        if(match.deadMatch)
+                            userExpections[i].finalPoints = matchPoints;
 
                         }
                         
                         else{
                             totalPoints+= userExpections[i].finalPoints;
                         }
-
-                       
-                        matchCarrier = {...match,expected : true};
-                        return match;
+                      
+                        filterMatches.push(match);
                     }
                
                 // this if condition for golden Player
                
             })
 
-            filterMatches.push(matchCarrier);
 
         }
      

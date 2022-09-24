@@ -13,6 +13,7 @@ import RoundFilter from './Component/RoundFilter';
 import { FilterState, ReduceFn } from './utilites/ReduceFn';
 import Axios from '../../Axios/axios';
 import { useNavigate } from 'react-router-dom';
+import fetchGoldenPlayerHook from '../../customHooks/FetchGoldenPlayer';
 
 // const socket = io.connect('https://expect-app.herokuapp.com/',{
 //     withCredentials: true,
@@ -34,7 +35,7 @@ const Matches = () => {
     localStorage.setItem("page","matches"); 
     const navigate = useNavigate();
 
-    const {isDark,token,userGlob,expectedMatches,setExpected} = globalUser();
+    const {isDark,token,userGlob,expectedMatches,user,goldenPlayer} = globalUser();
     
     const [data,setData] = useState([]);
     const [isLoading,setLoading] = useState(true);
@@ -44,13 +45,14 @@ const Matches = () => {
 
     const [expandButton,setExpandButton] = useState("See All Matches");
     const [matches, setMatches] = useState([]);
-    
     const date = `${new Date().getMonth() + 1},${(new Date().getDate()<10) ? `0${new Date().getDate()}`: `${new Date().getDate()}`},${new Date().getFullYear()}`
     document.title = "Matches";
+
+    fetchGoldenPlayerHook();
+    console.log(goldenPlayer);
     
     useEffect(()=>{
-        
-        
+
         let isSubscribe = true;
 
         const fetchData = async() =>{
@@ -69,6 +71,13 @@ const Matches = () => {
                 setData(MatchesWithFlag);
                 setMatches(AllMatches);
                 setUserExpections(data.userExpections);
+            }
+            if(!user.goldenPlayer){
+                const {data} = await Axios.get(`/expects/calculategoldenPlayer/${userGlob}`,{
+                    headers : {
+                        token
+                    } 
+                })
             }
             setLoading(false); 
 
@@ -164,7 +173,7 @@ const Matches = () => {
                             <label htmlFor="NavigateToThisDate">
                                 <h1>Pick a Date : </h1>
                                   
-                                    <input onClick={()=>console.log("clicke")}  onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
+                                    <input onInput={(e)=>getMatchesDate(e.target.value)} type="date" name="matchDate" id="NavigateToThisDate"/>
 
                             </label>
                         </div>

@@ -11,11 +11,18 @@ const TodayMatches = () => {
     const [todayMatches,setTodyMatches] = useState([]);
     const [isLoading,setLoading] = useState(true);
     useEffect(()=>{
-        return async()=>{
+        let isSubscribe = true;
+
+        const fetchTodayMatches = async()=>{
             const {data} = await Axios.get(`/matches/?date=${date}`);
-            setTodyMatches(data);
+            if(isSubscribe)
+                setTodyMatches(data);
             setLoading(false);
         }
+        
+        fetchTodayMatches();
+
+        return ()=>isSubscribe = false;
     })
   return (
     <div className='todayMatches-container'>

@@ -16,7 +16,7 @@ const Navbar = () => {
     
     const navbarItems = ["Home", "Matches", "MyExpects", "Team/myteam" , "States"];
     
-    const {isDark,setDark,user} = globalUser();
+    const {isDark,setDark,user,userGlob} = globalUser();
     const cookie = new Cookies();
     
     let items = document.getElementsByClassName('navbarLink');
@@ -58,9 +58,9 @@ const Navbar = () => {
     const handleLogOut = async()=>{
         store.setAuth(false);
         store.setUserGlob(false);
-        cookie.remove('connect.sid');
+        cookie.remove('expect_id');
         try{
-            await Axios.get('/register/logout');
+            await Axios.delete('/register/logout',{userName:userGlob});
         }catch(err){
             console.log(err);
         }
