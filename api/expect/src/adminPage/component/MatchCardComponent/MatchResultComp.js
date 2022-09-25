@@ -8,7 +8,7 @@ import Minute from './Minute';
 import { MatchStateCentral } from '../../../Context/MatchCardContext';
 
 const MatchResultComp =({result_1,result_2,FT,matchId,time,halfsTime})=> {
-  
+ 
   const matchStore = MatchStateCentral();
   const [min,setMin] = useState(0);
   return (

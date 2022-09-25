@@ -25,6 +25,10 @@ const playersToExpectSchema = new Schema({
     nextMatch : {
         required : true,
         type : String
+    },
+    index : {
+        type : Number ,
+        required : true 
     }
 })
 const playerToExpect = new model("playerToExpect",playersToExpectSchema);

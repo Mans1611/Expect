@@ -7,10 +7,10 @@ import { globalUser } from '../../Context/HomeContext';
 const  State = ({state,auth,userExpect,index,matchId})=> {
 
     const {user,goldenPlayer}  = globalUser();
+   
 
     let expected = false;
     let secondExpect = false;
-    let transparent = false; // this variable is for the substituted player, so at the first have it eill be transparent as his points is not calculated.
     let goldenPlayerSelect = false;
     
     const handleDeleteState = async(index)=>{
@@ -24,11 +24,12 @@ const  State = ({state,auth,userExpect,index,matchId})=> {
     }
     
     if(state.country === "first"){
-
+        if(goldenPlayer)
+            goldenPlayerSelect = state.playerName === goldenPlayer.player?.playerName;  // it is out in case of the user did not expect this game his golen player will be highlighted too.
         if(userExpect){
             expected = (state.playerName === userExpect.mutatePlayer1.playerName) && (userExpect.mutatePlayer1.subs? (parseInt(state.min)>=46) : true )
             secondExpect = (state.playerName === userExpect.mutatePlayer2.playerName) && (userExpect.mutatePlayer2.subs? (parseInt(state.min)>=46) : true )
-            goldenPlayerSelect = state.playerName === goldenPlayer.player.playerName;
+            
             
         }
     
@@ -36,7 +37,7 @@ const  State = ({state,auth,userExpect,index,matchId})=> {
         return (
 
             <div className="stateContainer">
-                <div className={`state first ${expected ? 'expected':null} ${secondExpect ? 'secondExpect':''} ${goldenPlayerSelect? 'goldenPlayer' : ''} `}>
+                <div className={`state first ${expected ? 'expected':''} ${secondExpect ? 'secondExpect':''} ${goldenPlayerSelect? 'goldenPlayer' : ''} `}>
                     {auth && <CloseIcon onClick = {(e)=>{e.preventDefault(); handleDeleteState(index)}} className='close'/>}
                     <div className="icon-wrapper">
                         <img src={state.icon} className="icon" />
@@ -56,11 +57,12 @@ const  State = ({state,auth,userExpect,index,matchId})=> {
         }
         
         else if(state.country === "second"){
+            if(goldenPlayer)
+                goldenPlayerSelect = state.playerName === goldenPlayer.player?.playerName; 
             
             if(userExpect){
                 expected = state.playerName === userExpect.mutatePlayer3.playerName && (userExpect.mutatePlayer3.subs? (parseInt(state.min)>=46) : true )
                 secondExpect = state.playerName === userExpect.mutatePlayer4.playerName && (userExpect.mutatePlayer4.subs? (parseInt(state.min)>=46) : true )
-                goldenPlayerSelect = state.playerName === goldenPlayer.player.playerName;
                 
             }
             

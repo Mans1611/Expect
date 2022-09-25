@@ -16,7 +16,8 @@ const UserStanding = ({totalUsers,selectedRound}) => {
             const fetchTopUsers = async()=>{
                 try{
                     const {data} = await Axios.get('/users/standing?limit=5');
-                    if(isSubscribe)
+                    console.log(typeof(data))
+                    if(isSubscribe && typeof(data) !== "object")  // since i send a msg as an object if there were no users. 
                         setUsers(data);
 
                     setLoading(false);
@@ -26,8 +27,9 @@ const UserStanding = ({totalUsers,selectedRound}) => {
             }
             fetchTopUsers();
             
-            return async()=> isSubscribe = false;
+            return ()=> isSubscribe = false;
         },[])
+
 
         return (
             <div className='userStanding-admin'>
@@ -41,6 +43,9 @@ const UserStanding = ({totalUsers,selectedRound}) => {
                     <UserAdminHeadRow/>
                     
                         {   isLoading ? <SmallLaoding/> : 
+                            users.length === 0 ?
+                            <div style={{color:"#ffffff"}} className="noContent">No Users Yet</div>
+                            :
                             users.map((user,index)=><UserAdmin_Row key={index} order = {index+1} user = {user} />)
                         }
                     

@@ -31,17 +31,29 @@ export default async function TransferingPointsToCountry(firstCountryName,second
         })
 
 
-        const checkGroupstage = match.round.match(/Group Stage/ig);
+        const checkGroupstage = match.round.match(/Group Stage/ig); // regular expression to add some states to players in standing
        if(checkGroupstage){
             // for goals difference 
 
             // first country
             firstCountry.goalScored.group+= parseInt(match.firstCountry.result); // to convert it from string to number.
             firstCountry.goalRecieved.group+= parseInt(match.secondCountry.result);
+            if(firstCountry.played)
+                firstCountry.played ++;
+            else{
+                firstCountry.played = 1
+            }
             // secondCountry
             secondCountry.goalScored.group+=parseInt(match.secondCountry.result); // scored
             secondCountry.goalRecieved.group+=parseInt(match.firstCountry.result); // recieved 
             
+            if(secondCountry.played)
+                secondCountry.played ++;
+            else{
+                secondCountry.played = 1
+            }
+
+
            if(match.firstCountry.result > match.secondCountry.result  )
                firstCountry.points += 3;
            else if(match.firstCountry.result < match.secondCountry.result)

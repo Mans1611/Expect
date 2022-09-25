@@ -9,9 +9,22 @@
     @include shadowMainNews;
     // for the dark theme.
     .expectPhone{
+        .upperExpectWrapper{
+            background-color : #595959;
+            .countryWrapper{
+                .dimond{
+                    &.transparent{
+                        background-color : #595959;
+
+                    }
+                }
+            }
+        }
+        
         .matchTime{
             font-size: 30px;
-            color: #e6c100
+            color: #e6c100;
+
         }
     }
     &.dark{

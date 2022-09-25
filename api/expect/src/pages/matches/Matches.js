@@ -49,7 +49,6 @@ const Matches = () => {
     document.title = "Matches";
 
     fetchGoldenPlayerHook();
-    console.log(goldenPlayer);
     
     useEffect(()=>{
 

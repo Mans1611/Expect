@@ -135,10 +135,7 @@
            
         }
         .informationHeader-Wrapper{
-            background: rgb(214,20,29);
-            background: -moz-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
-            background: -webkit-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
-            background: linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
+             background: linear-gradient(90deg, #fee504 75%, #373737 100%);;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -146,19 +143,10 @@
             border-top-right-radius: 20px;
             padding: 10px 0;
             h2{
-                color: #eeeeee;
+                color: #373737 !important;
                 font-size: 36px;
             }
-            .editWrapper{
-                text-align: end;
-                margin-left: 20px;
-                .editIcon{
-                    cursor: pointer;
-                    color: #eeeeee;
-                    font-size: 25px;
-                }
-
-            }
+           
             
         }
        } 

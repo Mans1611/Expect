@@ -15,7 +15,6 @@ const PlayerEachMatchPoints = ({player}) => {
             
             try{
                 const {data} = await Axios.get(`/player/playerDetails/${player.countryName}/${player.index}`)
-                
                 if(isSubscribe)
                     setDetails(data);
                 setLoading(false)
@@ -38,6 +37,8 @@ const PlayerEachMatchPoints = ({player}) => {
                 <div className="item">Match Points</div>
             </div>
             {
+                details.length === 0 ? <div  className="noContent">No Matches Played for this Player </div> 
+                : 
                 details.map((detail,index)=>(
                 <div key={index} className="detail-player row">
                     <div className="item flex-img">

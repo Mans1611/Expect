@@ -93,10 +93,10 @@ const GoldenPlayerCard = ({setGoldenPlayerPoints}) => {
                                         Change Player 
                                         <ChangeCircleIcon/>
                                     </button>
-                                    {
+                                    {/* {
                                         !showPlayerPoints &&
                                         <button onClick={()=>setShowPlayerPoints(true)} className='show-points'>Show Player Points</button>
-                                    }
+                                    } */}
                                 </div>  
                             }
 
@@ -113,7 +113,7 @@ const GoldenPlayerCard = ({setGoldenPlayerPoints}) => {
                         </div>
                 } 
                 </div>
-                {showPlayerPoints && <PlayerEachMatchPoints  player={goldenPlayer.player}/>}
+                {/* {showPlayerPoints && <PlayerEachMatchPoints  player={goldenPlayer.player}/>} */}
                 
 
                     {

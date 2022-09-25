@@ -1,7 +1,5 @@
 import './myexpect.scss';
 import '../matches/match.scss';
-
-
 import { useEffect, useMemo, useReducer, useState } from "react";
 import { globalUser } from "../../Context/HomeContext";
 import filteringExpects from "../matches/utilites/filteringExpects";
@@ -74,7 +72,8 @@ const MyExpects = () => {
                     setUserExpections(data.userExpections);
                     let reverseorder = data.filterMatches.reverse();
                     setExpected(reverseorder); 
-                    setExpectationsPoints(data.totalPoints);  
+                    setTotalPoints(data.totalPoints);
+                    console.log(data);  
                     
                 }
                 setLoading(false);
@@ -89,11 +88,17 @@ const MyExpects = () => {
     },[userGlob,expectedMatches]);
 
 
-   
+    //  useMemo(()=>{
+    //     if(goldenPlayer){
 
-     useMemo(()=>{
-        return setTotalPoints( goldenPlayer.totalPoints + expectationPoints  )
-    },[expectationPoints,goldenTotalPoints])
+    //         if(userGlob && ! (goldenPlayer.old_Player) && goldenPlayer.player)
+    //             return setTotalPoints( goldenPlayer.player.doublePoints  + expectationPoints );
+            
+    //         else if(userGlob && (goldenPlayer.old_Player) )
+    //             return setTotalPoints( goldenPlayer.totalPoints  + expectationPoints );
+    //     }
+
+    // },[goldenPlayer,userGlob])
 
 
 

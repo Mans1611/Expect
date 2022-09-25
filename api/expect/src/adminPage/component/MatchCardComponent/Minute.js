@@ -6,8 +6,7 @@ import { MatchStateCentral } from '../../../Context/MatchCardContext';
 const MINUTE = 1000*60 ; 
 
 
-const Minute = ({matchTime,min,setMin,halfsTime})=> {
-    
+const Minute = ({matchId,matchTime,min,setMin,halfsTime})=> {
     const MATCH_Time_IN_SECONDS = new Date(matchTime).getTime();
     const [refresh,setRefresh] = useState(0);
     

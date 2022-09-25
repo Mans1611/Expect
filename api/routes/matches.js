@@ -182,7 +182,7 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
         firstCountry.result = 0;
         secondCountry.result = 0;
 
-        const match = await new Matches ({
+        const match =  new Matches ({
             firstCountry,
             secondCountry,
             matchId,
@@ -195,26 +195,21 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
         })
         res.status(201).json({msg:"Match is added"});
 
+        await client.del('allMatches');
         // the code down below is to cahche the matches 
-        const matches = await client.get('allMatches');
-        if(matches == null) // this means that it is the first match
-            {
-                await client.set('allMatches',[{
-                firstCountry,
-                secondCountry,
-                matchId,
-                ...req.body
-            }])
-            }else{
-                let temp = JSON.parse(matches); // as it is an array.
-                temp.push({ 
-                    firstCountry,
-                    secondCountry,
-                    matchId,
-                    ...req.body
-                })
-                await client.set('allMatches',JSON.stringify(temp));
-            }
+        // const matches = await client.get('allMatches');
+        
+        // const matchesDB = await matches.find({matchId});
+
+        // if(matches == null) // this means that it is the first match
+        //     {
+        //         await client.set('allMatches',JSON.stringify(matchesDB));
+
+        //     }else{
+        //         let temp = JSON.parse(matches); // as it is an array.
+        //         temp.push(matches.push(matchesDB))
+        //         await client.set('allMatches',JSON.stringify(temp));
+        //     }
         
 
     }catch(err){
@@ -345,9 +340,10 @@ matches.delete('/deletematch/:matchID',verifyAdmin,async (req,res)=>{
             return res.status(203).json({msg:`This Match_id ${req.params.matchID} is not exist to delete`})     
         
         await Matches.deleteOne({matchId : req.params.matchID});
+        
         const matches = await Matches.find();
+        await client.del('allMatches');
 
-        await client.set('allMatches',JSON.stringify(matches));
         res.status(200).json({msg:"this match is deleted successfuly",newMatches:matches});
 
     }

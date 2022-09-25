@@ -30,11 +30,10 @@ const AddPlayerToExpect = () => {
         const countryName = document.getElementById('countryName').value;
         const playerIndex = document.getElementById('playerName').value;
         const nextMatch = document.getElementById('nextMatch').value;
-        let Player = {...players[playerIndex],nextMatch,country : {logo,countryName}};
+        let Player = {...players[playerIndex],nextMatch,country : {logo,countryName},index : playerIndex};
         
         
         try{
-            console.log(adminStore.token);
             const response = await Axios.post('/statistics/createPlayertoexpect',Player,{
                 headers : {token : adminStore.token}
             });

@@ -137,13 +137,12 @@ statistics.get('/gettotal',async(req,res)=>{
     res.status(200).send(totalObjects)
 })
 statistics.post('/createPlayertoexpect',verifyAdmin,async(req,res)=>{
-    const {Player:player} = req.body;
     
     const Player = new playerToExpect({...req.body});
     await Player.save(()=>{
         console.log("players to watch is done");
     }); 
-    res.status(200).json({player,msg:"Succussfully Added To Players to Expect"});
+    res.status(200).json({Player,msg:"Succussfully Added To Players to Expect"});
     
 
 })

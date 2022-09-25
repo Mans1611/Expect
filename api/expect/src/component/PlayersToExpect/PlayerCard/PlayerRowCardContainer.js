@@ -39,7 +39,7 @@ const PlayerRowCard = ({Players,isLoading,dark}) => {
 const PlayerRow = ({player})=>{
   
   const [showPlayerProfile,setShowPlayerProfile] = useState(false);
-  
+
   return (
         <>
           <div  onClick = {()=> setShowPlayerProfile(true)} className="row">

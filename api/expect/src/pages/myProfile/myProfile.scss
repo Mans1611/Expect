@@ -34,6 +34,14 @@
         .goldenPlayerPoints-container,.show-points,.totalgoldenPoints{
             display: none;
         }
+        .pointsWrapper{
+            text-align: center;
+        }
+        .buttons-wrapper{
+            button{
+                margin-top : 40px ;
+            }
+        }
     }
     .information{
         background-color: #ffffff;

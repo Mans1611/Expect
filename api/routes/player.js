@@ -53,7 +53,7 @@ player.get('/playerDetails/:countryName/:index',async(req,res)=>{
             const {countryName,index} = req.params;
         
             const countryShort = countryName.slice(0,3).toUpperCase();
-            const Regexp = new RegExp(`${countryShort}`,'ig');
+            const Regexp = new RegExp(`${countryShort}`,'ig');  // regular expression to fetch match by match_Id 
         
             const matches = await Matches.find({matchId:Regexp});
         
@@ -61,10 +61,9 @@ player.get('/playerDetails/:countryName/:index',async(req,res)=>{
         
             for(let match of matches){
         
-                let position = match.matchId.indexOf(countryShort);
-        
+                let position = match.matchId.indexOf(countryShort); // this to detect if the country was the first or the second one
                 if(position<2){
-                  
+                  console.log(index);
                     playerObject = {
                         opponent : match.secondCountry.countryName,
                         playerPoints : match.firstCountry.players[index].playerPoints,

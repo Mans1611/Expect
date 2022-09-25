@@ -24,6 +24,9 @@ team.post('/createteam',TeamValidation,async(req,res)=>{
     const {expects:userExpects} = await Expects.findOne({userName});
     const userExpects4Team = Filter_User_Expects_4Team(userExpects,joinedTime)
     
+    const userDB = await User.findOne({userName});
+    const goldenPlayerPoints = userDB.goldenPlayer ? (userDB.goldenPlayer.old_Player ? userDB.goldenPlayer.totalPoints :  userDB.goldenPlayer.player.doublePoints)  : 0  ;
+
     const team = new Teams({
         teamName ,
         teamCode,
@@ -31,7 +34,8 @@ team.post('/createteam',TeamValidation,async(req,res)=>{
             userName : user.userName,
             expects:userExpects4Team,
             joinedTime,
-            sharePoints:0
+            sharePoints:0,
+            goldenPlayerPoints
         }],
         teamStanding,
     })
@@ -64,11 +68,16 @@ team.put('/jointeam',joinTeamValidation,async(req,res)=>{
     //filter Expects 
     const user_Expects_To_Team = Filter_User_Expects_4Team(userExpects,joinedTime);
 
+
+    const userDB = await User.findOne({userName});
+    const goldenPlayerPoints = userDB.goldenPlayer ? (userDB.goldenPlayer.old_Player ? userDB.goldenPlayer.totalPoints :  userDB.goldenPlayer.player.doublePoints)  : 0  ;
+
     team.teamMembers.push({
         userName : user.userName,
         joinedTime,
         expects : user_Expects_To_Team,
-        sharePoints:0
+        sharePoints:0,
+        goldenPlayerPoints
     });
     user.team = team;
 
@@ -133,7 +142,9 @@ team.get('/myteam/:userName',async(req,res)=>{
             return res.status(200).send(null);
 
         let team = await Teams.findOne({teamName : user.team.teamName});
+        
         const member = team.teamMembers.find(member=>member.userName === userName);
+        
         const {totalTeamPoints} = await CalculateTotalTeamPoints(team);
         
         await SortingTeams();

@@ -248,9 +248,29 @@ body{
         .matchCard-container{
             width: 95%;
             height: fit-content;
+            margin-top: 40px;
             .matchCard{
                 background-color: #181818 !important;
                 margin-bottom: 10px;
+               
+                color: #ffffff !important;
+            }
+        }
+        .groups-container{
+            .CountryStanding{
+                .header{
+                    h1{
+                        font-size: 36px;
+                    }
+
+                }
+                .group-standing:not(.standing-header){
+                    background-color: #191919;
+                    color: #eeeeee !important;
+                    font-size: 16px;
+
+                    align-items: center;
+                }
             }
         }
     }
@@ -356,7 +376,7 @@ body{
                             }
                             
                         }
-                  n       .card-face{
+                         .card-face{
                            
                             .text{
                                 padding:  5px;

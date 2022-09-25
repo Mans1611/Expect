@@ -25,7 +25,7 @@ const ExpectPhone = ({match,userExpect,setLoading,setUserExpections})=> {
 
     useEffect(()=>{
         const expectComps = document.querySelectorAll('.expectComponent');
-        console.log(typeof(expectComps));
+       
 
         const observer = new IntersectionObserver(([entry])=>{
             if(entry.isIntersecting)

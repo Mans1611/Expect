@@ -42,12 +42,15 @@
                    display: none;
                     position: absolute;
                     transition: top 200ms ;
-                    top: -130px;
+                    top: -116px;
                     right: -5px;
                     z-index: 999;
                     width: 150px;
                     border-radius: 5px;
                     text-align: center;
+                    border-bottom: 2px solid #ffffff;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
                     a{
                         text-decoration: none;
                         color: #171717;

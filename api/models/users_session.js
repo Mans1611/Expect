@@ -13,6 +13,10 @@ const sessionSchema = new Schema({
     },
     session_id :{
         type : String,
+    },
+    device : {
+        type : String,
+        
     }
 })
 

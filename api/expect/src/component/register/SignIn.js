@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { globalUser } from '../../Context/HomeContext';
 import Cookies from 'universal-cookie';
 import Axios from '../../Axios/axios';
+import { deviceType } from './utilites/detectDevice';
 
 const SignIn = () => {
     document.title = "Sign in";
@@ -41,7 +42,8 @@ const SignIn = () => {
         }
        
         try{
-            const response = await Axios.post('/register/login',{userName,password});
+            const device = deviceType();
+            const response = await Axios.post('/register/login',{userName,password,device});
             if(response.status === 200){
                 cookie.set('token',response.data.token,{
                     maxAge : 60 * 60 * 3
@@ -54,7 +56,8 @@ const SignIn = () => {
                 store.setUserGlob(userName)
                 store.setAuth(true);
                 store.setToken(response.data.token);
-                store.setUser(response.data.user)
+                store.setUser(response.data.user);
+                
                 const audio = new Audio()
                 audio.controls = true;
                 audio.src = 'http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a';
@@ -97,7 +100,7 @@ const SignIn = () => {
                 </div>
                 {errMsg && <div id="backendmsglogin"></div>}
                 <div className="feild">
-                    <input className='submit' placeholder='Login' onClick={handleLogin} type="submit" />
+                    <button className='submit'  onClick={handleLogin} >Login</button>
                 </div>
             </form>
                 <div className="options">

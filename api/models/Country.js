@@ -22,6 +22,10 @@ const countrySchema = new Schema({
         type : String,
         required : true
     },
+    played : {
+        type : Number,
+        default : 0
+    },
     points : {
         type : Number,
         default : 0

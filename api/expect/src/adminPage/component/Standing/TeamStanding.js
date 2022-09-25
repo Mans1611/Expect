@@ -39,6 +39,8 @@ const TeamStanding = () => {
             {
               isLoading ? <SmallLaoding/>
               :
+              teams.length === 0 ? <div  style={{color:"#ffffff"}} className="noContent">No Teams Yet </div> 
+              : 
               teams.map((team,index)=><TeamAdmin_Row key={index} order = {index+1} team={team}/>)
             }
             

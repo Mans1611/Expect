@@ -25,7 +25,7 @@ const router = express.Router();
 
 router.post('/signup',async(req,res)=>{
     try{
-    const {userName,password,phoneNumber,email,userCountry} = req.body;
+    const {userName,password,phoneNumber,email,userCountry,device} = req.body;
 
     // since the phone number is optional not required so i will check the phone number first then i will find if it repetative.
     if(phoneNumber){
@@ -55,15 +55,27 @@ router.post('/signup',async(req,res)=>{
     const expects = new Expects({userName})// creating a new expect documentation 
     await expects.save(()=>{
     })
-    CreateUserSession(req);
 
-    await user.save(()=>{
-        res.status(201).json({
-            msg:"User is created succussfully",
-            token,
-            user : {userName,goldenPlayer:null}
-        });
-    })
+    const session_id = crypto.randomBytes(30).toString('hex');
+            
+            const user_session = new session({
+                user : userName,
+                session_id,
+                device
+            });
+
+    await user.save();
+
+    res.status(201).json({
+        msg:"User is created succussfully",
+        token,
+        session_id,
+        user : {userName,goldenPlayer:{player : null , updateCounter : 1}} //  as in the database, i just send it back to the fron end.
+        
+    });
+
+    await user_session.save();
+
     
 }
     catch(err){
@@ -75,7 +87,7 @@ router.post('/signup',async(req,res)=>{
 
 
 router.post('/login',async(req,res)=>{
-    const {userName,password} = req.body;
+    const {userName,password,device} = req.body;
     try{
         const userDB = await User.findOne({userName});
         if(!userDB)
@@ -97,7 +109,8 @@ router.post('/login',async(req,res)=>{
             
             const user_session = new session({
                 user : userName,
-                session_id
+                session_id,
+                device
             });
             await user_session.save();
 
@@ -118,6 +131,7 @@ router.post('/login',async(req,res)=>{
 
 router.post('/verifysession',async(req,res)=>{
     let  {session_id} = req.body;
+
     const Session = await session.findOne({session_id});
     if(!Session)
         return res.status(404).json({msg : "session had endded"});

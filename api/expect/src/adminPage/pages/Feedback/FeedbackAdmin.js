@@ -88,7 +88,9 @@ const FeedbackAdmin = () => {
 
             </div>
 
-            {
+            {   
+                feedbacks.length === 0 ? <div className="noContent">NO FeedBack Yet</div>
+                :
                 feedbacks.map((feedback,index)=>  <UserIssue support = {pageState.showVerify}  feedback ={feedback} key={index}/>) 
             }
            

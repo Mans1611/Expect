@@ -27,6 +27,11 @@ const PlayerProfilePop = ({player,setPop, toFetch}) => {
         }
     }
 
+    let playerObject = {
+        countryName : player.countryName ? player.countryName : player.country.countryName,
+        index : Player.index
+    }
+
     useEffect(()=>{
         let isSubscribe = true;
         
@@ -57,17 +62,16 @@ const PlayerProfilePop = ({player,setPop, toFetch}) => {
                     logo : player.logo,
                     ...player.players
                 })
-                console.log(Player);
             }
-
+            
             else{
-               setPlayer( {...player})
+                setPlayer( {...player})
             }
             setLoading(false);
         }
-
+        
     },[])
-
+    
 
   return ReactDom.createPortal(
     <div  onClick={hidePop}  className="popMatchFullPage playerProfile">
@@ -104,7 +108,7 @@ const PlayerProfilePop = ({player,setPop, toFetch}) => {
                             }
                             {showPlayerDetails &&
                             <div className='fakeackground'>
-                                <PlayerEachMatchPoints player = {Player}/>
+                                <PlayerEachMatchPoints player = {playerObject}/>
                             </div>
                             }
                     </>

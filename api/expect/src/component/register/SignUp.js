@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import {moveToFirst,moveToSecond} from './utilites/Moving.js';
 import { globalUser, userContext } from '../../Context/HomeContext';
 import Axios from '../../Axios/axios';
+import { deviceType } from './utilites/detectDevice';
 const SignUp = () => {
     document.getElementsByTagName('body')[0].style.overflow = 'visible';
     document.title = "Create An Account";
@@ -130,21 +131,22 @@ const SignUp = () => {
                     if(phone!=='')
                         setPhone('+974'+phone);
                 }
-                const user = {userName,email:mail,password:pass,userCountry:country,phoneNumber:phone}  ;
+                const device = deviceType()
+                const user = {userName,email:mail,password:pass,userCountry:country,phoneNumber:phone,device}  ;
                 const response = await Axios.post('/register/signup',user);
                 if(response.status === 201){
                     setLoadingPost(false);
                     store.setUserGlob(userName);
                     store.setAuth(true);
                     store.setToken(response.data.token);
+                    store.setGoldenPlayer(response.data.user.goldenPlayer);
+                    
                     navigate('/home');
-                    let token = ''
-                    for(let letter of response.headers.token){
-                        token += letter.indexOf()
-                    }
-                    cookie.set('token',response.headers.token,{
-                        maxAge : 60*60*8 // the token is valid for 8 hours 
+                    
+                    cookie.set('token',response.data.token,{
+                        maxAge : 60*60*1 // the token is valid for 8 hours 
                     })
+                    cookie.set('expect_id' , response.data.session_id,{maxAge : 60 * 60 })
 
 
                 }

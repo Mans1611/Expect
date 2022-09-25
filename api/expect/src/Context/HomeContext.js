@@ -15,6 +15,7 @@ export const Provider = ({children})=>{
     const [token,setToken] = useState(null);
     const [number,setNumber] = useState(0); // for number of notifications.
     const [user,setUser] = useState({});
+    
     const [goldenPlayer,setGoldenPlayer] = useState(null);
     
     return(

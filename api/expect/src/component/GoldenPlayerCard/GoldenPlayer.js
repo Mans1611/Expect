@@ -35,7 +35,7 @@ const GoldenPlayer = ({player,current}) => {
             <div >
                 <h2>{player.position}</h2>
             </div>
-            <div className="detail">
+            <div className="detail pointsWrapper">
                 <h1 className='points'>{current ? (goldenPlayer.totalPoints -  (goldenPlayer.old_Player ? goldenPlayer.old_Player.doublePoints : 0)) : goldenPlayer.old_Player.doublePoints }</h1>
                 Points
             </div>

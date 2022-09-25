@@ -17,12 +17,18 @@
             font-weight: 600;
             font-size: 26px;
             padding: 5px;
+            text-align: center;
             &.row{
                 display: grid;
                 grid-template-columns: repeat(2,50%);
 
             }
             
+    }
+    .noContent{
+        background-color: #262626;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
     }
     .detail-player{      
         background-color: #b1b1b1;
@@ -39,12 +45,14 @@
                 background-color: #390128;
                 h2{
                     color: #ffbf00;
+                    text-align: center;
                 }
             }
             
         }
         h2{
             color: #390128;
+            text-align: center;
         }
         .flex-img{
             display: flex;

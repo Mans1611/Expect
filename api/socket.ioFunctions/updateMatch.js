@@ -16,7 +16,7 @@ const updateMatch = async(data)=>{
             match = MatchHalfs(match,data.matchStatus);
         }
     
-    if(match.fullTime){
+    if(match.fullTime && data.matchStatus !== 'Match Is Done'){
         await TransferingPointsToCountry(match.firstCountry.countryName,match.secondCountry.countryName,match);
     }
     // so this code for uodating the time if the admin wants to
@@ -43,6 +43,7 @@ const updateMatch = async(data)=>{
         match = await addingPointsPlayer(updatedPlayer_2,match.secondCountry.countryName,match);
         match.states.push(updatedPlayer_2);
     }
+    
     if(data.matchStatus === 'Match Is Done')
          match.deadMatch = true // here sleep match  is a flage that the match has ended with all state like man of the match, so we dont need to calculate the state all over again.
     

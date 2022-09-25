@@ -18,6 +18,7 @@ const PostMatchCard = ({match,userExpect,userName}) => {
     const {userGlob,token} = globalUser();
     document.body.style.overflow = 'visible';
     
+    
     const [matchStatePop,setMatchStatePop] = useState(false);
     const [timeUp, setTimeUp] = useState(false); 
     const [showDelete,setShowDelete] = useState(false);

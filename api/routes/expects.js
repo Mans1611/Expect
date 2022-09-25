@@ -21,10 +21,6 @@ expects.get('/:userName',verifyJwt,async(req,res)=>{
         const {userName} = req.params;
 
         let cachedExpects =  await client.get(`${userName}GetExpects`);
-        
-       
-        
-        
             
             const user = await Expects.findOne({userName});
             let cachedMatches = await client.get('allMatches');
@@ -50,20 +46,29 @@ expects.get('/:userName',verifyJwt,async(req,res)=>{
             
             // await client.setEx(`${userName}GetExpects`,3600,
             // JSON.stringify({
-            //     filterMatches,
-            //     userExpections,
-            //     totalPoints
-            // }))
-            
-            
-            
-            res.status(200).json( {
-                filterMatches,
-                userExpections,
-                totalPoints,
+                //     filterMatches,
+                //     userExpections,
+                //     totalPoints
+                // }))
+                const userDB = await User.findOne({userName});
+                if(userDB.goldenPlayer && userDB.goldenPlayer.old_Player){
+                    totalPoints = totalPoints + userDB.goldenPlayer.totalPoints;
+                }
+                else{
+                    console.log(userDB.goldenPlayer.totalPoints);
+                    totalPoints = totalPoints + userDB.goldenPlayer.totalPoints;
+                }
                 
-            }); 
-            await User.updateOne({userName},{userPoints : totalPoints});
+                
+                res.status(200).json( {
+                    filterMatches,
+                    userExpections,
+                    totalPoints,
+                    
+                }); 
+                console.log(userName);
+            console.log(totalPoints);
+            await User.updateOne({userName},{userPoints : parseInt(totalPoints)});
         
     }catch(err){
         console.log(err);

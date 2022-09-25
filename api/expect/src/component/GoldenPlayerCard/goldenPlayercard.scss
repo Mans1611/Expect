@@ -389,7 +389,33 @@
         }
     }
 }
+@media screen and (max-width : 930px) {
+    .goldenPlayercard{
+        .playerCard-container{
+            .previousGoldenPlayer {
+                .player{
+                    display: grid !important;
+                    grid-template-columns: 50% 25% 25%;
+                    .pointsWrapper{
+                        display: block;
+                        margin: auto;
+                        width: 80px;
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                        grid-column: 1 /  4;
+                    }
+                    .player-personal{
+                        align-items: start;
+                        justify-content: center;
+                    }
 
+                }
+                
+            }
+        
+        }
+        }
+}
 @media screen and (max-width:570px) {
     .goldenPlayercard{
         .playerCard-container{
