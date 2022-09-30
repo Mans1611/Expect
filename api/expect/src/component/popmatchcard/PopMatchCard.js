@@ -16,7 +16,7 @@ import ReactDom from 'react-dom'
 
 const PopMatchCard = ({match,setPop,type,userExpect}) => {
     document.body.style.overflow = 'hidden';
-    const {isDark,userGlob,token,user,setExpected} = globalUser();
+    const {isDark,userGlob,token,user,setExpected,goldenPlayer} = globalUser();
     
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
     const [skip,setSkip] = useState(false);
@@ -172,9 +172,8 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
         <div  onClick={hidePop}  className="popMatchFullPage">
             <div className={`popMatchContainer ${isDark && 'dark'}`}>
                 <CloseIcon onClick={()=> setPop(false)} className='Popicon'/>
-                    {!user.goldenPlayer && ! skip ? 
+                    {!goldenPlayer.player && ! skip ? 
                         <PickGoldenPlayer setSkip = {setSkip} />
-
                          :
                      <form>
                         <div className="headerPopUp">

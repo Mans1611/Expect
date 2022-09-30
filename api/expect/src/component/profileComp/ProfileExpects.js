@@ -34,7 +34,7 @@ const ProfileExpects = ({userName}) => {
                     if(isSubscribe){
                         setUserExpections(top3);
                         setExpected(data.filterMatches); // matches 
-                        console.log(expected);
+                        
                     }
                     
                 }

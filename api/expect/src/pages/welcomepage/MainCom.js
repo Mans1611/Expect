@@ -19,7 +19,7 @@ const MainCom = () => {
   const [popup,setPop] = useState(false);
   const {userGlob,auth} = globalUser()
 
-  console.log(auth);
+ 
 
   useEffect(()=>{
     let cards_container = document.getElementsByClassName('cards-container')[0];
@@ -45,7 +45,7 @@ const MainCom = () => {
         <h2 className="firstTitle"> <span> Expect </span> &  Take Part in <span>World Cup </span></h2>
         <div className="buttonsWrapper">
           { auth ? 
-              <Link to='/register/signup' className="WelcomeNavbarButtons blueButton">Create Account</Link>
+              <Link to='/home' className="WelcomeNavbarButtons blueButton">Home Page</Link>
             :
             <>
               <Link to='/register/signup' className="WelcomeNavbarButtons blueButton">Create Account</Link>
@@ -53,6 +53,7 @@ const MainCom = () => {
             </>
           }
           </div>
+          <h1 className="how">How To Play The Game?</h1>
             <div className="cards-container">
               <WinnerExpect index = {0}/>
               <ResultExect index = {1}/>

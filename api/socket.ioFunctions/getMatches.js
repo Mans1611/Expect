@@ -11,8 +11,6 @@ const  getMatches = async(userName)=>{
         const {userExpections,totalPoints} = AddingPointsToUsers(matches,user.expects);
 
         await User.findOneAndUpdate({userName},{userPoints:totalPoints});
-        console.log("inside ugetMatches");
-        console.log(userExpections);
         return {matches,userExpections,totalPoints};
 
 

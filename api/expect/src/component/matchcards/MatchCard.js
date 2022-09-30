@@ -7,7 +7,6 @@ import MatchResultComp from '../../adminPage/component/MatchCardComponent/MatchR
 import MatchState from '../MatchState/MatchState';
 import { MatchCardProvider } from '../../Context/MatchCardContext';
 import { useNavigate, Link } from 'react-router-dom';
-import Axios from '../../Axios/axios';
 
 
 const MathchCard = ({match}) => {
@@ -51,7 +50,7 @@ const MathchCard = ({match}) => {
                     <div className="round">{match.round}</div>
                 </div>
 
-                { !timeUp && <TimeCounter setTimeUp = {setTimeUp}  matchTime={match.matchTime}/>}
+                {!timeUp && <TimeCounter setTimeUp = {setTimeUp}  matchTime={match.matchTime}/>}
 
                 {/* if the time is up the timer will display and you cant press the Expect button  */}
                 {!timeUp && 
@@ -60,15 +59,16 @@ const MathchCard = ({match}) => {
                     </div>
                 } 
                 
-                {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
                 
-                {timeUp && <MatchResultComp  time = {match.matchTime} 
+                {timeUp && 
+                        <MatchResultComp  
+                            time = {match.matchTime} 
                             FT={match.fullTime} 
                             result_1={match.firstCountry.result} 
                             result_2={match.secondCountry.result}
                             matchId = {match.matchId}
                             halfsTime = {match.time}
-                            /> 
+                        /> 
                 }
 
             {timeUp &&
@@ -77,6 +77,7 @@ const MathchCard = ({match}) => {
                     </div>
             }
             </div>
+            {!timeUp && pop && <PopMatchCard type="POST" pop={pop} setPop={setPop} dark = {isDark} match={match}/>}
             { pop && timeUp && <MatchState expected = {false}  setPop = {setPop} match={match}/>}   
             
         </>

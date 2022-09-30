@@ -103,6 +103,13 @@
     
     
 }
+@media screen and (max-width:400px) {
+    .register{
+        grid-template-columns: repeat(1,90%);
+    }
+    
+    
+}
 @media screen and (max-width:310px) {
     .register{
         grid-template-columns: repeat(1,100%);

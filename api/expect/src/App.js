@@ -50,7 +50,7 @@ const  App = ()=> {
         <ProtectedAdminProvider childern={
         <Routes>
           <Route path='/' element={<RequiredAuth childern={<><Navbar/><Footer/></>}/>}> 
-            <Route path='matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
+            <Route path='expect/matches' element={<RequiredAuth childern={<Matches/>}></RequiredAuth>}/>
             <Route path='home' element={<RequiredAuth childern={<Home/>}></RequiredAuth> }/>
             <Route path="myexpects" element={<RequiredAuth childern={<MyExpects/>}></RequiredAuth> }/>
             <Route path="team" element={<RequiredAuth childern={<Team/>}></RequiredAuth> }>

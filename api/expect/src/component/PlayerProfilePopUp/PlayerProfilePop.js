@@ -69,9 +69,28 @@ const PlayerProfilePop = ({player,setPop, toFetch}) => {
             }
             setLoading(false);
         }
-        
     },[])
     
+    let playerHeader = document.getElementsByClassName('player-header')[0];
+    
+    useEffect(()=>{
+        let observer = new IntersectionObserver(([entity])=>{
+            
+            console.log(entity.intersectionRatio);
+             if(entity.intersectionRatio > 0){
+                 document.getElementsByClassName('fixidPlayerHeader')[0].style.display = 'none'
+                 entity.target.style.opacity = 1
+             }
+             else {
+                 entity.target.style.opacity = 0
+                 document.getElementsByClassName('fixidPlayerHeader')[0].style.display = 'flex'
+             }
+            
+        })
+        if(playerHeader)
+            observer.observe(playerHeader);
+
+    },[playerHeader])
 
   return ReactDom.createPortal(
     <div  onClick={hidePop}  className="popMatchFullPage playerProfile">
@@ -83,6 +102,19 @@ const PlayerProfilePop = ({player,setPop, toFetch}) => {
                         :
                         <>
                             <div className="player-header">
+                                <div className="playerImg">
+                                    <img src={Player.playerImg } alt={Player.playerName} />
+                                </div>
+                                <div className="player-personl-details">
+                                    <h1 className="playerName">{Player.playerName}</h1>
+                                    <h2>{Player.position}</h2>
+                                </div>
+                                <div className="player-country">
+                                    <img src={Player.logo?Player.logo:(player.country?player.country.logo:player.logo)} />
+                                    <h2>{Player.countryName}</h2>
+                                </div>
+                            </div>
+                            <div className="fixidPlayerHeader">
                                 <div className="playerImg">
                                     <img src={Player.playerImg } alt={Player.playerName} />
                                 </div>

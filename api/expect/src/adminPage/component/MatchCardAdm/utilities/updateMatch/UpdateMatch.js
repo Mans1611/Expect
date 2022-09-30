@@ -15,15 +15,23 @@ import PlayerCardLinup from '../../../../../component/PlayerCardRadio/PlayerCard
 import Axios from '../../../../../Axios/axios';
 
 
-//https://expect-app.herokuapp.com/
- 
+// https://expect-app.herokuapp.com/
+// http://localhost:8000
 
-const socket = io.connect('http://localhost:8000',{
-  // withCredentials: true,
-  // extraHeaders: {
-  //   "my-custom-header": "abcd"
-  //}
+const socket = io.connect('https://expect-app.herokuapp.com/',{
+  withCredentials: true,
+  extraHeaders: {
+    "my-custom-header": "abcd"
+  }
 }); // we connect it to the bakend server;
+
+
+// const socket = io.connect('http://localhost:8000',{
+//     withCredentials: true,
+//         extraHeaders: {
+//             "my-custom-header": "abcd"
+//   }
+// }); // we connect it to the bakend server;
 
 const UpdateMatch = ({match,min})=> {
   

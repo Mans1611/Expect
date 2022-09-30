@@ -6,7 +6,7 @@ const ExpectsInfo = ({user}) => {
     const {isDark} = useContext(ThemeContext);
    
     return ( 
-        <div className="informationWrapper">
+        <div className="informationWrapper expects">
             <div className={`information ${isDark? 'dark': ''}`}>
             <div className="informationHeader-Wrapper">
                 <h2 className="InformationHeader">Expect Info</h2> 

@@ -12,13 +12,13 @@ import io from 'socket.io-client';
 import TeamInstructions from './Instructions';
 
 
-// https://expect-app.herokuapp.com/
-// const soket = io.connect('http://localhost:8000',{
-//   // withCredentials: true,
-//   // extraHeaders: {
-//   //   "my-custom-header": "abcd"
-//   // }
-// });
+//https://expect-app.herokuapp.com/
+const soket = io.connect('https://expect-app.herokuapp.com/',{
+  withCredentials: true,
+  extraHeaders: {
+    "my-custom-header": "abcd"
+  }
+});
 
 const MyTeam = () => {
   document.body.style.overflow = 'visible';

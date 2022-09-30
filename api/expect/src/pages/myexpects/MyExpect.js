@@ -18,13 +18,22 @@ import RoundExpectFilter from './RoundExpectFilter';
 
 
 
-// https://expect-app.herokuapp.com/
-const socket = io.connect('http://localhost:8000' ,{
+//https://expect-app.herokuapp.com/
+const socket = io.connect('https://expect-app.herokuapp.com/' ,{
+    withCredentials: true,
+        extraHeaders: {
+    "my-custom-header": "abcd"
+  }
+});
+
+
+// const socket = io.connect('http://localhost:8000',{
 //     withCredentials: true,
 //         extraHeaders: {
-//     "my-custom-header": "abcd"
+//             "my-custom-header": "abcd"
 //   }
-});
+// }); // we connect it to the bakend server;
+
 
 const MyExpects = () => {
     document.body.style.overflow = "visible";
@@ -103,35 +112,35 @@ const MyExpects = () => {
 
 
 
-    // useEffect(()=>{
-    //     let isSubscribe = true;
-    //      const fetchSocket =  async()=>{
-    //         try{
-    //             socket.on("updatingMatches",async(matches)=>{
-    //                 try{
-    //                     const response = await Axios.get(`/expects/${userGlob}`);
-    //                     const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
-    //                     const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
-    //                     if(isSubscribe){
-    //                         setUserExpections(response.data.userExpections);
-    //                         setExpected(filterdExpectedMatches.reverse()); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
-    //                         setTotalPoints(response.data.totalPoints);
-    //                         setGoldenTotalPoints(response.data.goldenPlayerPoints)
-    //                     }
+    useEffect(()=>{
+        let isSubscribe = true;
+         const fetchSocket =  async()=>{
+            try{
+                socket.on("updatingMatches",async(matches)=>{
+                    try{
+                        const response = await Axios.get(`/expects/${userGlob}`);
+                        const matchesWithFlage = filteringExpects(matches,response.data.userExpections); // where we assign a flag to each expected match to be filtered again
+                        const filterdExpectedMatches =  matchesWithFlage.filter(val=>val.expected); // where the full details about the match
+                        if(isSubscribe){
+                            setUserExpections(response.data.userExpections);
+                            setExpected(filterdExpectedMatches.reverse()); // matches afterFiltering , so iam garunted that all matches in this variable  is expected by this user
+                            setTotalPoints(response.data.totalPoints);
+                            setGoldenTotalPoints(response.data.goldenPlayerPoints)
+                        }
 
-    //                 }catch(err){
-    //                     console.log(err);
-    //                 }
-    //             })
+                    }catch(err){
+                        console.log(err);
+                    }
+                })
 
-    //         }catch(err){
-    //             console.log(err);
-    //         }
-    //     }
-    //     fetchSocket();
-    //     return ()=> isSubscribe = false;
+            }catch(err){
+                console.log(err);
+            }
+        }
+        fetchSocket();
+        return ()=> isSubscribe = false;
 
-    // },[socket])
+    },[socket])
    
     const [filterState,filterDispatch] = useReducer(ReduceFn,FilterState);
     return ( 
@@ -171,7 +180,7 @@ const MyExpects = () => {
                                     expected.length === 0 ? 
                                     <div className="noContent">
                                         <h2>You have not expected any matches yet</h2>
-                                        <h4>Nav to <Link to='/matches'>Matches Page</Link> to expect</h4>
+                                        <h4>Nav to <Link to='/expect/matches'>Matches Page</Link> to expect</h4>
                                     </div> 
                                     : 
                                     expected.map((val,index)=>{
@@ -197,7 +206,13 @@ const MyExpects = () => {
                                     
                                     <div className={`phoneContainer ${isDark ? 'dark' : ''}`}>
                                     {
-                                        loading ? <SmallLaoding/> : 
+                                        loading ? <SmallLaoding/> :
+                                        expected.length === 0 ?  
+                                        <div className="noContent">
+                                            <h2>You have not expected any matches yet</h2>
+                                            <h4>Nav to <Link to='/expect/matches'>Matches Page</Link> to expect</h4>
+                                        </div> 
+                                    :
                                         expected.map((val,index)=>{    
                                             return <MatchCardProvider match = {val} childeren = {<ExpectPhone key = {index} setUserExpections = {setUserExpections}  
                                             setLoading = {setLoading}

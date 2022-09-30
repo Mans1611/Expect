@@ -48,9 +48,9 @@ const TopPlayers = () => {
                 
             </div>
             }
-            <div className="ShowMoreWrapper">
+            {/* <div className="ShowMoreWrapper">
                 <button className="showMore">Show More </button>
-            </div>
+            </div> */}
         </div>
   )
 }

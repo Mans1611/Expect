@@ -33,13 +33,28 @@
         animation : showmatchCard 500ms forwards ;
     }
     .circle{
-        border: 2px solid #FFD600;
+        border: 2px solid #54ff00;
         font-size: 18px;
         font-weight: 600;
         border-radius: 50%;
         padding: 5px;
         color: #272727;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .time{
+            .upComing{
+                border: 0px !important;
+               
+                animation: changeColor 1500ms infinite linear;
+               
+            }
+        }
+        &.noCircle{
+            border: none;
+        }
     }
+
     .wingesContainer{
         position: relative;
         z-index: -1;
@@ -154,6 +169,7 @@
     .ExpectPhoneWrap{
         padding: 5px;
         display: flex;
+        justify-content: space-around;
         .button-wrapper{
             display: flex;
 
@@ -163,7 +179,7 @@
             padding: 2px 15px ;
             background-color: #007bf1;
             color: #fff ;
-            margin: auto;
+            margin: auto 5px;
             font-weight: 600;
             font-size:28px;
             &.danger{
@@ -202,7 +218,6 @@
             border: none;
             background-color: #272727 ;
             .circle{
-                border-radius: 50%;
                 color: #e1e1e1;
             }
             .upperExpectWrapper{
@@ -411,4 +426,10 @@
         transform: scale(1);
         opacity: 1;
     }
+}
+@keyframes changeColor {
+    0%{color: #ffffff;}
+    33%{ color: #FFc400;}
+    66%{ color: #ffffff;}
+    100%{ color: #FFc400;}
 }

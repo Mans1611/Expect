@@ -15,24 +15,25 @@ import Axios from '../../Axios/axios';
 import { useNavigate } from 'react-router-dom';
 import fetchGoldenPlayerHook from '../../customHooks/FetchGoldenPlayer';
 
-// const socket = io.connect('https://expect-app.herokuapp.com/',{
+
+const socket = io.connect('https://expect-app.herokuapp.com/',{
+    withCredentials: true,
+        extraHeaders: {
+            "my-custom-header": "abcd"
+  }
+}); 
+
+
+// const socket = io.connect('http://localhost:8000',{
 //     withCredentials: true,
 //         extraHeaders: {
 //             "my-custom-header": "abcd"
 //   }
 // }); // we connect it to the bakend server;
 
-
-const socket = io.connect('http://localhost:8000',{
-//     withCredentials: true,
-//         extraHeaders: {
-//             "my-custom-header": "abcd"
-//   }
-}); // we connect it to the bakend server;
-
 const Matches = () => {
     document.body.style.overflow = "visible";
-    localStorage.setItem("page","matches"); 
+    localStorage.setItem("page","expect/matches"); 
     const navigate = useNavigate();
 
     const {isDark,token,userGlob,expectedMatches,user,goldenPlayer} = globalUser();
@@ -99,32 +100,32 @@ const Matches = () => {
 
     const [filterState,filterDispatch] = useReducer(ReduceFn,FilterState);
     
-    // useEffect(()=>{
-    //     let isSubscribe = true;
-    //     socket.on("updatingMatches",async(matches)=>{
+    useEffect(()=>{
+        let isSubscribe = true;
+        socket.on("updatingMatches",async(matches)=>{
             
-    //         if(expandButton === "Just Todays' Matches"){
-    //                 const MatchesWithFlag = filteringExpects(matches,userExpections);
-    //                 if(isSubscribe)
-    //                     setData(MatchesWithFlag);
-    //             }
+            if(expandButton === "Just Todays' Matches"){
+                    const MatchesWithFlag = filteringExpects(matches,userExpections);
+                    if(isSubscribe)
+                        setData(MatchesWithFlag);
+                }
 
-    //         else if(expandButton === "See All Matches") {
-    //             try{
+            else if(expandButton === "See All Matches") {
+                try{
 
-    //                 const matchesRes = await Axios.get(`/matches/?date=${date}`); // array of todays' matches
-    //                 const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
-    //                 if(isSubscribe)
-    //                     setData(MatchesWithFlag);
-    //             }catch(err){
-    //                 console.log(err);
-    //             }
-    //             }
-    //             setLoading(false);
+                    const matchesRes = await Axios.get(`/matches/?date=${date}`); // array of todays' matches
+                    const MatchesWithFlag = filteringExpects(matchesRes.data,userExpections);
+                    if(isSubscribe)
+                        setData(MatchesWithFlag);
+                }catch(err){
+                    console.log(err);
+                }
+                }
+                setLoading(false);
 
-    //             return ()=> isSubscribe = false;
-    //     })
-    // },[socket])
+                return ()=> isSubscribe = false;
+        })
+    },[socket])
 
     const getMatchesDate = async(date)=>{
         const Date = date.split('-'); //year - month - day 

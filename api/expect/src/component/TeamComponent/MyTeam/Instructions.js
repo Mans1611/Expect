@@ -15,7 +15,7 @@ const TeamInstructions = ()=>{
                 <h4> &gt; If You left your team, your share points will be counted to the team, it Won’t be removed.</h4>
             </div>
             <div className="instructionButton-wrapper">
-                <Link to="/expect/team/teamjoin">
+                <Link to="/team/teamjoin">
                     <button className="createJoin">Create or Join Team</button>
                 </Link>
             </div>

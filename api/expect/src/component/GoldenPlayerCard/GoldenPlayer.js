@@ -3,6 +3,9 @@ import { globalUser } from '../../Context/HomeContext';
 
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
+
+
+
 const GoldenPlayer = ({player,current}) => {
 
     const [showPlayerDetails,setShowMoreDetails] = useState(false);
@@ -20,7 +23,7 @@ const GoldenPlayer = ({player,current}) => {
   return (
     <div className={`previousGoldenPlayer ${current ? 'current' : ''}`}>
         <div className="header">
-            <h1>Previous Player</h1>
+            <h1>{current ? 'Your Golden Player' :'Previous Player'} </h1>
         </div>
         <div className="player">
             <div className="player-personal">
@@ -36,7 +39,7 @@ const GoldenPlayer = ({player,current}) => {
                 <h2>{player.position}</h2>
             </div>
             <div className="detail pointsWrapper">
-                <h1 className='points'>{current ? (goldenPlayer.totalPoints -  (goldenPlayer.old_Player ? goldenPlayer.old_Player.doublePoints : 0)) : goldenPlayer.old_Player.doublePoints }</h1>
+                <h1 className='points'>{current ? goldenPlayer.player.goldenPlayerPoints :  goldenPlayer.old_Player ? goldenPlayer.old_Player.goldenPlayerPoints : 0}</h1>
                 Points
             </div>
         </div>
@@ -50,8 +53,26 @@ const GoldenPlayer = ({player,current}) => {
                         <div className="item">PTS</div>
                     </div>
 
-                    {
-                        player.matchDetails.map((detail,index)=>(
+                    { current ?
+                     
+                        goldenPlayer.player.matchDetails.length === 0 ? 
+                        <div className="noContent">No Matches Player for this Player</div> 
+                        :
+                        goldenPlayer.player.matchDetails.map((detail,index)=>(
+                        <div key={index} className="detail-player row">
+                            <div className="item flex-img">
+                                <h3>{detail.opponent}</h3>
+                                <img src={detail.logo}/>
+                            </div>
+                            <h4 className="item stage">{detail.stage.includes("Group") ? detail.stage.slice(12) : detail.stage  }</h4>
+                            <h2 className="item">{detail.points}</h2>
+                        </div>
+                        ))
+                        :
+                        goldenPlayer.old_Player.matchDetails.length === 0 ? 
+                        <div className="noContent">No Matches Player for this Player</div> 
+                        :
+                        goldenPlayer.old_Player.matchDetails.map((detail,index)=>(
                         <div key={index} className="detail-player row">
                             <div className="item flex-img">
                                 <h3>{detail.opponent}</h3>
@@ -61,8 +82,9 @@ const GoldenPlayer = ({player,current}) => {
                             <h2 className="item">{detail.points}</h2>
                         </div>
 
-                ))
-            }
+                        )
+                        )
+                    }
             </div>
             </div>
         }

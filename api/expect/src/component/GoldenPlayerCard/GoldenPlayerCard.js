@@ -1,15 +1,12 @@
 import './goldenPlayercard.scss';
 import React, { useEffect, useState } from 'react'
 import { globalUser } from '../../Context/HomeContext';
-import PlayerCard from '../popmatchcard/playercard/PlayerCard';
 import AddIcon from '@mui/icons-material/Add';
 import PickGoldenPlayer from '../PickGoldenPlayer/PickGoldenPlayer';
 import CloseIcon from '@mui/icons-material/Close';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import UpdateGoldenPlayer from './UpdateGoldenPlayer';
-import PlayerEachMatchPoints from '../PlayerMatchPoints/PlayerEachMatchPoints';
 import GoldenPlayer from './GoldenPlayer';
-import Axios from '../../Axios/axios';
 import SmallLaoding from '../loading/small.loading/smallLoading';
 import fetchGoldenPlayerHook from '../../customHooks/FetchGoldenPlayer';
 
@@ -126,7 +123,7 @@ const GoldenPlayerCard = ({setGoldenPlayerPoints}) => {
                                 </div>
                                 <h1 className="factor">X2</h1>
                             </div> */}
-                            <div className="totalgoldenPoints">Total Points :{ loadingGoldenPlayer ? ' ...' : goldenPlayer.totalPoints}</div>
+                            <div className="totalgoldenPoints">Total Points :{ loadingGoldenPlayer ? ' ...' : goldenPlayer.player.goldenPlayerPoints + (goldenPlayer.old_Player? goldenPlayer.old_Player.goldenPlayerPoints : 0 ) }</div>
                         </>
                     }
                 

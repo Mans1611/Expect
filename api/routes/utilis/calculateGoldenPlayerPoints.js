@@ -1,13 +1,17 @@
 
 
 export const calculateGoldenPlayerPoints = (goldenPlayer,matches)=>{
+    
     const countryName = goldenPlayer.player.countryName;
     const playerName = goldenPlayer.player.playerName;
 
-    let playerPoints = 0;
     let matchDetails = [];
-
+    let playerPoints = 0;
+    let currentPlayerPoints = 0;
+    let previousPlayerPoints = 0;
     matches.forEach((match)=> {
+        // the down condition below is to check that the picking time was before match time.
+
         let condition = ( (new Date(match.matchTime).getTime() - new Date(goldenPlayer.player.pickedTime).getTime()) > 0 )  && (match.firstCountry.countryName === countryName || match.secondCountry.countryName === countryName)
         
         if( condition){
@@ -34,12 +38,14 @@ export const calculateGoldenPlayerPoints = (goldenPlayer,matches)=>{
                 matchDetails.push(detail)
 
             }
-            
-
+            console.log(match )
         }
+
+
     })
-    if(goldenPlayer.old_Player) // in case of the player change his golden player.
-        playerPoints += goldenPlayer.old_Player.doublePoints;
+    
+    // if(goldenPlayer.old_Player) 
+    //     playerPoints += goldenPlayer.old_Player.goldenPlayerPoints;
     
     return {playerPoints,matchDetails}
 

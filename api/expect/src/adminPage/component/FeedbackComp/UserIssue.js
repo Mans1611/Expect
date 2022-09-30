@@ -42,9 +42,10 @@ return (
         </div>
 
         <div className="text-wrapper">
-            <h2 className="email">{feedback.email}</h2>
+            <h2 className="email">{feedback.name}</h2>
+            <h4 className="email">{new Date(feedback.time).toISOString()}</h4>
             {support && <h3>{feedback.problemType}</h3> }
-            <p>{feedback.feedBack}</p>
+            <p>{feedback.description}</p>
 
         </div>
         {

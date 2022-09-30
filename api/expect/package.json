@@ -25,7 +25,6 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:8000",
   "scripts": {
     "start": "set PORT=5000 && react-scripts start",
     "build": "react-scripts build",
@@ -51,4 +50,5 @@
   "browser": {
     "crypto": false
   }
+  
 }

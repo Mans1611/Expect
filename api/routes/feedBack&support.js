@@ -11,7 +11,7 @@ const feedback = express.Router();
 feedback.get('/getfeedbacks',verifyAdmin,async(req,res)=>{
     try{
         const feedbacks = await feedBack.find({helpSupport : false }); // as i want just the feed back not the the problems .
-        res.status(200).json({feedbacks});
+        res.status(200).json({feedbacks : feedbacks.reverse()});
     }catch(err){
         console.log(err);
     }
@@ -61,8 +61,11 @@ feedback.post('/checkEmail',verifyAdmin,async(req,res)=>{
 
 feedback.post('/postfeedback',async(req,res)=>{
     try{
-        console.log(req.body);
-        const feedback = new feedBack(req.body);
+
+        const feedback = new feedBack({
+            ...req.body,
+            name : req.body.name ? req.body.name.trim() : "Unknown"
+        });
         await feedback.save();
         res.status(200).json({msg : "feed back is sucussfully saved"});
 

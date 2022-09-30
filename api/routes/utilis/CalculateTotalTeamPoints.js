@@ -23,12 +23,13 @@ const CalculateTotalTeamPoints = async(team)=>{
         });
 
         let {goldenPlayer} = await User.findOne({userName : member.userName}) ;
-
-        let shareGoldenPlayer = goldenPlayer ? (goldenPlayer.old_Player ? goldenPlayer.totalPoints :  goldenPlayer.player.doublePoints)  : 0  ;
+        if(goldenPlayer.player){
+            let shareGoldenPlayer = (goldenPlayer.old_Player ? ( goldenPlayer.old_Player.goldenPlayerPoints + goldenPlayer.player.goldenPlayerPoints ) :  goldenPlayer.player.goldenPlayerPoints)  ;
+            console.log(shareGoldenPlayer);
+            shareGoldenPlayer = shareGoldenPlayer - (member.goldenPlayerPoints ? member.goldenPlayerPoints : 0 ) ;
+            sharePoints+= shareGoldenPlayer;
+        }
         
-        shareGoldenPlayer = shareGoldenPlayer - member.goldenPlayerPoints;
-        
-        sharePoints+= shareGoldenPlayer;
         
         
         totalExpects = [...teamUserExpects,...totalExpects];

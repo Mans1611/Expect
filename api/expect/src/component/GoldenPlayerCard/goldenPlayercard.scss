@@ -8,10 +8,15 @@
         background:linear-gradient(90deg, #ffd600 20%, #373737 74%);
         
     }
-    
+  .noContent{
+    padding: 5px;
+    font-size: 22px;
+    background-color: #c7c7c7;
+    border-radius: 0;
+  }  
     .InformationHeader{
         width: 100%;
-        color : #eeeeee !important;
+        color : #ffffff !important;
     }
     .playerCard-container{
         padding: 10px 10px 40px;
@@ -50,7 +55,7 @@
         }
         .previousGoldenPlayer{
             border-radius: 10px;
-            margin: 50px auto 0;
+            margin: 30px auto 0;
             width: 100%;
             padding-bottom: 10px;
             background-color: #b7b7b7;
@@ -332,6 +337,10 @@
             }
 
         }
+        .noContent{
+            background-color: #3b3b3b;
+            border-radius: 0;
+          }  
         .playerCard-container{
 
             button{
@@ -395,7 +404,7 @@
             .previousGoldenPlayer {
                 .player{
                     display: grid !important;
-                    grid-template-columns: 50% 25% 25%;
+                    grid-template-columns: 30% 25%  25%;
                     .pointsWrapper{
                         display: block;
                         margin: auto;
@@ -405,7 +414,6 @@
                         grid-column: 1 /  4;
                     }
                     .player-personal{
-                        align-items: start;
                         justify-content: center;
                     }
 
@@ -424,36 +432,31 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            .palyerCard{
-                cursor: default;
-                background: linear-gradient(90deg, #90901d 50%, #ffc400 50%);
-                width: 70%;
-                svg{
-                    color: #ffffff;
-                }
-                .imgBackground{
-                    img{
-                        width: 85px;
-                        height: 85px;
+            .previousGoldenPlayer {
+                .player{
+                    display: grid !important;
+                    grid-template-columns: 25% 25% 25%  25%;
+                    .pointsWrapper{
+                        grid-column:auto;
+                        margin: auto;
+                        width: 70px;
+                        margin-top: 5px;
+                        margin-bottom: 5px;
                     }
-                }
-                .playerDetails{
-                    
-                    .details{
-                        color: #ffffff;
-                        font-size: 24px;
-                        &.name{
-                            color: #111111;
-                            font-size: 30px;
-                        }
+                    .player-personal{
+                        justify-content: center;
                     }
+    
                 }
+                
             }
+            
             button{
                 margin-top: 5px;
                 font-size: 26px; 
             }
         }
+        
 
         .content{
             padding: 10px;

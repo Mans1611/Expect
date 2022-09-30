@@ -1,31 +1,31 @@
 import {useEffect,useState} from 'react'
-import Axios from './Axios/axios';
 
-const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
+
+const TimeCounter = ({matchTime,setTimeUp})=>{
     
-    const time = new Date(matchTime).getTime();  // to get time in milleseconds 
-    let left = 999999;
-
+    
     const [hours,setHours] = useState(0);
     const [min,setMin] = useState(0);
     const [sec,setSec] = useState(0);
     
-
+    
     let Hours = 0,Min = 0,Sec = 0;  // just temp variables to hold time 
-
     
     
-        useEffect(()=>{
+    const time = new Date(matchTime).getTime();  // to get time in milleseconds 
+    
+    useEffect(()=>{
 
-            let subscribe = true;
-            let now = new Date().getTime();
+        let subscribe = true;
+       
+        
+        let now = new Date().getTime();
+        let left = time - now ;
 
-            left = time - now;
-            let interval ; 
+        let interval ; // undefined 
 
             if(left > 0){
                 interval =  setInterval(()=>{
-                    const now = new Date().getTime(); 
                     left = time-now;
                     if(left>0){
                         Hours = Math.floor(left/(1000*60*60));
@@ -38,22 +38,23 @@ const TimeCounter = ({matchTime,setTimeUp,matchId})=>{
                         }
                     }
                     else{
-                        setTimeUp(true);
+                        setTimeUp(true);                        
                     }
-            },1000); 
-        }
+                },1000); 
+            }
+            
+            else{
+                setTimeUp(true);
+            }
 
-        else{
-            setTimeUp(true);
-        }
-       
 
+            // clean-up function.   
             return ()=> {
                 clearInterval(interval)
                 subscribe = false;
-                
             }
-    
+
+            console.log("time is rendering");
         },[sec])
         
 

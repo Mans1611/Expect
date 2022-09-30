@@ -8,8 +8,7 @@ const PickPlayers = ({fetchCountry,user,setSkip,setUser,profileSet,updateGoldenP
     const [players,setPlayers] = useState([]) ;
     const [selectedPlayer,setSelectedPlayer] = useState(null);
     const [submitStatue,dispatchStatue] = useReducer(ReduceFn,initPick_Player);
-
-    const {userGlob,token} = globalUser();
+    const {userGlob,token,setGoldenPlayer} = globalUser();
 
     
     useEffect(()=>{
@@ -48,7 +47,8 @@ const PickPlayers = ({fetchCountry,user,setSkip,setUser,profileSet,updateGoldenP
                     
                 else if(status === 200){
                     dispatchStatue({type:'success', payload :data.msg})
-                    setUser(data.user);
+                    setGoldenPlayer(data.user.goldenPlayer);
+                    console.log(data.user.goldenPlayer);
                     setTimeout(()=> setSkip(true),2000)
                }
             }

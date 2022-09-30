@@ -63,13 +63,13 @@ const TeamComponent = () => {
         totalPoints
         }}>
 
-        <div className={`TeamComponent-containetr ${isDark ? 'dark' : null}`}>
+        <div className={`TeamComponent-containetr ${isDark ? 'dark' : ''}`}>
 
             <div className="TeamComponent">
                 <div className="teamNavbar">
                     <ul>
-                        <Link to='myTeam'><li id='myTeam' className='navbar-item first'> My Team</li></Link>
-                        <Link to='teamjoin'> <li id ='teamjoin' className='navbar-item second'>Create-Join Team</li></Link>
+                        <Link to='/team/myTeam'><li id='myTeam' className='navbar-item first'> My Team</li></Link>
+                        <Link to='/team/teamjoin'> <li id ='teamjoin' className='navbar-item second'>Create-Join Team</li></Link>
                     </ul>
                 </div>
                 <div className="teamContent">

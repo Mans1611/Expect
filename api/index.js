@@ -24,8 +24,6 @@ import path ,{dirname} from 'path';
 import pvp from './routes/pvp.js';
 import player from './routes/player.js';
 import Redis from 'redis';
-// import Redis from redis;
-// const RedisClient = Redis.createClient();
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -35,10 +33,15 @@ dotenv.config();
 const MongoDBSession = MongoSessions(session);
 
 
-export const client = Redis.createClient();  // in production to heroku you need to provide url of the server {} 
-await client.connect();
+// export const client = Redis.createClient();  // in production to heroku you need to provide url of the server {} 
+// await client.connect();
+
+// client.on("error", function(err) {
+//     console.error("Error connecting to redis", err);
+//   })
 
 const app = express();
+
 
 
 
@@ -52,6 +55,23 @@ const storeSession = new MongoDBSession({
 
 
 app.use(cors());
+
+const server = http.createServer(app);
+
+const port = process.env.PORT|| 8000;
+
+
+const io = new Server(server,{
+    cors:{
+         origin : "https://expect-app.herokuapp.com/",
+        //origin : "http://localhost:5000" ,
+
+    methods : ["GET","POST","PUT","DELETE"],
+        allowedHeaders: ["my-custom-header"],
+        credentials : true
+     }
+});
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -82,21 +102,6 @@ app.use('/pvp',pvp);
 
 
 
-const server = http.createServer(app);
-const port = process.env.PORT|| 8000;
-
-
-const io = new Server(server,{
-    cors:{
-        // origin : "https://expect-app.herokuapp.com/",
-        origin : "http://localhost:5000" ,
-
-    // methods : ["GET","POST","PUT","DELETE"],
-    //     allowedHeaders: ["my-custom-header"],
-    //     credentials : true
-     }
-});
-
 
 
 
@@ -117,15 +122,7 @@ io.on('connection',(socket)=>{
             socket.broadcast.emit("updatingMatches",matches);
         })  
         
-        socket.on('join_room',(data)=>{
-            socket.join(data.roomId);
-            socket.to(data.roomId).emit("OpponentISReady", data)
-            
-        })
-        socket.on("ShowRockCaser",(data)=>{
-            socket.to(data.roomId).emit("showCaser", data)
-        })
-        socket.to()
+       
 
     }
     catch(err){
@@ -134,11 +131,12 @@ io.on('connection',(socket)=>{
 })
 
 //for production in heroku
-// app.use(express.static(path.join(__dirname,'/expect/build')))
 
-// app.get('*',(req,res)=>{
-//     res.sendFile(path.join(__dirname,'/expect/build','index.html'))
-// })
+app.use(express.static(path.join(__dirname,'/expect/build')))
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'/expect/build','index.html'))
+})
 
 server.listen(port,()=>{
     console.log("http://localhost:" + port);

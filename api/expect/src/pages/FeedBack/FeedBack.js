@@ -14,17 +14,17 @@ const FeedBack = () => {
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value;
         const description = document.getElementById('feedback').value;
 
-        if(email.trim() === '' || description.trim() === "" || !email || !description){
+        if(name.trim() === '' || description.trim() === "" || !name || !description){
            return  dispatch({type : "empty inputs"})
         }
 
         
         try{
             const {data, status} = await Axios.post('/feedback/postfeedback',{
-                email,
+                name,
                 description
             });
 
@@ -34,10 +34,9 @@ const FeedBack = () => {
                 
                 setTimeout(()=>{
                     navigate('/welcome'); 
-                },20000)
+                },2000)
             }
 
-            console.log(data.msg);
 
         }catch(err){
             console.log(err);
@@ -56,8 +55,8 @@ const FeedBack = () => {
             <h1 className="formtitle">Your Feedback is <span> appreciable </span> to us</h1>
             <form>
                 <div className="inputContainer">
-                    <label htmlFor="email">Email</label>
-                    <input onFocus={()=>dispatch({type : 'remove msg'})}  placeholder='Enter Your Name (Optional)' type="email"  id="email" />
+                    <label htmlFor="name">Name</label>
+                    <input onFocus={()=>dispatch({type : 'remove msg'})}  placeholder='Enter Your Name (Optional)' type="string"  id="name" />
                 </div>
                 
                 <div className="inputContainer">

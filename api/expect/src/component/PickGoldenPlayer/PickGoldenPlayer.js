@@ -18,7 +18,7 @@ const PickGoldenPlayer = ({setSkip,profileSet,setUser}) => {
         <PickPlayers 
             profileSet = {profileSet} 
             setUser={setUser} 
-          setSkip= {setSkip} 
+            setSkip= {setSkip} 
             user={user} 
             fetchCountry={fetchCountry} />
 

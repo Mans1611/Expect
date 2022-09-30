@@ -40,17 +40,15 @@ const GoldenPlayerSection = () => {
                 <img src={Mane}  className="playerImg-golden middle-img" />
                 <img src={Cout}  className="playerImg-golden right-img" />
                 <img src={goldenPlayerfont}  className=" title" />
-            </div>
-            
-
+        </div>
         </div>
             <div className="body-container">
                 <h1>Pick Your Golden Player</h1>
-                <p> - The Competition is long and of course you need a player who can get your back. The GoldenPlayer is your Back.</p>
+                <p> - The competition is long and of course you need a player who can get your back. The GoldenPlayer is your Back.</p>
                 <p>- Pick any Player from any country, and your picked player's points will <span>added</span> to your Total Points and multiplied by <span>X2</span> .</p>
-                <p> - Even if you span did not expect your Golden Player's match,You will get his match points.</p>
+                <p> - Even if you span did not expect your Golden Player's match, you will get his match points.</p>
                 <p>- You can change your golden player just <span>
-                once</span> in the competiton. so be carfeul about your picking.</p>
+                once</span> in the competition. so be careful about your picking.</p>
             </div>
     </div>
   )

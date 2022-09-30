@@ -9,6 +9,7 @@ import { globalUser } from '../../Context/HomeContext';
 import TopVotes from '../../component/TopVotes/TopVotes';
 import MatchCardPhone from '../../component/matchcards/MatchCardPhone/MatchCardPhone';
 import PlayersToExpect from '../../component/PlayersToExpect/PlayersToExpect';
+import TeamStanding from '../../adminPage/component/Standing/TeamStanding';
 
 //const socket = io.connect('http://localhost:8000');
 
@@ -30,7 +31,10 @@ const States = ()=> {
         <div className="tops-container">
           <TopVotes/>
         </div>
-        <HomeStanding/>
+        <div className="standing-container">
+          <HomeStanding/>
+          <TeamStanding/>
+        </div>
         <PlayersToExpect/>
     </div>
   )

@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { preperationFn, preperationObj } from '../Reducer/PreperationReducer';
 
 
-const socket = io.connect('http://localhost:8000');
+// const socket = io.connect('http://localhost:8000');
 
 const Preperation = ({invitation}) => {
     const [preperationState,dispatch] = useReducer(preperationFn,preperationObj);
@@ -11,43 +11,43 @@ const Preperation = ({invitation}) => {
     const [opponentReady,setOpponentReady] = useState(false);
     const [showworkcaser,setShowWorkCaser] = useState(false);
 
-    const joinRoom = (invitation)=>{
-        socket.emit("join_room",  invitation); // joining a private room with secert key.
-        setReady(true);
+    // const joinRoom = (invitation)=>{
+    //     socket.emit("join_room",  invitation); // joining a private room with secert key.
+    //     setReady(true);
 
-        // if(invitation.type === 'sender')
-        //     dispatch({type : 'Oppnent1 is ready'});
-        // else {
-        //     dispatch({type : 'Oppnent2 is ready'});
-        // // }
+    //     // if(invitation.type === 'sender')
+    //     //     dispatch({type : 'Oppnent1 is ready'});
+    //     // else {
+    //     //     dispatch({type : 'Oppnent2 is ready'});
+    //     // // }
         
-    }
+    // }
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        socket.on("OpponentISReady",(data)=>{
-            console.log(invitation);
-            console.log(data);
+    //     socket.on("OpponentISReady",(data)=>{
+    //         console.log(invitation);
+    //         console.log(data);
 
-           if(data.type !== invitation.type)
-                setOpponentReady(true);
-            if(ready && opponentReady)
-            {
-                socket.emit('ShowRockCaser',{...invitation,showWorkCaser : true});
-                setShowWorkCaser(true);
-            }
-        })
-        socket.on("showCaser",(data)=>{
+    //        if(data.type !== invitation.type)
+    //             setOpponentReady(true);
+    //         if(ready && opponentReady)
+    //         {
+    //             socket.emit('ShowRockCaser',{...invitation,showWorkCaser : true});
+    //             setShowWorkCaser(true);
+    //         }
+    //     })
+    //     socket.on("showCaser",(data)=>{
            
-            if(data.showWorkCaser)
-                setShowWorkCaser(true);
-        })
+    //         if(data.showWorkCaser)
+    //             setShowWorkCaser(true);
+    //     })
 
-        return ()=> {
-            socket.emit("leaveRoom")
-        };
+    //     return ()=> {
+    //         socket.emit("leaveRoom")
+    //     };
 
-    },[socket])
+    // },[socket])
     
 
     return (

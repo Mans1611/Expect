@@ -133,7 +133,7 @@ users.post('/postGoldenPlayer/:userName',VerifyUserJWT,async(req,res)=>{
         const {playerName, index,position,countryName,logo,pickedTime,playerImg} = req.body;
         
         userDB.goldenPlayer = {
-            player : {playerName, index,position,countryName,logo,pickedTime,playerImg},
+            player : {...req.body,goldenPlayerPoints : 0,matchDetails : []},
             updateCounter : 1
             };
 
@@ -161,7 +161,7 @@ users.put('/updateGoldenPlayer/:userName',VerifyUserJWT,async(req,res)=>{
         
         userDB.goldenPlayer = {
         old_Player : {...userDB.goldenPlayer.player},
-        player : {...req.body},
+        player : {...req.body,goldenPlayerPoints : 0},
         updateCounter : 0
     };
 

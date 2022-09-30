@@ -55,7 +55,7 @@
         } 
         .teamContent{
             padding:  0px ;
-            border-radius: 20px;
+            border-radius: 10px;
             width: 100%;
             background-color: #c9c9c9; 
             @include shadowMainStyle;
@@ -87,7 +87,8 @@
                         font-size: 24px;
                         padding: 10px;
                         color: #eee;
-                        border-radius: 10px;
+                        border-radius: 5px;
+                        border: none;
                         &:focus{
                             border: solid #c40027 2px;   
                         }
@@ -141,7 +142,7 @@
         }
     }
     .teamStanding{
-        margin: auto;
+        margin:  auto ;
         a{
             text-decoration: none
         }
@@ -167,6 +168,11 @@
                     background-color: #fee504 ;
                 }
             }
+        }
+        .noContent{
+            background-color: #999999;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
         .standing-container{
             .user-row{
@@ -399,7 +405,8 @@
             #teamName{
                 width: 90%;
                 border: none;
-                border-radius: 5px;
+                border-radius: 0px;
+                outline: none;
                 &:focus{
                     border: 2px solid #d5002b;
                 }

@@ -22,6 +22,7 @@ const FeedbackAdmin = () => {
                         token
                     }
                 }) 
+                console.log(data.feedbacks);
                 if(isSubscribe)
                     setFeedBacks(data.feedbacks); 
                 

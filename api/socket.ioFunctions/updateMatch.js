@@ -2,7 +2,7 @@ import Matches from "../models/Matches.js";
 import addingPointsPlayer from "../routes/utilis/addingPointsPlayers.js";
 import { MatchHalfs } from "../routes/utilis/MatchHalfs.js";
 import TransferingPointsToCountry from "../routes/utilis/TransferingPointsToCountry.js";
-import { client } from "../index.js";
+//import { client } from "../index.js";
 
 
 const updateMatch = async(data)=>{
@@ -51,7 +51,7 @@ const updateMatch = async(data)=>{
         
         const matches = await Matches.find();
 
-        await client.set("allMatches",JSON.stringify(matches));
+      //  await client.set("allMatches",JSON.stringify(matches));
         
     
 }

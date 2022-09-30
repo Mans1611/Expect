@@ -83,10 +83,10 @@
         .nogrid,.expectsContainer{
             padding: 10px;
             height: 100%;
-            width: 75%;
+            width: 73%;
             margin: 10px ;
             border-radius: 10px; 
-            background-color: #cccccc;
+            background-color: #b7b7b7;
 
         }
         
@@ -163,6 +163,7 @@
         
         .expectsContainer,.nogrid{
             background-color: #181818;
+            margin: 10px auto;
         }
         .flex-wrapper{
             .goldenPlayercard{
@@ -294,6 +295,14 @@
             grid-template-columns: repeat(2,50%);   
             .phoneContainer{
                 margin-bottom: 20px;
+                .noContent{
+                    h2{
+                        font-size: 26px !important;
+                    }
+                    h4{
+                        font-size: 22px !important;
+                    }
+                }
 
             }
         }

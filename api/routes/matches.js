@@ -8,7 +8,7 @@ import verifyAdmin from '../middleware/verifyAdmin.js';
 import FilterMatchesTimeLine from './utilis/FilterMatchesTimeLine.js';
 import Expects from '../models/Expects.js';
 import Redis from 'redis';
-import { client } from '../index.js';
+//import { client } from '../index.js';
 
 
 
@@ -17,12 +17,12 @@ const matches = express.Router();
 
 matches.get('/getmatches',async(req,res)=>{
     try{
-        const allMatches = await client.get("allMatches")
+        // const allMatches = await client.get("allMatches")
+        const matches = await Matches.find().sort({matchTime : 1}); // so we sort it asc
+        return res.status(200).send(matches);
 
         if(allMatches == null ){
-            const matches = await Matches.find().sort({matchTime : 1}); // so we sort it asc
             client.setEx("allMatches",3600, JSON.stringify(matches));
-            return res.status(200).send(matches);
         }
         else{   
             return res.status(200).send(JSON.parse(allMatches)); 
@@ -195,7 +195,7 @@ matches.post('/addgame',verifyAdmin ,async(req,res)=>{
         })
         res.status(201).json({msg:"Match is added"});
 
-        await client.del('allMatches');
+        // await client.del('allMatches');
         // the code down below is to cahche the matches 
         // const matches = await client.get('allMatches');
         
@@ -342,7 +342,7 @@ matches.delete('/deletematch/:matchID',verifyAdmin,async (req,res)=>{
         await Matches.deleteOne({matchId : req.params.matchID});
         
         const matches = await Matches.find();
-        await client.del('allMatches');
+        // await client.del('allMatches');
 
         res.status(200).json({msg:"this match is deleted successfuly",newMatches:matches});
 

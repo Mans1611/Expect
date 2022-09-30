@@ -18,6 +18,7 @@ const fetchGoldenPlayerHook = () =>{
                     }});
                     if(isSubscribe){
                         setGoldenPlayer(data.goldenPlayer);
+                        console.log(data.goldenPlayer);
                     }
                     setLoaidng(false)
             }catch(err){

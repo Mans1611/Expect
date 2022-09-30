@@ -10,7 +10,7 @@ import VerifyUserJWT from '../middleware/VerifyUserJWT.js';
 import SessionVerification from "../middleware/sessionVerify.js";
 import { PushExpectToMember , DeleteExpectFromMember, UpdateExpectForMember } from './utilis/TeamExpectHandlers.js';
 import { calculateGoldenPlayerPoints } from './utilis/calculateGoldenPlayerPoints.js';
-import { client } from '../index.js';
+//import { client } from '../index.js';
 
 const expects = express.Router();
 
@@ -20,60 +20,59 @@ expects.get('/:userName',verifyJwt,async(req,res)=>{
     try{
         const {userName} = req.params;
 
-        let cachedExpects =  await client.get(`${userName}GetExpects`);
+        // let cachedExpects =  await client.get(`${userName}GetExpects`);
             
             const user = await Expects.findOne({userName});
-            let cachedMatches = await client.get('allMatches');
+          //  let cachedMatches = await client.get('allMatches');
             let matches = [];
 
-            if(cachedMatches){
-                matches = JSON.parse(cachedMatches);
-            }
-            else{
-                    matches = await Matches.aggregate([
-                    {$match:{}},
-                    {$project : {_id : 0}}
-                ]); // find all matches 
-            }
+            // if(cachedMatches){
+            //     matches = JSON.parse(cachedMatches);
+            // }
+            matches = await Matches.aggregate([
+                {$match:{}},
+                {$project : {_id : 0}}
+            ]); // find all matches 
             
             if(!user.expects){
                 return res.send({matches,userExpections:[],totalPoints:0})
             }
             
             let {userExpections,totalPoints,filterMatches} =  AddingPointsToUsers(matches,user.expects,false);
-           
-            await Expects.updateOne({userName},{expects : userExpections});
             
-            // await client.setEx(`${userName}GetExpects`,3600,
-            // JSON.stringify({
-                //     filterMatches,
-                //     userExpections,
-                //     totalPoints
-                // }))
-                const userDB = await User.findOne({userName});
-                if(userDB.goldenPlayer && userDB.goldenPlayer.old_Player){
-                    totalPoints = totalPoints + userDB.goldenPlayer.totalPoints;
+            await Expects.updateOne({userName},{expects : userExpections});
+            const userDB = await User.findOne({userName});
+            if(userDB.goldenPlayer.player && userDB.goldenPlayer.old_Player){
+                    totalPoints  += 
+                    (userDB.goldenPlayer.old_Player.goldenPlayerPoints ? userDB.goldenPlayer.old_Player.goldenPlayerPoints : 0 + 
+                     userDB.goldenPlayer.player.goldenPlayerPoints ? userDB.goldenPlayer.player.goldenPlayerPoints : 0
+                     )
+                     
+                    }
+                    else if (userDB.goldenPlayer.player) {
+                        
+                        totalPoints  += 
+                        (userDB.goldenPlayer.player.goldenPlayerPoints) ? 
+                        userDB.goldenPlayer.player.goldenPlayerPoints
+                        : 
+                        0 
+                        ;
+                        
+                    }
+                    res.status(200).json( {
+                        filterMatches,
+                        userExpections,
+                        totalPoints,
+                        
+                    }); 
+                    await User.updateOne({userName},{userPoints : parseInt(totalPoints)});
                 }
-                else{
-                    console.log(userDB.goldenPlayer.totalPoints);
-                    totalPoints = totalPoints + userDB.goldenPlayer.totalPoints;
-                }
-                
-                
-                res.status(200).json( {
-                    filterMatches,
-                    userExpections,
-                    totalPoints,
-                    
-                }); 
-                console.log(userName);
-            console.log(totalPoints);
-            await User.updateOne({userName},{userPoints : parseInt(totalPoints)});
+            
+            catch(err){
+                console.log(err);
+            }
         
-    }catch(err){
-        console.log(err);
-    }
-});
+    });
 
 
 
@@ -92,15 +91,15 @@ expects.get('/calculategoldenPlayer/:userName',verifyJwt,async(req,res)=>{
         const matches = await Matches.find({matchId : RegEx}); // ;
 
         const {playerPoints,matchDetails} = calculateGoldenPlayerPoints(userDB.goldenPlayer,matches);
-        playerPoints;
+        
 
         userDB.goldenPlayer = {
             ...userDB.goldenPlayer,
             player : {
                 ...userDB.goldenPlayer.player,
-                matchDetails
-            },
-            totalPoints : playerPoints
+                matchDetails,
+                goldenPlayerPoints : playerPoints
+            }
         };
     }
     
@@ -216,7 +215,7 @@ expects.put('/editexpect/:userName',VerifyUserJWT,async(req,res)=>{
         });
 
 
-        await client.del(`${usreName}etExpects`) ; // `${userName}G`
+        //await client.del(`${usreName}etExpects`) ; // `${userName}G`
 
     }
     catch(err){
@@ -285,7 +284,7 @@ expects.put('/substitute/:userName',VerifyUserJWT,async(req,res)=>{
     if(user.team)
         await UpdateExpectForMember(user,matchId,userExpects);
     
-    await client.del(`${userName}GetExpects`) ; 
+    //await client.del(`${userName}GetExpects`) ; 
 
 })
 

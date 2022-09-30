@@ -18,10 +18,10 @@ const PersonalComp = ({user}) => {
     return (
         <>
        
-    <div className="informationWrapper">
-        <div className={`information ${isDark? 'dark':null}`}>
+    <div className="informationWrapper personal">
+        <div className={`information ${isDark? 'dark':''}`}>
             <div className="informationHeader-Wrapper">
-                <h2 className='InformationHeader'>Personal Information</h2>
+                <h2 className='InformationHeader'>User Information</h2>
                 <div className="editWrapper">
                     <span className='editIcon' onClick={()=>setUPI(true)}>
                         {(userGlob === userName ) && <><span>Edit</span> <EditIcon/></>}

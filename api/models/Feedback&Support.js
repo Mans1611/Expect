@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 const {Schema, model} = mongoose;
 
 const feedBackSchema = new Schema({
-    email : {
-        type : String,
-        required : true
-    },
+    // email : {
+    //     type : String,
+    //     required : true
+    // },
     description : {
         type : String,
         required : true
@@ -21,6 +21,10 @@ const feedBackSchema = new Schema({
     helpSupport : {
         type : Boolean,
         default : false 
+    },
+    time : {
+        type :String,
+        default : new Date()
     }
 })
 

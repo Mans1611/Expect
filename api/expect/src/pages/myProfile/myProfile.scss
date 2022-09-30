@@ -1,7 +1,7 @@
 @import '../../.mainStyle.scss';
 .myProfile{
     padding:30px 20px;
-    background-color: #eee;
+    background-color: #cccccc;
     
 .profileTitle{
     text-align: center;
@@ -23,8 +23,39 @@
     .informationWrapper {
         width: 33.3%;
         height: 100%;
+        border-radius: 5px;
+        
+        &.personal{
+            .information{
+               
+                border-radius: 5px;
+                .informationHeader-Wrapper{
+                    background-color: #4fd2e6e2 ;
+
+                }
+                .value{
+                    color: #4fd2e6e2;
+                    margin-left: 10px;
+                }
+            }
+         }  
+         &.expects{
+             .information{
+                 .informationHeader-Wrapper{
+                     background-color: #ff7070e2 ;
+     
+                 }
+                 .value{
+                     color: #ff7070e2;
+                     margin-left: 10px;
+                 }
+             }
+         }
     }
     .goldenPlayercard{
+        .informationHeader-Wrapper{
+            background: #ffe045;
+        }
         .playerCard-container{
             padding-bottom:20px ;
         }
@@ -46,17 +77,11 @@
     .information{
         background-color: #ffffff;
         position: relative;
-        border-radius: 20px;
+       
         .informationHeader-Wrapper{
-            background: rgb(214,20,29);
-            background: -moz-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
-            background: -webkit-linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
-            background: linear-gradient(90deg, rgba(214,20,29,1) 0%, rgba(46,0,6,1) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
             padding: 10px 0;
             .editWrapper{
                 text-align: end;
@@ -67,7 +92,7 @@
                     font-size: 25px;
                 }
             }
-            
+
         }
         .userInformation{
             padding: 10px 0;
@@ -91,10 +116,7 @@
                     border-bottom: none;
                 }
             }
-            .value{
-                color: #FFD600;
-                margin-left: 10px;
-            }
+           
             .userCountry{
                 font-size:30px;
                 margin: 10px 0;
@@ -110,7 +132,7 @@
             }
         }
         
-        width: 90%;
+        width: 95%;
         height: fit-content;
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
@@ -269,6 +291,30 @@
     }
 
 }
+@media (min-width :371px) and (max-width : 420px ){
+    .informationContainer{
+        .informationWrapper {
+            width: 95% !important;
+        }
+    }
+    .userExpectContainer{
+        .expects-Container{
+            grid-template-columns: repeat(1,100%) !important;
+            padding: 5px;
+            .postMatchCard{
+                .matchHeader{
+                    .country{
+                        .countryImage{
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+                }
+            }   
+        }
+    }
+
+}
 @media (min-width : 250px) and (max-width : 370px){
 
 .myProfile{
@@ -337,14 +383,10 @@
         @include shadowMainStyle ;
         margin: auto;
         .InformationHeader{
-            color: $gold;
             text-align: center;
-            background-color: $qatar;
-            font-size: 25px !important;
+            font-size: 30px !important;
             padding: 5px 10px;
-            border-bottom: 4px solid #161616;
-            
-
+           
         }
 
     }

@@ -25,7 +25,7 @@ team.post('/createteam',TeamValidation,async(req,res)=>{
     const userExpects4Team = Filter_User_Expects_4Team(userExpects,joinedTime)
     
     const userDB = await User.findOne({userName});
-    const goldenPlayerPoints = userDB.goldenPlayer ? (userDB.goldenPlayer.old_Player ? userDB.goldenPlayer.totalPoints :  userDB.goldenPlayer.player.doublePoints)  : 0  ;
+    const goldenPlayerPoints = userDB.goldenPlayer ? (userDB.goldenPlayer.old_Player ? (userDB.goldenPlayer.old_Player.goldenPlayerPoints+ userDB.goldenPlayer.player.goldenPlayerPoints) :  userDB.goldenPlayer.player.goldenPlayerPoints)  : 0  ;
 
     const team = new Teams({
         teamName ,
@@ -70,7 +70,7 @@ team.put('/jointeam',joinTeamValidation,async(req,res)=>{
 
 
     const userDB = await User.findOne({userName});
-    const goldenPlayerPoints = userDB.goldenPlayer ? (userDB.goldenPlayer.old_Player ? userDB.goldenPlayer.totalPoints :  userDB.goldenPlayer.player.doublePoints)  : 0  ;
+    const goldenPlayerPoints = userDB.goldenPlayer ? (userDB.goldenPlayer.old_Player ? (userDB.goldenPlayer.old_Player.goldenPlayerPoints + userDB.goldenPlayer.player.goldenPlayerPoints ) :  userDB.goldenPlayer.player.goldenPlayerPoints)  : 0  ;
 
     team.teamMembers.push({
         userName : user.userName,

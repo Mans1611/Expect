@@ -10,11 +10,14 @@
     @include flexAlign();
     height: 60px;
     padding-bottom: 5px;
-    background-color: #eee;
-    border-bottom: 5px solid #222;
+    background-color: #eeeeee;
+    border-bottom: 5px solid #222222;
     transition: 150ms;
     width: 100%;
     font-family: 'Ubuntu Mono', monospace;
+    position: sticky;
+    top: 0;
+    z-index: 990;
     &.dark{
         background-color: #222;
         border-bottom: #eee solid 5px;
@@ -300,5 +303,12 @@
     }
     to{
         height: 200px;
+    }
+}
+
+
+@media screen and (max-width : 680px) {
+    .navbar{
+        position: relative;
     }
 }

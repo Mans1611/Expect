@@ -79,7 +79,7 @@ const Navbar = () => {
                 <div className="navbarRight">
                     {!scale && <>
                     {   navbarItems.map((item,index)=>{ // to reduce the code lines 
-                        return <Link key={index} id = {`${item.toLowerCase()}`} to = {`/${item.toLowerCase()}`} className={`navbarLink`}><span className="navbarRightItem" key={index}>{item.split('/')[0]}</span></Link>    
+                        return <Link key={index} id = {`${item.toLowerCase()}`} to = {`${item==='Matches'? `/expect/${item.toLowerCase()}` : `/${item.toLowerCase()}` } `} className={`navbarLink`}><span className="navbarRightItem" key={index}>{item.split('/')[0]}</span></Link>    
                     })
                     }
                     </>
