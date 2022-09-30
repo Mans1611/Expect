@@ -164,6 +164,8 @@
                 background-color: #eeeeee ;
                 color: #171717;
                 font-size: 20px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
                 &:hover{
                     background-color: #fee504 ;
                 }
@@ -424,7 +426,7 @@
         }
         .TeamComponent{
             padding:  10px ;
-            width: 90% ;
+            width: 100% ;
           
             .selected{
                 border-radius: 5px;
@@ -447,6 +449,9 @@
                 }
             }
         }
+    }
+    .teamStanding{
+        width: 100%;
     }
     }
 @keyframes slideDown {

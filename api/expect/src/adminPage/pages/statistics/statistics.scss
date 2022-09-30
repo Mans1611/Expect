@@ -29,3 +29,35 @@
 
     }
 }
+
+
+
+@media screen and (max-width : 1110px){
+    .statistics{
+        .standing-Admin{
+            padding: 20px 10px ;
+            display: flex;
+            flex-direction: column;
+            margin: 20px auto ;
+            .teamStanding{
+                margin: 10px auto ;
+            }
+            
+        }
+    }
+    .totalContainer{
+        .totalWrapper{
+            padding: 10px 15px;
+            width: fit-content;
+            min-width: 70%;
+            h4{
+                font-size: 28px;
+            }
+            h1{
+                font-size: 48px;
+                text-align: end;
+                }
+    
+        }
+    }
+}

@@ -25,8 +25,7 @@ const MatchCardAdm = () => {
     const {token,setAdminAuth} = AdminContext();
 
     const navigate = useNavigate();
-    console.log(MatchCenteral.match);
-
+    
     const handleDelte = async(matchId) =>{
         try{
             const response = await Axios.delete(`/matches/deletematch/${matchId}`,{

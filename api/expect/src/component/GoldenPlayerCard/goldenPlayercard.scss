@@ -67,6 +67,8 @@
                     padding: 5px;
                     background-color: #f4cb00;
                     font-size: 40px;
+                    text-align: center;
+                    
                 }
             }
             .player{
@@ -181,6 +183,7 @@
 
             &.current{
                 background-color: #f4c400;
+                text-align: center;
                 .header{
 
                     h1{
@@ -439,7 +442,7 @@
                     .pointsWrapper{
                         grid-column:auto;
                         margin: auto;
-                        width: 70px;
+                        width: 60px;
                         margin-top: 5px;
                         margin-bottom: 5px;
                     }

@@ -96,6 +96,21 @@
         p{
             font-size: 22px;
             color: #fff;
+            &.totalPoints{
+                margin: 10px 0;
+            }
+            .points{
+                background-color: #ffc400;
+                border-radius: 5px;
+                padding: 5px;
+                height: 45px;
+                width: 50px;
+                color: $qatar;
+                font-size: 26px;
+                font-weight: 600;
+
+
+            }
 
         }
     }

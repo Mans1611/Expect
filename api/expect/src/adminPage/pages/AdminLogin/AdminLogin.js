@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
 import './adminlogin.scss';
+import React, { useState } from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
-import axios from 'axios';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signInValidation } from '../../utilis/CreateNewAdminValidation';
 import { AdminContext } from '../../Context/ProtectedAdmin';
 import Cookies from 'universal-cookie';
-import { LogoDev } from '@mui/icons-material';
 
 const AdminLogin = ()=> {
     const [userName,setUserName] = useState('');

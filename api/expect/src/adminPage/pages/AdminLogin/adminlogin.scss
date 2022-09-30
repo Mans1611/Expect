@@ -102,3 +102,53 @@
         width: 80%;
     }
 }
+
+
+@media screen and (max-width : 560px) {
+    .AdminLoginPage{
+        .loginContainer{
+            width: 75%;
+            .AdminLoginTitle{                
+                font-size: 60px;
+                font-weight: 500;            
+            }
+        }
+        .inputWrapper{
+            display: flex;
+            flex-direction: column;
+            label{
+                font-size: 28px;
+            }
+            
+            .input{
+                .icons{
+                    height: 40px;
+                    border-top-left-radius:5px;
+                    border-bottom-left-radius:5px;
+                }
+    
+                input{
+                    border-radius: 5px;
+                    border-top-left-radius:0;
+                    border-bottom-left-radius:0;
+                    height: 40px;
+                }
+            }
+        }
+        button[type="submit"]{
+            font-size: 30px;
+            width: 80%;
+            font-weight: 500;
+            margin-top: 5px;
+           
+        }
+        a{
+            color: #eee;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        .msg{
+            width: 90%;
+        }
+    }
+}

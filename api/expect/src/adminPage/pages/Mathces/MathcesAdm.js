@@ -9,6 +9,7 @@ import { matchesStore } from '../../Context/matchesContext';
 import io from 'socket.io-client';
 import { AdminContext } from '../../Context/ProtectedAdmin';
 import { MatchCardProvider } from '../../../Context/MatchCardContext';
+import Axios from '../../../Axios/axios';
 
 
 // api : http://localhost:8000
@@ -43,16 +44,17 @@ const MathcesAdm = () => {
         let isSubscribe = true;
         const fetchMatches = async()=>{
             try{
-                const {data} = await axios.get('/matches/getmatches')
+                const {data} = await Axios.get('/matches/getmatches')
                 if(isSubscribe)
-                    store.setMatches(data);
+                    store.setMatches(data.reverse());
                 store.setLoading(false);
             }
             catch(err){
                 console.log(err);
             }
         }
-        fetchMatches()
+        fetchMatches();
+
         return ()=> isSubscribe = false;
 
     },[])

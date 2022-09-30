@@ -10,6 +10,14 @@
         padding: 5px ;
         display: grid;
         grid-template-columns: repeat(4,25%);
+        .matchCard{
+            &.admin{
+                .countryLabel{
+                    margin: 5px 0;
+                    font-size: 26px;
+                }
+            }
+        }
     }
 
 
@@ -28,5 +36,62 @@
         span{
             font-weight: 700;
         }
+    }
+}
+
+@media screen and (max-width:1110px){
+    .matchesadmin{
+        padding: 0 10px;
+        height: fit-content;
+        .matchesContainer{
+            grid-template-columns: repeat(3,33%);
+            .matchCard{
+                &.admin{
+                    .countryLabel{
+                        margin: 5px 0;
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+    
+    
+        .addMatch{
+           
+        }
+    }
+}
+@media screen and (max-width:690px){
+    .matchesadmin{
+        .matchesContainer{
+            grid-template-columns: repeat(2,50%);
+            .matchCard{
+                &.admin{
+                    .countryLabel{
+                        margin: 5px 0;
+                    }
+                }
+            }
+        }
+    
+    
+       
+    }
+}
+@media screen and (max-width:490px){
+    .matchesadmin{
+        .matchesContainer{
+            grid-template-columns: repeat(1,100%);
+            .matchCard{
+                &.admin{
+                    .countryLabel{
+                        margin: 5px 0;
+                    }
+                }
+            }
+        }
+    
+    
+       
     }
 }

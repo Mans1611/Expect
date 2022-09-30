@@ -153,7 +153,7 @@ const handleUpdate = async(e)=>{
                 </div>
                 VS
                 <div className="matchCardCountry">
-                    <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg" />
+                    <img src={match.secondCountry.logo} alt="" className="matchCardCountryImg second" />
                     <span className='countryLabel'>{match.secondCountry.countryName}</span>
                     <span className="countryLabel">{match.secondCountry.result}</span>
                 </div>

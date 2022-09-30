@@ -83,7 +83,7 @@ const PostMatchCard = ({match,userExpect,userName}) => {
                     <h3 className="yourExpect">Your Expectation</h3>
                     <p>Winner : {userExpect.winnerValue}</p>
                     <p>Result : {userExpect.result1_value}  - {userExpect.result2_value}</p>
-                    <p>Your Match Points : {userExpect.userPoints} Pts</p>
+                    <p className="totalPoints">Your Match Points : <span className='points'>{userExpect.userPoints} Pts</span></p>
             </div> 
             <div className="showFullWrapper">
             {timeUp ?
