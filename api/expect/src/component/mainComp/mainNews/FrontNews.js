@@ -1,31 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import SmallNews from './SmallNews'
 
-const FrontNews = ({mainNews,setMainNews,isDark,HandleMainNews,news}) => {
-    const [index,setIndex]  = useState(0);
-
-    useEffect(()=>{
-        const changeNews = async ()=>{
-            if(index === 3)
-                setIndex(0);
-            setMainNews(news[index]);
-            
-        }
-
-        // const timeOut = setTimeout(()=>{
-        //     if(index === 2){
-        //         setIndex(0);
-        //     }else{
-        //         setIndex(index => index+1)
-        //     }
-        //     changeNews();
-        // },6000);
-
-        // clearTimeout(timeOut)
-
-    },[index])
-
-
+const FrontNews = ({mainNews,setMainNews,isDark,news,index}) => {
+    
+    console.log(news);
 
   return (
     <>
@@ -37,7 +15,9 @@ const FrontNews = ({mainNews,setMainNews,isDark,HandleMainNews,news}) => {
             <p className={` newsPara ${isDark?"dark":null} `}>{mainNews.paragraph}</p>
         </div>
         {
-          <SmallNews active ={index} HandleMainNews = {HandleMainNews} news = {news}/>
+            <div className="smallNews-contsiner">
+                <SmallNews  active ={index}  news = {news}/>
+            </div>
         }
     </>
   )

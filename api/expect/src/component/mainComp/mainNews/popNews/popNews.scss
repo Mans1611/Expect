@@ -1,0 +1,54 @@
+
+
+    .popMatchContainer{
+        &#popNewsContainer{
+
+            background: #cccccc;
+            padding: 0;
+            height: 80vh !important;
+            .Popicon{
+                position: absolute !important;
+                &:hover{
+                    transform: scale(1.25);
+                    transition: all 200ms;
+            color: #171717 !important;
+        }
+    }
+    .img-wrapper{
+        img{
+            width: 100%;
+            object-fit: cover;
+            height: 50%;
+        }
+    }
+    .conetent-wrapper{
+        position: relative;
+        top: -50px;
+        background-color: #ffffff;
+        width: 80%;
+        margin: auto;
+        border-radius: 10px;
+        h1{
+            color: #ffcf00;
+            padding: 10px;
+            font-size: 36px;
+            text-align: center;
+        }
+        p{
+            padding: 10px;
+            font-size: 22px;
+        }
+    }
+    &.dark{
+       background: #303030;
+        transition: all 200ms ;
+        .conetent-wrapper{
+            background-color: #171717;
+            p{
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+}

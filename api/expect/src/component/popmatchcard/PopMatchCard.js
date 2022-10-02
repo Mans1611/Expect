@@ -20,8 +20,6 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
     
     const [playersState,dispatchPlayer] = useReducer(ReducePlayerFn,statePlayers);
     const [skip,setSkip] = useState(false);
-
-    console.log(user);
     useEffect(()=>{
         return async()=>{
             if(userExpect){
@@ -162,8 +160,15 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
             }catch(err){
                 console.log(err);
             }
-        
-    
+    }
+
+    const scrollPlyers =  ()=>{
+        document.getElementById("playersContainer").scrollIntoView({
+            behavior : "smooth",
+            block : "start",   
+        })
+
+
     }
     
 
@@ -219,12 +224,12 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                             <h2 className="countryLabel">Select Player from {match.firstCountry.countryName}</h2>
                             
                             <div className="choose-container">
-                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer1`})}}>
+                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer1`}); setTimeout(scrollPlyers,0)}}>
                                         {playersState.player1 ? 
                                             <PlayerCard player={playersState.player1}/> : 
                                             <SelectPlayerCard order = {1} playersState={playersState} dispatchPlayer={dispatchPlayer}/>}
                                     </div>
-                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer2`})}}>
+                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer2`});setTimeout(scrollPlyers,0)}}>
                                         { playersState.player2 ? 
                                             <PlayerCard  player={playersState.player2}/> : 
                                             <SelectPlayerCard order = {2} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="FirstCountry"  playerOrder="Player2"/>}</div>
@@ -233,7 +238,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                 {(playersState.showPlayer1 || playersState.showPlayer2) &&  match.confirmedLineup && <h1>confirmed Lineup for {match.firstCountry.countryName}</h1>}
                                 {
                                     playersState.showPlayer1&& 
-                                <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
+                                <div id = "playersContainer" className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
                                     
                                     {match.firstCountry.players.map((player,index)=>{
                                             if(player.linup){
@@ -261,7 +266,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                 }
                                 {
                                     playersState.showPlayer2 && 
-                                    <div className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
+                                    <div id = "playersContainer" className="playersContainer"  onClick={()=>handleSelect("firstCountry",match.firstCountry.players)}>
                                         {match.firstCountry.players.map((player,index)=>{
                                             if(player.linup){
                                                 return  <PlayerCardRadio 
@@ -290,10 +295,10 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                 
                             <h2 className="countryLabel"> Select Player from {match.secondCountry.countryName}</h2>
                                 <div className="choose-container">
-                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`})}} >
+                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`});setTimeout(scrollPlyers,0)}} >
                                         { playersState.player3 ? <PlayerCard player={playersState.player3}/> : <SelectPlayerCard order = {3} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry" playerOrder="Player1"/>}
                                     </div>  
-                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`})}}>
+                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`});setTimeout(scrollPlyers,0)}}>
                                         { playersState.player4 ? <PlayerCard  player={playersState.player4}/> : <SelectPlayerCard order = {4} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry"  playerOrder="Player2"/>}
                                     </div> 
                                 </div>
@@ -302,7 +307,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                     }
                                     {
                                         playersState.showPlayer3 &&
-                                        <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
+                                        <div id = "playersContainer" className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
                                         {match.secondCountry.players.map((player,index)=>{
                                             if(player.linup){
                                                 return  <PlayerCardRadio 
@@ -331,7 +336,7 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                     }
                                     {
                                         playersState.showPlayer4 &&
-                                        <div className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
+                                        <div id = "playersContainer" className="playersContainer" onClick={()=>handleSelect("secondCountry",match.secondCountry.players)}>
                                            {match.secondCountry.players.map((player,index)=>{
                                             if(player.linup){
                                                 return  <PlayerCardRadio 

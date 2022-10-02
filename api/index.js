@@ -63,8 +63,8 @@ const port = process.env.PORT|| 8000;
 
 const io = new Server(server,{
     cors:{
-         origin : "https://expect-app.herokuapp.com/",
-        //origin : "http://localhost:5000" ,
+         //origin : "https://expect-app.herokuapp.com/",
+        origin : "http://localhost:5000" ,
 
     methods : ["GET","POST","PUT","DELETE"],
         allowedHeaders: ["my-custom-header"],
@@ -132,11 +132,11 @@ io.on('connection',(socket)=>{
 
 //for production in heroku
 
-app.use(express.static(path.join(__dirname,'/expect/build')))
+// app.use(express.static(path.join(__dirname,'/expect/build')))
 
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/expect/build','index.html'))
-})
+// app.get('*',(req,res)=>{
+//     res.sendFile(path.join(__dirname,'/expect/build','index.html'))
+// })
 
 server.listen(port,()=>{
     console.log("http://localhost:" + port);

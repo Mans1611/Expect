@@ -201,8 +201,10 @@ form{
                 
             
             .playersContainer{
-                background-color: #222;
+                background-color: #111111;
                 border-radius: 5px;
+                
+
                 
             }
         }
@@ -428,8 +430,9 @@ form{
 }
 @media screen and (max-width:480px) {    
     .popMatchContainer{
-        width: 90% ;
-        max-height: 50vh !important;
+        width: 95%  ;
+        height: 90vh !important;
+        max-height: none;
         .popMatchWinner{
             .winnerTitle{
                 font-size: 35px !important;  
@@ -450,7 +453,8 @@ form{
         overflow-y: scroll;
         height: 60vh;
         padding-right: 10px;
-        
+        width: 90%;
+        margin: auto;
         border-radius: 10px;
         .radioContaineter{
             display: flex;

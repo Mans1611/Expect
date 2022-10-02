@@ -13,7 +13,8 @@ import TeamInstructions from './Instructions';
 
 
 //https://expect-app.herokuapp.com/
-const soket = io.connect('https://expect-app.herokuapp.com/',{
+//http://localhost:8000
+const soket = io.connect('http://localhost:8000',{
   withCredentials: true,
   extraHeaders: {
     "my-custom-header": "abcd"

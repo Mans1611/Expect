@@ -15,21 +15,21 @@ import Axios from '../../../Axios/axios';
 // api : http://localhost:8000
  // https://expect-app.herokuapp.com/
  
-const socket = io.connect('https://expect-app.herokuapp.com/',{
-        withCredentials: true,
-        extraHeaders: {
-        "my-custom-header": "abcd"
-    }
-    }
-); // we connect it to the bakend server;
+// const socket = io.connect('https://expect-app.herokuapp.com/',{
+//         withCredentials: true,
+//         extraHeaders: {
+//         "my-custom-header": "abcd"
+//     }
+//     }
+// ); // we connect it to the bakend server;
 
 
-// const socket = io.connect('http://localhost:8000',{
-//   withCredentials: true,
-//   extraHeaders: {
-//     "my-custom-header": "abcd"
-//   }
-// }); // we connect it to the bakend server;
+const socket = io.connect('http://localhost:8000',{
+  withCredentials: true,
+  extraHeaders: {
+    "my-custom-header": "abcd"
+  }
+}); // we connect it to the bakend server;
 
 
 const MathcesAdm = () => {
