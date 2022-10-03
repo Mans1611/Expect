@@ -13,7 +13,7 @@ import { CreatePlayerObject } from '../PlayerCardRadio/CreatePlayerObject';
 import PlayerCard from './playercard/PlayerCard';
 import PickGoldenPlayer from '../PickGoldenPlayer/PickGoldenPlayer';
 import ReactDom from 'react-dom'
-
+import DeleteIcon from '@mui/icons-material/Delete';
 const PopMatchCard = ({match,setPop,type,userExpect}) => {
     document.body.style.overflow = 'hidden';
     const {isDark,userGlob,token,user,setExpected,goldenPlayer} = globalUser();
@@ -224,15 +224,23 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                             <h2 className="countryLabel">Select Player from {match.firstCountry.countryName}</h2>
                             
                             <div className="choose-container">
-                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer1`}); setTimeout(scrollPlyers,0)}}>
+                                    <div >
                                         {playersState.player1 ? 
-                                            <PlayerCard player={playersState.player1}/> : 
-                                            <SelectPlayerCard order = {1} playersState={playersState} dispatchPlayer={dispatchPlayer}/>}
+                                            <div className="playerCard-container">
+                                                <PlayerCard onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer1`}); setTimeout(scrollPlyers,0)}} player={playersState.player1}/> 
+                                                <button onClick={()=>dispatchPlayer({type : 'RemovePlayer1'})} className="remove">Remove <DeleteIcon/> </button>
+                                            </div>
+                                            : 
+                                            <SelectPlayerCard countryOrder="FirstCountry"  playerOrder="Player1"   order = {1} playersState={playersState} dispatchPlayer={dispatchPlayer}/>}
                                     </div>
-                                    <div onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer2`});setTimeout(scrollPlyers,0)}}>
+                                    <div >
                                         { playersState.player2 ? 
-                                            <PlayerCard  player={playersState.player2}/> : 
-                                            <SelectPlayerCard order = {2} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="FirstCountry"  playerOrder="Player2"/>}</div>
+                                            <div className="playerCard-container">
+                                                <PlayerCard onClick={()=>{dispatchPlayer({type : `showFirstCountryPlayer2`});setTimeout(scrollPlyers,0)}}  player={playersState.player2}/> 
+                                                <button  onClick={()=>dispatchPlayer({type : 'RemovePlayer2'})} className="remove">Remove <DeleteIcon/> </button>
+                                            </div>
+                                            : 
+                                            <SelectPlayerCard  order = {2} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="FirstCountry"  playerOrder="Player2"/>}</div>
                                     </div>
                             
                                 {(playersState.showPlayer1 || playersState.showPlayer2) &&  match.confirmedLineup && <h1>confirmed Lineup for {match.firstCountry.countryName}</h1>}
@@ -295,11 +303,25 @@ const PopMatchCard = ({match,setPop,type,userExpect}) => {
                                 
                             <h2 className="countryLabel"> Select Player from {match.secondCountry.countryName}</h2>
                                 <div className="choose-container">
-                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`});setTimeout(scrollPlyers,0)}} >
-                                        { playersState.player3 ? <PlayerCard player={playersState.player3}/> : <SelectPlayerCard order = {3} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry" playerOrder="Player1"/>}
+                                    <div  >
+                                        { playersState.player3 ? 
+                                        <div className="playerCard-container">
+                                            <PlayerCard onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`});setTimeout(scrollPlyers,0)}} player={playersState.player3}/> 
+                                            <button onClick={()=>dispatchPlayer({type : 'RemovePlayer3'})} className="remove">Remove <DeleteIcon/> </button>
+                                        </div>
+                                        
+                                        : 
+                                        <SelectPlayerCard onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer1`});setTimeout(scrollPlyers,0)}} order = {3} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry" playerOrder="Player1"/>}
                                     </div>  
-                                    <div onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`});setTimeout(scrollPlyers,0)}}>
-                                        { playersState.player4 ? <PlayerCard  player={playersState.player4}/> : <SelectPlayerCard order = {4} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry"  playerOrder="Player2"/>}
+                                    <div >
+                                        { playersState.player4 ?
+                                         <div className="playerCard-container">
+                                            <PlayerCard onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`});setTimeout(scrollPlyers,0)}}  player={playersState.player4}/> 
+                                            <button onClick={()=>dispatchPlayer({type : 'RemovePlayer4'})} className="remove">Remove <DeleteIcon/> </button>
+                                         </div>
+                                         
+                                         : 
+                                        <SelectPlayerCard onClick={()=>{dispatchPlayer({type : `showSecondCountryPlayer2`});setTimeout(scrollPlyers,0)}} order = {4} playersState={playersState} dispatchPlayer={dispatchPlayer} countryOrder="SecondCountry"  playerOrder="Player2"/>}
                                     </div> 
                                 </div>
                                     {

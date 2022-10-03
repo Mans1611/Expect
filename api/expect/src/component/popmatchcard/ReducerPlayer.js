@@ -61,7 +61,6 @@ export const ReducePlayerFn = (state,action)=>{
         case 'showSecondCountryPlayer2' : 
             state.showPlayer1 = state.showPlayer2 = state.showPlayer3 = false; 
             return {...state, showPlayer4 : true,selected : 4};
-    
         case 'PlayerSelect1' :
             return {
                     ...state, 
@@ -119,13 +118,54 @@ export const ReducePlayerFn = (state,action)=>{
                 player4 : action.payload.subIn,
                 subsOff : true
             }
-
-
-             
+            case 'RemovePlayer1' : 
+            return {
+                ...state,
+                showPlayer1 : false,
+                player1 : null,
+                player1_position : null
             }
-
-
-        
-
-
+            case 'RemovePlayer2' : 
+            return {
+                ...state,
+                showPlayer2 : false,
+                player2 : null,
+                player2_position : null
+            }
+            case 'RemovePlayer3' : 
+            return {
+                ...state,
+                player3 : null,
+                player3_position : null,
+                showPlayer3 : false
+            }
+            case 'RemovePlayer4' : 
+            return {
+                ...state,
+                showPlayer4 : false,
+                player4 : null,
+                player4_position : null
+            }
+        }
 }
+
+/*
+
+ showPlayer1 : false,
+    showPlayer2 : false,
+    showPlayer3 : false,
+    showPlayer4 : false,
+    player1 : null,
+    player2 : null,
+    player3 : null,
+    player4 : null,
+    player1_position : null,
+    player2_position : null,
+    player3_position : null,
+    player4_position : null,
+    subsOff: false,
+    subOut : null
+
+
+
+*/

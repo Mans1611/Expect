@@ -21,7 +21,7 @@
     background-color: #cccccc ;
     border-radius: 10px;
     position: fixed;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #000000;
     z-index: 1001;
 
 
@@ -76,6 +76,8 @@
     cursor: pointer;
     width: 40px;
     height: 40px;
+    color: #252525 !important;
+   
 }
 
 form{
@@ -88,7 +90,8 @@ form{
     svg{
         width: 45px;
         height:45px;
-        cursor: pointer;  
+        cursor: pointer; 
+       
     }
     .inputcontainer{
         display: flex;
@@ -161,13 +164,13 @@ form{
         }
     }
     .palyerCard{
+        position: relative;
         svg{
-            &.info{
-
-                position:absolute !important;
-                top: 5px !important;
-                right: 5px !important;
-            }
+            position: absolute !important;
+            top: 5px !important;
+            right: 5px !important;
+            left: none;
+            
         }
         &.confirmedLinup{
             .country-flag{
@@ -177,7 +180,9 @@ form{
     }
 }
     &.dark{
-        
+        .Popicon{
+            color: #eeeeee !important;
+        }
         .formContainerPopup{
             color: #eeeeee;
         
@@ -260,7 +265,25 @@ form{
             justify-content: center;
             align-items: center;
             margin: 5px auto;
-
+            .playerCard-container{
+                .remove{
+                    background-color: #9f0000;
+                    color: #ffffff;
+                    margin: auto;
+                    padding: 5px 10px;
+                    font-size: 25px;
+                    svg{
+                        width: 25px;
+                        height: 25px;
+                    }
+                    &:hover{
+                        transition: all 200ms ;
+                        background-color: #f54141;
+                        color: #ffffff;
+                        
+                    }
+                }
+            }
             .palyerCard{
                 .lineupPlayer{
                     display: none;
@@ -339,7 +362,7 @@ form{
                 
             }
             &.save{
-                background-color: rgb(193, 0, 58);
+                background-color: #009100;
                 color: #eee;
                 margin: auto;
                
@@ -437,14 +460,22 @@ form{
             .winnerTitle{
                 font-size: 35px !important;  
             }
-        }        
-        .headerPopUp{ 
-            .winnerTitle{
-                font-size: 42px;
-                
+        }  
+        .choose-container{
+            .playerCard-container{
+                .remove{
+                    margin: 5px auto !important;
+                }
             }
-        
+        }      
+    .headerPopUp{ 
+        .winnerTitle{
+            font-size: 42px;
+            
+        }
+    
     }
+    
     .playersContainer{
        
         display: flex;
@@ -456,6 +487,7 @@ form{
         width: 90%;
         margin: auto;
         border-radius: 10px;
+        
         .radioContaineter{
             display: flex;
             align-items: center;
